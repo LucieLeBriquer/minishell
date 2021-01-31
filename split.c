@@ -43,13 +43,14 @@ char	**ft_specialsplit(char *s)
 		ft_printf("[%s]\n", quotes_split[size]);
 		size++;
 	}
-	if (size % 2 != 0)
+	if (size % 2 != 1)
 		return (NULL);
 	return (quotes_split);
 }
 
 int		main(int argc, char **argv)
 {
-	ft_specialsplit(argv[1]);
+	if (!ft_specialsplit(argv[1]))
+		ft_printf("Error\n");
 	return (0);
 }
