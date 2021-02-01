@@ -29,7 +29,7 @@ int		nb_words(char *s, int l)
 	return (n + 1);
 }
 
-int		len_of_word(char *s, int *type)
+int		len_of_word(char *s, char *type)
 {
 	int	i;
 	int	type_quotes;
@@ -42,7 +42,7 @@ int		len_of_word(char *s, int *type)
 	}
 	else
 		type_quotes = -1;
-	*type = -1;
+	*type = ' ';
 	while (s[i])
 	{
 		if (type_quotes == 0 && s[i] == '\\')
@@ -50,7 +50,7 @@ int		len_of_word(char *s, int *type)
 		else if ((type_quotes == 0 && s[i] == '\"') 
 			|| (type_quotes == 1 && s[i] == '\''))
 		{
-			*type = (s[i] == '\'');
+			*type = s[i];
 			type_quotes = -1;
 			return (i + 1);
 		}
@@ -59,16 +59,16 @@ int		len_of_word(char *s, int *type)
 			return (i);
 		i++;
 	}
-	*type = -1;
+	*type = ' ';
 	return (i);
 }
 
 void	fill_words(t_split *split, int words, char *command)
 {
-	int	i;
-	int	k;
-	int	word_len;
-	int	type;
+	int		i;
+	int		k;
+	int		word_len;
+	char	type;
 
 	i = 0;
 	k = 0;
@@ -78,10 +78,11 @@ void	fill_words(t_split *split, int words, char *command)
 			k++;
 		word_len = len_of_word(command + k, &type);
 		split[i].str = malloc((word_len + 1) * sizeof(char));
-		split[i].quotes = type;
+		split[i].quote = type;
 		if (!split[i].str)
 			return ;	// faire un free all
 		ft_strlcpy(split[i].str, command + k, word_len + 1);
+		trim_useless(split[i]);
 		k += word_len;
 		i++;
 	}
@@ -114,7 +115,7 @@ void	print_parse_quotes(char *command)
 	i = 0;
 	while (split[i].str)
 	{
-		ft_printf("[%s] [%d]\n", split[i].str, split[i].quotes);
+		ft_printf("[%s] [%c]\n", split[i].str, split[i].quote);
 		i++;
 	}
 }

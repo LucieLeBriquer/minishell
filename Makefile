@@ -8,7 +8,7 @@ INCS		= $(addprefix includes/, minishell.h)
 
 LIBS		= librairies/libftfull.a
 
-SRCS		= parse.c \
+SRCS		= trim.c \
 			parsing.c \
 			prompt.c
 

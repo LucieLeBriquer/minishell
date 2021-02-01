@@ -23,11 +23,12 @@ typedef struct
 typedef struct
 {
 	char	*str;
-	int		quotes;
+	char	quote;
 }			t_split;
 
 void	simple_parse(char *command);
 t_split	*parse_quotes(char *command);
 void	print_parse_quotes(char *command);
+void	trim_useless(t_split split);
 
 #endif
