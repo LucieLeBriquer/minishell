@@ -17,7 +17,7 @@ int		main(int argc, char **argv, char **env)
 	prompt(cwd);
 	while (get_next_line(0, &line) > 0)
 	{
-		simple_parse(line);
+		print_parse_quotes(line);
 		free(line);
 		prompt(cwd);
 	}

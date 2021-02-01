@@ -20,6 +20,14 @@ typedef struct
 	int		option;
 }			t_cmd;
 */
+typedef struct
+{
+	char	*str;
+	int		quotes;
+}			t_split;
+
 void	simple_parse(char *command);
+t_split	*parse_quotes(char *command);
+void	print_parse_quotes(char *command);
 
 #endif
