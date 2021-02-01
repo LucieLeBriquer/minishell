@@ -1,35 +1,56 @@
 #include "minishell.h"
 
-int		is_cmd(char *s)
+void	trim_spaces(char *s)
 {
 	int	i;
+	int	j;
+	int	l;
+	int	n;
 
 	i = 0;
-	while (i < NB_CMD)
-	{
-		if (ft_strcmp(s, commands[i]) == 0)
-			return (1);
+	l = ft_strlen(s);
+	while (i < l && s[i] == ' ')
 		i++;
+	j = -1;
+	while (i + ++j < l)
+		s[j] = s[i + j];
+	n = j - 1;
+	while (j < l)
+	{
+		s[j] = '\0';
+		j++;
 	}
-	return (0);
+	while (n >= 0 && s[n] == ' ')
+	{
+		s[n] = '\0';
+		n--;
+	}
 }
 
-int		main(int argc, char **argv, char **env)
+char	**ft_specialsplit(char *s)
 {
-	char	*command = argv[1];
-	char	**words;
-	int		i;
+	char	**quotes_split;
+	int		size;
 
-	words = ft_split(command, " ");
-	i = 0;
-	while (words[i])
+	quotes_split = ft_split(s, "\"");
+	if (!quotes_split)
+		return (NULL);
+	size = 0;
+	while (quotes_split[size])
 	{
-		if (is_cmd(words[i]))
-			ft_printf("CMD");
-		ft_printf("[%s]\n", words[i]);
-		free(words[i]);
-		i++;
+		if (size % 2 == 0)
+			trim_spaces(quotes_split[size]);
+		ft_printf("[%s]\t", quotes_split[size]);
+		size++;
 	}
-	free(words);
-	return (0);
+	if (size % 2 != 0)
+		return (NULL);
+	ft_printf("\n");
+	return (quotes_split);
+}
+
+void	simple_parse(char *command)
+{
+	if (!ft_specialsplit(command))
+		ft_printf("Error\n");
 }

@@ -3,8 +3,9 @@
 # include "libftfull.h"
 # include <stdlib.h>
 # define NB_CMD 3
+# define SIZE_PATH 30
 
-typedef enum
+/*typedef enum
 {
 	ECHO,
 	CD,
@@ -18,5 +19,7 @@ typedef struct
 	t_cmds	name;
 	int		option;
 }			t_cmd;
+*/
+void	simple_parse(char *command);
 
 #endif
