@@ -1,0 +1,6 @@
+  abcdef        "01234567   89"  'coucou '  "   "
+> bad quoting
+    abcdef        "01234567   89"  ecec	
+> not showing ecec
+    abcdef        "01234567   89"  ecec	  'yeah'
+> showing everything
