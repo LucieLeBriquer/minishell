@@ -32,7 +32,7 @@ char	**ft_specialsplit(char *s)
 	char	**quotes_split;
 	int		size;
 
-	quotes_split = ft_split(s, "\"");
+	quotes_split = ft_split(s, "'");
 	if (!quotes_split)
 		return (NULL);
 	size = 0;
