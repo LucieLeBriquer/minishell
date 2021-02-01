@@ -1,66 +1,93 @@
 #include "minishell.h"
 
+int		is_begin_quote(char c, int sep, int *waiting_space)
+{
+	if (sep == ' ' && ((c == '\'') || (c == '\"')))
+	{
+		*waiting_space = 0;
+		return (1);
+	}
+	if (*waiting_space == 0 && sep == ' ' && c == ' ')
+	{
+		*waiting_space = 1;
+		return (1);
+	}
+	return (0);
+}
+
+int		is_end_quote(char c, int sep, int *waiting_space)
+{
+	if ((sep != ' ' && (sep == c)) || (sep == ' ' && *waiting_space))
+	{
+		*waiting_space = 0;
+		return (1);
+	}
+	return (0);
+}
+
 int		nb_words(char *s, int l)
 {
 	int	n;
 	int	i;
-	int	type_quotes;
+	int	sep;
+	int	waiting_space;
 
 	i = 0;
 	n = 0;
-	type_quotes = -1;
+	sep = ' ';
+	// replace tous les ' ' par des isspace
+	waiting_space = 1;
 	while (i < l)
 	{
-		if (type_quotes == 0 && s[i] == '\\')
+		while (sep == ' ' && waiting_space && i + 1 < l && s[i + 1] == ' ')
 			i++;
-		else if ((type_quotes == 0 && s[i] == '\"') 
-			|| (type_quotes == 1 && s[i] == '\''))
-			type_quotes = -1;
-		else if ((type_quotes == -1 && s[i] == '\'') 
-			|| (type_quotes == -1 && s[i] == '\"'))
+		if (sep == '\"' && s[i] == '\\')
+			i++;
+		else if (is_begin_quote(s[i], sep, &waiting_space))
 		{
+			sep = s[i];
 			n++;
-			type_quotes = (s[i] == '\'');
+		}
+		else if (is_end_quote(s[i], sep, &waiting_space))
+		{
+			/*while (i + 1 < l && s[i + 1] == ' ')
+				i++;
+			if (s[i + 1] == '\'' || s[i + 1] == '\"')
+				sep = s[i + 1];
+			else*/
+				sep = ' ';
+			//i++;
 		}
 		i++;
 	}
-	if (type_quotes != -1)
+	if (sep != ' ')
 		return (-1);
-	return (n + 1);
+	return (n);
 }
 
 int		len_of_word(char *s, char *type)
 {
 	int	i;
-	int	type_quotes;
 
 	i = 0;
+	while (s[i] == ' ')
+		i++;
 	if (s[i] == '\'' || s[i] == '\"')
 	{
-		type_quotes = (s[i] == '\'');
+		*type = s[i];
 		i++;
 	}
 	else
-		type_quotes = -1;
-	*type = ' ';
+		*type = ' ';
 	while (s[i])
 	{
-		if (type_quotes == 0 && s[i] == '\\')
+		if (*type == '\"' && s[i] == '\\')
 			i++;
-		else if ((type_quotes == 0 && s[i] == '\"') 
-			|| (type_quotes == 1 && s[i] == '\''))
-		{
-			*type = s[i];
-			type_quotes = -1;
-			return (i + 1);
-		}
-		else if ((type_quotes == -1 && s[i] == '\'') 
-			|| (type_quotes == -1 && s[i] == '\"'))
-			return (i);
+		else if (*type == s[i]) 
+			return (i + (*type != ' '));
 		i++;
 	}
-	*type = ' ';
-	return (i);
+	return (-1);
 }
 
 void	fill_words(t_split *split, int words, char *command)
@@ -77,11 +104,12 @@ void	fill_words(t_split *split, int words, char *command)
 		while (command[k] == ' ')
 			k++;
 		word_len = len_of_word(command + k, &type);
-		split[i].str = malloc((word_len + 1) * sizeof(char));
+		split[i].str = malloc((word_len + 2) * sizeof(char));
 		split[i].quote = type;
 		if (!split[i].str)
 			return ;	// faire un free all
 		ft_strlcpy(split[i].str, command + k, word_len + 1);
+		split[i].str[word_len + 1] = '\0';
 		trim_useless(split[i]);
 		k += word_len;
 		i++;
@@ -113,7 +141,7 @@ void	print_parse_quotes(char *command)
 
 	split = parse_quotes(command);
 	i = 0;
-	while (split[i].str)
+	while (split[i].str && split[i].str[0])
 	{
 		ft_printf("[%s] [%c]\n", split[i].str, split[i].quote);
 		i++;
