@@ -1,0 +1,3 @@
+- modifier le parsing pour que :
+	si state == 2 et on tombe sur un |, >, <, >> 
+	alors on split, on peut mettre dans sep '|' '>' '<' 'd' pour le double >>

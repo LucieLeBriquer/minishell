@@ -27,7 +27,7 @@ typedef struct
 }			t_split;
 
 void	simple_parse(char *command);
-t_split	*parse_quotes(char *command);
+t_split	*parse_quotes(char *command, int *err);
 void	print_parse_quotes(char *command);
 void	trim_useless(t_split split);
 

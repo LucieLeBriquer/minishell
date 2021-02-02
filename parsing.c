@@ -1,5 +1,19 @@
 #include "minishell.h"
 
+char	new_separator(int *i, int l, char *s, int *state)
+{
+	char	new_sep;
+
+	while (*i + 1 < l && ft_isspace(s[*i]))
+		(*i)++;
+	*state = ((s[*i] == '\'') || (s[*i] == '\"'));
+	if (*state == 0)
+		new_sep = ' ';
+	else
+		new_sep = s[*i];
+	return (new_sep);
+}
+
 int		nb_words(char *s, int l)
 {
 	int		state;
@@ -14,10 +28,7 @@ int		nb_words(char *s, int l)
 	{
 		if (state == 2)
 		{
-			while (i + 1 < l && ft_isspace(s[i]))
-				i++;
-			state = ((s[i] == '\'') || (s[i] == '\"'));
-			current_sep = s[i];
+			current_sep = new_separator(&i, l, s, &state);
 			if (i + 1 != l)
 				n++;
 		}
@@ -50,17 +61,13 @@ int		len_of_word(char *s, char *sep, int l)
 	{
 		if (state == 2)
 		{
-			while (i + 1 < l && ft_isspace(s[i]))
-				i++;
-			state = ((s[i] == '\'') || (s[i] == '\"'));
-			current_sep = s[i];
-			*sep = s[i];
+			current_sep = new_separator(&i, l, s, &state);
+			*sep = current_sep;
 		}
 		else if (state == 0)
 		{
 			while (i < l && !ft_isspace(s[i]))
 				i++;
-			*sep = ' ';
 			return (i);
 		}
 		else if (current_sep == '\"' && i + 1 < l && s[i] == '\\')
@@ -96,7 +103,7 @@ void	fill_words(t_split *split, int words, char *command, int l)
 	}
 }
 
-t_split	*parse_quotes(char *command)
+t_split	*parse_quotes(char *command, int *err)
 {
 	int		l;
 	int		words;
@@ -104,9 +111,11 @@ t_split	*parse_quotes(char *command)
 
 	l = ft_strlen(command);
 	words = nb_words(command, l);
+	*err = 1;
 	if (words <= 0)
-		ft_printf("Bad quoting\n");
+		return (NULL);
 	split = malloc((words + 1) * sizeof(t_split));
+	*err = 2;
 	if (!split)
 		return (NULL);
 	fill_words(split, words, command, l);
@@ -114,14 +123,25 @@ t_split	*parse_quotes(char *command)
 	return (split);
 }
 
+void	print_error_parsing(int err)
+{
+	if (err == 1)
+		ft_printf("Bad quoting\n");
+	else if (err == 2)
+		ft_printf("Allocation issue\n");
+}
+
 void	print_parse_quotes(char *command)
 {
 	t_split	*split;
+	int		err;
 	int		i;
 
-	split = parse_quotes(command);
+	split = parse_quotes(command, &err);
+	if (!split)
+		return (print_error_parsing(err));
 	i = 0;
-	while (split[i].str && split[i].str[0])
+	while (split[i].str)
 	{
 		ft_printf("[%s] [%c]\n", split[i].str, split[i].quote);
 		i++;
