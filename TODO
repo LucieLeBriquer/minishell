@@ -1,8 +1,9 @@
-- faire le free_all dans le split
-- revoir la gestion d'erreur
-	> faire comme si un espace en plus
+---- TODO ----
+- mettre l'environnement dans une liste chainee ?
+- fonction de recherche 
+- reflechir a l'expansion et aux commandes imbriquees -> a priori arbre
 
-** quelques tests qui marchent **
+----  OK  ----
 echo "erb" >>           	bl " test '\" ' "   >file.txt
 echo "blegh"|cat -e
 echo|test>te|tec<t
