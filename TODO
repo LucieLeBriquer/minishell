@@ -5,3 +5,4 @@
 ** quelques tests qui marchent **
 echo "erb" >>           	bl " test '\" ' "   >file.txt
 echo "blegh"|cat -e
+echo|test>te|tec<t

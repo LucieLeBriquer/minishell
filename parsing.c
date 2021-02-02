@@ -15,10 +15,9 @@ int		new_state(char *s, int i)
 	return (0);
 }
 
-int		is_sep(char c)
+int		is_operator(char c)
 {
-	if ((c == '\'') || (c == '\"') || (c == '|') || (c == '<') 
-			|| (c == '|') || (c == '>'))
+	if ((c == '|') || (c == '<') || (c == '>'))
 		return (1);
 	return (0);
 }
@@ -36,6 +35,8 @@ char	find_separator(int i, int l, char *s, t_parse *current)
 		current->sep = s[i];
 	if (i + 1 != l)
 		(current->nb_words)++;
+	else
+		(current->state) = 2;
 	return (i);
 }
 
@@ -53,8 +54,10 @@ int		nb_words(char *s, int l)
 			i = find_separator(i, l, s, &current);
 		else if (current.state == 0)
 		{
-			while (i < l && !ft_isspace(s[i]) && !is_sep(s[i]))
+			while (i < l && !ft_isspace(s[i]) && !is_operator(s[i]))
 				i++;
+			if (is_operator(s[i]))
+				i--;
 			current.state = 2;
 		}
 		else if ((current.state == 3) || (current.state == 4))
@@ -83,7 +86,7 @@ int		len_of_word(char *s, char *sep, int l)
 	*sep = current.sep;
 	if (current.state == 0)
 	{
-		while (i < l && !ft_isspace(s[i]) && !is_sep(s[i]))
+		while (i < l && !ft_isspace(s[i]) && !is_operator(s[i]))
 			i++;
 		return (i);
 	}
