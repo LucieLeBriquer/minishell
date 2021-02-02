@@ -2,7 +2,7 @@
 
 void	prompt(char *cwd)
 {
-	ft_printf("\033[36m%s@%s \033[34m%s\033[0m$ ", "mini", "shell", cwd);
+	ft_printf("\033[36m%s@%s \033[37m%s\033[0m$ ", "mini", "shell", cwd);
 }
 
 int		main(int argc, char **argv, char **env)

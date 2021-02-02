@@ -6,7 +6,7 @@ NAME		= minishell
 INCS_DIR	= ./includes
 INCS		= $(addprefix includes/, minishell.h)
 
-LIBS		= librairies/libftfull.a
+LIBS		= librairies/libftfull_mac.a
 
 SRCS		= trim.c \
 			parsing.c \

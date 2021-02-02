@@ -3,7 +3,7 @@
 # include "libftfull.h"
 # include <stdlib.h>
 # define NB_CMD 3
-# define SIZE_PATH 30
+# define SIZE_PATH 60
 
 /*typedef enum
 {
