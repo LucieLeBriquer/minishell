@@ -15,37 +15,29 @@ static void	trim_quotes(char *s)
 	s[i] = '\0';
 }
 
-void		trim_char(char *s, char c)
+void		trim_spaces(char *s)
 {
 	int	i;
 	int	j;
 	int	l;
-	int	n;
 
 	i = 0;
 	l = ft_strlen(s);
-	while (i < l && s[i] == c)
+	while (i < l && ft_isspace(s[i]))
 		i++;
 	j = -1;
 	while (i + ++j < l)
 		s[j] = s[i + j];
-	n = j - 1;
 	while (j < l)
 	{
 		s[j] = '\0';
 		j++;
 	}
-	while (n >= 0 && s[n] == c)
-	{
-		s[n] = '\0';
-		n--;
-	}
 }
 
 void		trim_useless(t_split split)
 {
+	trim_spaces(split.str);
 	if (split.quote == '\'' || split.quote == '\"')
 		trim_quotes(split.str);
-	else
-		trim_char(split.str, split.quote);
 }
