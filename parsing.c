@@ -28,7 +28,6 @@ char	find_separator(int i, int l, char *s, t_parse *current)
 		current->sep = s[i];
 	if (i + 1 != l)
 		(current->nb_words)++;
-	ft_printf("|%s|\n", s + i);
 	return (i);
 }
 
@@ -101,7 +100,6 @@ void	fill_words(t_split *split, int words, char *command, int l)
 
 	i = 0;
 	k = 0;
-	ft_printf("\n\n");
 	while (i < words)
 	{
 		word_len = len_of_word(command + k, &sep, l);
@@ -111,7 +109,7 @@ void	fill_words(t_split *split, int words, char *command, int l)
 			return ;	// faire un free all
 		ft_strlcpy(split[i].str, command + k, word_len + 1);
 		split[i].str[word_len + 1] = '\0';
-		//trim_useless(split[i]);
+		trim_useless(split[i]);
 		k += word_len;
 		i++;
 	}
