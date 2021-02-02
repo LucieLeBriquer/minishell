@@ -7,11 +7,19 @@ int		new_state(char *s, int i)
 	c = s[i];
 	if ((c == '\'') || (c == '\"'))
 		return (1);
-	if ((c == '|') || (c == '<') || 
+	if ((c == '|') || (c == '<') || (c == '|') || 
 			(c == '>' && c && s[i + 1] && s[i + 1] != '>'))
 		return (3);
 	if (c == '>' && c && s[i + 1] && s[i + 1] == '>')
 		return (4);
+	return (0);
+}
+
+int		is_sep(char c)
+{
+	if ((c == '\'') || (c == '\"') || (c == '|') || (c == '<') 
+			|| (c == '|') || (c == '>'))
+		return (1);
 	return (0);
 }
 
@@ -45,7 +53,7 @@ int		nb_words(char *s, int l)
 			i = find_separator(i, l, s, &current);
 		else if (current.state == 0)
 		{
-			while (i < l && !ft_isspace(s[i]))
+			while (i < l && !ft_isspace(s[i]) && !is_sep(s[i]))
 				i++;
 			current.state = 2;
 		}
@@ -75,7 +83,7 @@ int		len_of_word(char *s, char *sep, int l)
 	*sep = current.sep;
 	if (current.state == 0)
 	{
-		while (i < l && !ft_isspace(s[i]))
+		while (i < l && !ft_isspace(s[i]) && !is_sep(s[i]))
 			i++;
 		return (i);
 	}
