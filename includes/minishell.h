@@ -26,6 +26,13 @@ typedef struct
 	char	quote;
 }			t_split;
 
+typedef struct
+{
+	char	sep;
+	int		nb_words;
+	int		state;
+}			t_parse;
+
 void	simple_parse(char *command);
 t_split	*parse_quotes(char *command, int *err);
 void	print_parse_quotes(char *command);

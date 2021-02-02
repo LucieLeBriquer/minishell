@@ -1,82 +1,95 @@
 #include "minishell.h"
 
-char	new_separator(int *i, int l, char *s, int *state)
+int		new_state(char *s, int i)
 {
-	char	new_sep;
+	char	c;
 
-	while (*i + 1 < l && ft_isspace(s[*i]))
-		(*i)++;
-	*state = ((s[*i] == '\'') || (s[*i] == '\"'));
-	if (*state == 0)
-		new_sep = ' ';
+	c = s[i];
+	if ((c == '\'') || (c == '\"'))
+		return (1);
+	if ((c == '|') || (c == '<') || 
+			(c == '>' && c && s[i + 1] && s[i + 1] != '>'))
+		return (3);
+	if (c == '>' && c && s[i + 1] && s[i + 1] == '>')
+		return (4);
+	return (0);
+}
+
+char	find_separator(int i, int l, char *s, t_parse *current)
+{
+	while (i + 1 < l && ft_isspace(s[i]))
+		i++;
+	current->state = new_state(s, i);
+	if (current->state == 0)
+		current->sep = ' ';
+	else if (current->state == 4)
+		current->sep = 'd';
 	else
-		new_sep = s[*i];
-	return (new_sep);
+		current->sep = s[i];
+	if (i + 1 != l)
+		(current->nb_words)++;
+	ft_printf("|%s|\n", s + i);
+	return (i);
 }
 
 int		nb_words(char *s, int l)
 {
-	int		state;
 	int		i;
-	int		n;
-	char	current_sep;
+	t_parse	current;
 
 	i = 0;
-	n = 0;
-	state = 2;
+	current.state = 2;
+	current.nb_words = 0;
 	while (i < l)
 	{
-		if (state == 2)
-		{
-			current_sep = new_separator(&i, l, s, &state);
-			if (i + 1 != l)
-				n++;
-		}
-		else if (state == 0)
+		if (current.state == 2)
+			i = find_separator(i, l, s, &current);
+		else if (current.state == 0)
 		{
 			while (i < l && !ft_isspace(s[i]))
 				i++;
-			state = 2;
+			current.state = 2;
 		}
-		else if (current_sep == '\"' && i + 1 < l && s[i] == '\\')
+		else if ((current.state == 3) || (current.state == 4))
+		{
+			i -= (current.state == 3);
+			current.state = 2;
+		}
+		else if (current.sep == '\"' && i + 1 < l && s[i] == '\\')
 			i++;
-		else if (s[i] == current_sep)
-			state = 2;
+		else if (s[i] == current.sep)
+			current.state = 2;
 		i++;
 	}
-	if (state != 2 && !ft_isspace(s[l - 1]))
+	if (current.state != 2 && !ft_isspace(s[l - 1]))
 		return (-1);
-	return (n);
+	return (current.nb_words);
 }
 
 int		len_of_word(char *s, char *sep, int l)
 {
-	int		state;
 	int		i;
-	char	current_sep;
+	t_parse	current;
 
 	i = 0;
-	state = 2;
-	while (i < l)
+	i = find_separator(i, l, s, &current);
+	*sep = current.sep;
+	if (current.state == 0)
 	{
-		if (state == 2)
-		{
-			current_sep = new_separator(&i, l, s, &state);
-			*sep = current_sep;
-		}
-		else if (state == 0)
-		{
-			while (i < l && !ft_isspace(s[i]))
-				i++;
-			return (i);
-		}
-		else if (current_sep == '\"' && i + 1 < l && s[i] == '\\')
+		while (i < l && !ft_isspace(s[i]))
 			i++;
-		else if (s[i] == current_sep)
-			return (i + 1);
+		return (i);
+	}
+	if ((current.state == 3) || (current.state == 4))
+		return (i + 1 + (current.state == 4));
+	i++;
+	while (s[i] != current.sep)
+	{
+		if (current.sep == '\"' && i + 1 < l && s[i] == '\\')
+			i++;
 		i++;
 	}
-	return (-1);
+	return (i + 1);
 }
 
 void	fill_words(t_split *split, int words, char *command, int l)
@@ -88,6 +101,7 @@ void	fill_words(t_split *split, int words, char *command, int l)
 
 	i = 0;
 	k = 0;
+	ft_printf("\n\n");
 	while (i < words)
 	{
 		word_len = len_of_word(command + k, &sep, l);
@@ -97,7 +111,7 @@ void	fill_words(t_split *split, int words, char *command, int l)
 			return ;	// faire un free all
 		ft_strlcpy(split[i].str, command + k, word_len + 1);
 		split[i].str[word_len + 1] = '\0';
-		trim_useless(split[i]);
+		//trim_useless(split[i]);
 		k += word_len;
 		i++;
 	}
