@@ -1,4 +1,6 @@
 - faire le free_all dans le split
+- revoir la gestion d'erreur
+	> faire comme si un espace en plus
 
 ** quelques tests qui marchent **
 echo "erb" >>           	bl " test '\" ' "   >file.txt

@@ -10,6 +10,7 @@ LIBS		= librairies/libftfull_mac.a
 
 SRCS		= parse/trim.c \
 			parse/parsing.c \
+			parse/count.c \
 			main.c
 
 OBJS		= $(SRCS:.c=.o)

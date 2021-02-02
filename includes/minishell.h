@@ -36,6 +36,9 @@ typedef struct
 void	simple_parse(char *command);
 t_split	*parse_quotes(char *command, int *err);
 void	print_parse_quotes(char *command);
+void	trim_spaces_right(char *s);
 void	trim_useless(t_split split);
+int		nb_words(char *s, int l);
+int		len_of_word(char *s, char *sep, int l);
 
 #endif
