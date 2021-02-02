@@ -8,9 +8,9 @@ INCS		= $(addprefix includes/, minishell.h)
 
 LIBS		= librairies/libftfull_mac.a
 
-SRCS		= trim.c \
-			parsing.c \
-			prompt.c
+SRCS		= parse/trim.c \
+			parse/parsing.c \
+			main.c
 
 OBJS		= $(SRCS:.c=.o)
 
