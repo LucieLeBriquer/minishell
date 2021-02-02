@@ -22,13 +22,6 @@ static int	is_operator(char c)
 	return (0);
 }
 
-/*static int	is_quote(char c)
-{
-	if ((c == '\'') || (c == '\"'))
-		return (1);
-	return (0);
-}*/
-
 static char	find_separator(int i, int l, char *s, t_parse *current)
 {
 	while (i + 1 < l && ft_isspace(s[i]))

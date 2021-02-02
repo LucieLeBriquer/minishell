@@ -15,7 +15,7 @@ static void	trim_quotes(char *s)
 	s[i] = '\0';
 }
 
-void		trim_spaces_left(char *s)
+static void	trim_spaces_left(char *s)
 {
 	int	i;
 	int	j;
