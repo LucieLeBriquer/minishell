@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   count.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/03 11:38:32 by lle-briq          #+#    #+#             */
+/*   Updated: 2021/02/03 11:43:43 by lle-briq         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static int	new_state(char *s, int i)
@@ -7,7 +19,7 @@ static int	new_state(char *s, int i)
 	c = s[i];
 	if ((c == '\'') || (c == '\"'))
 		return (1);
-	if ((c == '|') || (c == '<') || (c == '|') || 
+	if ((c == '|') || (c == '<') || (c == '|') ||
 			(c == '>' && c && s[i + 1] && s[i + 1] != '>'))
 		return (3);
 	if (c == '>' && c && s[i + 1] && s[i + 1] == '>')
@@ -39,7 +51,7 @@ static char	find_separator(int i, int l, char *s, t_parse *current)
 	return (i);
 }
 
-int		nb_words(char *s, int l)
+int			nb_words(char *s, int l)
 {
 	int		i;
 	t_parse	current;
@@ -79,7 +91,7 @@ int		nb_words(char *s, int l)
 	return (current.nb_words);
 }
 
-int		len_of_word(char *s, char *sep, int l)
+int			len_of_word(char *s, char *sep, int l)
 {
 	int		i;
 	t_parse	current;

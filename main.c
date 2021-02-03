@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/03 11:36:55 by lle-briq          #+#    #+#             */
+/*   Updated: 2021/02/03 11:40:49 by lle-briq         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	prompt(char *cwd)
@@ -8,7 +20,7 @@ void	prompt(char *cwd)
 void	print_entry(void *ventry)
 {
 	t_env	*entry;
-		
+
 	entry = ventry;
 	ft_printf("%s : %s\n", entry->name, entry->value);
 }
