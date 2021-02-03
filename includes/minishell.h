@@ -33,6 +33,12 @@ typedef struct
 	int		state;
 }			t_parse;
 
+typedef struct
+{
+	char	*name;
+	char	*value;
+}			t_env;
+
 void	simple_parse(char *command);
 t_split	*parse_quotes(char *command, int *err);
 void	print_parse_quotes(char *command);
@@ -40,5 +46,8 @@ void	trim_spaces_right(char *s);
 void	trim_useless(t_split split);
 int		nb_words(char *s, int l);
 int		len_of_word(char *s, char *sep, int l);
+void	parse_env(t_list **env_list, char **env);
+void	print_env_entry(void *ventry);
+void	print_entry(t_env *content);
 
 #endif
