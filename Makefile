@@ -12,6 +12,9 @@ SRCS		= parse/trim.c \
 			parse/parsing.c \
 			parse/env.c \
 			parse/count.c \
+			print/command.c \
+			search/list.c \
+			exec/execute.c \
 			main.c
 
 OBJS		= $(SRCS:.c=.o)

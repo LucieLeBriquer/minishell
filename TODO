@@ -7,3 +7,4 @@
 echo "erb" >>           	bl " test '\" ' "   >file.txt
 echo "blegh"|cat -e
 echo|test>te|tec<t
+   result " of\" " command 's' "   $SPLIT" |   goes ' "in" ' >here

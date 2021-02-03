@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 16:08:17 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/02 16:20:53 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/03 11:35:03 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,31 +68,4 @@ t_split		*parse_quotes(char *command, int *err)
 		return (NULL);
 	split[words].str = NULL;
 	return (split);
-}
-
-void		print_error_parsing(int err)
-{
-	if (err == 1)
-		ft_printf("Wrong format\n");
-	else if (err == 2)
-		ft_printf("Allocation issue\n");
-}
-
-void		print_parse_quotes(char *command)
-{
-	t_split	*split;
-	int		err;
-	int		i;
-
-	split = parse_quotes(command, &err);
-	if (!split)
-		return (print_error_parsing(err));
-	i = 0;
-	while (split[i].str)
-	{
-		ft_printf("[%c] [%s]\n", split[i].quote, split[i].str);
-		free(split[i].str);
-		i++;
-	}
-	free(split);
 }
