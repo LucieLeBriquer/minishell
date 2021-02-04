@@ -10,14 +10,14 @@ LIB_NAME	= $(LIB_DIR)libft.a
 
 INCS		= $(addprefix $(INCS_DIR), minishell.h)
 
-SRCS		=  parse/trim.c \
-			parse/parsing.c \
-			parse/env.c \
-			parse/count.c \
-			print/command.c \
-			search/list.c \
-			exec/execute.c \
-			main.c
+SRCS		=  $(addprefix sources/, count.c \
+			execute.c \
+			parse.c \
+			parse_env.c \
+			print.c \
+			search.c \
+			trim.c \
+			main.c )
  
 OBJS		= $(SRCS:.c=.o)
 
