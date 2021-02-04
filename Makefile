@@ -16,6 +16,7 @@ SRCS		=  $(addprefix sources/, count.c \
 			parse_env.c \
 			print.c \
 			search.c \
+			tree.c \
 			trim.c \
 			main.c )
  

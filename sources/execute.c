@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:37:45 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/03 11:38:25 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/04 16:48:56 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 void	execute(t_split *split, char **env)
 {
-	(void)split;
+	t_tree	*tree;
+
 	(void)env;
-	ft_printf("execute.....\n");
+	tree = create_tree(split);
+	ft_printf("--- parcours postfixe de l'arbre ---\n");
+	print_tree(tree, split);
 }

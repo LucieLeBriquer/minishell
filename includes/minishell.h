@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/03 11:43:06 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/04 16:42:09 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@
 # define NB_CMD 3
 # define SIZE_PATH 60
 
+enum operators {PIPE = 1, LEFT, RIGHT, RRIGHT, SEMIC};
+
 typedef struct
 {
 	char	*str;
-	char	quote;
+	char	quote; // rename en sep
 }			t_split;
 
 typedef struct
@@ -36,6 +38,23 @@ typedef struct
 	char	*value;
 }			t_env;
 
+typedef struct
+{
+	int		type;
+	int		input;
+	int		output;
+	int		start;
+	int		number;
+}			t_info;
+
+typedef struct s_tree
+{
+	t_info			*info;
+	struct s_tree	*left;
+	struct s_tree	*right;
+}					t_tree;
+
+
 void		simple_parse(char *command);
 t_split		*parse_quotes(char *command, int *err);
 void		print_parse_quotes(char *command);
@@ -50,5 +69,7 @@ char		*search_env(t_list *env, char *to_find);
 void		execute(t_split *split, char **env);
 void		print_error_parsing(int err);
 void		print_parsed_command(t_split *split);
+t_tree		*create_tree(t_split *split);
+void		print_tree(t_tree *tree, t_split *split);
 
 #endif
