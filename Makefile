@@ -1,14 +1,16 @@
-CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror
+CC			= gcc -Wall -Wextra -Werror
 RM			= rm -rf
-NAME		= minishell
+NAME		= minishell 
+INCS_DIR	= ./includes/
+MAIN_INC	= -I$(INCS_DIR)
 
-INCS_DIR	= ./includes
-INCS		= $(addprefix includes/, minishell.h)
+LIB_DIR		= ./libft/
+LIB_INC		= -I$(LIB_DIR)includes/
+LIB_NAME	= $(LIB_DIR)libft.a
 
-LIBS		= librairies/libftfull_mac.a
+INCS		= $(addprefix $(INCS_DIR), minishell.h)
 
-SRCS		= parse/trim.c \
+SRCS		=  parse/trim.c \
 			parse/parsing.c \
 			parse/env.c \
 			parse/count.c \
@@ -16,23 +18,27 @@ SRCS		= parse/trim.c \
 			search/list.c \
 			exec/execute.c \
 			main.c
-
+ 
 OBJS		= $(SRCS:.c=.o)
 
 %.o			: %.c
-			@$(CC) $(CFLAGS) -I$(INCS_DIR) -c $< -o $@
+			@$(CC) $(MAIN_INC) $(LIB_INC) -c $< -o $@
 
 all			: $(NAME)
 
 $(NAME)		: $(OBJS) $(INCS)
-			@$(CC) $(CFLAGS) -I$(INCS_DIR) $(OBJS) $(LIBS) -o $(NAME)
+			@make --silent -C $(LIB_DIR)
+			@$(CC) $(OBJS) $(LIB_NAME) -L$(LIB_DIR) $(LIB_INC) $(MAIN_INC) -o $(NAME)
+			@echo "minishell compiled"
 
 clean:
+			@$(MAKE) clean --silent -C $(LIB_DIR)
 			@$(RM) $(OBJS)
 
 fclean		: clean
+			@$(MAKE) fclean --silent -C $(LIB_DIR)
 			@$(RM) $(NAME)
 
 re			: fclean all
 
-.PHONY		: all clean fclean re
+.PHONY		: all clean fclean re docu
