@@ -101,5 +101,4 @@ void	print_tree(t_tree *tree, t_split *split)
 	ft_printf("type : %d\t %d[%d]\t", tree->info->type, tree->info->start, tree->info->number);
 	ft_printf("operator : %c\t", split[tree->info->start].quote);
 	ft_printf("first word : %s\n", split[tree->info->start].str);
-	print_tree(tree->right, split);
-}
+	print_tree(tree->right, split);w}
