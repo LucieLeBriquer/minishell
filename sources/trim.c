@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:38:58 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/03 11:39:00 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/06 14:45:26 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	trim_quotes(char *s)
 	s[i] = '\0';
 }
 
-static void	trim_spaces_left(char *s)
+void		trim_spaces_left(char *s)
 {
 	int	i;
 	int	j;

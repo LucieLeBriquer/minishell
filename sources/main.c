@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:36:55 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/03 11:40:49 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/06 14:49:03 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		main(int argc, char **argv, char **env)
 	prompt(cwd);
 	while (get_next_line(0, &line) > 0)
 	{
-		split = parse_quotes(line, &err);
+		split = parse_command(line, &err);
 		if (!split)
 			print_error_parsing(err);
 		else

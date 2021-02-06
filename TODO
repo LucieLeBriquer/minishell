@@ -1,10 +1,7 @@
 ---- TODO ----
-- mettre l'environnement dans une liste chainee ?
-- fonction de recherche 
-- reflechir a l'expansion et aux commandes imbriquees -> a priori arbre
 - pour l'expansion des db quotes, supprimer tous les escaping + $ a replace, si
   search = null on skip
-
+- lorsque juste des spaces -> wrong format ??
 ----  OK  ----
 echo "erb" >>           	bl " test '\" ' "   >file.txt
 echo "blegh"|cat -e

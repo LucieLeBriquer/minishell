@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 16:08:17 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/03 11:38:55 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/06 14:47:57 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,21 @@ static int	fill_words(t_split *split, int words, char *command, int l)
 	return (0);
 }
 
-t_split		*parse_quotes(char *command, int *err)
+t_split		*parse_command(char *command, int *err)
 {
 	int		l;
 	int		words;
 	t_split	*split;
 
 	trim_spaces_right(command);
+	trim_spaces_left(command);
+	*err = 0;
 	l = ft_strlen(command);
+	if (l == 0)
+		return (NULL);
 	words = nb_words(command, l);
 	*err = 1;
-	if (words <= 0)
+	if (words < 0)
 		return (NULL);
 	split = malloc((words + 1) * sizeof(t_split));
 	*err = 2;

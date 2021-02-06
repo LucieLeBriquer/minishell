@@ -95,10 +95,16 @@ t_tree	*create_tree(t_split *split)
 
 void	print_tree(t_tree *tree, t_split *split)
 {
+	int	i;
+
 	if (tree == NULL)
 		return ;
 	print_tree(tree->left, split);
-	ft_printf("type : %d\t %d[%d]\t", tree->info->type, tree->info->start, tree->info->number);
+	ft_printf("type : %d\t%d[%d]\t", tree->info->type, tree->info->start, tree->info->number);
 	ft_printf("operator : %c\t", split[tree->info->start].quote);
-	ft_printf("first word : %s\n", split[tree->info->start].str);
-	print_tree(tree->right, split);w}
+	i = -1;
+	while (++i < tree->info->number)
+		ft_printf("%s ", split[tree->info->start + i].str);
+	ft_printf("\n");
+	print_tree(tree->right, split);
+}

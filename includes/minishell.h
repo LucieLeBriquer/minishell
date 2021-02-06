@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/04 16:42:09 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/06 14:48:09 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,10 @@ typedef struct s_tree
 
 
 void		simple_parse(char *command);
-t_split		*parse_quotes(char *command, int *err);
+t_split		*parse_command(char *command, int *err);
 void		print_parse_quotes(char *command);
 void		trim_spaces_right(char *s);
+void		trim_spaces_left(char *s);
 void		trim_useless(t_split split);
 int			nb_words(char *s, int l);
 int			len_of_word(char *s, char *sep, int l);
