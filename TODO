@@ -1,9 +1,21 @@
 ---- TODO ----
 - pour l'expansion des db quotes, supprimer tous les escaping + $ a replace, si
   search = null on skip
-- lorsque juste des spaces -> wrong format ??
+- repenser l'arbre pour avoir les pipes en noeud principaux, que la commande 
+cat < TODO > bl | cat < TOOD > bl2
+donne l'arbre
+				|
+		<				<
+	cat		 >	   cat		>
+		 TODO  bl		TODO  bl
+comme ca tout ce qui sort de la commande à gauche rentre dans la commande à droite
+en fait il faut peut etre simplement faire juste un arbre avec les pipes ?
+
 ----  OK  ----
 echo "erb" >>           	bl " test '\" ' "   >file.txt
 echo "blegh"|cat -e
 echo|test>te|tec<t
    result " of\" " command 's' "   $SPLIT" |   goes ' "in" ' >here
+
+---- pour l'arbre ----
+cat < TODO > bl | cat < TODO > bl2

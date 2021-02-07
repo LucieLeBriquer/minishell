@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/06 14:48:09 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/07 16:06:16 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define NB_CMD 3
 # define SIZE_PATH 60
 
-enum operators {PIPE = 1, LEFT, RIGHT, RRIGHT, SEMIC};
+enum operators {CMD, PIPE, LEFT, RIGHT, RRIGHT, SEMIC};
 
 typedef struct
 {
@@ -43,6 +43,8 @@ typedef struct
 	int		type;
 	int		input;
 	int		output;
+	int		inpipe;
+	int		outpipe;
 	int		start;
 	int		number;
 }			t_info;
