@@ -1,4 +1,5 @@
 ---- TODO ----
+- l'histoire d'une liste chainee pour l'env totalement con puisque qu'on veut le passer sous forme de char ** a execve
 - pour l'expansion des db quotes, supprimer tous les escaping + $ a replace, si
   search = null on skip
 - repenser l'arbre pour avoir les pipes en noeud principaux, que la commande 

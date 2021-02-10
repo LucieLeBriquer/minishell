@@ -6,56 +6,18 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/07 16:06:16 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/10 16:51:31 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include "libftfull.h"
+# include "structures.h"
 # include <stdlib.h>
+# include <signal.h>
 # define NB_CMD 3
 # define SIZE_PATH 60
-
-enum operators {CMD, PIPE, LEFT, RIGHT, RRIGHT, SEMIC};
-
-typedef struct
-{
-	char	*str;
-	char	quote; // rename en sep
-}			t_split;
-
-typedef struct
-{
-	char	sep;
-	int		nb_words;
-	int		state;
-}			t_parse;
-
-typedef struct
-{
-	char	*name;
-	char	*value;
-}			t_env;
-
-typedef struct
-{
-	int		type;
-	int		input;
-	int		output;
-	int		inpipe;
-	int		outpipe;
-	int		start;
-	int		number;
-}			t_info;
-
-typedef struct s_tree
-{
-	t_info			*info;
-	struct s_tree	*left;
-	struct s_tree	*right;
-}					t_tree;
-
 
 void		simple_parse(char *command);
 t_split		*parse_command(char *command, int *err);
@@ -74,5 +36,11 @@ void		print_error_parsing(int err);
 void		print_parsed_command(t_split *split);
 t_tree		*create_tree(t_split *split);
 void		print_tree(t_tree *tree, t_split *split);
+void		execute_cmd(t_info *cmd, t_split *split, char **env);
+void	exec_builtin(t_info *cmd, t_split *split, char **env);
+void	exec_executable(t_info *cmd, t_split *split, char **env);
+void	exec_declaration(t_info *cmd, t_split *split, char **env);
+void	exec_execbin(t_info *cmd, t_split *split, char **env);
+
 
 #endif

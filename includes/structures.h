@@ -1,0 +1,62 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structures.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
+/*   Updated: 2021/02/10 16:58:00 by lle-briq         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef STRUCTURES_H
+# define STRUCTURES_H
+
+typedef struct		s_parse
+{
+	char			sep;
+	int				nb_words;
+	int				state;
+}					t_parse;
+
+typedef struct		s_split
+{
+	char			*str;
+	char			quote;
+}					t_split;
+
+/*
+** rename quote en sep
+*/
+
+typedef struct		s_env
+{
+	char			*name;
+	char			*value;
+}					t_env;
+
+typedef struct		s_info
+{
+	int				type;
+	int				input;
+	int				output;
+	int				start;
+	int				number;
+	int				builtin;
+}					t_info;
+
+typedef struct		s_tree
+{
+	t_info			*info;
+	struct s_tree	*left;
+	struct s_tree	*right;
+}					t_tree;
+
+typedef void (*t_exec)(t_info *, t_split *, char **env);
+
+enum	{CMD, PIPE, LEFT, RIGHT, RRIGHT, SEMIC};
+enum	{BUILTIN, EXECUTABLE, DECLARATION, EXECBIN};
+enum	{ECHO, CD, PWD, EXPORT, UNSET, ENV, EXIT};
+
+#endif

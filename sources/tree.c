@@ -4,12 +4,12 @@ static int	is_operator(char c)
 {
 	if (c == '|')
 		return (PIPE);
-	if (c == '<')
-		return (LEFT);
-	if (c == '>')
-		return (RIGHT);
-	if (c == 'd')
-		return (RRIGHT);
+	//if (c == '<')
+	//	return (LEFT);
+	//if (c == '>')
+//		return (RIGHT);
+//	if (c == 'd')
+//		return (RRIGHT);
 	if (c == ';')
 		return (SEMIC);
 	return (0);

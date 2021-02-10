@@ -10,7 +10,9 @@ LIB_NAME	= $(LIB_DIR)libft.a
 
 INCS		= $(addprefix $(INCS_DIR), minishell.h)
 
-SRCS		=  $(addprefix sources/, count.c \
+SRCS		=  $(addprefix sources/, command_func.c \
+			command.c \
+			count.c \
 			execute.c \
 			parse.c \
 			parse_env.c \
