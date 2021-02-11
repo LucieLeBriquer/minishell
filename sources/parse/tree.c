@@ -90,6 +90,8 @@ t_tree	*create_tree(t_split *split)
 	}
 	if (last_node)
 		last_node->right = create_leave(j, i - j);
+	if (!tree)
+		tree = create_leave(0, i);
 	return (tree);
 }
 
