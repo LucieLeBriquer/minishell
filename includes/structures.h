@@ -6,12 +6,15 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/10 16:58:00 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/11 16:49:28 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
+# define NB_SEPS 6
+# define NB_TYPES 4
+# define NB_BUILTIN 7
 
 typedef struct		s_parse
 {
@@ -53,7 +56,7 @@ typedef struct		s_tree
 	struct s_tree	*right;
 }					t_tree;
 
-typedef void (*t_exec)(t_info *, t_split *, char **env);
+typedef int (*t_exec)(t_info *, t_split *, char **env);
 
 enum	{CMD, PIPE, LEFT, RIGHT, RRIGHT, SEMIC};
 enum	{BUILTIN, EXECUTABLE, DECLARATION, EXECBIN};
