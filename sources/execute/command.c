@@ -60,7 +60,8 @@ int		cmd_type(char *first_word, t_info *cmd)
 
 void	execute_cmd(t_info *cmd, t_split *split, char **env)
 {
-	t_exec	exec_func[4];
+	t_exec	exec_func[NB_TYPES];
+	int		err;
 
 	(void)env;
 	exec_func[BUILTIN] = &exec_builtin;
@@ -68,5 +69,6 @@ void	execute_cmd(t_info *cmd, t_split *split, char **env)
 	exec_func[DECLARATION] = &exec_declaration;
 	exec_func[EXECBIN] = &exec_execbin;
 	print_leave(*cmd, split);
-	(exec_func[cmd_type(split[cmd->start].str, cmd)])(cmd, split, env);
+	err = (exec_func[cmd_type(split[cmd->start].str, cmd)])(cmd, split, env);
+	ft_printf("\terr = %d\n", err);
 }
