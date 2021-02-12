@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 00:08:59 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/01/08 13:08:30 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/11 17:57:17 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ typedef struct s_print
 	int		field;
 	int		precision;
 	int		type;
+	int		fd;
 }			t_print;
 
 typedef int	(*t_func)(t_print, va_list);
@@ -126,9 +127,10 @@ void		print_param_useful(t_print p);
 int			is_type(char c);
 const char	*parse_param(t_print *param, const char *str, va_list args);
 int			is_all_coherent(const char *str);
-const char	*print_str_classic(const char *str, int *nb_char);
+const char	*print_str_classic(const char *str, int *nb_char, int fd);
 void		print_param(t_print p, va_list args, int *nb_char);
 int			ft_printf(const char *str, ...);
+int			ft_printf_fd(int fd, const char *str, ...);
 void		fill_str_s(char **to_print, char *str, t_print param, int size);
 void		fill_int_right_p(char **to_print, char *nb, t_print par, int size);
 void		fill_int_right(char **to_print, char *nb, int size);

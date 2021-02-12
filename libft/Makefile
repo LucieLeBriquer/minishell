@@ -67,7 +67,7 @@ SRCS		= convert/ft_atoi.c \
 			  write/ft_putstr.c \
 			  write/ft_putstr_fd.c
 
-PRINT_SRCS	= $(addprefix printf/, ft_printf.c \
+PRINT_SRCS	= $(addprefix printf/, ft_printf.c ft_printf_fd.c \
 			parse/errors.c \
 			parse/params.c \
 			print/print_0chr.c \

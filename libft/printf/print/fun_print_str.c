@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 18:59:13 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/01/03 17:02:47 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/11 17:55:56 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	fill_str_left(char **to_print, char *str, t_print param, int size)
 		(*to_print)[i] = str[i];
 }
 
-const char	*print_str_classic(const char *str, int *nb_char)
+const char	*print_str_classic(const char *str, int *nb_char, int fd)
 {
 	char		*buf;
 	const char	*save;
@@ -68,7 +68,7 @@ const char	*print_str_classic(const char *str, int *nb_char)
 	buf = ft_substr(save, 0, i);
 	if (!buf)
 		return (NULL);
-	ft_putstr(buf);
+	ft_putstr_fd(buf, fd);
 	free(buf);
 	(*nb_char) += i;
 	return (str);

@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 18:23:35 by lle-briq          #+#    #+#             */
-/*   Updated: 2020/12/30 15:07:22 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/11 17:39:59 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	print_0chr(t_print param, va_list args)
 		to_print[0] = c;
 	else
 		to_print[size - 1] = c;
-	write(1, to_print, size);
+	write(param.fd, to_print, size);
 	free(to_print);
 	return (size);
 }

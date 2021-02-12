@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 18:59:13 by lle-briq          #+#    #+#             */
-/*   Updated: 2020/12/30 15:07:38 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/11 17:40:19 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	print_1str_null(t_print param)
 	if (!to_print)
 		return (0);
 	fill_str_s(&to_print, str, param, size);
-	write(1, to_print, size - 1);
+	write(param.fd, to_print, size - 1);
 	free(to_print);
 	return (size - 1);
 }
@@ -54,7 +54,7 @@ int	print_1str(t_print param, va_list args)
 	if (!to_print)
 		return (0);
 	fill_str_s(&to_print, str, param, size);
-	write(1, to_print, size - 1);
+	write(param.fd, to_print, size - 1);
 	free(to_print);
 	return (size - 1);
 }

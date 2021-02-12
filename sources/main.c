@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:36:55 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/10 17:33:34 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/11 17:34:09 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,18 @@ void	print_entry(void *ventry)
 void	handler(int signo)
 {
 	(void)signo;
-	ft_printf("%d\n", signo);
 	prompt();
 }
 
 int		main(int argc, char **argv, char **env)
 {
 	char	*line;
-	t_list	*env_list;
 	t_split	*split;
 	int		err;
 
 	(void)argc;
 	(void)argv;
-	parse_env(&env_list, env);
+	//parse_env(&env_list, env);
 	signal(SIGINT, handler);
 	prompt();
 	while (get_next_line(0, &line) > 0)
@@ -62,6 +60,6 @@ int		main(int argc, char **argv, char **env)
 		prompt();
 	}
 	free(line);
-	ft_lstclear(&env_list, &free_entry);
+	//ft_lstclear(&env_list, &free_entry);
 	return (0);
 }

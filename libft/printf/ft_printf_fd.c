@@ -1,42 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_8pct.c                                       :+:      :+:    :+:   */
+/*   ft_printf_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/26 21:51:09 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/11 17:42:11 by lle-briq         ###   ########.fr       */
+/*   Created: 2020/11/26 18:04:46 by lle-briq          #+#    #+#             */
+/*   Updated: 2021/02/11 17:56:20 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftfull.h"
 
-int	print_8pct(t_print param, va_list args)
+int	ft_printf_fd(int fd, const char *str, ...)
 {
-	int		size;
-	char	*to_print;
-	int		i;
+	va_list	args;
+	t_print	param;
+	int		nb_char;
 
-	(void)args;
-	size = 1;
-	if (param.field > 0)
-		size = param.field;
-	to_print = malloc(size * sizeof(char));
-	if (!to_print)
+	if (!is_all_coherent(str))
 		return (0);
-	i = -1;
-	while (++i < size)
+	va_start(args, str);
+	nb_char = 0;
+	while (*str)
 	{
-		to_print[i] = ' ';
-		if (param.zero && !param.align)
-			to_print[i] = '0';
+		if (*str != '%')
+			str = print_str_classic(str, &nb_char, fd);
+		else
+		{
+			str++;
+			init_param(&param);
+			str = parse_param(&param, str, args);
+			if (!str)
+				return (0);
+			param.fd = fd;
+			print_param(param, args, &nb_char);
+		}
 	}
-	if (param.align)
-		to_print[0] = '%';
-	else
-		to_print[size - 1] = '%';
-	write(param.fd, to_print, size);
-	free(to_print);
-	return (size);
+	va_end(args);
+	return (nb_char);
 }

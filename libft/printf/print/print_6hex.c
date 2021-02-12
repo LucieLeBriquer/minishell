@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 21:51:09 by lle-briq          #+#    #+#             */
-/*   Updated: 2020/12/30 15:09:19 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/11 17:41:49 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	print_6hex(t_print param, va_list args)
 		return (0);
 	fill_int(&to_print, nb_utox, param, size);
 	free(nb_utox);
-	ft_putstr(to_print);
+	ft_putstr_fd(to_print, param.fd);
 	free(to_print);
 	return (size - 1);
 }

@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 00:08:59 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/03 11:42:20 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/11 17:57:17 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,15 +74,15 @@ char		*ft_strjoin(const char *s1, const char *s2);
 char		*ft_strtrim(const char *s1, const char *set);
 char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char		*ft_substr(const char *s, unsigned int start, size_t len);
-t_list		*ft_lstnew();
+t_list		*ft_lstnew(void *content);
 void		ft_lstadd_back(t_list **alst, t_list *new);
 void		ft_lstadd_front(t_list **alst, t_list *new);
-void		ft_lstdelone(t_list *lst, void (*del)());
+void		ft_lstdelone(t_list *lst, void (*del)(void *));
 int			ft_lstsize(t_list *lst);
 t_list		*ft_lstlast(t_list *lst);
 void		ft_lstclear(t_list **lst, void (*del)(void *));
 void		ft_lstiter(t_list *lst, void (*f)(void *));
-t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)());
 int			ft_issep(char c, const char *charset);
 int			ft_isspace(char c);
 int			ft_max(int a, int b);
@@ -113,6 +113,7 @@ typedef struct s_print
 	int		field;
 	int		precision;
 	int		type;
+	int		fd;
 }			t_print;
 
 typedef int	(*t_func)(t_print, va_list);
@@ -126,9 +127,10 @@ void		print_param_useful(t_print p);
 int			is_type(char c);
 const char	*parse_param(t_print *param, const char *str, va_list args);
 int			is_all_coherent(const char *str);
-const char	*print_str_classic(const char *str, int *nb_char);
+const char	*print_str_classic(const char *str, int *nb_char, int fd);
 void		print_param(t_print p, va_list args, int *nb_char);
 int			ft_printf(const char *str, ...);
+int			ft_printf_fd(int fd, const char *str, ...);
 void		fill_str_s(char **to_print, char *str, t_print param, int size);
 void		fill_int_right_p(char **to_print, char *nb, t_print par, int size);
 void		fill_int_right(char **to_print, char *nb, int size);

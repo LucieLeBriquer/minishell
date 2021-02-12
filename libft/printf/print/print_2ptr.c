@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/28 15:50:53 by lle-briq          #+#    #+#             */
-/*   Updated: 2020/12/30 15:07:52 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/11 17:40:33 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	print_2ptr(t_print param, va_list args)
 		return (0);
 	fill_ptr(&to_print, ptoa, param, size);
 	free(ptoa);
-	write(1, to_print, size);
+	write(param.fd, to_print, size);
 	free(to_print);
 	return (size);
 }
