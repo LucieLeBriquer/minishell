@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:37:45 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/13 17:07:08 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/13 17:09:20 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	execute_recursive(t_tree *tree, t_split *split, char **env)
 		fill_subtree_fd(tree->right, 0, pfd[0]);
 	}
 	execute_recursive(tree->left, split, env);
+	// add waiting functions
 	execute_recursive(tree->right, split, env);
 }
 
