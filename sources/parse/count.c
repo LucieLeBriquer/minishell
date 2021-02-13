@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:38:32 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/10 15:39:10 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/13 16:37:54 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	new_state(char *s, int i)
 	if ((c == '\'') || (c == '\"'))
 		return (1);
 	if ((c == '|') || (c == '<') || (c == '|') || (c == ';') ||
-			(c == '>' && c && s[i + 1] && s[i + 1] != '>'))
+			(c == '>' && (!s[i + 1] || s[i + 1] != '>')))
 		return (3);
 	if (c == '>' && c && s[i + 1] && s[i + 1] == '>')
 		return (4);
@@ -64,7 +64,7 @@ int			nb_words(char *s, int l)
 		if (current.state == 2)
 		{
 			i = find_separator(i, l, s, &current);
-			if (i + 1 == l && current.sep != ' ')
+			if (i + 1 >= l && current.sep != ' ')
 				return (-1);
 		}
 		else if (current.state == 0)
@@ -108,7 +108,7 @@ int			len_of_word(char *s, char *sep, int l)
 	if ((current.state == 3) || (current.state == 4))
 		return (i + 1 + (current.state == 4));
 	i++;
-	while (s[i] != current.sep)
+	while (i < l && s[i] != current.sep)
 	{
 		if (current.sep == '\"' && i + 1 < l && s[i] == '\\')
 			i++;

@@ -20,3 +20,9 @@ echo|test>te|tec<t
 
 ---- pour l'arbre ----
 cat < TODO > bl | cat < TODO > bl2
+
+---- a corriger ----
+A >
+PARSING
+	[ ] [A]
+	[ ] []

@@ -25,6 +25,7 @@ t_info	*init_node(int i, int type, int number)
 	info->type = type;
 	info->input = 0;
 	info->output = 1;
+	info->output = 1;
 	info->start = i;
 	info->number = number;
 	return (info);
@@ -47,8 +48,8 @@ t_tree	*create_leave(int start, int number)
 
 t_tree	*create_node(int i, int type, int start)
 {
-	t_tree	*new;
-	t_info	*new_info;
+	t_tree		*new;
+	t_info		*new_info;
 
 	new = malloc(sizeof(t_tree));
 	if (!new)
@@ -92,6 +93,7 @@ t_tree	*create_tree(t_split *split)
 		last_node->right = create_leave(j, i - j);
 	if (!tree)
 		tree = create_leave(0, i);
+	print_tree(tree, split);
 	return (tree);
 }
 

@@ -4,12 +4,12 @@ void	print_leave(t_info cmd, t_split *split)
 {
 	int	i;
 
-	ft_printf("EXECUTE input %d\t\t", cmd.input);
-	ft_printf("output %d\t\t", cmd.output);
+	ft_printf("\033[33mEXECUTE   input %2d   ", cmd.input);
+	ft_printf("output %2d\t\t", cmd.output);
 	i = -1;
 	while (++i < cmd.number)
 		ft_printf("%s ", split[cmd.start + i].str);
-	ft_printf("\n");
+	ft_printf("\n\033[0m");
 }
 
 int		is_declaration(char *str)
@@ -58,17 +58,38 @@ int		cmd_type(char *first_word, t_info *cmd)
 		return (EXECBIN);
 }
 
+void	close_unused(int fd)
+{
+	if (fd > 2)
+	{
+		ft_printf("closing %d...", fd);
+		close(fd);
+	}
+}
+
 void	execute_cmd(t_info *cmd, t_split *split, char **env)
 {
 	t_exec	exec_func[NB_TYPES];
 	int		err;
 
-	(void)env;
 	exec_func[BUILTIN] = &exec_builtin;
 	exec_func[EXECUTABLE] = &exec_executable;
 	exec_func[DECLARATION] = &exec_declaration;
 	exec_func[EXECBIN] = &exec_execbin;
+	err = update_in_out(cmd, split);
+	if (err == -1)
+	{
+		ft_printf("parse error\n");
+		return ;
+	}
+	if (err < -1)
+	{
+		ft_printf("file error\n");
+		return ;
+	}
 	print_leave(*cmd, split);
 	err = (exec_func[cmd_type(split[cmd->start].str, cmd)])(cmd, split, env);
+	close_unused(cmd->input);
+	close_unused(cmd->output);
 	ft_printf("\terr = %d\n", err);
 }

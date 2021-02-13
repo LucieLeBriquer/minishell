@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:37:45 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/10 16:23:03 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/13 16:13:42 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,6 @@ void	execute_recursive(t_tree *tree, t_split *split, char **env)
 	}
 	execute_recursive(tree->left, split, env);
 	execute_recursive(tree->right, split, env);
-	if (type != CMD && type != SEMIC)
-	{
-		ft_printf("closing %d %d\n", pfd[0], pfd[1]);
-		close(pfd[0]);
-		close(pfd[1]);
-	}
 }
 
 void	execute(t_split *split, char **env)

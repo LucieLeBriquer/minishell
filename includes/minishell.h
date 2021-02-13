@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/11 16:57:57 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/13 16:08:08 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "structures.h"
 # include <stdlib.h>
 # include <signal.h>
+# include <fcntl.h>
 # define NB_CMD 3
 # define SIZE_PATH 60
 
@@ -41,6 +42,7 @@ int		exec_builtin(t_info *cmd, t_split *split, char **env);
 int		exec_executable(t_info *cmd, t_split *split, char **env);
 int		exec_declaration(t_info *cmd, t_split *split, char **env);
 int		exec_execbin(t_info *cmd, t_split *split, char **env);
+int		update_in_out(t_info *cmd, t_split *split);
 
 /*
 ** Built-in
