@@ -58,15 +58,6 @@ int		cmd_type(char *first_word, t_info *cmd)
 		return (EXECBIN);
 }
 
-void	close_unused(int fd)
-{
-	if (fd > 2)
-	{
-		ft_printf("closing %d...", fd);
-		close(fd);
-	}
-}
-
 void	execute_cmd(t_info *cmd, t_split *split, char **env)
 {
 	t_exec	exec_func[NB_TYPES];
@@ -89,7 +80,5 @@ void	execute_cmd(t_info *cmd, t_split *split, char **env)
 	}
 	print_leave(*cmd, split);
 	err = (exec_func[cmd_type(split[cmd->start].str, cmd)])(cmd, split, env);
-	close_unused(cmd->input);
-	close_unused(cmd->output);
 	ft_printf("\terr = %d\n", err);
 }
