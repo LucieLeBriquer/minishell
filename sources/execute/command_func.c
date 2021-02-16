@@ -71,3 +71,7 @@ int	exec_execbin(t_info *cmd, t_split *split, char **env)
 	}
 	return (0);
 }
+
+/*
+** maybe ajouter test (à renommer) à la structure de cmd avec un status qui indique si le child process est finito
+*/
