@@ -43,10 +43,10 @@ int	exec_execbin(t_info *cmd, t_split *split, char **env)
 	fd = open_executable(cmd, split, env, &file);
 	if (fd < 0)
 		return (-1);
+	close(fd);
 	status = fork();
 	if (status == 0)
 	{
-		close(fd);
 		if (cmd->output != 1)
 		{
 			close(1);
