@@ -55,7 +55,6 @@ int	exec_execbin(t_info *cmd, t_split *split, char **env)
 			close(cmd->output);
 		}
 		args = create_tab_args(cmd, split);
-		args[1] = NULL;
 		execve(file, args, env);
 	}
 	else
