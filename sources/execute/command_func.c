@@ -37,12 +37,30 @@ int	exec_execbin(t_info *cmd, t_split *split, char **env)
 	int		fd;
 	char	*file;
 	char	**args;
+	int		status;
+	int		test;
 
 	fd = open_executable(cmd, split, env, &file);
 	if (fd < 0)
 		return (-1);
-	close(fd);
-	args = create_tab_args(cmd, split);
-	execve(file, args, env); //add fork etc
+	status = fork();
+	if (status == 0)
+	{
+		close(fd);
+		if (cmd->output != 1)
+		{
+			close(1);
+			dup(cmd->output);
+			close(cmd->input);
+			close(cmd->output);
+		}
+		args = create_tab_args(cmd, split);
+		args[1] = NULL;
+		execve(file, args, env);
+	}
+	else
+	{
+		wait(&test);
+	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/16 08:36:42 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/16 09:02:14 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <stdlib.h>
 # include <signal.h>
 # include <fcntl.h>
+# include <sys/wait.h>
+# include <sys/types.h>
 # define NB_CMD 3
 # define SIZE_PATH 60
 

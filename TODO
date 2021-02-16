@@ -1,16 +1,9 @@
 ---- TODO ----
 - l'histoire d'une liste chainee pour l'env totalement con puisque qu'on veut le passer sous forme de char ** a execve
+- donc coder une fonction de realloc avec le type char *
 - pour l'expansion des db quotes, supprimer tous les escaping + $ a replace, si
   search = null on skip
-- repenser l'arbre pour avoir les pipes en noeud principaux, que la commande 
-cat < TODO > bl | cat < TOOD > bl2
-donne l'arbre
-				|
-		<				<
-	cat		 >	   cat		>
-		 TODO  bl		TODO  bl
-comme ca tout ce qui sort de la commande à gauche rentre dans la commande à droite
-en fait il faut peut etre simplement faire juste un arbre avec les pipes ?
+- pour les executable semble ok, mais reste à gérer ces histoire de join pour éviter les leaks, recoder un strjoin
 
 ----  OK  ----
 echo "erb" >>           	bl " test '\" ' "   >file.txt
@@ -20,9 +13,3 @@ echo|test>te|tec<t
 
 ---- pour l'arbre ----
 cat < TODO > bl | cat < TODO > bl2
-
----- a corriger ----
-A >
-PARSING
-	[ ] [A]
-	[ ] []
