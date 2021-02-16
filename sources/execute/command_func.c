@@ -50,16 +50,24 @@ int	exec_execbin(t_info *cmd, t_split *split, char **env)
 		if (cmd->output != 1)
 		{
 			close(1);
-			dup(cmd->output);
-			close(cmd->input);
-			close(cmd->output);
+			dup2(cmd->output, 1);
+		}
+		if (cmd->input != 0)
+		{
+			close(0);
+			dup2(cmd->input, 0);
 		}
 		args = create_tab_args(cmd, split);
 		execve(file, args, env);
 	}
 	else
 	{
+		if (cmd->input != 0)
+			close(cmd->input);
+		if (cmd->output != 1)
+			close(cmd->output);
 		wait(&test);
+		ft_printf("\033[32mchild process finished\033[0m\n");
 	}
 	return (0);
 }
