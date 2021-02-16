@@ -16,10 +16,36 @@ int	exec_builtin(t_info *cmd, t_split *split, char **env)
 
 int	exec_executable(t_info *cmd, t_split *split, char **env)
 {
-	(void)cmd;
-	(void)split;
-	(void)env;
-	ft_printf("\t> Executable ./\n");
+	char	**args;
+	int		status;
+	int		test;
+
+	ft_printf("\t> Executable\n");
+	status = fork();
+	if (status == 0)
+	{
+		if (cmd->output != 1)
+		{
+			close(1);
+			dup2(cmd->output, 1);
+		}
+		if (cmd->input != 0)
+		{
+			close(0);
+			dup2(cmd->input, 0);
+		}
+		args = create_tab_args(cmd, split);
+		execve(split[cmd->start].str, args, env);
+	}
+	else
+	{
+		if (cmd->input != 0)
+			close(cmd->input);
+		if (cmd->output != 1)
+			close(cmd->output);
+		wait(&test);
+		ft_printf("\033[32mchild process finished\033[0m\n");
+	}
 	return (0);
 }
 
