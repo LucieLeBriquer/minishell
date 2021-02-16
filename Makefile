@@ -15,6 +15,8 @@ SRCS		=  $(addprefix sources/, \
 			execute/command.c \
 			parse/count.c \
 			execute/execute.c \
+			execute/executable.c \
+			execute/useful.c \
 			parse/parse.c \
 			parse/redir.c \
 			env/parse_env.c \

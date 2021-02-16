@@ -34,9 +34,15 @@ int	exec_declaration(t_info *cmd, t_split *split, char **env)
 
 int	exec_execbin(t_info *cmd, t_split *split, char **env)
 {
-	(void)cmd;
-	(void)split;
-	(void)env;
-	ft_printf("\t> Executable $PATH\n");
+	int		fd;
+	char	*file;
+	char	**args;
+
+	fd = open_executable(cmd, split, env, &file);
+	if (fd < 0)
+		return (-1);
+	close(fd);
+	args = create_tab_args(cmd, split);
+	execve(file, args, env); //add fork etc
 	return (0);
 }

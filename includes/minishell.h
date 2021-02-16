@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/13 16:08:08 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/16 08:36:42 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int		exec_executable(t_info *cmd, t_split *split, char **env);
 int		exec_declaration(t_info *cmd, t_split *split, char **env);
 int		exec_execbin(t_info *cmd, t_split *split, char **env);
 int		update_in_out(t_info *cmd, t_split *split);
+int		open_executable(t_info *cmd, t_split *split, char **env, char **file);
+char	**create_tab_args(t_info *cmd, t_split *split);
 
 /*
 ** Built-in
