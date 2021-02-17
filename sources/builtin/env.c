@@ -14,15 +14,16 @@ static void	print_env(char **env)
 
 int			ft_env(t_info *cmd, t_split *split, char **env)
 {
-	int	pid;
-	int	status;
+	int		pid;
+	int		status;
+	char	**args;
 
-	(void)split;
-//	if (cmd->number > 1)
-//	{
-//		ft_printf("env: '%s': %s\n", split[cmd->start + 1].str, strerror(2));
-//		return (-1);
-//	}
+	if (cmd->number > 1)
+	{
+		args = create_tab_args(cmd, split);
+		ft_printf("env: '%s': %s\n", args[1], strerror(2));
+		return (-1);
+	}
 	pid = fork();
 	if (pid == 0)
 	{
