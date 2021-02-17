@@ -4,6 +4,8 @@ void	print_leave(t_info cmd, t_split *split)
 {
 	int	i;
 
+	if (PRINT_ALL == 0)
+		return ;
 	ft_printf("\033[33mEXECUTE   input %2d   ", cmd.input);
 	ft_printf("output %2d\t\t", cmd.output);
 	i = -1;
@@ -80,5 +82,7 @@ void	execute_cmd(t_info *cmd, t_split *split, char **env)
 	}
 	print_leave(*cmd, split);
 	err = (exec_func[cmd_type(split[cmd->start].str, cmd)])(cmd, split, env);
+	if (PRINT_ALL == 0)
+		return ;
 	ft_printf("\terr = %d\n", err);
 }

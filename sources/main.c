@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:36:55 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/13 16:22:54 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/17 17:37:10 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,11 @@ int		main(int argc, char **argv, char **env)
 	t_split	*split;
 	int		err;
 
-	(void)argc;
 	(void)argv;
+	if (argc > 1)
+		PRINT_ALL = 0;
+	else
+		PRINT_ALL = 1;
 	//parse_env(&env_list, env);
 	signal(SIGINT, handler);
 	prompt();

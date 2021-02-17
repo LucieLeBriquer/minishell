@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:39:04 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/12 17:27:53 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/17 17:32:02 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	print_parsed_command(t_split *split)
 {
 	int		i;
 
+	if (PRINT_ALL == 0)
+		return ;
 	ft_printf("\033[33mPARSING\033[0m\n");
 	i = 0;
 	while (split[i].str)
@@ -35,3 +37,11 @@ void	print_parsed_command(t_split *split)
 	}
 	ft_printf("\n");
 }
+
+void	print_child_end(int status)
+{
+	if (PRINT_ALL == 0)
+		return ;
+	ft_printf("\033[32mchild process finished [%d]\033[0m\n", status);
+}
+

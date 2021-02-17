@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:37:45 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/13 17:09:20 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/17 17:36:56 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,18 @@ void	close_unused_fd(t_info *cmd)
 {
 	if (cmd->input != 0)
 	{
-		ft_printf("closing %d...\n", cmd->input);
+		if (PRINT_ALL == 1)
+			ft_printf("closing %d...\n", cmd->input);
 		close(cmd->input);
 	}
 	if (cmd->output != 1)
 	{
-		ft_printf("closing %d...\n", cmd->output);
+		if (PRINT_ALL == 1)
+			ft_printf("closing %d...\n", cmd->output);
 		close(cmd->output);
 	}
-	ft_printf("\n");
+	if (PRINT_ALL == 1)
+		ft_printf("\n");
 }
 
 void	execute_recursive(t_tree *tree, t_split *split, char **env)
@@ -65,7 +68,6 @@ void	execute_recursive(t_tree *tree, t_split *split, char **env)
 		fill_subtree_fd(tree->right, 0, pfd[0]);
 	}
 	execute_recursive(tree->left, split, env);
-	// add waiting functions
 	execute_recursive(tree->right, split, env);
 }
 

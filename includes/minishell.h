@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/16 09:02:14 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/17 17:30:06 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <sys/types.h>
 # define NB_CMD 3
 # define SIZE_PATH 60
+
+int		PRINT_ALL;
 
 void	simple_parse(char *command);
 t_split	*parse_command(char *command, int *err);
@@ -47,6 +49,9 @@ int		exec_execbin(t_info *cmd, t_split *split, char **env);
 int		update_in_out(t_info *cmd, t_split *split);
 int		open_executable(t_info *cmd, t_split *split, char **env, char **file);
 char	**create_tab_args(t_info *cmd, t_split *split);
+void	close_unused_fd(t_info *cmd);
+void	change_stdin_stdout(t_info *cmd);
+void	print_child_end(int status);
 
 /*
 ** Built-in
