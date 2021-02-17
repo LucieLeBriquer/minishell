@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/17 17:30:06 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/17 18:09:19 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char	**create_tab_args(t_info *cmd, t_split *split);
 void	close_unused_fd(t_info *cmd);
 void	change_stdin_stdout(t_info *cmd);
 void	print_child_end(int status);
+int		number_of_args(char **args);
 
 /*
 ** Built-in

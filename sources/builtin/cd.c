@@ -20,7 +20,8 @@ int	ft_cd(t_info *cmd, t_split *split, char **env)
 	int		fd;
 
 	args = create_tab_args(cmd, split);
-	if (cmd->number > 2)
+
+	if (number_of_args(args) > 2)
 	{
 		ft_printf("minishell: '%s': %s\n", "cd", "too many arguments");
 		return (-1);

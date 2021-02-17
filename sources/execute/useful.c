@@ -1,5 +1,15 @@
 #include "minishell.h"
 
+int		number_of_args(char **args)
+{
+	int	i;
+
+	i = 0;
+	while (args[i])
+		i++;
+	return (i);
+}
+
 char	**create_tab_args(t_info *cmd, t_split *split)
 {
 	char	**args;
@@ -16,8 +26,10 @@ char	**create_tab_args(t_info *cmd, t_split *split)
 		if (c == 'd' || c == '>' || c == '<')
 			j++;
 		else
+		{
 			args[i] = split[cmd->start + j].str;
-		i++;
+			i++;
+		}
 		j++;
 	}
 	args[i] = NULL;
