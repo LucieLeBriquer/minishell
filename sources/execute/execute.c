@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:37:45 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/17 17:36:56 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/18 14:38:24 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,21 @@ void	execute_recursive(t_tree *tree, t_split *split, char **env)
 	execute_recursive(tree->right, split, env);
 }
 
+void	free_tree(t_tree *tree)
+{
+	if (!tree)
+		return ;
+	free_tree(tree->left);
+	free_tree(tree->right);
+	free(tree->info);
+	free(tree);
+}
+
 void	execute(t_split *split, char **env)
 {
 	t_tree	*tree;
 
 	tree = create_tree(split);
 	execute_recursive(tree, split, env);
+	free_tree(tree);
 }

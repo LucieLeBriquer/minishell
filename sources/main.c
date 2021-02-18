@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:36:55 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/17 17:37:10 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/18 14:35:39 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,22 @@ void	handler(int signo)
 	prompt();
 }
 
+void	free_all(char *line, t_split *split)
+{
+	int	i;
+
+	free(line);
+	if (!split)
+		return ;
+	i = 0;
+	while (split[i].str)
+	{
+		free(split[i].str);
+		i++;
+	}
+	free(split);
+}
+
 int		main(int argc, char **argv, char **env)
 {
 	char	*line;
@@ -59,8 +75,7 @@ int		main(int argc, char **argv, char **env)
 			print_parsed_command(split);
 			execute(split, env);
 		}
-		free(line);
-		free(split);
+		free_all(line, split);
 		prompt();
 	}
 	free(line);

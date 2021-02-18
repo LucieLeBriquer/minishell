@@ -39,6 +39,7 @@ int	exec_executable(t_info *cmd, t_split *split, char **env)
 	if (PRINT_ALL == 1)
 		ft_printf("\t> Executable\n");
 	pid = fork();
+	args = NULL;
 	if (pid == 0)
 	{
 		change_stdin_stdout(cmd);
@@ -48,6 +49,7 @@ int	exec_executable(t_info *cmd, t_split *split, char **env)
 	else
 	{
 		wait(&status);
+		free_tab(args);
 		close_unused_fd(cmd);
 		print_child_end(status);
 	}
@@ -78,6 +80,7 @@ int	exec_execbin(t_info *cmd, t_split *split, char **env)
 	if (fd < 0)
 		return (-1);
 	close(fd);
+	args = NULL;
 	pid = fork();
 	if (pid == 0)
 	{
@@ -88,6 +91,8 @@ int	exec_execbin(t_info *cmd, t_split *split, char **env)
 	else
 	{
 		wait(&status);
+		free(file);
+		free_tab(args);
 		close_unused_fd(cmd);
 		print_child_end(status);
 	}
