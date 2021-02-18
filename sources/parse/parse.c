@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 16:08:17 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/13 16:38:25 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/18 15:13:57 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	free_split(t_split *split, int i)
 	return (-1);
 }
 
-static int	fill_words(t_split *split, int words, char *command, int l)
+static int	fill_words(t_split *split, int words, char *command)
 {
 	int		i;
 	int		k;
@@ -34,7 +34,7 @@ static int	fill_words(t_split *split, int words, char *command, int l)
 	k = 0;
 	while (i < words)
 	{
-		word_len = len_of_word(command + k, &sep, l);
+		word_len = len_of_word(command + k, &sep);
 		split[i].quote = sep;
 		split[i].str = malloc((word_len + 2) * sizeof(char));
 		if (!split[i].str)
@@ -68,7 +68,7 @@ t_split		*parse_command(char *command, int *err)
 	*err = 2;
 	if (!split)
 		return (NULL);
-	if (fill_words(split, words, command, l) < 0)
+	if (fill_words(split, words, command) < 0)
 		return (NULL);
 	split[words].str = NULL;
 	return (split);

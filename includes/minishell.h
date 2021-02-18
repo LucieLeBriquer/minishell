@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/18 14:55:32 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/18 15:14:11 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	trim_spaces_right(char *s);
 void	trim_spaces_left(char *s);
 void	trim_useless(t_split split);
 int		nb_words(char *s, int l);
-int		len_of_word(char *s, char *sep, int l);
+int		len_of_word(char *s, char *sep);
 void	parse_env(t_list **env_list, char **env);
 void	print_entry(void *ventry);
 void	free_entry(void *ventry);

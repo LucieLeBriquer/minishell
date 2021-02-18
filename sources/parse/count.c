@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:38:32 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/13 16:37:54 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/18 15:14:22 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,14 @@ int			nb_words(char *s, int l)
 	return (current.nb_words);
 }
 
-int			len_of_word(char *s, char *sep, int l)
+int			len_of_word(char *s, char *sep)
 {
 	int		i;
+	int		l;
 	t_parse	current;
 
 	i = 0;
+	l = ft_strlen(s);
 	i = find_separator(i, l, s, &current);
 	*sep = current.sep;
 	if (current.state == 0)
