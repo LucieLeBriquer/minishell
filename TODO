@@ -3,8 +3,8 @@
 - donc coder une fonction de realloc avec le type char *
 - pour l'expansion des db quotes, supprimer tous les escaping + $ a replace, si
   search = null on skip
-- pour les executable semble ok, mais reste à gérer ces histoire de join pour éviter les leaks, recoder un strjoin
 - pour les executable faire un fstat pour savoir si executable
+- faire pwd et echo aujourd'hui
 
 ----  OK  ----
 echo "erb" >>           	bl " test '\" ' "   >file.txt
