@@ -22,6 +22,7 @@ int			ft_env(t_info *cmd, t_split *split, char **env)
 	{
 		args = create_tab_args(cmd, split);
 		ft_printf("env: '%s': %s\n", args[1], strerror(2));
+		free(args);
 		return (-1);
 	}
 	pid = fork();
