@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:36:55 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/18 14:35:39 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/18 15:22:03 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	free_all(char *line, t_split *split)
 {
 	int	i;
 
-	free(line);
+	if (line)
+		free(line);
 	if (!split)
 		return ;
 	i = 0;

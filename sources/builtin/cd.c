@@ -8,7 +8,7 @@ char	*get_home(char **env)
 	while (env[i])
 	{
 		if (ft_strncmp(env[i], "HOME=", 5) == 0)
-			return (ft_split(env[i], "=")[1]);
+			return (ft_strrchr(env[i], '=') + 1);
 		i++;
 	}
 	return ("/");
@@ -18,9 +18,10 @@ int	ft_cd(t_info *cmd, t_split *split, char **env)
 {
 	char	**args;
 	int		fd;
+	int		err;
+	char	*path;
 
 	args = create_tab_args(cmd, split);
-
 	if (number_of_args(args) > 2)
 	{
 		ft_printf("minishell: '%s': %s\n", "cd", "too many arguments");
@@ -32,8 +33,12 @@ int	ft_cd(t_info *cmd, t_split *split, char **env)
 		if (fd < 0)
 			return (-2);
 		close(fd);
-		return (chdir(ft_strjoin("./", args[1])));
+		path = ft_strjoin("./", args[1]);
+		err = chdir(path);
+		free(args);
+		free(path);
+		return (err);
 	}
-	else
-		return (chdir(get_home(env)));
+	free(args);
+	return (chdir(get_home(env)));
 }
