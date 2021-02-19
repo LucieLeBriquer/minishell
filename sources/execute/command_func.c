@@ -78,7 +78,6 @@ int	exec_declaration(t_info *cmd, t_split *split, t_list *envl)
 
 int	exec_execbin(t_info *cmd, t_split *split, t_list *envl)
 {
-	int		fd;
 	char	*file;
 	char	**args;
 	int		pid;
@@ -86,10 +85,8 @@ int	exec_execbin(t_info *cmd, t_split *split, t_list *envl)
 	char	**env;
 
 	env = create_env_tab(envl, 0);
-	fd = open_executable(cmd, split, env, &file);
-	if (fd < 0)
+	if (open_executable(cmd, split, env, &file) < 0)
 		return (-1);
-	close(fd);
 	args = NULL;
 	pid = fork();
 	if (pid == 0)
