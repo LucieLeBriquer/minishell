@@ -9,15 +9,13 @@
 - pendant l'expansion remplacer '\' 'n' par '\n' etc pour tous les caractères echappés
 
 [exécution]
-- pour les executable faire un f/lstat pour savoir si executable
+- pour les executable faire un f/lstat pour savoir si executable .
 - penser à protéger les forks
 - replacer l'ouverture d'un fd par lstat ou fstat
-- commandes path absolu
-
-pour les paths /!\ si un / est présent dans le nom de la commande alors on a affaire à un chemin vers un fichier, on ne doit pas passer par execbin
 
 [builtin]
 - afficher exit lors de l'exit
+- export et unset peuvent avoir arguments multiples
 
 [gestion d'erreur]
 - plutôt que de faire des retours arbitraires faire un enum de types d'erreur à propager
