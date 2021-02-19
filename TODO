@@ -1,7 +1,7 @@
 [[ TODO ]]
 
 [env]
-- coder une fonction de realloc avec le type char *
+- attention duplications needed dans certains cas
 
 [expansion]
 - pour l'expansion des db quotes, supprimer tous les escaping + $ a replace, si

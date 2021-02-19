@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/19 15:43:43 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/19 16:04:44 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int		len_of_word(char *s, char *sep);
 void	parse_env(t_list **env_list, char **env);
 void	print_entry(void *ventry);
 void	free_entry(void *ventry);
+t_list	*init_entry(char *line, int exported);
 char	*search_env(t_list *env, char *to_find);
 void	execute(t_split *split, t_list *envl);
 void	print_error_parsing(int err);
@@ -56,6 +57,7 @@ int		number_of_args(char **args);
 void	free_tab(char **args);
 char	*search_in_env(t_list *envl, char *var);
 char	**create_env_tab(t_list *envl, int exported);
+int		is_in_env(t_list *envl, char *var);
 
 /*
 ** Built-in

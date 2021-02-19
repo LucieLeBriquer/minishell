@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:36:55 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/19 15:12:42 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/19 16:09:12 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int		main(int argc, char **argv, char **env)
 	signal(SIGINT, handler);
 	prompt();
 	parse_env(&envl, env);
-	ft_lstiter(envl, &print_entry);
 	while (get_next_line(0, &line) > 0)
 	{
 		split = parse_command(line, &err);

@@ -11,8 +11,6 @@ int	exec_builtin(t_info *cmd, t_split *split, t_list *envl)
 	builtin[UNSET] = &ft_unset; 
 	builtin[ENV] = &ft_env; 
 	builtin[EXIT] = &ft_exit; 
-	if (PRINT_ALL == 1)
-		ft_printf("\t> Builtin\n");
 	return (builtin[cmd->builtin](cmd, split, envl));
 }
 
@@ -37,8 +35,6 @@ int	exec_executable(t_info *cmd, t_split *split, t_list *envl)
 	int		status;
 	char	**env;
 
-	if (PRINT_ALL == 1)
-		ft_printf("\t> Executable\n");
 	env = create_env_tab(envl, 0);
 	pid = fork();
 	args = NULL;
@@ -61,11 +57,22 @@ int	exec_executable(t_info *cmd, t_split *split, t_list *envl)
 
 int	exec_declaration(t_info *cmd, t_split *split, t_list *envl)
 {
-	(void)cmd;
-	(void)split;
-	(void)envl;
-	if (PRINT_ALL == 1)
-		ft_printf("\t> Declaration\n");
+	t_list	*new;
+
+	new = envl;
+	while (new)
+	{
+		if (is_in_env(new, split[cmd->start].str))
+		{
+			((t_env *)new->content)->var = ft_strdup(split[cmd->start].str);
+			return (0);
+		}
+		new = new->next;
+	}
+	new = init_entry(split[cmd->start].str, 0);
+	while (envl && envl->next)
+		envl = envl->next;
+	envl->next = new;
 	return (0);
 }
 
@@ -78,8 +85,6 @@ int	exec_execbin(t_info *cmd, t_split *split, t_list *envl)
 	int		status;
 	char	**env;
 
-	if (PRINT_ALL == 1)
-		ft_printf("\t> Execbin\n");
 	env = create_env_tab(envl, 0);
 	fd = open_executable(cmd, split, env, &file);
 	if (fd < 0)
