@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int	exec_builtin(t_info *cmd, t_split *split, char **env)
+int	exec_builtin(t_info *cmd, t_split *split, t_list *envl)
 {
 	t_exec	builtin[NB_BUILTIN];
 
@@ -13,7 +13,7 @@ int	exec_builtin(t_info *cmd, t_split *split, char **env)
 	builtin[EXIT] = &ft_exit; 
 	if (PRINT_ALL == 1)
 		ft_printf("\t> Builtin\n");
-	return (builtin[cmd->builtin](cmd, split, env));
+	return (builtin[cmd->builtin](cmd, split, envl));
 }
 
 void	change_stdin_stdout(t_info *cmd)
@@ -30,14 +30,16 @@ void	change_stdin_stdout(t_info *cmd)
 	}
 }
 
-int	exec_executable(t_info *cmd, t_split *split, char **env)
+int	exec_executable(t_info *cmd, t_split *split, t_list *envl)
 {
 	char	**args;
 	int		pid;
 	int		status;
+	char	**env;
 
 	if (PRINT_ALL == 1)
 		ft_printf("\t> Executable\n");
+	env = create_env_tab(envl, 0);
 	pid = fork();
 	args = NULL;
 	if (pid == 0)
@@ -53,29 +55,32 @@ int	exec_executable(t_info *cmd, t_split *split, char **env)
 		close_unused_fd(cmd);
 		print_child_end(status);
 	}
+	free(env);
 	return (0);
 }
 
-int	exec_declaration(t_info *cmd, t_split *split, char **env)
+int	exec_declaration(t_info *cmd, t_split *split, t_list *envl)
 {
 	(void)cmd;
 	(void)split;
-	(void)env;
+	(void)envl;
 	if (PRINT_ALL == 1)
 		ft_printf("\t> Declaration\n");
 	return (0);
 }
 
-int	exec_execbin(t_info *cmd, t_split *split, char **env)
+int	exec_execbin(t_info *cmd, t_split *split, t_list *envl)
 {
 	int		fd;
 	char	*file;
 	char	**args;
 	int		pid;
 	int		status;
+	char	**env;
 
 	if (PRINT_ALL == 1)
 		ft_printf("\t> Execbin\n");
+	env = create_env_tab(envl, 0);
 	fd = open_executable(cmd, split, env, &file);
 	if (fd < 0)
 		return (-1);
@@ -91,10 +96,11 @@ int	exec_execbin(t_info *cmd, t_split *split, char **env)
 	else
 	{
 		wait(&status);
-		free(file);
 		free_tab(args);
 		close_unused_fd(cmd);
 		print_child_end(status);
 	}
+	free(file);
+	free(env);
 	return (0);
 }

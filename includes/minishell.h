@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/19 11:11:54 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/19 15:43:43 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,16 @@ void	parse_env(t_list **env_list, char **env);
 void	print_entry(void *ventry);
 void	free_entry(void *ventry);
 char	*search_env(t_list *env, char *to_find);
-void	execute(t_split *split, char **env);
+void	execute(t_split *split, t_list *envl);
 void	print_error_parsing(int err);
 void	print_parsed_command(t_split *split);
 t_tree	*create_tree(t_split *split);
 void	print_tree(t_tree *tree, t_split *split);
-void	execute_cmd(t_info *cmd, t_split *split, char **env);
-int		exec_builtin(t_info *cmd, t_split *split, char **env);
-int		exec_executable(t_info *cmd, t_split *split, char **env);
-int		exec_declaration(t_info *cmd, t_split *split, char **env);
-int		exec_execbin(t_info *cmd, t_split *split, char **env);
+void	execute_cmd(t_info *, t_split *, t_list *envl);
+int		exec_builtin(t_info *, t_split *, t_list *envl);
+int		exec_executable(t_info *, t_split *, t_list *envl);
+int		exec_declaration(t_info *, t_split *, t_list *envl);
+int		exec_execbin(t_info *, t_split *, t_list *envl);
 int		update_in_out(t_info *cmd, t_split *split);
 int		open_executable(t_info *cmd, t_split *split, char **env, char **file);
 char	**create_tab_args(t_info *cmd, t_split *split);
@@ -54,18 +54,19 @@ void	change_stdin_stdout(t_info *cmd);
 void	print_child_end(int status);
 int		number_of_args(char **args);
 void	free_tab(char **args);
-char	*search_in_env(char **env, char *var);
+char	*search_in_env(t_list *envl, char *var);
+char	**create_env_tab(t_list *envl, int exported);
 
 /*
 ** Built-in
 */
 
-int		ft_cd(t_info *cmd, t_split *split, char **env);
-int		ft_echo(t_info *cmd, t_split *split, char **env);
-int		ft_env(t_info *cmd, t_split *split, char **env);
-int		ft_exit(t_info *cmd, t_split *split, char **env);
-int		ft_export(t_info *cmd, t_split *split, char **env);
-int		ft_pwd(t_info *cmd, t_split *split, char **env);
-int		ft_unset(t_info *cmd, t_split *split, char **env);
+int		ft_cd(t_info *, t_split *, t_list *envl);
+int		ft_echo(t_info *, t_split *, t_list *envl);
+int		ft_env(t_info *, t_split *, t_list *envl);
+int		ft_exit(t_info *, t_split *, t_list *envl);
+int		ft_export(t_info *, t_split *, t_list *envl);
+int		ft_pwd(t_info *, t_split *, t_list *envl);
+int		ft_unset(t_info *, t_split *, t_list *envl);
 
 #endif

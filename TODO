@@ -13,6 +13,9 @@
 - penser à protéger les forks
 - replacer l'ouverture d'un fd par lstat ou fstat
 
+[builtin]
+- afficher exit lors de l'exit
+
 [gestion d'erreur]
 - plutôt que de faire des retours arbitraires faire un enum de types d'erreur à propager
 

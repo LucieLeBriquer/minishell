@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:36:55 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/19 11:02:43 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/19 15:12:42 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	print_entry(void *ventry)
 	t_env	*entry;
 
 	entry = ventry;
-	ft_printf("%s : %s\n", entry->name, entry->value);
+	ft_printf("%s : %d\n", entry->var, entry->exported);
 }
 
 void	handler(int signo)
@@ -57,6 +57,7 @@ int		main(int argc, char **argv, char **env)
 	char	*line;
 	t_split	*split;
 	int		err;
+	t_list	*envl;
 
 	(void)argv;
 	if (argc > 1)
@@ -65,6 +66,8 @@ int		main(int argc, char **argv, char **env)
 		PRINT_ALL = 1;
 	signal(SIGINT, handler);
 	prompt();
+	parse_env(&envl, env);
+	ft_lstiter(envl, &print_entry);
 	while (get_next_line(0, &line) > 0)
 	{
 		split = parse_command(line, &err);
@@ -73,11 +76,12 @@ int		main(int argc, char **argv, char **env)
 		else
 		{
 			print_parsed_command(split);
-			execute(split, env);
+			execute(split, envl);
 		}
 		free_all(line, split);
 		prompt();
 	}
+	ft_lstclear(&envl, &free_entry);
 	free(line);
 	return (0);
 }

@@ -60,7 +60,7 @@ int		cmd_type(char *first_word, t_info *cmd)
 		return (EXECBIN);
 }
 
-void	execute_cmd(t_info *cmd, t_split *split, char **env)
+void	execute_cmd(t_info *cmd, t_split *split, t_list *envl)
 {
 	t_exec	exec_func[NB_TYPES];
 	int		err;
@@ -81,7 +81,7 @@ void	execute_cmd(t_info *cmd, t_split *split, char **env)
 		return ;
 	}
 	print_leave(*cmd, split);
-	err = (exec_func[cmd_type(split[cmd->start].str, cmd)])(cmd, split, env);
+	err = (exec_func[cmd_type(split[cmd->start].str, cmd)])(cmd, split, envl);
 	if (PRINT_ALL == 0)
 		return ;
 	ft_printf("\terr = %d\n", err);

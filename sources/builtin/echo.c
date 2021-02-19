@@ -13,7 +13,7 @@ void	print_args(char **args, int option, int i)
 	exit(0);
 }
 
-int		ft_echo(t_info *cmd, t_split *split, char **env)
+int		ft_echo(t_info *cmd, t_split *split, t_list *envl)
 {
 	char	**args;
 	int		i;
@@ -21,7 +21,7 @@ int		ft_echo(t_info *cmd, t_split *split, char **env)
 	int		pid;
 	int		status;
 	
-	(void)env;
+	(void)envl;
 	args = create_tab_args(cmd, split);
 	option = 0;
 	i = 1;

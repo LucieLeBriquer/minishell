@@ -1,17 +1,15 @@
 #include "minishell.h"
 
-char	*search_in_env(char **env, char *var)
+char	*search_in_env(t_list *envl, char *var)
 {
-	int	i;
 	int	size;
 
-	i = 0;
 	size = ft_strlen(var);
-	while (env[i])
+	while (envl)
 	{
-		if (ft_strncmp(env[i], var, size) == 0)
-			return (ft_strrchr(env[i], '=') + 1);
-		i++;
+		if (ft_strncmp(((t_env *)envl->content)->var, var, size) == 0)
+			return (ft_strrchr(((t_env *)envl->content)->var, '=') + 1);
+		envl = envl->next;
 	}
 	return (NULL);
 }

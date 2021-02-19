@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:37:45 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/18 14:38:24 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/19 15:13:39 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	close_unused_fd(t_info *cmd)
 		ft_printf("\n");
 }
 
-void	execute_recursive(t_tree *tree, t_split *split, char **env)
+void	execute_recursive(t_tree *tree, t_split *split, t_list *envl)
 {
 	int	pfd[2];
 	int	type;
@@ -52,7 +52,7 @@ void	execute_recursive(t_tree *tree, t_split *split, char **env)
 	type = tree->info->type;
 	if (type == CMD)
 	{
-		execute_cmd(tree->info, split, env);
+		execute_cmd(tree->info, split, envl);
 		close_unused_fd(tree->info);
 		return ;
 	}
@@ -67,8 +67,8 @@ void	execute_recursive(t_tree *tree, t_split *split, char **env)
 		tree->left->info->output = pfd[1];
 		fill_subtree_fd(tree->right, 0, pfd[0]);
 	}
-	execute_recursive(tree->left, split, env);
-	execute_recursive(tree->right, split, env);
+	execute_recursive(tree->left, split, envl);
+	execute_recursive(tree->right, split, envl);
 }
 
 void	free_tree(t_tree *tree)
@@ -81,11 +81,11 @@ void	free_tree(t_tree *tree)
 	free(tree);
 }
 
-void	execute(t_split *split, char **env)
+void	execute(t_split *split, t_list *envl)
 {
 	t_tree	*tree;
 
 	tree = create_tree(split);
-	execute_recursive(tree, split, env);
+	execute_recursive(tree, split, envl);
 	free_tree(tree);
 }

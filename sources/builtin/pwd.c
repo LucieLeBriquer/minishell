@@ -1,13 +1,13 @@
 #include "minishell.h"
 
-int	ft_pwd(t_info *cmd, t_split *split, char **env)
+int	ft_pwd(t_info *cmd, t_split *split, t_list *envl)
 {
 	char	cwd[SIZE_PATH];
 	int		pid;
 	int		status;
 	
 	(void)split;
-	(void)env;
+	(void)envl;
 	getcwd(cwd, SIZE_PATH);
 	pid = fork();	
 	if (pid == 0)

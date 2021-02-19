@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int	ft_cd(t_info *cmd, t_split *split, char **env)
+int	ft_cd(t_info *cmd, t_split *split, t_list *envl)
 {
 	char	**args;
 	int		fd;
@@ -26,5 +26,5 @@ int	ft_cd(t_info *cmd, t_split *split, char **env)
 		return (err);
 	}
 	free(args);
-	return (chdir(search_in_env(env, "HOME")));
+	return (chdir(search_in_env(envl, "HOME")));
 }
