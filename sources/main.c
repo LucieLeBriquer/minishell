@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:36:55 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/18 15:22:03 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/19 11:02:43 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int		main(int argc, char **argv, char **env)
 		PRINT_ALL = 0;
 	else
 		PRINT_ALL = 1;
-	//parse_env(&env_list, env);
 	signal(SIGINT, handler);
 	prompt();
 	while (get_next_line(0, &line) > 0)
@@ -80,6 +79,5 @@ int		main(int argc, char **argv, char **env)
 		prompt();
 	}
 	free(line);
-	//ft_lstclear(&env_list, &free_entry);
 	return (0);
 }
