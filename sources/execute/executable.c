@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-static int	is_path(char **env)
+static int	ispath(char **env)
 {
 	int		i;
 
@@ -22,7 +22,7 @@ int	open_executable(t_info *cmd, t_split *split, char **env, char **file)
 	char	*tmp;
 	int		fd;
 
-	j = is_path(env);
+	j = ispath(env);
 	if (j < 0)
 		return (-1);
 	path_list = ft_split(env[j], ":=");
