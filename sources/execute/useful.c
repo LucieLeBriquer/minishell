@@ -50,3 +50,17 @@ char	**create_tab_args(t_info *cmd, t_split *split)
 	args[i] = NULL;
 	return (args);
 }
+
+int		is_path(char *word)
+{
+	int	i;
+
+	i = 0;
+	while (word[i])
+	{
+		if (word[i] == '/')
+			return (1);
+		i++;
+	}
+	return (0);
+}

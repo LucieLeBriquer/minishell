@@ -52,7 +52,7 @@ int		cmd_type(char *first_word, t_info *cmd)
 	cmd->builtin = is_builtin(first_word);
 	if (cmd->builtin > -1)
 		return (BUILTIN);
-	else if (ft_strncmp("./", first_word, 2) == 0)
+	else if (is_path(first_word))
 		return (EXECUTABLE);
 	else if (is_declaration(first_word))
 		return (DECLARATION);

@@ -12,6 +12,9 @@
 - pour les executable faire un f/lstat pour savoir si executable
 - penser à protéger les forks
 - replacer l'ouverture d'un fd par lstat ou fstat
+- commandes path absolu
+
+pour les paths /!\ si un / est présent dans le nom de la commande alors on a affaire à un chemin vers un fichier, on ne doit pas passer par execbin
 
 [builtin]
 - afficher exit lors de l'exit
