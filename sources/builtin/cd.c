@@ -1,19 +1,5 @@
 #include "minishell.h"
 
-char	*get_home(char **env)
-{
-	int		i;
-
-	i = 0;
-	while (env[i])
-	{
-		if (ft_strncmp(env[i], "HOME=", 5) == 0)
-			return (ft_strrchr(env[i], '=') + 1);
-		i++;
-	}
-	return ("/");
-}
-
 int	ft_cd(t_info *cmd, t_split *split, char **env)
 {
 	char	**args;
@@ -40,5 +26,5 @@ int	ft_cd(t_info *cmd, t_split *split, char **env)
 		return (err);
 	}
 	free(args);
-	return (chdir(get_home(env)));
+	return (chdir(search_in_env(env, "HOME")));
 }

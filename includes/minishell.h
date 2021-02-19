@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/18 15:14:11 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/19 11:11:54 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	change_stdin_stdout(t_info *cmd);
 void	print_child_end(int status);
 int		number_of_args(char **args);
 void	free_tab(char **args);
+char	*search_in_env(char **env, char *var);
 
 /*
 ** Built-in
