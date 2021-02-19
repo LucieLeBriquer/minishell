@@ -4,14 +4,5 @@
 - pour l'expansion des db quotes, supprimer tous les escaping + $ a replace, si
   search = null on skip
 - pour les executable faire un fstat pour savoir si executable
-- faire pwd et echo aujourd'hui
 - pendant l'expansion remplacer '\' 'n' par '\n' etc pour tous les caractères echappés
-
-----  OK  ----
-echo "erb" >>           	bl " test '\" ' "   >file.txt
-echo "blegh"|cat -e
-echo|test>te|tec<t
-   result " of\" " command 's' "   $SPLIT" |   goes ' "in" ' >here
-
----- pour l'arbre ----
-cat < TODO > bl | cat < TODO > bl2
+- penser à protéger les forks
