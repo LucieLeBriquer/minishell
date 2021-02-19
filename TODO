@@ -1,8 +1,35 @@
----- TODO ----
-- l'histoire d'une liste chainee pour l'env totalement con puisque qu'on veut le passer sous forme de char ** a execve
-- donc coder une fonction de realloc avec le type char *
+[[ TODO ]]
+
+[env]
+- coder une fonction de realloc avec le type char *
+
+[expansion]
 - pour l'expansion des db quotes, supprimer tous les escaping + $ a replace, si
   search = null on skip
-- pour les executable faire un fstat pour savoir si executable
 - pendant l'expansion remplacer '\' 'n' par '\n' etc pour tous les caractères echappés
+
+[exécution]
+- pour les executable faire un f/lstat pour savoir si executable
 - penser à protéger les forks
+- replacer l'ouverture d'un fd par lstat ou fstat
+
+[gestion d'erreur]
+- plutôt que de faire des retours arbitraires faire un enum de types d'erreur à propager
+
+
+[[ Test ]]
+
+#include <sys/stat.h>
+
+int	main(int argc, char **argv)
+{
+	char		*file;
+	struct stat	buf;
+	int			err;
+
+	file = argv[argc - 1];
+	err = lstat(file, &buf);
+	if (err == 0 && buf.st_mode & S_IXUSR)
+		printf("executable\n");
+	return (0);
+}
