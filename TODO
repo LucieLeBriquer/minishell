@@ -5,6 +5,7 @@
   search = null on skip
 - pour les executable faire un fstat pour savoir si executable
 - faire pwd et echo aujourd'hui
+- pendant l'expansion remplacer '\' 'n' par '\n' etc pour tous les caractères echappés
 
 ----  OK  ----
 echo "erb" >>           	bl " test '\" ' "   >file.txt
