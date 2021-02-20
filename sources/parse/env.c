@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:38:48 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/19 15:53:10 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/20 16:35:09 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	free_entry(void *ventry)
 
 	entry = (t_env *)ventry;
 	free(entry->var);
+	free(entry);
 }
 
 int		size_of_list(t_list *list, int exported)

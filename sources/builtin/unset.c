@@ -8,6 +8,7 @@ void	unset_one(char *to_unset, t_list *envl)
 		{
 			((t_env *)envl->content)->exported = 0;
 			((t_env *)envl->content)->var = ft_strjoin(to_unset, "=''");
+			free(to_unset);
 			return ;
 		}
 		envl = envl->next;

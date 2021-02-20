@@ -22,7 +22,7 @@ int			ft_env(t_info *cmd, t_split *split, t_list *envl)
 	if (cmd->number > 1)
 	{
 		args = create_tab_args(cmd, split);
-		ft_printf("env: '%s': %s\n", args[1], strerror(2));
+		ft_printf("env: should be used without options or arguments\n");
 		free(args);
 		return (-1);
 	}
