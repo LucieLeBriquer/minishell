@@ -1,4 +1,4 @@
-# miniRT
+# minishell
 ## TODO
 
 ### env
