@@ -28,6 +28,7 @@ SRCS		=  $(addprefix sources/, \
 			builtin/env.c \
 			builtin/exit.c \
 			builtin/export.c \
+			builtin/export_sorted.c \
 			builtin/pwd.c \
 			builtin/unset.c \
 			expand/useful.c \

@@ -3,7 +3,7 @@
 [env]
 - |ok| attention duplications needed dans certains cas
 - |ok| check si seulement lettres et _ 
-- soit passer des pointeurs sur pointeurs, soit mettre un élément begin qui restera toujours là
+- |ok| soit passer des pointeurs sur pointeurs, soit mettre un élément begin qui restera toujours là
 
 [expansion]
 - pour l'expansion des db quotes, supprimer tous les escaping + $ a replace, si
@@ -17,7 +17,7 @@
 
 [builtin]
 - afficher exit lors de l'exit
-- export et unset peuvent avoir arguments multiples
+- |ok| export et unset peuvent avoir arguments multiples
 
 [gestion d'erreur]
 - plutôt que de faire des retours arbitraires faire un enum de types d'erreur à propager
@@ -25,6 +25,7 @@
 
 [[ Test ]]
 
+[utilisation lstat pour check si exécutable]
 #include <sys/stat.h>
 
 int	main(int argc, char **argv)
