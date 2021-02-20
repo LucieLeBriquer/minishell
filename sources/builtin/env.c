@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-static void	print_env(char **env)
+void	print_env(char **env)
 {
 	int	i;
 

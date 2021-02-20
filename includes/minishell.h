@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/20 23:00:13 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/20 23:27:34 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,12 @@ char	**create_env_tab(t_list *envl, int exported);
 int		variable_match(t_list *envl, char *var);
 int		is_path(char *word);
 int		authorized_char(char *s);
+void	print_env(char **env);
+
+/*
+** a ajouter dans la libft
+*/
+void	ft_lstsort(t_list **begin_list, int (*cmp)());
 
 /*
 ** Built-in

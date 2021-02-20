@@ -14,6 +14,49 @@ char	*search_in_env(t_list *envl, char *var)
 	return (NULL);
 }
 
+int		list_size(t_list *begin_list)
+{
+	int		i;
+
+	i = 0;
+	while (begin_list)
+	{
+		begin_list = begin_list->next;
+		i++;
+	}
+	return (i);
+}
+
+void	ft_lstsort(t_list **begin_list, int (*cmp)())
+{
+	t_list	*current;
+	void	*save;
+	int		size;
+	int		i;
+	int		j;
+
+	i = 0;
+	size = list_size(*begin_list);
+	while (i < size)
+	{
+		j = 0;
+		current = *begin_list;
+		while (j < size - 1 - i)
+		{
+			if ((*cmp)(current->content, current->next->content) > 0)
+			{
+				save = current->content;
+				current->content = current->next->content;
+				current->next->content = save;
+			}
+			current = current->next;
+			j++;
+		}
+		i++;
+	}
+}
+
+
 int		variable_match(t_list *envl, char *var)
 {
 	int		size;
