@@ -24,15 +24,28 @@ static int	cmp_entry(void *data1, void *data2)
 	return (ft_strcmp(str1, str2));
 }
 
-int			print_sorted(t_list *envl)
+int			print_sorted(t_list *envl, t_info *cmd)
 {
 	t_list	*sorted;
 	char	**env;
+	int		pid;
+	int		status;
 
 	sorted = ft_lstmap(envl, &copy_entry, &free_entry);
 	ft_lstsort(&sorted, &cmp_entry);
 	env = create_env_tab(sorted, 1);
-	print_env(env);
+	pid = fork();
+	if (pid == 0)
+	{
+		change_stdin_stdout(cmd);
+		print_env(env);
+	}
+	else
+	{
+		wait(&status);
+		close_unused_fd(cmd);
+		print_child_end(status);
+	}
 	free(env);
 	ft_lstclear(&sorted, &free_entry);
 	return (0);

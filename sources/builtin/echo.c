@@ -41,5 +41,6 @@ int		ft_echo(t_info *cmd, t_split *split, t_list *envl)
 		close_unused_fd(cmd);
 		print_child_end(status);
 	}
+	free(args);
 	return (0);
 }

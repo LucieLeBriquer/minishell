@@ -10,6 +10,7 @@ void	print_env(char **env)
 		ft_printf("%s\n", env[i]);
 		i++;
 	}
+	exit(0);
 }
 
 int			ft_env(t_info *cmd, t_split *split, t_list *envl)
@@ -19,9 +20,9 @@ int			ft_env(t_info *cmd, t_split *split, t_list *envl)
 	char	**args;
 	char	**env;
 
-	if (cmd->number > 1)
+	args = create_tab_args(cmd, split);
+	if (number_of_args(args) > 1)
 	{
-		args = create_tab_args(cmd, split);
 		ft_printf("env: should be used without options or arguments\n");
 		free(args);
 		return (-1);
@@ -32,7 +33,6 @@ int			ft_env(t_info *cmd, t_split *split, t_list *envl)
 	{
 		change_stdin_stdout(cmd);
 		print_env(env);
-		exit(0);
 	}
 	else
 	{

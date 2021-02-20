@@ -28,9 +28,12 @@ int		ft_export(t_info *cmd, t_split *split, t_list *envl)
 	int		i;
 	char	**args;
 
-	if (cmd->number <= 1)
-		return (print_sorted(envl));
 	args = create_tab_args(cmd, split);
+	if (number_of_args(args) <= 1)
+	{
+		free(args);
+		return (print_sorted(envl, cmd));
+	}
 	i = 1;
 	while (args[i])
 	{
