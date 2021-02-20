@@ -1,16 +1,29 @@
 #include "minishell.h"
 
+void	print_one(t_list *envl, char *pos)
+{
+	if (envl)
+		ft_printf("%s %p [%s]\n", pos, envl, ((t_env *)envl->content)->var);
+	else
+		ft_printf("%s %p\n", pos, envl);
+}
+
 void	unset_one(char *to_unset, t_list *envl)
 {
+	t_list	*previous;
+
+	previous = envl;
+	envl = envl->next;
 	while (envl)
 	{
-		if (is_in_env(envl, to_unset))
+		if (variable_match(envl, to_unset))
 		{
-			((t_env *)envl->content)->exported = 0;
-			((t_env *)envl->content)->var = ft_strjoin(to_unset, "=''");
-			free(to_unset);
+			previous->next = envl->next;
+			free_entry(envl->content);
+			free(envl);
 			return ;
 		}
+		previous = envl;
 		envl = envl->next;
 	}
 }

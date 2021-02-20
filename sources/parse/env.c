@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:38:48 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/20 16:35:09 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/20 23:06:07 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	free_entry(void *ventry)
 	t_env	*entry;
 
 	entry = (t_env *)ventry;
+	//ft_printf("free %p %p\n", entry->var, entry);
 	free(entry->var);
 	free(entry);
 }
@@ -87,6 +88,8 @@ void	parse_env(t_list **envl, char **env)
 
 	i = 0;
 	*envl = NULL;
+	new = init_entry("?begin", 0);
+	ft_lstadd_back(envl, new);
 	while (env[i])
 	{
 		new = init_entry(env[i], 1);

@@ -3,6 +3,7 @@
 [env]
 - |ok| attention duplications needed dans certains cas
 - |ok| check si seulement lettres et _ 
+- soit passer des pointeurs sur pointeurs, soit mettre un élément begin qui restera toujours là
 
 [expansion]
 - pour l'expansion des db quotes, supprimer tous les escaping + $ a replace, si

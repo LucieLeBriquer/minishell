@@ -64,7 +64,7 @@ int	exec_declaration(t_info *cmd, t_split *split, t_list *envl)
 		return (-1);
 	while (new)
 	{
-		if (is_in_env(new, split[cmd->start].str))
+		if (variable_match(new, split[cmd->start].str))
 		{
 			((t_env *)new->content)->var = ft_strdup(split[cmd->start].str);
 			return (0);

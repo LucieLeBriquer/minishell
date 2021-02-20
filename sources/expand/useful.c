@@ -14,7 +14,7 @@ char	*search_in_env(t_list *envl, char *var)
 	return (NULL);
 }
 
-int		is_in_env(t_list *envl, char *var)
+int		variable_match(t_list *envl, char *var)
 {
 	int		size;
 	char	*to_find;
