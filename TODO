@@ -1,7 +1,8 @@
 [[ TODO ]]
 
 [env]
-- attention duplications needed dans certains cas
+- |ok| attention duplications needed dans certains cas
+- check si seulement lettres et _ 
 
 [expansion]
 - pour l'expansion des db quotes, supprimer tous les escaping + $ a replace, si

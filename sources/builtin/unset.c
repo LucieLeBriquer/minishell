@@ -25,7 +25,8 @@ int	ft_unset(t_info *cmd, t_split *split, t_list *envl)
 	i = 1;
 	while (args[i])
 	{
-		unset_one(args[i], envl);
+		if (authorized_char(args[i]))
+			unset_one(args[i], envl);
 		i++;
 	}
 	free(args);

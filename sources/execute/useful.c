@@ -25,6 +25,22 @@ void	free_tab(char **args)
 	free(args);
 }
 
+int		authorized_char(char *s)
+{
+	int	i;
+
+	i = 0;
+	if (!ft_isalpha(s[0]) && (s[0] != '_'))
+		return (0);
+	while (s[i] && (s[i] != '='))
+	{
+		if (!ft_isalnum(s[i]) && (s[i] != '_'))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 char	**create_tab_args(t_info *cmd, t_split *split)
 {
 	char	**args;

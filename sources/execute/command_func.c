@@ -60,6 +60,8 @@ int	exec_declaration(t_info *cmd, t_split *split, t_list *envl)
 	t_list	*new;
 
 	new = envl;
+	if (!authorized_char(split[cmd->start].str))
+		return (-1);
 	while (new)
 	{
 		if (is_in_env(new, split[cmd->start].str))

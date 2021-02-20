@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/19 17:09:00 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/20 10:15:05 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ char	*search_in_env(t_list *envl, char *var);
 char	**create_env_tab(t_list *envl, int exported);
 int		is_in_env(t_list *envl, char *var);
 int		is_path(char *word);
+int		authorized_char(char *s);
 
 /*
 ** Built-in
