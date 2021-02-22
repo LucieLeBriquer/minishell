@@ -60,7 +60,7 @@ int		cmd_type(char *first_word, t_info *cmd)
 		return (EXECBIN);
 }
 
-void	execute_cmd(t_info *cmd, t_split *split, t_list *envl)
+void	execute_cmd(t_info *cmd, t_split *split, t_list **envl)
 {
 	t_exec	exec_func[NB_TYPES];
 	int		err;

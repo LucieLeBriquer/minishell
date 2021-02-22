@@ -65,6 +65,17 @@ void	fill_root(t_tree *tree, t_tree *root)
 	fill_root(tree->right, root);
 }
 
+int		previous_end_with_slash(t_split *split, int i)
+{
+	char	*last;
+
+	if (i > 0)
+	{
+		last = split[i - 1].str;
+		return (last[ft_strlen(last) - 1] == '\\');
+	}
+	return (0);
+}
 t_tree	*create_tree(t_split *split, char *line)
 {
 	t_tree	*tree;
@@ -82,7 +93,7 @@ t_tree	*create_tree(t_split *split, char *line)
 	{
 		type = is_operator(split[i].quote);
 		last_node = new_node;
-		if (type)
+		if (type && !previous_end_with_slash(split, i))
 		{
 			new_node = create_node(i, type, j, line);
 			if (j == 0)
