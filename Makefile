@@ -1,4 +1,4 @@
-CC			= gcc -Wall -Wextra -Werror
+CC			= clang -Wall -Wextra -Werror
 RM			= rm -rf
 NAME		= minishell 
 INCS_DIR	= ./includes/
