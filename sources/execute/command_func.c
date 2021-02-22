@@ -61,7 +61,7 @@ char	*join_all_arguments(t_split *split, int start, int number)
 	char	*join;
 	char	*last;
 
-	join = ft_strjoin(split[start].str, "\"");
+	join = ft_strdup(split[start].str);
 	i = 0;
 	while (++i < number)
 	{
@@ -69,9 +69,6 @@ char	*join_all_arguments(t_split *split, int start, int number)
 		join = ft_strjoin(last, split[start + i].str);
 		free(last);
 	}
-	last = join;
-	join = ft_strjoin(last, "\"");
-	free(last);
 	return (join);
 }
 

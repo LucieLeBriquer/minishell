@@ -11,7 +11,8 @@
 ## TODO
 
 ### env
-- export n'affiche pas la variable "\_="
+- export mets des db quotes sur chaque var
+- export missing 2 var
 
 ### expansion
 - pour l'expansion des db quotes, supprimer tous les escaping + $ a replace, si search = null on skip

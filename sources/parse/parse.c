@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 16:08:17 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/22 18:34:32 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/22 19:35:08 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@ static int	fill_words(t_split *split, int words, char *command)
 	int		k;
 	int		word_len;
 	char	sep;
+	int		size;
 
 	i = 0;
 	k = 0;
+	size = ft_strlen(command);
 	while (i < words)
 	{
 		word_len = len_of_word(command + k, &sep);
@@ -41,7 +43,7 @@ static int	fill_words(t_split *split, int words, char *command)
 			return (free_split(split, i));
 		ft_strlcpy(split[i].str, command + k, word_len + 1);
 		split[i].space = 0;
-		if (command[k + word_len] == ' ')
+		if (k + word_len < size && command[k + word_len] == ' ')
 			split[i].space = 1;
 		split[i].str[word_len + 1] = '\0';
 		trim_useless(split[i]);

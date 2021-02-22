@@ -46,5 +46,6 @@ int		ft_echo(t_info *cmd, t_split *split, t_list **envl)
 		print_child_end(status);
 	}
 	free(args);
+	free(spaces);
 	return (0);
 }
