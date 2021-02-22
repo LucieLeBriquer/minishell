@@ -12,12 +12,12 @@ void	export_one(char *to_export, t_list *envl)
 		save = envl;
 		if (variable_match(envl, to_export))
 		{
-			((t_env *)envl->content)->exported = 1;
+			((t_env *)envl->content)->exported = 2;
 			return ;
 		}
 		envl = envl->next;
 	}
-	empty = ft_strjoin(to_export, "=''");
+	empty = ft_strdup(to_export);
 	new = init_entry(empty, 1);
 	free(empty);
 	save->next = new;

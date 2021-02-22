@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:38:32 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/22 17:49:37 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/22 18:16:20 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,12 @@ static char	find_separator(int i, int l, char *s, t_parse *current)
 int			nb_words(char *s, int l)
 {
 	int		i;
-	int		step;
 	t_parse	current;
 
 	i = 0;
 	current.state = 2;
 	current.nb_words = 0;
 	current.sep = ' ';
-	step = 0;
 	while (i < l)
 	{
 		if (current.state == 2)
@@ -99,7 +97,6 @@ int			nb_words(char *s, int l)
 				current.state = new_state(s, i);
 				current.sep = sep_convert(s[i]);
 				current.nb_words++;
-				step = 1;
 			}
 		}
 		else if ((current.state == 3) || (current.state == 4))
@@ -115,7 +112,7 @@ int			nb_words(char *s, int l)
 	}
 	if (current.state != 2)
 		return (-1);
-	return (current.nb_words - step);
+	return (current.nb_words);
 }
 
 int			len_of_word(char *s, char *sep)

@@ -1,12 +1,14 @@
 #include "minishell.h"
 
-void	print_env(char **env)
+void	print_env(char **env, int declare)
 {
 	int	i;
 
 	i = 0;
 	while (env[i])
 	{
+		if (declare)
+			ft_printf("declare -x ");
 		ft_printf("%s\n", env[i]);
 		i++;
 	}
@@ -28,12 +30,12 @@ int			ft_env(t_info *cmd, t_split *split, t_list **envl)
 		return (-1);
 	}
 	free(args);
-	env = create_env_tab(*envl, 1);
+	env = create_env_tab(*envl, 2);
 	pid = fork();
 	if (pid == 0)
 	{
 		change_stdin_stdout(cmd);
-		print_env(env);
+		print_env(env, 0);
 	}
 	else
 	{

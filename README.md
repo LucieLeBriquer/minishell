@@ -1,4 +1,14 @@
 # minishell
+
+## Notes
+- si \ a la fin d'une ligne continuer le gnl
+- echo \; ls	: ne pas exécuter ls
+
+- dans les doubles quotes le backslash utile pour
+	- \
+	- $
+	- "
+
 ## TODO
 
 ### env
@@ -7,14 +17,7 @@
 - |ok| soit passer des pointeurs sur pointeurs, soit mettre un élément begin qui restera toujours là
 - les déclarations de truc non existants ne s'affiche pas dans env
 - export afficher declare -x
-
-- si \ a la fin d'une ligne continuer le gnl
-- echo \; ls	: ne pas exécuter ls
-
-- dans les doubles quotes le backslash utile pour
-	- \
-	- $
-	- "
+- export n'affiche pas la variable "_="
 
 ### expansion
 - pour l'expansion des db quotes, supprimer tous les escaping + $ a replace, si search = null on skip
@@ -25,18 +28,11 @@
 - penser à protéger les forks
 - replacer l'ouverture d'un fd par lstat ou fstat
 
-### builtin
-- afficher exit lors de l'exit
-- |ok| export et unset peuvent avoir arguments multiples
-
 ### gestion d'erreur
 - plutôt que de faire des retours arbitraires faire un enum de types d'erreur à propager
 
 ### pipes et redirections
 - des fd sont mals refermés (output ?)
-
-### exit
-- filer en parametre line pour pouvoir free all et quitter proprement donc il faut modifier touuut
 
 ## Some code
 

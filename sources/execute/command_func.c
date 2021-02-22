@@ -55,6 +55,26 @@ int	exec_executable(t_info *cmd, t_split *split, t_list **envl)
 	return (0);
 }
 
+char	*join_all_arguments(t_split *split, int start, int number)
+{
+	int		i;
+	char	*join;
+	char	*last;
+
+	join = ft_strjoin(split[start].str, "\"");
+	i = 0;
+	while (++i < number)
+	{
+		last = join;
+		join = ft_strjoin(last, split[start + i].str);
+		free(last);
+	}
+	last = join;
+	join = ft_strjoin(last, "\"");
+	free(last);
+	return (join);
+}
+
 int	exec_declaration(t_info *cmd, t_split *split, t_list **envl)
 {
 	t_list	*new;
@@ -67,7 +87,9 @@ int	exec_declaration(t_info *cmd, t_split *split, t_list **envl)
 	{
 		if (variable_match(new, split[cmd->start].str))
 		{
-			((t_env *)new->content)->var = ft_strdup(split[cmd->start].str);
+			((t_env *)new->content)->var = join_all_arguments(split, cmd->start, cmd->number);
+			if (((t_env *)new->content)->exported == 1)
+				((t_env *)new->content)->exported = 2;
 			return (0);
 		}
 		new = new->next;

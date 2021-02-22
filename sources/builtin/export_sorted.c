@@ -38,7 +38,7 @@ int			print_sorted(t_list *envl, t_info *cmd)
 	if (pid == 0)
 	{
 		change_stdin_stdout(cmd);
-		print_env(env);
+		print_env(env, 1);
 	}
 	else
 	{

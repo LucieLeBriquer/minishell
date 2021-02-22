@@ -61,6 +61,7 @@ int		variable_match(t_list *envl, char *var)
 {
 	int		size;
 	char	*to_find;
+	char	*env_var;
 	int		i;
 
 	size = ft_strlen(var);
@@ -72,7 +73,9 @@ int		variable_match(t_list *envl, char *var)
 		to_find[i] = var[i];
 	to_find[i] = '=';
 	to_find[i + 1] = '\0';
-	if (ft_strncmp(((t_env *)envl->content)->var, to_find, i + 1) == 0)
+	env_var = ((t_env *)envl->content)->var;
+	if (ft_strncmp(env_var, to_find, i + 1) == 0 || 
+		((ft_strncmp(env_var, to_find, i) == 0) && (env_var[i] == '\0')))
 	{
 		free(to_find);
 		return (1);
