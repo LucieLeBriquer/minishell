@@ -10,9 +10,15 @@
 
 ## TODO
 
+### gnl
+- lecture char par char puis :
+	- \0 si delete
+	- ctrl u : vide le buffer
+	- fleche gauche, droit pour naviguer
+	- comment gérer le curseur ?
+
 ### env
-- export mets des db quotes sur chaque var
-- export missing 2 var
+- SHLVL++ dans les sous-process
 
 ### expansion
 - pour l'expansion des db quotes, supprimer tous les escaping + $ a replace, si search = null on skip
