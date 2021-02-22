@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/22 15:44:21 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/22 15:57:06 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int		len_of_word(char *s, char *sep);
 void	parse_env(t_list **env_list, char **env);
 void	print_entry(void *ventry);
 void	free_entry(void *ventry);
+void	free_tree(t_tree *tree);
 t_list	*init_entry(char *line, int exported);
 char	*search_env(t_list *env, char *to_find);
 void	execute(t_split *split, t_list **envl, char *line);

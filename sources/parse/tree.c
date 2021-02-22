@@ -56,6 +56,15 @@ t_tree	*create_node(int i, int type, int start, char *line)
 	return (new);
 }
 
+void	fill_root(t_tree *tree, t_tree *root)
+{
+	if (!tree)
+		return ;
+	tree->info->root = root;
+	fill_root(tree->left, root);
+	fill_root(tree->right, root);
+}
+
 t_tree	*create_tree(t_split *split, char *line)
 {
 	t_tree	*tree;
@@ -88,6 +97,7 @@ t_tree	*create_tree(t_split *split, char *line)
 		last_node->right = create_leave(j, i - j, line);
 	if (!tree)
 		tree = create_leave(0, i, line);
+	fill_root(tree, tree);
 	return (tree);
 }
 
