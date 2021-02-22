@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/22 16:55:54 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/22 23:33:38 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct		s_split
 typedef struct		s_env
 {
 	char			*var;
+	char			*value;
 	int				exported;
 }					t_env;
 

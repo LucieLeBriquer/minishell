@@ -10,6 +10,9 @@ static void	*copy_entry(void *entry)
 	if (!res)
 		return (NULL);
 	res->var = ft_strdup(ventry->var);
+	res->value = NULL;
+	if (ventry->value)
+		res->value = ft_strdup(ventry->value);
 	res->exported = ventry->exported;
 	return (res);
 }
@@ -21,24 +24,22 @@ static int	cmp_entry(void *data1, void *data2)
 
 	str1 = ((t_env *)data1)->var;
 	str2 = ((t_env *)data2)->var;
-	return (ft_strcmp(str1, str2));
+	return (0);
 }
 
 int			print_sorted(t_list *envl, t_info *cmd)
 {
 	t_list	*sorted;
-	char	**env;
 	int		pid;
 	int		status;
 
 	sorted = ft_lstmap(envl, &copy_entry, &free_entry);
 	ft_lstsort(&sorted, &cmp_entry);
-	env = create_env_tab(sorted, 1);
 	pid = fork();
 	if (pid == 0)
 	{
 		change_stdin_stdout(cmd);
-		print_env(env, 1);
+		print_envl(sorted, 1);
 	}
 	else
 	{
@@ -46,7 +47,6 @@ int			print_sorted(t_list *envl, t_info *cmd)
 		close_unused_fd(cmd);
 		print_child_end(status);
 	}
-	free(env);
 	ft_lstclear(&sorted, &free_entry);
 	return (0);
 }

@@ -56,30 +56,31 @@ void	ft_lstsort(t_list **begin_list, int (*cmp)())
 	}
 }
 
-
 int		variable_match(t_list *envl, char *var)
 {
-	int		size;
-	char	*to_find;
 	char	*env_var;
-	int		i;
 
-	size = ft_strlen(var);
-	to_find = malloc((size + 2) * sizeof(char));
-	if (!to_find)
-		return (0);
-	i = -1;
-	while (++i < size && var[i] != '=')
-		to_find[i] = var[i];
-	to_find[i] = '=';
-	to_find[i + 1] = '\0';
 	env_var = ((t_env *)envl->content)->var;
-	if (ft_strncmp(env_var, to_find, i + 1) == 0 || 
-		((ft_strncmp(env_var, to_find, i) == 0) && (env_var[i] == '\0')))
-	{
-		free(to_find);
+	if (ft_strcmp(env_var, var) == 0)
 		return (1);
-	}
-	free(to_find);
 	return (0);
+}
+
+char	*ft_strcut(char *line, char c)
+{
+	int		i;
+	char	*res;
+
+	i = 0;
+	while (line[i] && line[i] != c)
+		i++;
+	res = malloc((i + 1) * sizeof(char));
+	i = 0;
+	while (line[i] && line[i] != c)
+	{
+		res[i] = line[i];
+		i++;
+	}
+	res[i] = '\0';
+	return (res);
 }

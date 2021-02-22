@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:38:48 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/22 19:22:33 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/23 00:10:18 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ t_list	*init_entry(char *line, int exported)
 {
 	t_list	*new;
 	t_env	*cont;
+	char	*val;
+	int		end;
 
 	new = malloc(sizeof(t_list));
 	if (!new)
@@ -26,7 +28,16 @@ t_list	*init_entry(char *line, int exported)
 		free(new);
 		return (NULL);
 	}
+	cont->value = NULL;
+	end = ft_strlen(line);
+	if (ft_strrchr(line, '=') != NULL)
+	{
+		val = ft_strchr(line, '=') + 1;
+		end = ft_strlen(line) - ft_strlen(val) - 1;
+		cont->value = ft_strdup(val);
+	}
 	cont->var = ft_strdup(line);
+	(cont->var)[end] = '\0';
 	cont->exported = exported;
 	new->content = cont;
 	new->next = NULL;
@@ -38,8 +49,9 @@ void	free_entry(void *ventry)
 	t_env	*entry;
 
 	entry = (t_env *)ventry;
-	//ft_printf("free %p %p\n", entry->var, entry);
 	free(entry->var);
+	if (entry->value)
+		free(entry->value);
 	free(entry);
 }
 

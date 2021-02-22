@@ -19,6 +19,7 @@
 
 ### env
 - SHLVL++ dans les sous-process
+- env sep name et value
 
 ### expansion
 - pour l'expansion des db quotes, supprimer tous les escaping + $ a replace, si search = null on skip
