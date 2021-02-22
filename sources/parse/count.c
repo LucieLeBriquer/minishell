@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:38:32 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/22 17:48:07 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/22 17:49:37 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ int			nb_words(char *s, int l)
 	step = 0;
 	while (i < l)
 	{
-		ft_printf("state %d [%c] [%s]\n", current.state, current.sep, s + i);
-		ft_printf("current.nb_words = %d\n", current.nb_words);
 		if (current.state == 2)
 		{
 			i = find_separator(i, l, s, &current);
