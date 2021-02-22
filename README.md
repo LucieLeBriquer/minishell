@@ -2,7 +2,6 @@
 
 ## Notes
 - si \ a la fin d'une ligne continuer le gnl
-- echo \; ls	: ne pas exécuter ls
 
 - dans les doubles quotes le backslash utile pour
 	- \
@@ -12,12 +11,7 @@
 ## TODO
 
 ### env
-- |ok| attention duplications needed dans certains cas
-- |ok| check si seulement lettres et _ 
-- |ok| soit passer des pointeurs sur pointeurs, soit mettre un élément begin qui restera toujours là
-- les déclarations de truc non existants ne s'affiche pas dans env
-- export afficher declare -x
-- export n'affiche pas la variable "_="
+- export n'affiche pas la variable "\_="
 
 ### expansion
 - pour l'expansion des db quotes, supprimer tous les escaping + $ a replace, si search = null on skip

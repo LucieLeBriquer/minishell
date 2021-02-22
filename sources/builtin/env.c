@@ -7,9 +7,13 @@ void	print_env(char **env, int declare)
 	i = 0;
 	while (env[i])
 	{
-		if (declare)
+		if (declare && ft_strncmp(env[i], "_=", 2) != 0)
+		{
 			ft_printf("declare -x ");
-		ft_printf("%s\n", env[i]);
+			ft_printf("%s\n", env[i]);
+		}
+		else if (!declare)
+			ft_printf("%s\n", env[i]);
 		i++;
 	}
 	exit(0);
