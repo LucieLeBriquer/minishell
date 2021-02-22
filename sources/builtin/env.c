@@ -13,7 +13,7 @@ void	print_env(char **env)
 	exit(0);
 }
 
-int			ft_env(t_info *cmd, t_split *split, t_list *envl)
+int			ft_env(t_info *cmd, t_split *split, t_list **envl)
 {
 	int		pid;
 	int		status;
@@ -27,7 +27,8 @@ int			ft_env(t_info *cmd, t_split *split, t_list *envl)
 		free(args);
 		return (-1);
 	}
-	env = create_env_tab(envl, 1);
+	free(args);
+	env = create_env_tab(*envl, 1);
 	pid = fork();
 	if (pid == 0)
 	{

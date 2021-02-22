@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:36:55 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/20 23:39:39 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/22 15:46:18 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,13 @@ int		main(int argc, char **argv, char **env)
 		else
 		{
 			print_parsed_command(split);
-			execute(split, envl);
+			execute(split, &envl, line);
 		}
 		free_all(line, split);
 		prompt();
 	}
 	free(line);
 	ft_lstclear(&envl, &free_entry);
+	ft_printf("exit\n");
 	return (0);
 }

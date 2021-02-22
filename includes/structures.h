@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/19 15:39:29 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/22 15:43:40 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct		s_info
 	int				start;
 	int				number;
 	int				builtin;
+	char			*line;
 }					t_info;
 
 typedef struct		s_tree
@@ -56,7 +57,7 @@ typedef struct		s_tree
 	struct s_tree	*right;
 }					t_tree;
 
-typedef int (*t_exec)(t_info *, t_split *, t_list *);
+typedef int (*t_exec)(t_info *, t_split *, t_list **);
 
 enum	{CMD, PIPE, LEFT, RIGHT, RRIGHT, SEMIC};
 enum	{BUILTIN, EXECUTABLE, DECLARATION, EXECBIN};

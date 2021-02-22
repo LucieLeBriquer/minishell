@@ -25,6 +25,8 @@
 ### pipes et redirections
 - des fd sont mals refermés (output ?)
 
+### exit
+- filer en parametre line pour pouvoir free all et quitter proprement donc il faut modifier touuut
 
 ## Some code
 

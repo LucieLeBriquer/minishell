@@ -28,7 +28,7 @@ void	unset_one(char *to_unset, t_list *envl)
 	}
 }
 
-int	ft_unset(t_info *cmd, t_split *split, t_list *envl)
+int	ft_unset(t_info *cmd, t_split *split, t_list **envl)
 {
 	int		i;
 	char	**args;
@@ -40,7 +40,7 @@ int	ft_unset(t_info *cmd, t_split *split, t_list *envl)
 	while (args[i])
 	{
 		if (authorized_char(args[i]))
-			unset_one(args[i], envl);
+			unset_one(args[i], *envl);
 		i++;
 	}
 	free(args);

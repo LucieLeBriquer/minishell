@@ -23,7 +23,7 @@ void	export_one(char *to_export, t_list *envl)
 	save->next = new;
 }
 
-int		ft_export(t_info *cmd, t_split *split, t_list *envl)
+int		ft_export(t_info *cmd, t_split *split, t_list **envl)
 {
 	int		i;
 	char	**args;
@@ -32,13 +32,13 @@ int		ft_export(t_info *cmd, t_split *split, t_list *envl)
 	if (number_of_args(args) <= 1)
 	{
 		free(args);
-		return (print_sorted(envl, cmd));
+		return (print_sorted(*envl, cmd));
 	}
 	i = 1;
 	while (args[i])
 	{
 		if (authorized_char(args[i]))
-			export_one(args[i], envl);
+			export_one(args[i], *envl);
 		i++;
 	}
 	free(args);

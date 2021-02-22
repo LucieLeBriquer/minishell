@@ -4,18 +4,12 @@ static int	is_operator(char c)
 {
 	if (c == '|')
 		return (PIPE);
-	//if (c == '<')
-	//	return (LEFT);
-	//if (c == '>')
-//		return (RIGHT);
-//	if (c == 'd')
-//		return (RRIGHT);
 	if (c == ';')
 		return (SEMIC);
 	return (0);
 }
 
-t_info	*init_node(int i, int type, int number)
+t_info	*init_node(int i, int type, int number, char *line)
 {
 	t_info	*info;
 
@@ -27,11 +21,12 @@ t_info	*init_node(int i, int type, int number)
 	info->output = 1;
 	info->output = 1;
 	info->start = i;
+	info->line = line;
 	info->number = number;
 	return (info);
 }
 
-t_tree	*create_leave(int start, int number)
+t_tree	*create_leave(int start, int number, char *line)
 {
 	t_tree	*new;
 	t_info	*new_info;
@@ -39,14 +34,14 @@ t_tree	*create_leave(int start, int number)
 	new = malloc(sizeof(t_tree));
 	if (!new)
 		return (NULL);
-	new_info = init_node(start, 0, number);
+	new_info = init_node(start, 0, number, line);
 	new->left = NULL;
 	new->right = NULL;
 	new->info = new_info;
 	return (new);
 }
 
-t_tree	*create_node(int i, int type, int start)
+t_tree	*create_node(int i, int type, int start, char *line)
 {
 	t_tree		*new;
 	t_info		*new_info;
@@ -54,14 +49,14 @@ t_tree	*create_node(int i, int type, int start)
 	new = malloc(sizeof(t_tree));
 	if (!new)
 		return (NULL);
-	new_info = init_node(i, type, 1);
-	new->left = create_leave(start, i - start);
+	new_info = init_node(i, type, 1, line);
+	new->left = create_leave(start, i - start, line);
 	new->right = NULL;
 	new->info = new_info;
 	return (new);
 }
 
-t_tree	*create_tree(t_split *split)
+t_tree	*create_tree(t_split *split, char *line)
 {
 	t_tree	*tree;
 	t_tree	*last_node;
@@ -80,7 +75,7 @@ t_tree	*create_tree(t_split *split)
 		last_node = new_node;
 		if (type)
 		{
-			new_node = create_node(i, type, j);
+			new_node = create_node(i, type, j, line);
 			if (j == 0)
 				tree = new_node;
 			if (last_node)
@@ -90,9 +85,9 @@ t_tree	*create_tree(t_split *split)
 		i++;
 	}
 	if (last_node)
-		last_node->right = create_leave(j, i - j);
+		last_node->right = create_leave(j, i - j, line);
 	if (!tree)
-		tree = create_leave(0, i);
+		tree = create_leave(0, i, line);
 	return (tree);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:37:45 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/19 15:13:39 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/22 15:39:36 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	close_unused_fd(t_info *cmd)
 		ft_printf("\n");
 }
 
-void	execute_recursive(t_tree *tree, t_split *split, t_list *envl)
+void	execute_recursive(t_tree *tree, t_split *split, t_list **envl)
 {
 	int	pfd[2];
 	int	type;
@@ -81,11 +81,11 @@ void	free_tree(t_tree *tree)
 	free(tree);
 }
 
-void	execute(t_split *split, t_list *envl)
+void	execute(t_split *split, t_list **envl, char *line)
 {
 	t_tree	*tree;
 
-	tree = create_tree(split);
+	tree = create_tree(split, line);
 	execute_recursive(tree, split, envl);
 	free_tree(tree);
 }

@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int	exec_builtin(t_info *cmd, t_split *split, t_list *envl)
+int	exec_builtin(t_info *cmd, t_split *split, t_list **envl)
 {
 	t_exec	builtin[NB_BUILTIN];
 
@@ -28,14 +28,14 @@ void	change_stdin_stdout(t_info *cmd)
 	}
 }
 
-int	exec_executable(t_info *cmd, t_split *split, t_list *envl)
+int	exec_executable(t_info *cmd, t_split *split, t_list **envl)
 {
 	char	**args;
 	int		pid;
 	int		status;
 	char	**env;
 
-	env = create_env_tab(envl, 0);
+	env = create_env_tab(*envl, 0);
 	pid = fork();
 	args = NULL;
 	if (pid == 0)
@@ -55,11 +55,12 @@ int	exec_executable(t_info *cmd, t_split *split, t_list *envl)
 	return (0);
 }
 
-int	exec_declaration(t_info *cmd, t_split *split, t_list *envl)
+int	exec_declaration(t_info *cmd, t_split *split, t_list **envl)
 {
 	t_list	*new;
+	t_list	*beg;
 
-	new = envl;
+	new = *envl;
 	if (!authorized_char(split[cmd->start].str))
 		return (-1);
 	while (new)
@@ -72,13 +73,14 @@ int	exec_declaration(t_info *cmd, t_split *split, t_list *envl)
 		new = new->next;
 	}
 	new = init_entry(split[cmd->start].str, 0);
-	while (envl && envl->next)
-		envl = envl->next;
-	envl->next = new;
+	beg = *envl;
+	while (beg && beg->next)
+		beg = beg->next;
+	beg->next = new;
 	return (0);
 }
 
-int	exec_execbin(t_info *cmd, t_split *split, t_list *envl)
+int	exec_execbin(t_info *cmd, t_split *split, t_list **envl)
 {
 	char	*file;
 	char	**args;
@@ -86,7 +88,7 @@ int	exec_execbin(t_info *cmd, t_split *split, t_list *envl)
 	int		status;
 	char	**env;
 
-	env = create_env_tab(envl, 0);
+	env = create_env_tab(*envl, 0);
 	if (open_executable(cmd, split, env, &file) < 0)
 		return (-1);
 	args = NULL;

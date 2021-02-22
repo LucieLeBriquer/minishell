@@ -13,7 +13,7 @@ void	print_args(char **args, int option, int i)
 	exit(0);
 }
 
-int		ft_echo(t_info *cmd, t_split *split, t_list *envl)
+int		ft_echo(t_info *cmd, t_split *split, t_list **envl)
 {
 	char	**args;
 	int		i;
