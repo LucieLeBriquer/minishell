@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:38:32 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/18 15:14:22 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/22 17:19:38 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,15 @@ static int	new_state(char *s, int i)
 static int	is_operator(char c)
 {
 	if ((c == '|') || (c == '<') || (c == '>') || (c == ';'))
+		return (1);
+	return (0);
+}
+
+static int	close_sep(char c, char sep)
+{
+	if (c == sep)
+		return (1);
+	if (sep == ' ' && (c == '\"' || c == '\'' || ft_isspace(c)))
 		return (1);
 	return (0);
 }
@@ -69,11 +78,16 @@ int			nb_words(char *s, int l)
 		}
 		else if (current.state == 0)
 		{
-			while (i < l && !ft_isspace(s[i]) && !is_operator(s[i]))
+			while (i < l && !is_operator(s[i]) && !close_sep(s[i], current.sep))
 				i++;
+			current.state = 2;
 			if (is_operator(s[i]))
 				i--;
-			current.state = 2;
+			else if (close_sep(s[i], current.sep))
+			{
+				current.state = new_state(s, i);
+				current.nb_words++;
+			}
 		}
 		else if ((current.state == 3) || (current.state == 4))
 		{
@@ -82,8 +96,12 @@ int			nb_words(char *s, int l)
 		}
 		else if (current.sep == '\"' && i + 1 < l && s[i] == '\\')
 			i++;
-		else if (s[i] == current.sep)
+		else if (close_sep(s[i], current.sep))
+		{
 			current.state = 2;
+			if (current.sep != ' ')
+				i--;
+		}
 		i++;
 	}
 	if (current.state != 2)
@@ -103,14 +121,14 @@ int			len_of_word(char *s, char *sep)
 	*sep = current.sep;
 	if (current.state == 0)
 	{
-		while (i < l && !ft_isspace(s[i]) && !is_operator(s[i]))
+		while (i < l && !is_operator(s[i]) && !close_sep(s[i], current.sep))
 			i++;
 		return (i);
 	}
 	if ((current.state == 3) || (current.state == 4))
 		return (i + 1 + (current.state == 4));
 	i++;
-	while (i < l && s[i] != current.sep)
+	while (i < l && !close_sep(s[i], current.sep))
 	{
 		if (current.sep == '\"' && i + 1 < l && s[i] == '\\')
 			i++;

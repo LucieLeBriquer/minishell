@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 16:08:17 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/18 15:13:57 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/22 16:59:45 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ static int	fill_words(t_split *split, int words, char *command)
 		if (!split[i].str)
 			return (free_split(split, i));
 		ft_strlcpy(split[i].str, command + k, word_len + 1);
+		split[i].space = 0;
+		if (command[k + word_len] == ' ')
+			split[i].space = 1;
 		split[i].str[word_len + 1] = '\0';
 		trim_useless(split[i]);
 		k += word_len;

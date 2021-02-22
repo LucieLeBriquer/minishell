@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/22 15:58:48 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/22 16:55:54 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct		s_split
 {
 	char			*str;
 	char			quote;
+	int				space;
 }					t_split;
 
 /*

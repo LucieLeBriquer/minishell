@@ -5,6 +5,16 @@
 - |ok| attention duplications needed dans certains cas
 - |ok| check si seulement lettres et _ 
 - |ok| soit passer des pointeurs sur pointeurs, soit mettre un élément begin qui restera toujours là
+- les déclarations de truc non existants ne s'affiche pas dans env
+- export afficher declare -x
+
+- si \ a la fin d'une ligne continuer le gnl
+- echo \; ls	: ne pas exécuter ls
+
+- dans les doubles quotes le backslash utile pour
+	- \
+	- $
+	- "
 
 ### expansion
 - pour l'expansion des db quotes, supprimer tous les escaping + $ a replace, si search = null on skip
