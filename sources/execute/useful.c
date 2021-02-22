@@ -67,6 +67,32 @@ char	**create_tab_args(t_info *cmd, t_split *split)
 	return (args);
 }
 
+int		*create_tab_spaces(t_info *cmd, t_split *split)
+{
+	int		*spaces;
+	char	c;
+	int		i;
+	int		j;
+
+	spaces = malloc((cmd->number + 1) * sizeof(int));
+	i = 0;
+	j = 0;
+	while (j < cmd->number)
+	{	
+		c = split[cmd->start + j].quote;
+		if (c == 'd' || c == '>' || c == '<')
+			j++;
+		else
+		{
+			spaces[i] = split[cmd->start + j].space;
+			i++;
+		}
+		j++;
+	}
+	spaces[i] = -1;
+	return (spaces);
+}
+
 int		is_path(char *word)
 {
 	int	i;

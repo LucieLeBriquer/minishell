@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:38:32 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/22 17:19:38 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/22 17:48:07 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,14 @@ static int	is_operator(char c)
 	if ((c == '|') || (c == '<') || (c == '>') || (c == ';'))
 		return (1);
 	return (0);
+}
+
+static char	sep_convert(char c)
+{
+	if (ft_isspace(c))
+		return (' ');
+	else
+		return (c);
 }
 
 static int	close_sep(char c, char sep)
@@ -63,13 +71,18 @@ static char	find_separator(int i, int l, char *s, t_parse *current)
 int			nb_words(char *s, int l)
 {
 	int		i;
+	int		step;
 	t_parse	current;
 
 	i = 0;
 	current.state = 2;
 	current.nb_words = 0;
+	current.sep = ' ';
+	step = 0;
 	while (i < l)
 	{
+		ft_printf("state %d [%c] [%s]\n", current.state, current.sep, s + i);
+		ft_printf("current.nb_words = %d\n", current.nb_words);
 		if (current.state == 2)
 		{
 			i = find_separator(i, l, s, &current);
@@ -86,7 +99,9 @@ int			nb_words(char *s, int l)
 			else if (close_sep(s[i], current.sep))
 			{
 				current.state = new_state(s, i);
+				current.sep = sep_convert(s[i]);
 				current.nb_words++;
+				step = 1;
 			}
 		}
 		else if ((current.state == 3) || (current.state == 4))
@@ -97,16 +112,12 @@ int			nb_words(char *s, int l)
 		else if (current.sep == '\"' && i + 1 < l && s[i] == '\\')
 			i++;
 		else if (close_sep(s[i], current.sep))
-		{
 			current.state = 2;
-			if (current.sep != ' ')
-				i--;
-		}
 		i++;
 	}
 	if (current.state != 2)
 		return (-1);
-	return (current.nb_words);
+	return (current.nb_words - step);
 }
 
 int			len_of_word(char *s, char *sep)
