@@ -1,13 +1,5 @@
 #include "minishell.h"
 
-void	print_one(t_list *envl, char *pos)
-{
-	if (envl)
-		ft_printf("%s %p [%s]\n", pos, envl, ((t_env *)envl->content)->var);
-	else
-		ft_printf("%s %p\n", pos, envl);
-}
-
 void	unset_one(char *to_unset, t_list *envl)
 {
 	t_list	*previous;
