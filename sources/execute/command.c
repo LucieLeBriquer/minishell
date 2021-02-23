@@ -81,6 +81,7 @@ void	execute_cmd(t_info *cmd, t_split *split, t_list **envl)
 		return ;
 	}
 	print_leave(*cmd, split);
+	expand_db(cmd, split, *envl);
 	err = (exec_func[cmd_type(split[cmd->start].str, cmd)])(cmd, split, envl);
 	if (PRINT_ALL == 0)
 		return ;

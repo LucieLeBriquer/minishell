@@ -32,6 +32,7 @@ SRCS		=  $(addprefix sources/, \
 			builtin/pwd.c \
 			builtin/unset.c \
 			expand/useful.c \
+			expand/db_quotes.c \
 			main.c )
  
 OBJS		= $(SRCS:.c=.o)
