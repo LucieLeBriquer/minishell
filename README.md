@@ -1,16 +1,11 @@
 # minishell
 
 ## Notes
-- si \ a la fin d'une ligne continuer le gnl
-
-- dans les doubles quotes le backslash utile pour
-	- \
-	- $
-	- "
 
 ## TODO
 
-### gnl
+### buff reader
+- si \ a la fin d'une ligne continuer le gnl
 - lecture char par char puis :
 	- \0 si delete
 	- ctrl u : vide le buffer
@@ -19,17 +14,14 @@
 
 ### env
 - SHLVL++ dans les sous-process
-- env sep name et value
 
 ### expansion
-- pour l'expansion des db quotes, supprimer tous les escaping + $ a replace, si search = null on skip
-- pendant l'expansion remplacer '\' 'n' par '\n' etc pour tous les caractères echappés
+- ignorer les \ $ et " échappés
 
 ### exécution
-- pour les executable faire un f/lstat pour savoir si executable .
+- pour les executable faire un f/lstat pour savoir si executable ?
 - penser à protéger les forks
 - replacer l'ouverture d'un fd par lstat ou fstat
-- les exécutables ne marchent plus
 
 ### gestion d'erreur
 - plutôt que de faire des retours arbitraires faire un enum de types d'erreur à propager

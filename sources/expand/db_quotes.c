@@ -33,8 +33,8 @@ int		size_var(char *str, t_list *envl, char **value)
 }
 
 /*
-** without escaping \, $, "
-*/
+ ** without escaping \, $, "
+ */
 int		expanded_size(char *str, t_list *envl)
 {
 	int		i;
@@ -49,10 +49,15 @@ int		expanded_size(char *str, t_list *envl)
 	{
 		if (str[i] == '$')
 		{
-			i++;
-			res += size_var(str + i, envl, &value);
-			while (i < l && (ft_isalpha(str[i]) || str[i] == '_'))
+			if (i > 0 && str[i - 1] == '\\')
 				i++;
+			else
+			{
+				i++;
+				res += size_var(str + i, envl, &value);
+				while (i < l && (ft_isalpha(str[i]) || str[i] == '_'))
+					i++;
+			}
 		}
 		res++;
 		i++;
@@ -73,15 +78,26 @@ void	fill_expanded(char *fill, char *old, t_list *envl)
 	i = 0;
 	while (i < l)
 	{
-		if (old[i] == '$')
+		if ((old[i] == '\"' || old[i] == '\\' || old[i] == '$') && i > 0 && old[i - 1] == '\\')
 		{
+			fill[res - 1] = old[i];
 			i++;
-			size = size_var(old + i, envl, &current_var);
-			if (current_var)
-				ft_strlcpy(fill + res, current_var, size + 1);
-			while (i < l && (ft_isalpha(old[i]) || old[i] == '_'))
+		}
+		else if (old[i] == '$')
+		{
+			if (i > 0 && old[i - 1] == '\\')
+			{
+			}
+			else
+			{
 				i++;
-			res += size;
+				size = size_var(old + i, envl, &current_var);
+				if (current_var)
+					ft_strlcpy(fill + res, current_var, size + 1);
+				while (i < l && (ft_isalpha(old[i]) || old[i] == '_'))
+					i++;
+				res += size;
+			}
 		}
 		fill[res] = old[i];
 		res++;
