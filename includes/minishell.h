@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/23 14:12:58 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/23 14:39:31 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int		exec_executable(t_info *, t_split *, t_list **envl);
 int		exec_declaration(t_info *, t_split *, t_list **envl);
 int		exec_execbin(t_info *, t_split *, t_list **envl);
 int		update_in_out(t_info *cmd, t_split *split);
-int		open_executable(t_info *cmd, t_split *split, char **env, char **file);
+int		open_executable(t_info *cmd, t_split *split, t_list *envl, char **file);
 char	**create_tab_args(t_info *cmd, t_split *split);
 int		*create_tab_spaces(t_info *cmd, t_split *split);
 void	close_unused_fd(t_info *cmd);
@@ -67,6 +67,7 @@ int		print_sorted(t_list *envl, t_info *cmd);
 void	free_all(char *line, t_split *split);
 char	*ft_strcut(char *line, char c);
 void	expand_db(t_info *cmd, t_split *split, t_list *envl);
+char	*search(char *var, t_list *envl);
 
 /*
 ** a ajouter dans la libft

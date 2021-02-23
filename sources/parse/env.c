@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:38:48 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/23 00:10:18 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/23 14:45:16 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ char	**create_env_tab(t_list *envl, int exported)
 	int		size;
 	int		i;
 	char	**env;
+	char	*tmp;
 
 	size = size_of_list(envl, exported);
 	env = malloc((size + 1) * sizeof(char *));
@@ -84,7 +85,9 @@ char	**create_env_tab(t_list *envl, int exported)
 	{
 		if (((t_env *)envl->content)->exported >= exported)
 		{
-			env[i] = ((t_env *)envl->content)->var;
+			tmp = ft_strjoin(((t_env *)envl->content)->var, "=");
+			env[i] = ft_strjoin(tmp, ((t_env *)envl->content)->value);
+			free(tmp);
 			i++;
 		}
 		envl = envl->next;

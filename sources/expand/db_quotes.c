@@ -109,7 +109,7 @@ void	expand_db(t_info *cmd, t_split *split, t_list *envl)
 	i = -1;
 	while (++i < cmd->number)
 	{
-		if (split[cmd->start + i].quote == '\"')
+		if (split[cmd->start + i].quote == '\"' || split[cmd->start + i].quote == ' ')
 			expand_one(split, cmd->start + i, envl);
 	}
 }

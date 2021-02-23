@@ -1,34 +1,18 @@
 #include "minishell.h"
 
-static int	ispath(char **env)
+int	open_executable(t_info *cmd, t_split *split, t_list *envl, char **file)
 {
-	int		i;
-
-	i = 0;
-	while (env[i])
-	{
-		if (ft_strncmp(env[i], "PATH", 4) == 0)
-			return (i);
-		i++;
-	}
-	return (-1);
-}
-
-int	open_executable(t_info *cmd, t_split *split, char **env, char **file)
-{
-	int		j;
-	int		i;
 	char	**path_list;
+	char	*path;
+	int		i;
 	char	*tmp;
 	int		fd;
-
-	j = ispath(env);
-	if (j < 0)
-		return (-1);
-	path_list = ft_split(env[j], ":=");
-	i = 0;
+	
+	path = search("PATH", envl);
+	path_list = ft_split(path, ":=");
 	fd = -1;
 	*file = NULL;
+	i = 0;
 	while (path_list[i] && fd < 0)
 	{
 		tmp = ft_strjoin(path_list[i], "/");

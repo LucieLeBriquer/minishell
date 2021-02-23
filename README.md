@@ -29,6 +29,7 @@
 - pour les executable faire un f/lstat pour savoir si executable .
 - penser à protéger les forks
 - replacer l'ouverture d'un fd par lstat ou fstat
+- les exécutables ne marchent plus
 
 ### gestion d'erreur
 - plutôt que de faire des retours arbitraires faire un enum de types d'erreur à propager
