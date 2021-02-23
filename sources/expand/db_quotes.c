@@ -26,6 +26,7 @@ int		size_var(char *str, t_list *envl, char **value)
 		var[i] = str[i];
 	var[i] = '\0';
 	*value = search(var, envl);
+	free(var);
 	if (!(*value))
 		return (0);
 	return (ft_strlen(*value));
@@ -86,6 +87,7 @@ void	fill_expanded(char *fill, char *old, t_list *envl)
 		res++;
 		i++;
 	}
+	fill[res] = '\0';
 }
 
 void	expand_one(t_split *split, int i, t_list *envl)
@@ -99,6 +101,7 @@ void	expand_one(t_split *split, int i, t_list *envl)
 	if (!split[i].str)
 		return ;
 	fill_expanded(split[i].str, old, envl);
+	//ft_printf("%s %d\n", split[i].str, size_tot);
 	free(old);
 }
 

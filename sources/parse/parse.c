@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 16:08:17 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/22 19:35:08 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/23 15:01:37 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ static int	fill_words(t_split *split, int words, char *command)
 		i++;
 	}
 	if (split[words - 1].str[0] == '\0')
+	{
+		free(split[words - 1].str);
 		split[words - 1].str = NULL;
+	}
 	return (0);
 }
 
