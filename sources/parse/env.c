@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:38:48 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/23 14:45:16 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/23 15:29:27 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int		size_of_list(t_list *list, int exported)
 	int	i;
 
 	i = 0;
+	list = list->next;
 	while (list)
 	{
 		if (((t_env *)list->content)->exported >= exported)
@@ -68,6 +69,7 @@ int		size_of_list(t_list *list, int exported)
 	}
 	return (i);
 }
+
 
 char	**create_env_tab(t_list *envl, int exported)
 {
@@ -81,6 +83,7 @@ char	**create_env_tab(t_list *envl, int exported)
 	if (!env)
 		return (NULL);
 	i = 0;
+	envl = envl->next;
 	while (i < size)
 	{
 		if (((t_env *)envl->content)->exported >= exported)
@@ -99,6 +102,7 @@ char	**create_env_tab(t_list *envl, int exported)
 void	parse_env(t_list **envl, char **env)
 {
 	t_list	*new;
+	int		shlvl;
 	int		i;
 
 	i = 0;
@@ -108,6 +112,14 @@ void	parse_env(t_list **envl, char **env)
 	while (env[i])
 	{
 		new = init_entry(env[i], 2);
+		if (ft_strcmp(((t_env *)new->content)->var, "SHLVL") == 0)
+		{
+			shlvl = ft_atoi(((t_env *)new->content)->value);
+			shlvl++;
+			free(((t_env *)new->content)->value);
+			((t_env *)new->content)->value = ft_itoa(shlvl);
+			
+		}
 		ft_lstadd_back(envl, new);
 		i++;
 	}

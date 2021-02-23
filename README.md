@@ -12,12 +12,6 @@
 	- fleche gauche, droit pour naviguer
 	- comment gérer le curseur ?
 
-### env
-- SHLVL++ dans les sous-process
-
-### expansion
-- ignorer les \ $ et " échappés
-
 ### exécution
 - pour les executable faire un f/lstat pour savoir si executable ?
 - penser à protéger les forks
