@@ -219,6 +219,10 @@ lucie@lucie-XPS ~/Code/minishell$ echo -n -n -n -n "hey"
 hey%
 lucie@lucie-XPS ~/Code/minishell$ echo -n "hey " -n -n -n "hey" 
 hey  -n -n -n hey%
+lucie@lucie-XPS ~/Code/minishell$ echo "'"'$a'"'" 
+'$a'
+lucie@lucie-XPS ~/Code/minishell$ echo "'"    '$a'     "'" 
+' $a '
 ```
 
 ## Ressources
