@@ -209,7 +209,13 @@ Pour resumer, pour executer une commande il nous faut l'indice du debut du/des a
 
 ### Description des commandes builtin
 #### echo
-- prend en argument l'ensemble des chaînes de caractères en suivant
+- prend en argument l'ensemble des chaînes de caractères en suivant, attention au cas où les arguments ne sont pas séparés par un espace :
+```
+lucie@lucie-XPS ~/Code/minishell$ echo "'"'$a'"'" 
+'$a'
+lucie@lucie-XPS ~/Code/minishell$ echo "'"    '$a'     "'" 
+' $a '
+```
 - si on a une redirection `<` tente d'ouvrir le fichier mais ignore son contenu, donc lève une exception si le fichier n'existe pas par exemple
 - pour l'option `-n` :
 ```
@@ -219,10 +225,6 @@ lucie@lucie-XPS ~/Code/minishell$ echo -n -n -n -n "hey"
 hey%
 lucie@lucie-XPS ~/Code/minishell$ echo -n "hey " -n -n -n "hey" 
 hey  -n -n -n hey%
-lucie@lucie-XPS ~/Code/minishell$ echo "'"'$a'"'" 
-'$a'
-lucie@lucie-XPS ~/Code/minishell$ echo "'"    '$a'     "'" 
-' $a '
 ```
 
 ## Ressources
