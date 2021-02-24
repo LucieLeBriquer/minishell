@@ -36,6 +36,7 @@
 - `ctrl-C`, `ctrl-D` et `ctrl-\` doivent afficher le même résultat que dans bash
 
 ## TODO
+### General
 - [done] un split qui prend en compte les `'` et `"`
   - pour les simples quotes : easy
   - pour les doubles c'est plus galère, il faut check tous les cas de `\` et `$`
@@ -54,6 +55,8 @@
 - penser à protéger les forks
 - replacer l'ouverture d'un fd par lstat ou fstat + check si exécutable ?
 - plutôt que de faire des retours arbitraires faire un enum de types d'erreur à propager
+### En detail (a suppr au fur et a mesure)
+- si pas d'arguments a echo afficher un `\n` et pas `(null)`
 
 ## Notes
 
