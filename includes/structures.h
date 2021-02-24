@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/22 23:33:38 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/24 16:54:01 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct		s_parse
 	char			sep;
 	int				nb_words;
 	int				state;
+	int				step;
 }					t_parse;
 
 typedef struct		s_split
