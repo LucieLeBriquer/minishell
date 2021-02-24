@@ -20,6 +20,7 @@ SRCS		=  $(addprefix sources/, \
 			parse/parse.c \
 			parse/redir.c \
 			parse/env.c \
+			reader/reader.c \
 			print.c \
 			parse/tree.c \
 			parse/trim.c \

@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:36:55 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/23 18:05:52 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/24 15:43:18 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	prompt(void)
 {
 	char	cwd[SIZE_PATH];
-	
+
 	getcwd(cwd, SIZE_PATH);
 	ft_printf("\033[36m%s@%s \033[37m%s\033[0m$ ", "mini", "shell", cwd);
 }
@@ -28,12 +28,6 @@ void	print_entry(void *ventry)
 	ft_printf("%s : %d\n", entry->var, entry->exported);
 }
 
-void	handler(int signo)
-{
-	(void)signo;
-	ft_printf("\n");
-	prompt();
-}
 
 void	free_all(char *line, t_split *split)
 {
@@ -52,22 +46,23 @@ void	free_all(char *line, t_split *split)
 	free(split);
 }
 
-int		main(int argc, char **argv, char **env)
+void	handler(int signo)
+{
+	(void)signo;
+	ft_printf("\n");
+	prompt();
+}
+
+void	waiting_command(t_list **envl)
 {
 	char	*line;
 	t_split	*split;
 	int		err;
-	t_list	*envl;
 
-	(void)argv;
-	if (argc > 1)
-		PRINT_ALL = 0;
-	else
-		PRINT_ALL = 1;
-	signal(SIGINT, handler);
+	signal(SIGINT, &handler);
 	prompt();
-	parse_env(&envl, env);
-	while (get_next_line(0, &line) > 0)
+	line = NULL;
+	while (reader(&line) > 0)
 	{
 		split = parse_command(line, &err);
 		if (!split)
@@ -75,12 +70,26 @@ int		main(int argc, char **argv, char **env)
 		else
 		{
 			print_parsed_command(split);
-			execute(split, &envl, line);
+			execute(split, envl, line);
 		}
 		free_all(line, split);
 		prompt();
 	}
 	free(line);
+}
+
+int		main(int argc, char **argv, char **env)
+{
+	t_list	*envl;
+
+	(void)argv;
+	if (argc > 1)
+		PRINT_ALL = 0;
+	else
+		PRINT_ALL = 1;
+	parse_env(&envl, env);
+	signal(SIGINT, &handler);
+	waiting_command(&envl);
 	ft_lstclear(&envl, &free_entry);
 	ft_printf("exit\n");
 	return (0);

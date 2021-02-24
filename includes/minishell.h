@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/23 17:54:35 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/24 15:26:12 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	free_all(char *line, t_split *split);
 char	*ft_strcut(char *line, char c);
 void	expand_db(t_info *cmd, t_split *split, t_list *envl);
 char	*search(char *var, t_list *envl);
-int		gnl_improved(char **line);
+int		reader(char **line);
 
 /*
 ** a ajouter dans la libft
