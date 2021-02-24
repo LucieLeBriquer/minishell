@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 00:08:59 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/11 17:57:17 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/23 17:47:15 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 4095
+#  define BUFFER_SIZE 1
 # endif
 
 /*

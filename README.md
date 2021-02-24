@@ -11,6 +11,13 @@
 	- ctrl u : vide le buffer
 	- fleche gauche, droit pour naviguer
 	- comment gérer le curseur ?
+- donc il va falloir un reader char par char, lorsque :
+	- \n : on l'envoie comme avant
+	- si la size du truc lu est nulle et que le ctrl-D est lancé on ne fait rien
+
+### signaux
+- pour le Ctrl+c, on doit return 130
+- pour le dernier retour le mettre dans la variable begin ?
 
 ### exécution
 - pour les executable faire un f/lstat pour savoir si executable ?
