@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:36:55 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/24 16:01:01 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/24 16:08:56 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	print_entry(void *ventry)
 	entry = ventry;
 	ft_printf("%s : %d\n", entry->var, entry->exported);
 }
-
 
 void	free_all(char *line, t_split *split)
 {

@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:38:32 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/22 18:16:20 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/24 16:42:37 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int			nb_words(char *s, int l)
 
 	i = 0;
 	current.state = 2;
-	current.nb_words = 0;
+	current.nb_words = -1;
 	current.sep = ' ';
 	while (i < l)
 	{

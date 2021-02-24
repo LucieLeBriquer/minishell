@@ -35,10 +35,18 @@ int	exec_executable(t_info *cmd, t_split *split, t_list **envl)
 	char	**args;
 	int		pid;
 	int		status;
+	int		fd;
 	char	**env;
 
 	if (PRINT_ALL)
 		ft_printf("> executable\n");
+	fd = open(split[cmd->start].str, O_RDONLY);
+	if (fd < 0)
+	{
+		ft_printf("minishell: %s: %s\n", split[cmd->start].str, strerror(2));
+		return (-1);
+	}
+	close(fd);
 	env = create_env_tab(*envl, 0);
 	pid = fork();
 	args = NULL;
@@ -121,7 +129,10 @@ int	exec_execbin(t_info *cmd, t_split *split, t_list **envl)
 	if (PRINT_ALL)
 		ft_printf("> execbin\n");
 	if (open_executable(cmd, split, *envl, &file) < 0)
+	{
+		ft_printf("minishell: %s: command not found\n", split[cmd->start].str);
 		return (-1);
+	}
 	args = NULL;
 	pid = fork();
 	env = create_env_tab(*envl, 0);
