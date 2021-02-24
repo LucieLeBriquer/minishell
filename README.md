@@ -27,9 +27,6 @@
 ### gestion d'erreur
 - plutôt que de faire des retours arbitraires faire un enum de types d'erreur à propager
 
-### pipes et redirections
-- des fd sont mals refermés (output ?)
-
 ## Some code
 
 ### lstat

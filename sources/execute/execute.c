@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:37:45 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/22 15:39:36 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/24 12:58:06 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,16 @@ void	close_unused_fd(t_info *cmd)
 	if (cmd->input != 0)
 	{
 		if (PRINT_ALL == 1)
-			ft_printf("closing %d...\n", cmd->input);
-		close(cmd->input);
+			ft_printf("closing %d... [%d]\n", cmd->input, close(cmd->input));
+		else
+			close(cmd->input);
 	}
 	if (cmd->output != 1)
 	{
 		if (PRINT_ALL == 1)
-			ft_printf("closing %d...\n", cmd->output);
-		close(cmd->output);
+			ft_printf("closing %d... [%d]\n", cmd->output, close(cmd->output));
+		else
+			close(cmd->output);
 	}
 	if (PRINT_ALL == 1)
 		ft_printf("\n");
@@ -53,7 +55,7 @@ void	execute_recursive(t_tree *tree, t_split *split, t_list **envl)
 	if (type == CMD)
 	{
 		execute_cmd(tree->info, split, envl);
-		close_unused_fd(tree->info);
+		//close_unused_fd(tree->info);
 		return ;
 	}
 	if (type == SEMIC)
@@ -64,6 +66,8 @@ void	execute_recursive(t_tree *tree, t_split *split, t_list **envl)
 	else
 	{
 		pipe(pfd);
+		if (PRINT_ALL == 1)
+			ft_printf("create pipe [%d,%d]\n", pfd[0], pfd[1]);
 		tree->left->info->output = pfd[1];
 		fill_subtree_fd(tree->right, 0, pfd[0]);
 	}

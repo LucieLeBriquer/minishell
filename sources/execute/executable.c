@@ -25,6 +25,9 @@ int	open_executable(t_info *cmd, t_split *split, t_list *envl, char **file)
 	}
 	free_tab(path_list);
 	if (fd > 0)
+	{
+		close(fd);
 		return (1);
+	}
 	return (-1);
 }
