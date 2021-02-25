@@ -56,7 +56,6 @@
 - gestion du dernier retour à faire : le mettre dans la variable begin ?
 - export a= doit s'afficher dans l'env
 - export illegal : not a valid identifier
-- return 1 si un invalide pour export et unset
 
 ## Notes
 

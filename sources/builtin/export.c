@@ -35,6 +35,7 @@ int		ft_export(t_info *cmd, t_split *split, t_list **envl)
 {
 	int		i;
 	char	**args;
+	int		ret;
 
 	args = create_tab_args(cmd, split);
 	if (number_of_args(args) <= 1)
@@ -43,14 +44,18 @@ int		ft_export(t_info *cmd, t_split *split, t_list **envl)
 		return (print_sorted(*envl, cmd));
 	}
 	i = 1;
+	ret = 0;
 	while (args[i])
 	{
 		if (authorized_char(args[i]))
 			export_one(args[i], *envl);
 		else
+		{
 			ft_printf_fd(2, "minishell: export: '%s': not a valid identifier\n", args[i]);
+			ret = 1;
+		}
 		i++;
 	}
 	free(args);
-	return (0);
+	return (ret);
 }
