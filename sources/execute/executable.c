@@ -19,6 +19,8 @@ int	open_executable(t_info *cmd, t_split *split, t_list *envl, char **file)
 	int		fd;
 
 	path = search("PATH", envl);
+	if (!path)
+		return (-1);
 	path_list = ft_split(path, ":=");
 	fd = -1;
 	*file = NULL;
