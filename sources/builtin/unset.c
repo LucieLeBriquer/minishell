@@ -37,7 +37,8 @@ int	ft_unset(t_info *cmd, t_split *split, t_list **envl)
 			unset_one(args[i], *envl);
 		else
 		{
-			ft_printf_fd(2, "minishell: unset: '%s': not a valid identifier\n", args[i]);
+			ft_printf_fd(2, "minishell: unset: '%s': \
+				not a valid identifier\n", args[i]);
 			ret = 1;
 		}
 		i++;

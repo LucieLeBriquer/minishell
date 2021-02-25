@@ -4,8 +4,6 @@ int	exec_builtin(t_info *cmd, t_split *split, t_list **envl)
 {
 	t_exec	builtin[NB_BUILTIN];
 
-	if (PRINT_ALL)
-		ft_printf("> builtin\n");
 	builtin[ECHO] = &ft_echo;
 	builtin[CD] = &ft_cd;
 	builtin[PWD] = &ft_pwd;
@@ -31,6 +29,15 @@ int	exec_executable(t_info *cmd, t_split *split, t_list **envl)
 	return (0);
 }
 
+static int	export_var(t_env *env_var, t_info *cmd, t_split *split, char *var)
+{
+	env_var->value = join_all_arguments(split, cmd->start, cmd->number);
+	if (env_var->exported == 1)
+		env_var->exported = 2;
+	free(var);
+	return (0);
+}
+
 int	exec_declaration(t_info *cmd, t_split *split, t_list **envl)
 {
 	t_list	*new;
@@ -44,14 +51,7 @@ int	exec_declaration(t_info *cmd, t_split *split, t_list **envl)
 	while (new)
 	{
 		if (variable_match(new, var, 0))
-		{
-			((t_env *)new->content)->value
-				= join_all_arguments(split, cmd->start, cmd->number);
-			if (((t_env *)new->content)->exported == 1)
-				((t_env *)new->content)->exported = 2;
-			free(var);
-			return (0);
-		}
+			return (export_var(new->content, cmd, split, var));
 		new = new->next;
 	}
 	new = init_entry(var, 0);

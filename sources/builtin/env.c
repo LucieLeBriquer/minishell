@@ -9,7 +9,8 @@ void	print_envl(t_list *envl, int declare)
 		entry = (t_env *)envl->content;
 		if (authorized_char(entry->var))
 		{
-			if (declare && entry->exported >= 1 && ft_strcmp(entry->var, "_") != 0)
+			if (declare && entry->exported >= 1
+				&& ft_strcmp(entry->var, "_") != 0)
 			{
 				ft_printf("declare -x %s", entry->var);
 				if (entry->value)
@@ -24,7 +25,7 @@ void	print_envl(t_list *envl, int declare)
 	exit(0);
 }
 
-int			ft_env(t_info *cmd, t_split *split, t_list **envl)
+int	ft_env(t_info *cmd, t_split *split, t_list **envl)
 {
 	int		pid;
 	int		status;

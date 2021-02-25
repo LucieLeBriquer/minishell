@@ -27,7 +27,7 @@ static int	cmp_entry(void *data1, void *data2)
 	return (0);
 }
 
-int			print_sorted(t_list *envl, t_info *cmd)
+int	print_sorted(t_list *envl, t_info *cmd)
 {
 	t_list	*sorted;
 	int		pid;

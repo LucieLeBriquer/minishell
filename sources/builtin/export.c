@@ -1,24 +1,29 @@
 #include "minishell.h"
 
-void	export_one(char *to_export, t_list *envl)
+static void	declare(char *to_export, t_env *var)
+{
+	if (ft_strchr(to_export, '='))
+	{
+		if (var->value)
+			free(var->value);
+		var->value = ft_strdup(ft_strchr(to_export, '=') + 1);
+	}
+}
+
+static void	export_one(char *to_export, t_list *envl)
 {
 	char	*empty;
 	t_list	*save;
 	t_list	*new;
-	
-	save = envl; 
+
+	save = envl;
 	while (envl)
 	{
 		save = envl;
 		if (variable_match(envl, to_export, 1))
 		{
 			((t_env *)envl->content)->exported = 2;
-			if (ft_strchr(to_export, '='))
-			{
-				if (((t_env *)envl->content)->value)
-					free(((t_env *)envl->content)->value);
-				((t_env *)envl->content)->value = ft_strdup(ft_strchr(to_export, '=') + 1);
-			}
+			declare(to_export, envl->content);
 			return ;
 		}
 		envl = envl->next;
@@ -31,7 +36,7 @@ void	export_one(char *to_export, t_list *envl)
 	save->next = new;
 }
 
-int		ft_export(t_info *cmd, t_split *split, t_list **envl)
+int	ft_export(t_info *cmd, t_split *split, t_list **envl)
 {
 	int		i;
 	char	**args;
@@ -51,7 +56,8 @@ int		ft_export(t_info *cmd, t_split *split, t_list **envl)
 			export_one(args[i], *envl);
 		else
 		{
-			ft_printf_fd(2, "minishell: export: '%s': not a valid identifier\n", args[i]);
+			ft_printf_fd(2, "minishell: export: '%s':\
+				not a valid identifier\n", args[i]);
 			ret = 1;
 		}
 		i++;

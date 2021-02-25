@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void	print_args(char **args, int *spaces, int option, int i)
+static void	print_args(char **args, int *spaces, int option, int i)
 {
 	while (args[i] && args[i + 1])
 	{
@@ -16,36 +16,55 @@ void	print_args(char **args, int *spaces, int option, int i)
 	exit(0);
 }
 
-int		ft_echo(t_info *cmd, t_split *split, t_list **envl)
+static int	option_echo(char ***args, int **spaces, t_info *cmd, t_split *split)
+{
+	int	i;
+
+	i = 1;
+	*args = create_tab_args(cmd, split);
+	if (!args)
+		return (-1);
+	*spaces = create_tab_spaces(cmd, split);
+	if (!spaces)
+	{
+		free(args);
+		return (-1);
+	}
+	while ((*args)[i] && (ft_strcmp((*args)[i], "-n") == 0))
+		i++;
+	return (i);
+}
+
+static void	wait_builtin(t_info *cmd)
+{
+	int	status;
+
+	wait(&status);
+	close_unused_fd(cmd);
+	print_child_end(status);
+}
+
+int	ft_echo(t_info *cmd, t_split *split, t_list **envl)
 {
 	char	**args;
 	int		*spaces;
 	int		i;
-	int		option;
 	int		pid;
-	int		status;
-	
+
 	(void)envl;
-	args = create_tab_args(cmd, split);
-	spaces = create_tab_spaces(cmd, split);
-	option = 0;
-	i = 1;
-	while (args[i] && (ft_strcmp(args[i], "-n") == 0))
-		i++;
-	if (i > 1)
-		option = 1;
-	pid = fork();	
-	if (pid == 0)
+	i = option_echo(&args, &spaces, cmd, split);
+	if (i < 0)
+		return (ALLOCATION_FAIL);
+	pid = fork();
+	if (pid == -1)
+		return (FORK_FAIL);
+	else if (pid == 0)
 	{
 		change_stdin_stdout(cmd);
-		print_args(args, spaces, option, i);
+		print_args(args, spaces, (i > 1), i);
 	}
 	else
-	{
-		wait(&status);
-		close_unused_fd(cmd);
-		print_child_end(status);
-	}
+		wait_builtin(cmd);
 	free(args);
 	free(spaces);
 	return (0);
