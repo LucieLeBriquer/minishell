@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/25 13:56:12 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/25 15:23:29 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <sys/wait.h>
 # include <sys/types.h>
 # define NB_CMD 3
-# define SIZE_PATH 60
+# define SIZE_PATH 4096
 
 int		PRINT_ALL;
 
@@ -59,7 +59,7 @@ int		number_of_args(char **args);
 void	free_tab(char **args);
 char	*search_in_env(t_list *envl, char *var);
 char	**create_env_tab(t_list *envl, int exported);
-int		variable_match(t_list *envl, char *var);
+int		variable_match(t_list *envl, char *var, int cut);
 int		is_path(char *word);
 int		authorized_char(char *s);
 void	print_envl(t_list *envl, int declare);

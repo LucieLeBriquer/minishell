@@ -43,7 +43,7 @@ int	exec_declaration(t_info *cmd, t_split *split, t_list **envl)
 	var = ft_strcut(split[cmd->start].str, '=');
 	while (new)
 	{
-		if (variable_match(new, var))
+		if (variable_match(new, var, 0))
 		{
 			((t_env *)new->content)->value
 				= join_all_arguments(split, cmd->start, cmd->number);

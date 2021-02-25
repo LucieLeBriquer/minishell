@@ -10,15 +10,23 @@ void	export_one(char *to_export, t_list *envl)
 	while (envl)
 	{
 		save = envl;
-		if (variable_match(envl, to_export))
+		if (variable_match(envl, to_export, 1))
 		{
 			((t_env *)envl->content)->exported = 2;
+			if (ft_strchr(to_export, '='))
+			{
+				if (((t_env *)envl->content)->value)
+					free(((t_env *)envl->content)->value);
+				((t_env *)envl->content)->value = ft_strdup(ft_strchr(to_export, '=') + 1);
+			}
 			return ;
 		}
 		envl = envl->next;
 	}
 	empty = ft_strdup(to_export);
 	new = init_entry(empty, 1);
+	if (((t_env *)new->content)->value != NULL)
+		((t_env *)new->content)->exported = 2;
 	free(empty);
 	save->next = new;
 }

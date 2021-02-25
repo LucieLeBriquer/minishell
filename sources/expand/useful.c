@@ -56,16 +56,6 @@ void	ft_lstsort(t_list **begin_list, int (*cmp)())
 	}
 }
 
-int		variable_match(t_list *envl, char *var)
-{
-	char	*env_var;
-
-	env_var = ((t_env *)envl->content)->var;
-	if (ft_strcmp(env_var, var) == 0)
-		return (1);
-	return (0);
-}
-
 char	*ft_strcut(char *line, char c)
 {
 	int		i;
@@ -83,4 +73,23 @@ char	*ft_strcut(char *line, char c)
 	}
 	res[i] = '\0';
 	return (res);
+}
+
+int		variable_match(t_list *envl, char *var, int cut)
+{
+	char	*env_var;
+	char	*to_find;
+
+	if (cut)
+		to_find = ft_strcut(var, '=');
+	else
+		to_find = ft_strdup(var);
+	env_var = ((t_env *)envl->content)->var;
+	if (ft_strcmp(env_var, to_find) == 0)
+	{
+		free(to_find);
+		return (1);
+	}
+	free(to_find);
+	return (0);
 }
