@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/24 16:54:01 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/25 13:55:05 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,6 @@ typedef int (*t_exec)(t_info *, t_split *, t_list **);
 enum	{CMD, PIPE, LEFT, RIGHT, RRIGHT, SEMIC};
 enum	{BUILTIN, EXECUTABLE, DECLARATION, EXECBIN};
 enum	{ECHO, CD, PWD, EXPORT, UNSET, ENV, EXIT};
+enum	{FORK_FAIL = -2};
 
 #endif

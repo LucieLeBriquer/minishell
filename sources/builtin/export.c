@@ -39,6 +39,8 @@ int		ft_export(t_info *cmd, t_split *split, t_list **envl)
 	{
 		if (authorized_char(args[i]))
 			export_one(args[i], *envl);
+		else
+			ft_printf_fd(2, "minishell: export: '%s': not a valid identifier\n", args[i]);
 		i++;
 	}
 	free(args);

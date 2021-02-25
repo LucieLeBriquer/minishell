@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int		update_in_out(t_info *cmd, t_split *split)
+int	update_in_out(t_info *cmd, t_split *split)
 {
 	int	i;
 

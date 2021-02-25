@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/25 12:15:28 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/25 13:56:12 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void	expand_db(t_info *cmd, t_split *split, t_list *envl);
 char	*search(char *var, t_list *envl);
 int		reader(char **line);
 char	*join_all_arguments(t_split *split, int start, int number);
+void	ft_lstsort(t_list **begin_list, int (*cmp)());
+int		fork_and_exec(t_info *cmd, t_split *split, t_list *envl, char *file);
 
 void	print_leave(t_info cmd, t_split *split);
 

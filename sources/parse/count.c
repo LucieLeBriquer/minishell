@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:38:32 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/24 16:57:33 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/25 13:59:33 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static char	find_separator(int i, int l, char *s, t_parse *current)
 	return (i);
 }
 
-int			nb_words(char *s, int l)
+int	nb_words(char *s, int l)
 {
 	int		i;
 	t_parse	current;

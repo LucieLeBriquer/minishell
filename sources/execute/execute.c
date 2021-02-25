@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:37:45 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/24 12:58:06 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/25 14:00:57 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,7 @@ void	execute_recursive(t_tree *tree, t_split *split, t_list **envl)
 		return ;
 	type = tree->info->type;
 	if (type == CMD)
-	{
-		execute_cmd(tree->info, split, envl);
-		//close_unused_fd(tree->info);
-		return ;
-	}
+		return (execute_cmd(tree->info, split, envl));
 	if (type == SEMIC)
 	{
 		fill_subtree_fd(tree->right, 0, 0);

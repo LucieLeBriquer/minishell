@@ -12,7 +12,8 @@ LIB_NAME	= $(LIB_DIR)libft.a
 INCS		= $(addprefix $(INCS_DIR), minishell.h)
 
 SRCS		=  $(addprefix sources/, \
-			execute/command_func.c \
+			execute/types.c \
+			execute/fork.c \
 			execute/command.c \
 			parse/count.c \
 			execute/execute.c \

@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 16:08:17 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/24 17:00:02 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/25 14:04:57 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int	fill_words(t_split *split, int words, char *command)
 	return (0);
 }
 
-t_split		*parse_command(char *command, int *err)
+t_split	*parse_command(char *command, int *err)
 {
 	int		l;
 	int		words;

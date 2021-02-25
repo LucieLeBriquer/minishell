@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int		number_of_args(char **args)
+int	number_of_args(char **args)
 {
 	int	i;
 
@@ -10,7 +10,7 @@ int		number_of_args(char **args)
 	return (i);
 }
 
-int		authorized_char(char *s)
+int	authorized_char(char *s)
 {
 	int	i;
 
@@ -52,7 +52,7 @@ char	**create_tab_args(t_info *cmd, t_split *split)
 	return (args);
 }
 
-int		*create_tab_spaces(t_info *cmd, t_split *split)
+int	*create_tab_spaces(t_info *cmd, t_split *split)
 {
 	int		*spaces;
 	char	c;
@@ -78,7 +78,7 @@ int		*create_tab_spaces(t_info *cmd, t_split *split)
 	return (spaces);
 }
 
-int		is_path(char *word)
+int	is_path(char *word)
 {
 	int	i;
 
