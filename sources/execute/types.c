@@ -47,6 +47,8 @@ int	exec_declaration(t_info *cmd, t_split *split, t_list **envl)
 	new = *envl;
 	if (!authorized_char(split[cmd->start].str))
 		return (-1);
+	if (cmd->output != 1)
+		return (0);
 	var = ft_strcut(split[cmd->start].str, '=');
 	while (new)
 	{
