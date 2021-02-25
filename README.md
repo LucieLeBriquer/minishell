@@ -49,14 +49,12 @@
 - [done] se renseigner sur les signaux qui peuvent etre envoyes pendant l'execution d'un processus pour gerer les leaks (par exemple deja ctrl+c ctrl+d dans la fonction principale)
 - [done] rajouter un entier d'état pour savoir si la commande est exportée ou non ; est-ce que l'on doit modifier l'environnement extérieur ?
 - [done] faire les commandes built-in pour commencer
+### En detail (a suppr au fur et a mesure)
+- penser à protéger les forks
 - pour le line reader si \ a la fin d'une ligne continuer le gnl
 - pour le Ctrl+c, on doit return 130
-- gestion du dernier retour à faire : le mettre dans la variable begin ?
-- penser à protéger les forks
-- replacer l'ouverture d'un fd par lstat ou fstat + check si exécutable ?
 - plutôt que de faire des retours arbitraires faire un enum de types d'erreur à propager
-### En detail (a suppr au fur et a mesure)
-- si pas d'arguments a echo afficher un `\n` et pas `(null)`
+- gestion du dernier retour à faire : le mettre dans la variable begin ?
 
 ## Notes
 

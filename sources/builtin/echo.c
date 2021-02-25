@@ -9,7 +9,8 @@ void	print_args(char **args, int *spaces, int option, int i)
 			ft_printf(" ");
 		i++;
 	}
-	ft_printf("%s", args[i]);
+	if (args[i])
+		ft_printf("%s", args[i]);
 	if (!option)
 		ft_printf("\n");
 	exit(0);
