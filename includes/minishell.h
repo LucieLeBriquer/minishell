@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/24 15:26:12 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/25 12:15:28 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,13 @@ char	*ft_strcut(char *line, char c);
 void	expand_db(t_info *cmd, t_split *split, t_list *envl);
 char	*search(char *var, t_list *envl);
 int		reader(char **line);
+char	*join_all_arguments(t_split *split, int start, int number);
+
+void	print_leave(t_info cmd, t_split *split);
 
 /*
 ** a ajouter dans la libft
 */
-void	ft_lstsort(t_list **begin_list, int (*cmp)());
 
 /*
 ** Built-in

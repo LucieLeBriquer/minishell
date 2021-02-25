@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:36:55 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/24 16:08:56 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/25 12:07:50 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,36 +20,13 @@ void	prompt(void)
 	ft_printf("\033[36m%s@%s \033[37m%s\033[0m$ ", "mini", "shell", cwd);
 }
 
-void	print_entry(void *ventry)
-{
-	t_env	*entry;
-
-	entry = ventry;
-	ft_printf("%s : %d\n", entry->var, entry->exported);
-}
-
-void	free_all(char *line, t_split *split)
-{
-	int	i;
-
-	if (line)
-		free(line);
-	if (!split)
-		return ;
-	i = 0;
-	while (split[i].str)
-	{
-		free(split[i].str);
-		i++;
-	}
-	free(split);
-}
-
 void	handler(int signo)
 {
-	(void)signo;
-	ft_printf("\n");
-	prompt();
+	if (signo == SIGINT)
+	{
+		ft_printf("\n");
+		prompt();
+	}
 }
 
 void	waiting_command(t_list **envl)
@@ -87,7 +64,6 @@ int		main(int argc, char **argv, char **env)
 	else
 		PRINT_ALL = 1;
 	parse_env(&envl, env);
-	signal(SIGINT, &handler);
 	waiting_command(&envl);
 	ft_lstclear(&envl, &free_entry);
 	ft_printf("exit\n");

@@ -1,5 +1,6 @@
 CC			= clang -Wall -Wextra -Werror
 RM			= rm -rf
+NORME		= norminette
 NAME		= minishell 
 INCS_DIR	= ./includes/
 MAIN_INC	= -I$(INCS_DIR)
@@ -17,11 +18,14 @@ SRCS		=  $(addprefix sources/, \
 			execute/execute.c \
 			execute/executable.c \
 			execute/useful.c \
+			execute/useful2.c \
 			parse/parse.c \
 			parse/redir.c \
 			parse/env.c \
 			reader/reader.c \
-			print.c \
+			utilities/errors.c \
+			utilities/print.c \
+			utilities/free.c \
 			parse/tree.c \
 			parse/trim.c \
 			builtin/cd.c \
@@ -57,5 +61,8 @@ fclean		: clean
 			@$(RM) $(NAME)
 
 re			: fclean all
+
+norme		:
+			@norminette $(SRCS)
 
 .PHONY		: all clean fclean re docu

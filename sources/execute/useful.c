@@ -10,21 +10,6 @@ int		number_of_args(char **args)
 	return (i);
 }
 
-void	free_tab(char **args)
-{
-	int	i;
-
-	if (!args)
-		return ;
-	i = 0;
-	while (args[i])
-	{
-		free(args[i]);
-		i++;
-	}
-	free(args);
-}
-
 int		authorized_char(char *s)
 {
 	int	i;

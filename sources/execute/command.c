@@ -1,20 +1,6 @@
 #include "minishell.h"
 
-void	print_leave(t_info cmd, t_split *split)
-{
-	int	i;
-
-	if (PRINT_ALL == 0)
-		return ;
-	ft_printf("\033[33mEXECUTE   input %2d   ", cmd.input);
-	ft_printf("output %2d\t\t", cmd.output);
-	i = -1;
-	while (++i < cmd.number)
-		ft_printf("%s ", split[cmd.start + i].str);
-	ft_printf("\n\033[0m");
-}
-
-int		is_declaration(char *str)
+static int	is_declaration(char *str)
 {
 	int	i;
 
@@ -28,7 +14,7 @@ int		is_declaration(char *str)
 	return (0);
 }
 
-int		is_builtin(char *str)
+static int	is_builtin(char *str)
 {
 	if (ft_strcmp(str, "echo") == 0)
 		return (ECHO);
@@ -47,7 +33,7 @@ int		is_builtin(char *str)
 	return (-1);
 }
 
-int		cmd_type(char *first_word, t_info *cmd)
+static int	cmd_type(char *first_word, t_info *cmd)
 {
 	cmd->builtin = is_builtin(first_word);
 	if (cmd->builtin > -1)

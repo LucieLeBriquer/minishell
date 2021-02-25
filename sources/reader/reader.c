@@ -6,6 +6,8 @@ static char	*join_realloc(char *line, char c, int reset)
 	int		l;
 	int		i;
 
+	if (c == '\n')
+		return (line);
 	if (reset)
 		l = 0;
 	else
@@ -51,8 +53,13 @@ int			reader(char **line)
 	{
 		if (c == '\n')
 		{
-			reset = 1;
-			return (1);
+			if ((*line)[ft_strlen(*line) - 1] == '\\')
+				(*line)[ft_strlen(*line) - 1] = '\0';
+			else
+			{
+				reset = 1;
+				return (1);
+			}
 		}
 		reset = 0;
 		*line = join_realloc(*line, c, reset);

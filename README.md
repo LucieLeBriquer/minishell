@@ -51,7 +51,6 @@
 - [done] faire les commandes built-in pour commencer
 ### En detail (a suppr au fur et a mesure)
 - penser à protéger les forks
-- pour le line reader si \ a la fin d'une ligne continuer le gnl
 - pour le Ctrl+c, on doit return 130
 - plutôt que de faire des retours arbitraires faire un enum de types d'erreur à propager
 - gestion du dernier retour à faire : le mettre dans la variable begin ?
