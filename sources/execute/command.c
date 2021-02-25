@@ -22,7 +22,7 @@ int		is_declaration(char *str)
 	while (str[i])
 	{
 		if (str[i] == '=')
-			return (1);
+			return (authorized_char(str));
 		i++;
 	}
 	return (0);
