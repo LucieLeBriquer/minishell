@@ -39,6 +39,7 @@ SRCS		=  $(addprefix sources/, \
 			builtin/unset.c \
 			expand/useful.c \
 			expand/db_quotes.c \
+			header.c \
 			main.c )
  
 OBJS		= $(SRCS:.c=.o)

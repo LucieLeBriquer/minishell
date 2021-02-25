@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/25 15:23:29 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/25 23:50:00 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int		reader(char **line);
 char	*join_all_arguments(t_split *split, int start, int number);
 void	ft_lstsort(t_list **begin_list, int (*cmp)());
 int		fork_and_exec(t_info *cmd, t_split *split, t_list *envl, char *file);
+void	header(void);
 
 void	print_leave(t_info cmd, t_split *split);
 
