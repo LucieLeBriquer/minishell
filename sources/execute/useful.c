@@ -15,6 +15,7 @@ int	authorized_char(char *s)
 	int	i;
 
 	i = 0;
+	//ft_printf("test : %s\n", s);
 	if (!ft_isalpha(s[0]) && (s[0] != '_'))
 		return (0);
 	while (s[i] && (s[i] != '='))

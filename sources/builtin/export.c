@@ -65,3 +65,7 @@ int	ft_export(t_info *cmd, t_split *split, t_list **envl)
 	free(args);
 	return (ret);
 }
+/*
+** modifier l'export/les declaration d'un en prenant en compte les arguments multiples dans le cas a="reverve"
+** while no space, ajouter des elements
+*/
