@@ -1,24 +1,11 @@
 #include "minishell.h"
 
-static void	wait_father(char **args, t_info *cmd)
-{
-	int		status;
-
-	wait(&status);
-	free_tab(args);
-	close_unused_fd(cmd);
-	print_child_end(status);
-}
-
 int	fork_and_exec(t_info *cmd, t_split *split, t_list *envl, char *file)
 {
-	char	**args;
-	char	**env;
 	int		ret;
 	int		pid;
 
-	env = create_env_tab(envl, 0);
-	args = NULL;
+	cmd->env = create_env_tab(envl, 0);
 	ret = -1;
 	pid = fork();
 	if (pid == -1)
@@ -26,14 +13,14 @@ int	fork_and_exec(t_info *cmd, t_split *split, t_list *envl, char *file)
 	else if (pid == 0)
 	{
 		change_stdin_stdout(cmd);
-		args = create_tab_args(cmd, split);
+		close_unused_fd(cmd);
+		cmd->args = create_tab_args(cmd, split);
+		ft_printf("hello\n");
 		if (file)
-			ret = execve(file, args, env);
+			ret = execve(file, cmd->args, cmd->env);
 		else
-			ret = execve(split[cmd->start].str, args, env);
+			ret = execve(split[cmd->start].str, cmd->args, cmd->env);
+		ft_printf("%d\n", ret);
 	}
-	else
-		wait_father(args, cmd);
-	free_tab(env);
-	return (ret);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:38:32 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/25 16:46:53 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/26 18:16:48 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	new_state(char *s, int i)
 	if ((c == '\'') || (c == '\"'))
 		return (1);
 	if ((c == '|') || (c == '<') || (c == '|') || (c == ';') ||
-			(c == '>' && (!s[i + 1] || s[i + 1] != '>')))
+			(c == '>' && (!s[i + 1] || s[i + 1] != '>')) || (c == '='))
 		return (3);
 	if (c == '>' && c && s[i + 1] && s[i + 1] == '>')
 		return (4);
@@ -29,7 +29,7 @@ static int	new_state(char *s, int i)
 
 static int	is_operator(char c)
 {
-	if ((c == '|') || (c == '<') || (c == '>') || (c == ';'))
+	if ((c == '|') || (c == '<') || (c == '>') || (c == ';') || (c == '='))
 		return (1);
 	return (0);
 }
@@ -82,7 +82,7 @@ int	nb_words(char *s, int l)
 		if (current.state == 2)
 		{
 			i = find_separator(i, l, s, &current);
-			if (i + 1 >= l && current.sep != ' ')
+			if (i + 1 >= l && current.sep != ' ' && current.sep != '=')
 				return (-1);
 		}
 		else if (current.state == 0)
@@ -110,7 +110,7 @@ int	nb_words(char *s, int l)
 			current.state = 2;
 		i++;
 	}
-	if (current.state != 2)
+	if (current.state != 2 && current.sep != '=')
 		return (-1);
 	return (current.nb_words);
 }

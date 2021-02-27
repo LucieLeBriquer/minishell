@@ -4,7 +4,6 @@ int	ft_pwd(t_info *cmd, t_split *split, t_list **envl)
 {
 	char	cwd[SIZE_PATH];
 	int		pid;
-	int		status;
 
 	(void)split;
 	(void)envl;
@@ -17,12 +16,6 @@ int	ft_pwd(t_info *cmd, t_split *split, t_list **envl)
 		change_stdin_stdout(cmd);
 		ft_printf("%s\n", cwd);
 		exit(0);
-	}
-	else
-	{
-		wait(&status);
-		close_unused_fd(cmd);
-		print_child_end(status);
 	}
 	return (0);
 }

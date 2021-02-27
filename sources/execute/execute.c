@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:37:45 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/25 14:00:57 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/27 22:28:25 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,9 @@ void	fill_subtree_fd(t_tree *tree, int out, int fd)
 void	close_unused_fd(t_info *cmd)
 {
 	if (cmd->input != 0)
-	{
-		if (PRINT_ALL == 1)
-			ft_printf("closing %d... [%d]\n", cmd->input, close(cmd->input));
-		else
-			close(cmd->input);
-	}
+		close(cmd->input);
 	if (cmd->output != 1)
-	{
-		if (PRINT_ALL == 1)
-			ft_printf("closing %d... [%d]\n", cmd->output, close(cmd->output));
-		else
-			close(cmd->output);
-	}
-	if (PRINT_ALL == 1)
-		ft_printf("\n");
+		close(cmd->output);
 }
 
 void	execute_recursive(t_tree *tree, t_split *split, t_list **envl)
@@ -53,7 +41,10 @@ void	execute_recursive(t_tree *tree, t_split *split, t_list **envl)
 		return ;
 	type = tree->info->type;
 	if (type == CMD)
+	{
+		//close(tree->info->output - 1);
 		return (execute_cmd(tree->info, split, envl));
+	}
 	if (type == SEMIC)
 	{
 		fill_subtree_fd(tree->right, 0, 0);
@@ -73,19 +64,32 @@ void	execute_recursive(t_tree *tree, t_split *split, t_list **envl)
 
 void	free_tree(t_tree *tree)
 {
+	t_info	*cmd;
+
 	if (!tree)
 		return ;
 	free_tree(tree->left);
 	free_tree(tree->right);
-	free(tree->info);
+	cmd = tree->info;
+	if (cmd->args)
+		free(cmd->args);
+	if (cmd->env)
+		free_tab(cmd->env);
+	if (cmd->spaces)
+		free(cmd->spaces);
+	free(cmd);
 	free(tree);
 }
 
 void	execute(t_split *split, t_list **envl, char *line)
 {
 	t_tree	*tree;
+	int		status;
+	int		wpid;
 
 	tree = create_tree(split, line);
 	execute_recursive(tree, split, envl);
+	while ((wpid = wait(&status)) > 0)
+		;
 	free_tree(tree);
 }

@@ -23,6 +23,9 @@ t_info	*init_node(int i, int type, int number, char *line)
 	info->start = i;
 	info->line = line;
 	info->number = number;
+	info->args = NULL;
+	info->env = NULL;
+	info->spaces = NULL;
 	return (info);
 }
 

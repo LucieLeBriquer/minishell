@@ -29,41 +29,31 @@ int	exec_executable(t_info *cmd, t_split *split, t_list **envl)
 	return (0);
 }
 
-static int	export_var(t_env *env_var, t_info *cmd, t_split *split, char *var)
+static int	export_var(t_env *env_var, t_info *cmd, t_split *split)
 {
 	env_var->value = join_all_arguments(split, cmd->start, cmd->number);
 	if (env_var->exported == 1)
 		env_var->exported = 2;
-	free(var);
 	return (0);
 }
 
 int	exec_declaration(t_info *cmd, t_split *split, t_list **envl)
 {
 	t_list	*new;
-	t_list	*beg;
-	char	*var;
 
-	new = *envl;
-	if (!authorized_char(split[cmd->start].str))
-		return (-1);
 	if (cmd->output != 1)
 		return (0);
-	var = ft_strcut(split[cmd->start].str, '=');
+	new = *envl;
 	while (new)
 	{
-		if (variable_match(new, var, 0))
-			return (export_var(new->content, cmd, split, var));
+		if (variable_match(new, split[cmd->start].str, 0))
+			return (export_var(new->content, cmd, split));
 		new = new->next;
 	}
-	new = init_entry(var, 0);
-	free(var);
+	new = init_entry(split[cmd->start].str, 0);
 	((t_env *)new->content)->value
 		= join_all_arguments(split, cmd->start, cmd->number);
-	beg = *envl;
-	while (beg && beg->next)
-		beg = beg->next;
-	beg->next = new;
+	ft_lstadd_back(envl, new);
 	return (0);
 }
 

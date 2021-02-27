@@ -31,22 +31,18 @@ int	print_sorted(t_list *envl, t_info *cmd)
 {
 	t_list	*sorted;
 	int		pid;
-	int		status;
 
-	sorted = ft_lstmap(envl, &copy_entry, &free_entry);
-	ft_lstsort(&sorted, &cmp_entry);
 	pid = fork();
-	if (pid == 0)
+	if (pid == -1)
+		return (FORK_FAIL);
+	else if (pid == 0)
 	{
 		change_stdin_stdout(cmd);
+		sorted = ft_lstmap(envl, &copy_entry, &free_entry);
+		ft_lstsort(&sorted, &cmp_entry);
 		print_envl(sorted, 1);
+		ft_lstclear(&sorted, &free_entry);
+		exit(0);
 	}
-	else
-	{
-		wait(&status);
-		close_unused_fd(cmd);
-		print_child_end(status);
-	}
-	ft_lstclear(&sorted, &free_entry);
 	return (0);
 }
