@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:37:45 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/27 22:28:25 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/02/28 22:40:25 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,9 @@ void	free_tree(t_tree *tree)
 void	execute(t_split *split, t_list **envl, char *line)
 {
 	t_tree	*tree;
-	int		status;
-	int		wpid;
 
 	tree = create_tree(split, line);
 	execute_recursive(tree, split, envl);
-	while ((wpid = wait(&status)) > 0)
-		;
+	waitpid(-1, NULL, 0);
 	free_tree(tree);
 }
