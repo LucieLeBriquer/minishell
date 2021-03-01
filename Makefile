@@ -70,5 +70,6 @@ re			: fclean all
 
 norme		:
 			@$(NORME) $(SRCS) includes/structures.h includes/minishell.h includes/libftfull.h
+			@$(MAKE) norme --silent -C $(LIB_DIR)
 
 .PHONY		: all clean fclean re docu
