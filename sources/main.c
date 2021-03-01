@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:36:55 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 17:19:42 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 17:39:03 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	waiting_command(t_list **envl)
 		else
 		{
 			print_parsed_command(split);
-			//execute(split, envl, line);
+			execute(split, envl, line);
 			(void)envl;
 		}
 		free_all(line, split);

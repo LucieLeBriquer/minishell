@@ -5,12 +5,12 @@ void	change_stdin_stdout(t_info *cmd)
 	if (cmd->output != 1)
 	{
 		close(1);
-		dup2(cmd->output, 1);
+		dup(cmd->output);
 	}
 	if (cmd->input != 0)
 	{
 		close(0);
-		dup2(cmd->input, 0);
+		dup(cmd->input);
 	}
 }
 

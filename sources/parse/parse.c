@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 17:37:50 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 17:37:51 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 17:40:54 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ static int	free_split(t_split *split, int i)
 	return (-1);
 }
 
-static void	fill_one_word(t_split word, int word_len, const char *cmd)
+static void	fill_one_word(t_split *word, int word_len, const char *cmd)
 {
-	ft_strlcpy(word.str, cmd, word_len + 1);
-	trim_seps(word);
-	word.space = 0;
-	word.str[word_len + 1] = '\0';
+	ft_strlcpy(word->str, cmd, word_len + 1);
+	word->str[word_len + 1] = '\0';
+	trim_seps(*word);
+	word->space = 0;
 }
 
 static int	fill_words(t_split *split, int words, char *command)
@@ -51,7 +51,7 @@ static int	fill_words(t_split *split, int words, char *command)
 		split[i].str = malloc((word_len + 2) * sizeof(char));
 		if (!split[i].str)
 			return (free_split(split, i));
-		fill_one_word(split[i], word_len, command + k);
+		fill_one_word(&(split[i]), word_len, command + k);
 		if (k + word_len < size && ft_isspace(command[k + word_len]))
 			split[i].space = 1;
 		k += word_len;

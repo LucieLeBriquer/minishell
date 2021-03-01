@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:37:45 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 17:19:17 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 18:06:09 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	close_unused_fd(t_info *cmd)
 		close(cmd->output);
 }
 
-void	execute_recursive(t_tree *tree, t_split *split, t_list **envl)
+void	fd_recursive(t_tree *tree, t_split *split, t_list **envl)
 {
 	int	pfd[2];
 	int	type;
@@ -41,10 +41,7 @@ void	execute_recursive(t_tree *tree, t_split *split, t_list **envl)
 		return ;
 	type = tree->info->type;
 	if (type == CMD)
-	{
-		//close(tree->info->output - 1);
-		return (execute_cmd(tree->info, split, envl));
-	}
+		return ;
 	if (type == SEMIC)
 	{
 		fill_subtree_fd(tree->right, 0, 0);
@@ -58,7 +55,21 @@ void	execute_recursive(t_tree *tree, t_split *split, t_list **envl)
 		tree->left->info->output = pfd[1];
 		fill_subtree_fd(tree->right, 0, pfd[0]);
 	}
+	fd_recursive(tree->left, split, envl);
+	fd_recursive(tree->right, split, envl);
+}
+
+void	execute_recursive(t_tree *tree, t_split *split, t_list **envl)
+{
+	if (!tree)
+		return ;
 	execute_recursive(tree->left, split, envl);
+	if (tree->info->type == CMD)
+	{
+		execute_cmd(tree->info, split, envl);
+		close_unused_fd(tree->info);
+		return ;
+	}
 	execute_recursive(tree->right, split, envl);
 }
 
@@ -86,7 +97,9 @@ void	execute(t_split *split, t_list **envl, char *line)
 	t_tree	*tree;
 
 	tree = create_tree(split, line);
+	fd_recursive(tree, split, envl);
 	execute_recursive(tree, split, envl);
-	waitpid(-1, NULL, 0);
+	while (wait(NULL) > 0)
+		;
 	free_tree(tree);
 }
