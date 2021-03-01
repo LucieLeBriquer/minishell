@@ -41,8 +41,9 @@ SRCS		=  $(addprefix sources/, \
 			builtin/export_sorted.c \
 			builtin/pwd.c \
 			builtin/unset.c \
+			expand/main.c \
 			expand/useful.c \
-			expand/db_quotes.c \
+			expand/replace.c \
 			header.c \
 			main.c )
  

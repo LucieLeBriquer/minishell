@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 18:57:12 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 19:28:08 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	print_envl(t_list *envl, int declare);
 int		print_sorted(t_list *envl, t_info *cmd);
 void	free_all(char *line, t_split *split);
 char	*ft_strcut(char *line, char c);
-void	expand_db(t_info *cmd, t_split *split, t_list *envl);
 char	*search(char *var, t_list *envl);
 int		reader(char **line);
 char	*join_all_arguments(t_split *split, int start, int number);
@@ -125,4 +124,9 @@ void	pipe_recursive(t_tree *tree, t_split *split, t_list **envl);
 */
 
 char	**create_env_tab(t_list *envl, int exported);
+void	fill_expanded(char *fill, char *old, t_list *envl);
+void	expand(t_info *cmd, t_split *split, t_list *envl);
+int		size_var(char *str, t_list *envl, char **value);
+
+
 #endif
