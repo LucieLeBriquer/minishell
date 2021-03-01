@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:48:01 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 23:46:38 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 23:51:16 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,5 @@ void		execute_cmd(t_info *cmd, t_split *split, t_list **envl)
 		split[cmd->start + 1].sep, cmd)])(cmd, split, envl);
 	if (g_print_all == 0)
 		return ;
-	ft_putstr(GREY);
-	ft_printf("err = %d\n", err);
-	ft_putstr(WHITE);
+	ft_printf("%serr = %d%s\n", GREY, err, WHITE);
 }
