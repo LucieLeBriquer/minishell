@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:38:58 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 17:28:44 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 19:02:32 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,4 @@ int	is_state_ok(t_parse *p)
 	if (p->state != OPERATOR || p->sep == '=' || p->sep == ';')
 		return (p->nb);
 	return (-1);
-}
-
-int	new_state(char *command, int i)
-{
-	if (command[i] == '\"')
-		return (DB_QUOTE);
-	if (command[i] == '\'')
-		return (QUOTE);
-	if (is_operator(command[i]))
-		return (OPERATOR);
-	return (SPACE);
 }

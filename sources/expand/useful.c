@@ -14,7 +14,7 @@ char	*search_in_env(t_list *envl, char *var)
 	return (NULL);
 }
 
-int		list_size(t_list *begin_list)
+int	list_size(t_list *begin_list)
 {
 	int		i;
 
@@ -75,7 +75,7 @@ char	*ft_strcut(char *line, char c)
 	return (res);
 }
 
-int		variable_match(t_list *envl, char *var, int cut)
+int	variable_match(t_list *envl, char *var, int cut)
 {
 	char	*env_var;
 	char	*to_find;

@@ -1,5 +1,16 @@
 #include "minishell.h"
 
+int	new_state(char *command, int i)
+{
+	if (command[i] == '\"')
+		return (DB_QUOTE);
+	if (command[i] == '\'')
+		return (QUOTE);
+	if (is_operator(command[i]))
+		return (OPERATOR);
+	return (SPACE);
+}
+
 int	nb_words(char *command)
 {
 	t_parse	p;

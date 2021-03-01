@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/01 19:06:38 by lle-briq          #+#    #+#             */
+/*   Updated: 2021/03/01 19:06:53 by lle-briq         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static void	declare(char *to_export, t_env *var)
@@ -65,7 +77,9 @@ int	ft_export(t_info *cmd, t_split *split, t_list **envl)
 	free(args);
 	return (ret);
 }
+
 /*
-** modifier l'export/les declaration d'un en prenant en compte les arguments multiples dans le cas a="reverve"
+** modifier l'export/les declaration d'un en prenant en compte les arguments
+** multiples dans le cas a="reverve"
 ** while no space, ajouter des elements
 */

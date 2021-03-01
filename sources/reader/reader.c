@@ -35,7 +35,22 @@ static char	*malloc_empty_string(void)
 	return (empty);
 }
 
-int			reader(char **line)
+static int	ignore_escaped(char c, char **line, int *reset)
+{
+	if (c == '\n')
+	{
+		if ((*line)[ft_strlen(*line) - 1] == '\\')
+			(*line)[ft_strlen(*line) - 1] = '\0';
+		else
+		{
+			*reset = 1;
+			return (1);
+		}
+	}
+	return (0);
+}
+
+int	reader(char **line)
 {
 	static char	c;
 	static int	size;
@@ -51,16 +66,8 @@ int			reader(char **line)
 		return (-1);
 	while (size > 0)
 	{
-		if (c == '\n')
-		{
-			if ((*line)[ft_strlen(*line) - 1] == '\\')
-				(*line)[ft_strlen(*line) - 1] = '\0';
-			else
-			{
-				reset = 1;
-				return (1);
-			}
-		}
+		if (ignore_escaped(c, line, &reset))
+			return (1);
 		reset = 0;
 		*line = join_realloc(*line, c, reset);
 		if (!(*line))

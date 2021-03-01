@@ -1,62 +1,12 @@
 #include "minishell.h"
 
-static int	need_new_node(char c)
+static int	is_node(char c)
 {
 	if (c == '|')
 		return (PIPE);
 	if (c == ';')
 		return (SEMIC);
 	return (0);
-}
-
-t_info	*init_node(int i, int type, int number, char *line)
-{
-	t_info	*info;
-
-	info = malloc(sizeof(t_info));
-	if (!info)
-		return (NULL);
-	info->type = type;
-	info->input = 0;
-	info->output = 1;
-	info->output = 1;
-	info->start = i;
-	info->line = line;
-	info->number = number;
-	info->args = NULL;
-	info->env = NULL;
-	info->spaces = NULL;
-	return (info);
-}
-
-t_tree	*create_leave(int start, int number, char *line)
-{
-	t_tree	*new;
-	t_info	*new_info;
-
-	new = malloc(sizeof(t_tree));
-	if (!new)
-		return (NULL);
-	new_info = init_node(start, 0, number, line);
-	new->left = NULL;
-	new->right = NULL;
-	new->info = new_info;
-	return (new);
-}
-
-t_tree	*create_node(int i, int type, int start, char *line)
-{
-	t_tree		*new;
-	t_info		*new_info;
-
-	new = malloc(sizeof(t_tree));
-	if (!new)
-		return (NULL);
-	new_info = init_node(i, type, 1, line);
-	new->left = create_leave(start, i - start, line);
-	new->right = NULL;
-	new->info = new_info;
-	return (new);
 }
 
 void	fill_root(t_tree *tree, t_tree *root)
@@ -68,7 +18,7 @@ void	fill_root(t_tree *tree, t_tree *root)
 	fill_root(tree->right, root);
 }
 
-int		previous_end_with_slash(t_split *split, int i)
+int	previous_end_with_slash(t_split *split, int i)
 {
 	char	*last;
 
@@ -79,54 +29,41 @@ int		previous_end_with_slash(t_split *split, int i)
 	}
 	return (0);
 }
+
+void	tree_final(t_tree **tree, t_tree *last_node, int i[2], char *line)
+{
+	if (last_node)
+		last_node->right = create_leave(i[1], i[0] - i[1], line);
+	if (!(*tree))
+		*tree = create_leave(0, i[0], line);
+	fill_root(*tree, *tree);
+}
+
 t_tree	*create_tree(t_split *split, char *line)
 {
 	t_tree	*tree;
 	t_tree	*last_node;
 	t_tree	*new_node;
-	int		type;
-	int		i;
-	int		j;
+	int		i[2];
 
-	i = 0;
-	j = 0;
+	i[0] = 0;
+	i[1] = 0;
 	new_node = NULL;
 	tree = NULL;
-	while (split[i].str)
+	while (split[i[0]].str)
 	{
-		type = need_new_node(split[i].sep);
 		last_node = new_node;
-		if (type && !previous_end_with_slash(split, i))
+		if (is_node(split[i[0]].sep) && !previous_end_with_slash(split, i[0]))
 		{
-			new_node = create_node(i, type, j, line);
-			if (j == 0)
+			new_node = create_node(i[0], is_node(split[i[0]].sep), i[1], line);
+			if (!tree)
 				tree = new_node;
 			if (last_node)
 				last_node->right = new_node;
-			j = i + 1;
+			i[1] = i[0] + 1;
 		}
-		i++;
+		i[0]++;
 	}
-	if (last_node)
-		last_node->right = create_leave(j, i - j, line);
-	if (!tree)
-		tree = create_leave(0, i, line);
-	fill_root(tree, tree);
+	tree_final(&tree, last_node, i, line);
 	return (tree);
-}
-
-void	print_tree(t_tree *tree, t_split *split)
-{
-	int	i;
-
-	if (tree == NULL)
-		return ;
-	print_tree(tree->left, split);
-	ft_printf("type : %d\t%d[%d]\t", tree->info->type, tree->info->start, tree->info->number);
-	ft_printf("operator : %c\t", split[tree->info->start].sep);
-	i = -1;
-	while (++i < tree->info->number)
-		ft_printf("%s ", split[tree->info->start + i].str);
-	ft_printf("\n");
-	print_tree(tree->right, split);
 }

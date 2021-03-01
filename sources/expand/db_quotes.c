@@ -32,9 +32,6 @@ int		size_var(char *str, t_list *envl, char **value)
 	return (ft_strlen(*value));
 }
 
-/*
- ** without escaping \, $, "
- */
 int		expanded_size(char *str, t_list *envl)
 {
 	int		i;
@@ -78,17 +75,15 @@ void	fill_expanded(char *fill, char *old, t_list *envl)
 	i = 0;
 	while (i < l)
 	{
-		if ((old[i] == '\"' || old[i] == '\\' || old[i] == '$') && i > 0 && old[i - 1] == '\\')
+		if ((old[i] == '\"' || old[i] == '\\' || old[i] == '$')
+			&& i > 0 && old[i - 1] == '\\')
 		{
 			fill[res - 1] = old[i];
 			i++;
 		}
 		else if (old[i] == '$')
 		{
-			if (i > 0 && old[i - 1] == '\\')
-			{
-			}
-			else
+			if (!(i > 0 && old[i - 1] == '\\'))
 			{
 				i++;
 				size = size_var(old + i, envl, &current_var);
@@ -117,7 +112,6 @@ void	expand_one(t_split *split, int i, t_list *envl)
 	if (!split[i].str)
 		return ;
 	fill_expanded(split[i].str, old, envl);
-	//ft_printf("%s %d\n", split[i].str, size_tot);
 	free(old);
 }
 
