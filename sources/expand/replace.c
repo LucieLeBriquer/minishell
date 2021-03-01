@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:19:12 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 19:27:44 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 19:34:21 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,18 @@ int	size_var(char *str, t_list *envl, char **value)
 	return (ft_strlen(*value));
 }
 
-static int	replace_var(int i, char *old, t_list *envl, char *dest)
+static int	replace_var(int *i, char *old, t_list *envl, char *dest)
 {
 	int		size;
 	int		l;
 	char	*current_var;
 
 	l = ft_strlen(old);
-	size = size_var(old + ++i, envl, &current_var);
+	size = size_var(old + ++(*i), envl, &current_var);
 	if (current_var)
 		ft_strlcpy(dest, current_var, size + 1);
-	while (i < l && (ft_isalpha(old[i]) || old[i] == '_'))
-		i++;
+	while (*i < l && (ft_isalpha(old[*i]) || old[*i] == '_'))
+		(*i)++;
 	return (size);
 }
 
@@ -67,8 +67,8 @@ void	fill_expanded(char *fill, char *old, t_list *envl)
 		}
 		else if (old[i] == '$')
 		{
-			if (!(i > 0 && old[i - 1] == '\\'))
-				res += replace_var(i, old, envl, fill + res);
+			if (i == 0 || old[i - 1] != '\\')
+				res += replace_var(&i, old, envl, fill + res);
 		}
 		fill[res] = old[i];
 		res++;
