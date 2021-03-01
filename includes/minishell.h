@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 20:10:16 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 22:01:27 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define SIZE_PATH 4096
 
 int		g_print_all;
+int		g_sigint;
 void	simple_parse(char *command);
 t_split	*parse_command(char *command, int *err);
 void	print_parse_quotes(char *command);

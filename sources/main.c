@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:36:55 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 20:01:34 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 22:04:29 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	handler(int signo)
 {
 	if (signo == SIGINT)
 	{
+		g_sigint = 1;
 		ft_printf("\n");
 		prompt();
 	}
@@ -35,11 +36,12 @@ void	waiting_command(t_list **envl)
 	t_split	*split;
 	int		err;
 
-	signal(SIGINT, &handler);
 	prompt();
+	signal(SIGINT, &handler);
 	line = NULL;
 	while (reader(&line) > 0)
 	{
+		g_sigint = 0;
 		split = parse_command(line, &err);
 		if (!split)
 			print_error_parsing(err);
@@ -47,12 +49,21 @@ void	waiting_command(t_list **envl)
 		{
 			print_parsed_command(split);
 			execute(split, envl, line);
-			(void)envl;
 		}
 		free_all(line, split);
-		prompt();
+		if (!g_sigint)
+			prompt();
 	}
 	free(line);
+}
+
+void	header_simple(void)
+{
+	ft_putstr("\033[1;35m  __  __ _       _     _          _ _\n");
+	ft_putstr(" |  \\/  (_)_ __ (_)___| |__   ___| | |\n");
+	ft_putstr(" | |\\/| | | '_ \\| / __| '_ \\ / _ \\ | |\n");
+	ft_putstr(" | |  | | | | | | \\__ \\ | | |  __/ | |\n");
+	ft_putstr(" |_|  |_|_|_| |_|_|___/_| |_|\\___|_|_|\033[0m\n\n");
 }
 
 int		main(int argc, char **argv, char **env)
@@ -64,7 +75,7 @@ int		main(int argc, char **argv, char **env)
 		g_print_all = 0;
 	else
 		g_print_all = 1;
-	header();
+	header_simple();
 	parse_env(&envl, env);
 	waiting_command(&envl);
 	ft_lstclear(&envl, &free_entry);
