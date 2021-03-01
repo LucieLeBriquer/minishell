@@ -55,6 +55,7 @@
 - gestion du dernier retour à faire : le mettre dans la variable begin ?
 - rebosser le export en faisant une liste chainee des variables à exporter
 - same pour les définitions de variables temporaires (suivies d'une commande ?)
+- echo a b < nonexistingfile --> file error, msg a changer
 
 ## Notes
 
