@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int		nb_words(char *command)
+int	nb_words(char *command)
 {
 	t_parse	p;
 
@@ -11,7 +11,7 @@ int		nb_words(char *command)
 	return (state_reset(command, 0, &p));
 }
 
-int		len_of_word(char *command, int i, char *sep)
+int	len_of_word(char *command, int i, char *sep)
 {
 	t_parse	p;
 

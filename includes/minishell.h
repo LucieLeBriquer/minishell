@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 18:13:56 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 18:34:20 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,4 +111,11 @@ void	trim_seps(t_split split);
 */
 
 void	pipe_recursive(t_tree *tree, t_split *split, t_list **envl);
+
+
+/*
+** Expand
+*/
+
+char	**create_env_tab(t_list *envl, int exported);
 #endif

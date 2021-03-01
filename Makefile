@@ -15,6 +15,7 @@ SRCS		=  $(addprefix sources/, \
 			execute/types.c \
 			execute/fork.c \
 			execute/command.c \
+			execute/env.c \
 			execute/execute.c \
 			execute/file.c \
 			execute/useful.c \

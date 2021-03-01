@@ -36,7 +36,7 @@ char	*join_all_arguments(t_split *split, int start, int number)
 		if (!empty)
 			return (NULL);
 		empty[0] = '\0';
-		return (empty); 
+		return (empty);
 	}
 	join = ft_strdup(split[start + i].str);
 	while (++i < number)

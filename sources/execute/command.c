@@ -1,11 +1,11 @@
 #include "minishell.h"
 
-/*static int	is_declaration(char *str, char sep)
+static int	is_declaration(char *str, char sep)
 {
 	if (sep == '=' && authorized_char(str))
 		return (1);
 	return (0);
-}*/
+}
 
 static int	is_builtin(char *str)
 {
@@ -30,8 +30,8 @@ static int	cmd_type(char *first_word, char sep, t_info *cmd)
 {
 	cmd->builtin = is_builtin(first_word);
 	(void)sep;
-	//if (is_declaration(first_word, sep))
-	//	return (DECLARATION);
+	if (is_declaration(first_word, sep))
+		return (DECLARATION);
 	if (cmd->builtin > -1)
 		return (BUILTIN);
 	else if (is_path(first_word))
@@ -62,7 +62,8 @@ void	execute_cmd(t_info *cmd, t_split *split, t_list **envl)
 	}
 	print_leave(*cmd, split);
 	expand_db(cmd, split, *envl);
-	err = (exec_func[cmd_type(split[cmd->start].str, split[cmd->start + 1].sep, cmd)])(cmd, split, envl);
+	err = (exec_func[cmd_type(split[cmd->start].str, \
+		split[cmd->start + 1].sep, cmd)])(cmd, split, envl);
 	if (PRINT_ALL == 0)
 		return ;
 	ft_printf("\terr = %d\n", err);
