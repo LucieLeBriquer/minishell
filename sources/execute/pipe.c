@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:37:45 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 19:48:51 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 23:48:33 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void		pipe_recursive(t_tree *tree, t_split *split, t_list **envl)
 	{
 		pipe(pfd);
 		if (g_print_all == 1)
-			ft_printf("create pipe [%d,%d]\n", pfd[0], pfd[1]);
+			ft_printf("%screate pipe [%d,%d]%s\n", GREY, pfd[0], pfd[1], WHITE);
 		tree->left->info->output = pfd[1];
 		fill_subtree_fd(tree->right, 0, pfd[0]);
 	}

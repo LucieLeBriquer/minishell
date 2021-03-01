@@ -6,11 +6,18 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:39:04 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 19:06:11 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 23:26:32 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	print_title(char *s)
+{
+	ft_putstr(COLOR);
+	ft_putstr(SQUARE);
+	ft_putstr(s);
+}
 
 void	print_parsed_command(t_split *split)
 {
@@ -18,7 +25,8 @@ void	print_parsed_command(t_split *split)
 
 	if (g_print_all == 0)
 		return ;
-	ft_printf("\033[33mPARSING\033[0m\n");
+	print_title("PARSING\n");
+	ft_putstr(WHITE);
 	i = 0;
 	while (split[i].str)
 	{
@@ -33,7 +41,9 @@ void	print_child_end(int status)
 {
 	if (g_print_all == 0)
 		return ;
-	ft_printf("\033[32mchild process finished [%d]\033[0m\n", status);
+	ft_putstr("\n");
+	print_title("DONE");
+	ft_printf("\t\t%d\n\n", status);
 }
 
 void	print_leave(t_info cmd, t_split *split)
@@ -42,12 +52,15 @@ void	print_leave(t_info cmd, t_split *split)
 
 	if (g_print_all == 0)
 		return ;
-	ft_printf("\033[33mEXECUTE   input %2d   ", cmd.input);
-	ft_printf("output %2d\t\t", cmd.output);
+	ft_putstr("\n");
+	print_title("EXECUTE");
+	ft_printf("\t\xE2\xAE\x9f%2d   ", cmd.input);
+	ft_printf("\xE2\xAE\x9D%2d\t", cmd.output);
 	i = -1;
-	while (++i < cmd.number)
+	while (++i < cmd.number - 1)
 		ft_printf("%s ", split[cmd.start + i].str);
-	ft_printf("\n\033[0m");
+	ft_printf("%s\n", split[cmd.start + i].str);
+	ft_putstr(WHITE);
 }
 
 void	print_tree(t_tree *tree, t_split *split)

@@ -50,12 +50,11 @@
 - [done] rajouter un entier d'état pour savoir si la commande est exportée ou non ; est-ce que l'on doit modifier l'environnement extérieur ?
 - [done] faire les commandes built-in pour commencer
 ### En detail (a suppr au fur et a mesure)
-- penser à protéger les forks
-- `echo hey | wc -c` doesn't end
-- si une commande dans le pipeline est bloquante, pas d'arret, il faut close le bon fd j'imagine
 - pour le Ctrl+c, on doit return 130
 - plutôt que de faire des retours arbitraires faire un enum de types d'erreur à propager
 - gestion du dernier retour à faire : le mettre dans la variable begin ?
+- rebosser le export en faisant une liste chainee des variables à exporter
+- same pour les définitions de variables temporaires (suivies d'une commande ?)
 
 ## Notes
 

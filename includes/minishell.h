@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 22:01:27 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 23:50:06 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@
 # include <sys/types.h>
 # define NB_CMD 3
 # define SIZE_PATH 4096
+# define SQUARE "\xE2\x96\xA1 "
+# define WHITE "\033[0;0m"
+# define GREY "\033[0;30m"
+# define COLOR "\033[0;35m"
+# define BOLD "\033[1;35m"
 
 int		g_print_all;
 int		g_sigint;
@@ -125,5 +130,11 @@ char	**create_env_tab(t_list *envl, int exported);
 void	fill_expanded(char *fill, char *old, t_list *envl);
 void	expand(t_info *cmd, t_split *split, t_list *envl);
 int		size_var(char *str, t_list *envl, char **value);
+
+/*
+** Utilities
+*/
+
+void	print_title(char *s);
 
 #endif
