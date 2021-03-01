@@ -1,6 +1,6 @@
 CC			= clang -Wall -Wextra -Werror
 RM			= rm -rf
-NORME		= norminette
+NORME		= ~/.norminette_v2/norminette.rb
 NAME		= minishell 
 INCS_DIR	= ./includes/
 MAIN_INC	= -I$(INCS_DIR)
@@ -70,6 +70,6 @@ fclean		: clean
 re			: fclean all
 
 norme		:
-			@norminette $(SRCS)
+			@$(NORME) $(SRCS) includes/structures.h includes/minishell.h includes/libftfull.h
 
 .PHONY		: all clean fclean re docu

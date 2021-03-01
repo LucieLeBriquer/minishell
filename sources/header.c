@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:36:55 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/26 00:02:42 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 20:00:54 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	last_part(void)
 }
 
 void	header(void)
-{	
+{
 	ft_printf("\033[35m\n\n");
 	first_part();
 	second_part();

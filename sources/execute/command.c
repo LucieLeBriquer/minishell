@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   command.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/01 19:48:01 by lle-briq          #+#    #+#             */
+/*   Updated: 2021/03/01 19:48:08 by lle-briq         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static int	is_declaration(char *str, char sep)
@@ -40,7 +52,7 @@ static int	cmd_type(char *first_word, char sep, t_info *cmd)
 		return (EXECBIN);
 }
 
-void	execute_cmd(t_info *cmd, t_split *split, t_list **envl)
+void		execute_cmd(t_info *cmd, t_split *split, t_list **envl)
 {
 	t_exec	exec_func[NB_TYPES];
 	int		err;
@@ -64,7 +76,7 @@ void	execute_cmd(t_info *cmd, t_split *split, t_list **envl)
 	expand(cmd, split, *envl);
 	err = (exec_func[cmd_type(split[cmd->start].str, \
 		split[cmd->start + 1].sep, cmd)])(cmd, split, envl);
-	if (PRINT_ALL == 0)
+	if (g_print_all == 0)
 		return ;
 	ft_printf("\terr = %d\n", err);
 }

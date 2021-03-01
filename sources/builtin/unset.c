@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unset.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/01 19:41:45 by lle-briq          #+#    #+#             */
+/*   Updated: 2021/03/01 19:42:00 by lle-briq         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	unset_one(char *to_unset, t_list *envl)
@@ -20,7 +32,7 @@ void	unset_one(char *to_unset, t_list *envl)
 	}
 }
 
-int	ft_unset(t_info *cmd, t_split *split, t_list **envl)
+int		ft_unset(t_info *cmd, t_split *split, t_list **envl)
 {
 	int		i;
 	char	**args;

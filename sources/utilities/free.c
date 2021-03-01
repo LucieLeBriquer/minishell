@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/01 19:58:52 by lle-briq          #+#    #+#             */
+/*   Updated: 2021/03/01 19:59:48 by lle-briq         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	free_all(char *line, t_split *split)
@@ -30,4 +42,23 @@ void	free_tab(char **args)
 		i++;
 	}
 	free(args);
+}
+
+void	free_tree(t_tree *tree)
+{
+	t_info	*cmd;
+
+	if (!tree)
+		return ;
+	free_tree(tree->left);
+	free_tree(tree->right);
+	cmd = tree->info;
+	if (cmd->args)
+		free(cmd->args);
+	if (cmd->env)
+		free_tab(cmd->env);
+	if (cmd->spaces)
+		free(cmd->spaces);
+	free(cmd);
+	free(tree);
 }

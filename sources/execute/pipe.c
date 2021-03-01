@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:37:45 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 18:11:50 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 19:48:51 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	fill_subtree_fd(t_tree *tree, int out, int fd)
 	fill_subtree_fd(tree->left, out, fd);
 }
 
-void	pipe_recursive(t_tree *tree, t_split *split, t_list **envl)
+void		pipe_recursive(t_tree *tree, t_split *split, t_list **envl)
 {
 	int	pfd[2];
 	int	type;
@@ -42,7 +42,7 @@ void	pipe_recursive(t_tree *tree, t_split *split, t_list **envl)
 	else
 	{
 		pipe(pfd);
-		if (PRINT_ALL == 1)
+		if (g_print_all == 1)
 			ft_printf("create pipe [%d,%d]\n", pfd[0], pfd[1]);
 		tree->left->info->output = pfd[1];
 		fill_subtree_fd(tree->right, 0, pfd[0]);

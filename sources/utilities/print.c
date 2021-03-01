@@ -16,7 +16,7 @@ void	print_parsed_command(t_split *split)
 {
 	int		i;
 
-	if (PRINT_ALL == 0)
+	if (g_print_all == 0)
 		return ;
 	ft_printf("\033[33mPARSING\033[0m\n");
 	i = 0;
@@ -31,7 +31,7 @@ void	print_parsed_command(t_split *split)
 
 void	print_child_end(int status)
 {
-	if (PRINT_ALL == 0)
+	if (g_print_all == 0)
 		return ;
 	ft_printf("\033[32mchild process finished [%d]\033[0m\n", status);
 }
@@ -40,7 +40,7 @@ void	print_leave(t_info cmd, t_split *split)
 {
 	int	i;
 
-	if (PRINT_ALL == 0)
+	if (g_print_all == 0)
 		return ;
 	ft_printf("\033[33mEXECUTE   input %2d   ", cmd.input);
 	ft_printf("output %2d\t\t", cmd.output);

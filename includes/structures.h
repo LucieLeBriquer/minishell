@@ -6,15 +6,51 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 17:13:07 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 20:11:38 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
+# include <stdarg.h>
 # define NB_SEPS 6
 # define NB_TYPES 4
 # define NB_BUILTIN 7
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
+
+/*
+** libft
+*/
+
+typedef struct		s_list
+{
+	void			*content;
+	struct s_list	*next;
+}					t_list;
+
+typedef struct		s_print
+{
+	int				align;
+	int				zero;
+	int				field;
+	int				precision;
+	int				type;
+	int				fd;
+}					t_print;
+
+typedef struct		s_buffer
+{
+	int				size;
+	char			content[BUFFER_SIZE + 1];
+}					t_buffer;
+
+typedef int	(*t_func)(t_print, va_list);
+
+/*
+** minishell
+*/
 
 typedef struct		s_parse
 {
@@ -24,17 +60,12 @@ typedef struct		s_parse
 	int				state;
 }					t_parse;
 
-
 typedef struct		s_split
 {
 	char			*str;
 	char			sep;
 	int				space;
 }					t_split;
-
-/*
-** rename quote en sep
-*/
 
 typedef struct		s_env
 {
@@ -65,14 +96,12 @@ typedef struct		s_tree
 	struct s_tree	*right;
 }					t_tree;
 
-
-typedef int (*t_exec)(t_info *, t_split *, t_list **);
+typedef int	(*t_exec)(t_info *, t_split *, t_list **);
 
 enum	{CMD, PIPE, LEFT, RIGHT, RRIGHT, SEMIC};
 enum	{BUILTIN, EXECUTABLE, DECLARATION, EXECBIN};
 enum	{ECHO, CD, PWD, EXPORT, UNSET, ENV, EXIT};
 enum	{FORK_FAIL = -2, ALLOCATION_FAIL = -3};
 enum	{RESET, SPACE, QUOTE, DB_QUOTE, REDIR, OPERATOR};
-
 
 #endif

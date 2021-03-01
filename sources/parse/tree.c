@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tree.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/01 19:57:39 by lle-briq          #+#    #+#             */
+/*   Updated: 2021/03/01 19:57:53 by lle-briq         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static int	is_node(char c)
@@ -9,7 +21,7 @@ static int	is_node(char c)
 	return (0);
 }
 
-void	fill_root(t_tree *tree, t_tree *root)
+void		fill_root(t_tree *tree, t_tree *root)
 {
 	if (!tree)
 		return ;
@@ -18,7 +30,7 @@ void	fill_root(t_tree *tree, t_tree *root)
 	fill_root(tree->right, root);
 }
 
-int	previous_end_with_slash(t_split *split, int i)
+int			previous_end_with_slash(t_split *split, int i)
 {
 	char	*last;
 
@@ -30,7 +42,7 @@ int	previous_end_with_slash(t_split *split, int i)
 	return (0);
 }
 
-void	tree_final(t_tree **tree, t_tree *last_node, int i[2], char *line)
+void		tree_final(t_tree **tree, t_tree *last_node, int i[2], char *line)
 {
 	if (last_node)
 		last_node->right = create_leave(i[1], i[0] - i[1], line);
@@ -39,7 +51,7 @@ void	tree_final(t_tree **tree, t_tree *last_node, int i[2], char *line)
 	fill_root(*tree, *tree);
 }
 
-t_tree	*create_tree(t_split *split, char *line)
+t_tree		*create_tree(t_split *split, char *line)
 {
 	t_tree	*tree;
 	t_tree	*last_node;

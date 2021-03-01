@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:19:12 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 19:27:52 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 20:00:16 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	expand_one(t_split *split, int i, t_list *envl)
 	free(old);
 }
 
-void	expand(t_info *cmd, t_split *split, t_list *envl)
+void		expand(t_info *cmd, t_split *split, t_list *envl)
 {
 	int	i;
 

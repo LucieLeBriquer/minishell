@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   useful.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/01 19:51:33 by lle-briq          #+#    #+#             */
+/*   Updated: 2021/03/01 19:52:16 by lle-briq         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-int	number_of_args(char **args)
+int		number_of_args(char **args)
 {
 	int	i;
 
@@ -10,7 +22,7 @@ int	number_of_args(char **args)
 	return (i);
 }
 
-int	authorized_char(char *s)
+int		authorized_char(char *s)
 {
 	int	i;
 
@@ -37,7 +49,7 @@ char	**create_tab_args(t_info *cmd, t_split *split)
 	i = 0;
 	j = 0;
 	while (j < cmd->number)
-	{	
+	{
 		c = split[cmd->start + j].sep;
 		if (c == 'd' || c == '>' || c == '<')
 			j++;
@@ -52,7 +64,7 @@ char	**create_tab_args(t_info *cmd, t_split *split)
 	return (args);
 }
 
-int	*create_tab_spaces(t_info *cmd, t_split *split)
+int		*create_tab_spaces(t_info *cmd, t_split *split)
 {
 	int		*spaces;
 	char	c;
@@ -63,7 +75,7 @@ int	*create_tab_spaces(t_info *cmd, t_split *split)
 	i = 0;
 	j = 0;
 	while (j < cmd->number)
-	{	
+	{
 		c = split[cmd->start + j].sep;
 		if (c == 'd' || c == '>' || c == '<')
 			j++;
@@ -78,7 +90,7 @@ int	*create_tab_spaces(t_info *cmd, t_split *split)
 	return (spaces);
 }
 
-int	is_path(char *word)
+int		is_path(char *word)
 {
 	int	i;
 

@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:36:55 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 17:39:03 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 20:01:34 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,15 @@ void	waiting_command(t_list **envl)
 	free(line);
 }
 
-int	main(int argc, char **argv, char **env)
+int		main(int argc, char **argv, char **env)
 {
 	t_list	*envl;
 
 	(void)argv;
 	if (argc > 1)
-		PRINT_ALL = 0;
+		g_print_all = 0;
 	else
-		PRINT_ALL = 1;
+		g_print_all = 1;
 	header();
 	parse_env(&envl, env);
 	waiting_command(&envl);

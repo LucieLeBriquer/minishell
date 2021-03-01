@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/01 19:39:28 by lle-briq          #+#    #+#             */
+/*   Updated: 2021/03/01 19:42:22 by lle-briq         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static void	print_args(char **args, int *spaces, int option, int i)
@@ -29,7 +41,7 @@ static int	option_echo(t_info *cmd, t_split *split)
 	return (i);
 }
 
-int	ft_echo(t_info *cmd, t_split *split, t_list **envl)
+int			ft_echo(t_info *cmd, t_split *split, t_list **envl)
 {
 	int		i;
 	int		pid;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export_sorted.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/01 19:41:31 by lle-briq          #+#    #+#             */
+/*   Updated: 2021/03/01 19:42:15 by lle-briq         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static void	*copy_entry(void *entry)
@@ -27,7 +39,7 @@ static int	cmp_entry(void *data1, void *data2)
 	return (0);
 }
 
-int	print_sorted(t_list *envl, t_info *cmd)
+int			print_sorted(t_list *envl, t_info *cmd)
 {
 	t_list	*sorted;
 	int		pid;

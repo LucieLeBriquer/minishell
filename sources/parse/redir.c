@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 18:39:05 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 18:42:14 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 19:57:26 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	fill_app(t_info *cmd, t_split *split, int i)
 	return (0);
 }
 
-int	update_in_out(t_info *cmd, t_split *split)
+int			update_in_out(t_info *cmd, t_split *split)
 {
 	int	i;
 

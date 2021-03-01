@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:06:38 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 19:06:53 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 19:44:55 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,15 @@ static void	export_one(char *to_export, t_list *envl)
 	save->next = new;
 }
 
-int	ft_export(t_info *cmd, t_split *split, t_list **envl)
+static void	unvalid_identifier(char *str, int *ret)
+{
+	ft_putstr_fd("minishell: export: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(": not a valid identifier\n", 2);
+	*ret = 1;
+}
+
+int			ft_export(t_info *cmd, t_split *split, t_list **envl)
 {
 	int		i;
 	char	**args;
@@ -67,11 +75,7 @@ int	ft_export(t_info *cmd, t_split *split, t_list **envl)
 		if (authorized_char(args[i]))
 			export_one(args[i], *envl);
 		else
-		{
-			ft_printf_fd(2, "minishell: export: '%s':\
-				not a valid identifier\n", args[i]);
-			ret = 1;
-		}
+			unvalid_identifier(args[i], &ret);
 		i++;
 	}
 	free(args);

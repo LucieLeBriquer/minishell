@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/01 19:39:32 by lle-briq          #+#    #+#             */
+/*   Updated: 2021/03/01 19:42:31 by lle-briq         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	print_envl(t_list *envl, int declare)
@@ -24,7 +36,7 @@ void	print_envl(t_list *envl, int declare)
 	}
 }
 
-int	ft_env(t_info *cmd, t_split *split, t_list **envl)
+int		ft_env(t_info *cmd, t_split *split, t_list **envl)
 {
 	int		pid;
 

@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:38:48 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 18:34:12 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 19:48:15 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	size_of_list(t_list *list, int exported)
 	return (i);
 }
 
-char	**create_env_tab(t_list *envl, int exported)
+char		**create_env_tab(t_list *envl, int exported)
 {
 	int		size;
 	int		i;
