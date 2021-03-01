@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/02 16:08:17 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/25 16:49:29 by lle-briq         ###   ########.fr       */
+/*   Created: 2021/03/01 17:37:50 by lle-briq          #+#    #+#             */
+/*   Updated: 2021/03/01 17:37:51 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,40 +23,39 @@ static int	free_split(t_split *split, int i)
 	return (-1);
 }
 
-static int	fill_words(t_split *split, int words, char *command)
+static void	fill_one_word(t_split word, int word_len, const char *cmd)
 {
+	ft_strlcpy(word.str, cmd, word_len + 1);
+	trim_seps(word);
+	word.space = 0;
+	word.str[word_len + 1] = '\0';
+}
+
+static int	fill_words(t_split *split, int words, char *command)
+{	
 	int		i;
 	int		k;
-	int		word_len;
 	char	sep;
 	int		size;
+	int		word_len;
 
+	size = ft_strlen(command);
 	i = 0;
 	k = 0;
-	size = ft_strlen(command);
 	while (i < words)
 	{
-		word_len = len_of_word(command + k, &sep);
-		split[i].quote = sep;
+		while (ft_isspace(command[k]))
+			k++;
+		word_len = len_of_word(command, k, &sep);
+		split[i].sep = sep_converter(sep, command, k);
 		split[i].str = malloc((word_len + 2) * sizeof(char));
 		if (!split[i].str)
 			return (free_split(split, i));
-		ft_strlcpy(split[i].str, command + k, word_len + 1);
-		split[i].space = 0;
-		if (k + word_len < size && command[k + word_len] == ' ')
+		fill_one_word(split[i], word_len, command + k);
+		if (k + word_len < size && ft_isspace(command[k + word_len]))
 			split[i].space = 1;
-		split[i].str[word_len + 1] = '\0';
-		trim_useless(split[i]);
 		k += word_len;
 		i++;
-	}
-	while (--i >= 0)
-	{
-		if (split[i].str[0] == '\0')
-		{
-			free(split[i].str);
-			split[i].str = NULL;
-		}
 	}
 	return (0);
 }
@@ -67,13 +66,11 @@ t_split	*parse_command(char *command, int *err)
 	int		words;
 	t_split	*split;
 
-	trim_spaces_right(command);
-	trim_spaces_left(command);
 	*err = 0;
 	l = ft_strlen(command);
 	if (l == 0)
 		return (NULL);
-	words = nb_words(command, l);
+	words = nb_words(command);
 	*err = 1;
 	if (words < 0)
 		return (NULL);

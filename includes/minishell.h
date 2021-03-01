@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/25 23:50:00 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 17:32:16 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,6 @@ int		PRINT_ALL;
 void	simple_parse(char *command);
 t_split	*parse_command(char *command, int *err);
 void	print_parse_quotes(char *command);
-void	trim_spaces_right(char *s);
-void	trim_spaces_left(char *s);
-void	trim_useless(t_split split);
-int		nb_words(char *s, int l);
-int		len_of_word(char *s, char *sep);
 void	parse_env(t_list **env_list, char **env);
 void	print_entry(void *ventry);
 void	free_entry(void *ventry);
@@ -91,5 +86,26 @@ int		ft_exit(t_info *, t_split *, t_list **envl);
 int		ft_export(t_info *, t_split *, t_list **envl);
 int		ft_pwd(t_info *, t_split *, t_list **envl);
 int		ft_unset(t_info *, t_split *, t_list **envl);
+
+/*
+** Parsing
+*/
+
+int		state_space(char *command, int i, t_parse *p);
+int		state_quote(char *command, int i, t_parse *p);
+int		state_db_quote(char *command, int i, t_parse *p);
+int		state_operator(char *command, int i, t_parse *p);
+int		state_reset(char *command, int i, t_parse *p);
+int		nb_words(char *s);
+int		len_of_word(char *s, int i, char *sep);
+void	trim_seps(t_split split);
+int		new_state(char *command, int i);
+int		is_state_ok(t_parse *p);
+int		is_spaceend(char c);
+int		is_operator(char c);
+char	sep_converter(char c, char *command, int k);
+void	trim_seps(t_split split);
+
+
 
 #endif

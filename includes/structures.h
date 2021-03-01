@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/27 21:49:09 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 17:13:07 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,16 @@
 typedef struct		s_parse
 {
 	char			sep;
-	int				nb_words;
+	int				len_word;
+	int				nb;
 	int				state;
 }					t_parse;
+
 
 typedef struct		s_split
 {
 	char			*str;
-	char			quote;
+	char			sep;
 	int				space;
 }					t_split;
 
@@ -70,5 +72,7 @@ enum	{CMD, PIPE, LEFT, RIGHT, RRIGHT, SEMIC};
 enum	{BUILTIN, EXECUTABLE, DECLARATION, EXECBIN};
 enum	{ECHO, CD, PWD, EXPORT, UNSET, ENV, EXIT};
 enum	{FORK_FAIL = -2, ALLOCATION_FAIL = -3};
+enum	{RESET, SPACE, QUOTE, DB_QUOTE, REDIR, OPERATOR};
+
 
 #endif

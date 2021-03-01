@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:39:04 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/25 12:10:32 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 17:25:26 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_parsed_command(t_split *split)
 	i = 0;
 	while (split[i].str)
 	{
-		ft_printf("\t[%c] [%s]\n", split[i].quote, split[i].str);
+		ft_printf("\t[%c] [%d] [%s]\n", split[i].sep, split[i].space, split[i].str);
 		i++;
 	}
 	ft_printf("\n");

@@ -39,7 +39,7 @@ char	**create_tab_args(t_info *cmd, t_split *split)
 	j = 0;
 	while (j < cmd->number)
 	{	
-		c = split[cmd->start + j].quote;
+		c = split[cmd->start + j].sep;
 		if (c == 'd' || c == '>' || c == '<')
 			j++;
 		else
@@ -65,7 +65,7 @@ int	*create_tab_spaces(t_info *cmd, t_split *split)
 	j = 0;
 	while (j < cmd->number)
 	{	
-		c = split[cmd->start + j].quote;
+		c = split[cmd->start + j].sep;
 		if (c == 'd' || c == '>' || c == '<')
 			j++;
 		else

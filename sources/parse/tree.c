@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-static int	is_operator(char c)
+static int	need_new_node(char c)
 {
 	if (c == '|')
 		return (PIPE);
@@ -94,7 +94,7 @@ t_tree	*create_tree(t_split *split, char *line)
 	tree = NULL;
 	while (split[i].str)
 	{
-		type = is_operator(split[i].quote);
+		type = need_new_node(split[i].sep);
 		last_node = new_node;
 		if (type && !previous_end_with_slash(split, i))
 		{
@@ -123,7 +123,7 @@ void	print_tree(t_tree *tree, t_split *split)
 		return ;
 	print_tree(tree->left, split);
 	ft_printf("type : %d\t%d[%d]\t", tree->info->type, tree->info->start, tree->info->number);
-	ft_printf("operator : %c\t", split[tree->info->start].quote);
+	ft_printf("operator : %c\t", split[tree->info->start].sep);
 	i = -1;
 	while (++i < tree->info->number)
 		ft_printf("%s ", split[tree->info->start + i].str);

@@ -15,20 +15,21 @@ SRCS		=  $(addprefix sources/, \
 			execute/types.c \
 			execute/fork.c \
 			execute/command.c \
-			parse/count.c \
 			execute/execute.c \
 			execute/executable.c \
 			execute/useful.c \
 			execute/useful2.c \
+			parse/count.c \
+			parse/env.c \
 			parse/parse.c \
 			parse/redir.c \
-			parse/env.c \
+			parse/state.c \
+			parse/tree.c \
+			parse/useful.c \
 			reader/reader.c \
 			utilities/errors.c \
 			utilities/print.c \
 			utilities/free.c \
-			parse/tree.c \
-			parse/trim.c \
 			builtin/cd.c \
 			builtin/echo.c \
 			builtin/env.c \

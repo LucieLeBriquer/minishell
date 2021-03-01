@@ -7,14 +7,14 @@ int	update_in_out(t_info *cmd, t_split *split)
 	i = -1;
 	while (++i < cmd->number)
 	{
-		if (split[cmd->start + i].quote == '<')
+		if (split[cmd->start + i].sep == '<')
 		{
 			if (++i >= cmd->number || cmd->input != 0)
 				return (-1);
 			else
 				cmd->input = open(split[cmd->start + i].str, O_RDONLY);
 		}
-		else if (split[cmd->start + i].quote == '>')
+		else if (split[cmd->start + i].sep == '>')
 		{
 			if (++i >= cmd->number || cmd->output != 1)
 				return (-1);
@@ -22,7 +22,7 @@ int	update_in_out(t_info *cmd, t_split *split)
 				cmd->output = open(split[cmd->start + i].str, O_WRONLY |
 								O_CREAT | O_TRUNC, 0666);
 		}
-		else if (split[cmd->start + i].quote == 'd')
+		else if (split[cmd->start + i].sep == 'd')
 		{
 			if (++i >= cmd->number || cmd->output != 1)
 				return (-1);
