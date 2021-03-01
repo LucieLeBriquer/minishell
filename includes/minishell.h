@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 17:32:16 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 18:13:56 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,9 @@ int		is_operator(char c);
 char	sep_converter(char c, char *command, int k);
 void	trim_seps(t_split split);
 
+/*
+** Execute
+*/
 
-
+void	pipe_recursive(t_tree *tree, t_split *split, t_list **envl);
 #endif

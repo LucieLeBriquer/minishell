@@ -14,6 +14,14 @@ void	change_stdin_stdout(t_info *cmd)
 	}
 }
 
+void	close_unused_fd(t_info *cmd)
+{
+	if (cmd->input != 0)
+		close(cmd->input);
+	if (cmd->output != 1)
+		close(cmd->output);
+}
+
 char	*join_all_arguments(t_split *split, int start, int number)
 {
 	int		i;
