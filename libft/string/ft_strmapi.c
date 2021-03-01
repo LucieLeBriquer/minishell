@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 22:50:53 by lle-briq          #+#    #+#             */
-/*   Updated: 2020/12/30 14:50:09 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 20:32:33 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strmapi(const char *s, char (*f)(unsigned int, char))
 	if (!s)
 		return (NULL);
 	l = ft_strlen(s);
-	map = malloc((l + 1)*sizeof(char));
+	map = malloc((l + 1) * sizeof(char));
 	if (!map)
 		return (NULL);
 	while (++i < l)

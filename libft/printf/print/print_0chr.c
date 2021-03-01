@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 18:23:35 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/11 17:39:59 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 20:34:05 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	print_0chr(t_print param, va_list args)
 	size = 1;
 	if (param.field > 0)
 		size = param.field;
-	to_print = malloc((size + 1)*sizeof(char));
+	to_print = malloc((size + 1) * sizeof(char));
 	if (!to_print)
 		return (0);
 	i = -1;

@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 21:51:09 by lle-briq          #+#    #+#             */
-/*   Updated: 2020/12/30 15:12:34 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 20:35:24 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	fill_int(char **to_print, char *nb, t_print param, int size)
 	(*to_print)[size - 1] = '\0';
 }
 
-int	size_int(t_print param, char *nb_itoa)
+int		size_int(t_print param, char *nb_itoa)
 {
 	int		max1;
 	int		max2;

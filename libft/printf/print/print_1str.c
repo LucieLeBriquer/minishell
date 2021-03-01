@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 18:59:13 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/11 17:40:19 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 20:34:21 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	print_1str_null(t_print param)
 	return (size - 1);
 }
 
-int	print_1str(t_print param, va_list args)
+int			print_1str(t_print param, va_list args)
 {
 	char	*str;
 	char	*to_print;

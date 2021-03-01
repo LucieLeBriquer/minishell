@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 11:14:48 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/01/05 21:11:32 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 20:30:50 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	utox_size(unsigned int nb)
 	return (1 + utox_size(nb / 16));
 }
 
-char	*ft_utox(unsigned int n)
+char		*ft_utox(unsigned int n)
 {
 	char	*res;
 	char	*base;

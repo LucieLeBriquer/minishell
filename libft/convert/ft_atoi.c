@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 11:46:14 by lle-briq          #+#    #+#             */
-/*   Updated: 2020/12/30 14:37:00 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 20:30:17 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	is_space(char c)
 	return (0);
 }
 
-int	ft_atoi(const char *nptr)
+int			ft_atoi(const char *nptr)
 {
 	unsigned long long int	nb;
 	short int				sg;

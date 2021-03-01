@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 17:54:41 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/23 17:48:35 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 20:31:10 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	index_pos(int size)
 	return (size);
 }
 
-int	get_next_line(int fd, char **line)
+int			get_next_line(int fd, char **line)
 {
 	static t_buffer	buff;
 	int				i;

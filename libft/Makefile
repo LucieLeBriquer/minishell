@@ -3,9 +3,10 @@ CFLAGS		= -Wall -Wextra -Werror
 RM			= rm -rf
 NAME		= libft.a
 LIB			= ar rcs
+NORME		= ~/.norminette_v2/norminette.rb
 
 INCS_DIR	= includes/
-INCS		= $(addprefix $(INCS_DIR), libftfull.h)
+INCS		= $(addprefix $(INCS_DIR), libftfull.h libftstruct.h)
 
 SRCS		= convert/ft_atoi.c \
 			  convert/ft_itoa.c \
@@ -98,7 +99,7 @@ $(NAME)		: $(OBJS) $(INCS)
 			@$(LIB) $(NAME) $(OBJS)
 
 norme		:
-			@norminette $(SRCS) $(PRINT_SRCS) $(INCS)
+			@$(NORME) $(SRCS) $(PRINT_SRCS) $(INCS)
 
 clean:
 			@$(RM) $(OBJS)

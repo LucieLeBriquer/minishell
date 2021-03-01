@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 11:14:48 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/01/05 21:11:19 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 20:30:42 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	itoa_size(unsigned int nb, short int sg, unsigned int base)
 	return (1 + itoa_size(nb / base, sg, base));
 }
 
-char	*ft_utoct(unsigned int n)
+char		*ft_utoct(unsigned int n)
 {
 	char	*res;
 	char	*base;

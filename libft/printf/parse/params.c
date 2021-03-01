@@ -6,13 +6,13 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/28 18:24:44 by lle-briq          #+#    #+#             */
-/*   Updated: 2020/12/30 15:06:35 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 20:33:46 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftfull.h"
 
-void	init_param(t_print *param)
+void		init_param(t_print *param)
 {
 	param->align = 0;
 	param->zero = 0;

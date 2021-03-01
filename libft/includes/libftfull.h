@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 00:08:59 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/02/11 17:57:17 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 21:02:17 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include "libftstruct.h"
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 4095
 # endif
@@ -23,12 +24,6 @@
 /*
 ** libft
 */
-
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}					t_list;
 
 void		*ft_memset(void *s, int c, size_t n);
 void		*ft_bzero(void *s, size_t n);
@@ -92,12 +87,6 @@ int			ft_min(int a, int b);
 ** get_next_line
 */
 
-typedef struct s_buffer
-{
-	int		size;
-	char	content[BUFFER_SIZE + 1];
-}			t_buffer;
-
 char		*join_and_realloc(char *s, char *buf, size_t size);
 int			find_char_index(char *str, char c);
 int			get_next_line(int fd, char **line);
@@ -105,18 +94,6 @@ int			get_next_line(int fd, char **line);
 /*
 ** ft_printf
 */
-
-typedef struct s_print
-{
-	int		align;
-	int		zero;
-	int		field;
-	int		precision;
-	int		type;
-	int		fd;
-}			t_print;
-
-typedef int	(*t_func)(t_print, va_list);
 
 int			size_int(t_print param, char *nb_itoa);
 int			size_ptr(unsigned long ptr, int prec);

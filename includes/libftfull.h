@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 00:08:59 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 20:07:26 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 21:02:17 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "structures.h"
+# include "libftstruct.h"
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 4095
+# endif
 
 /*
 ** libft

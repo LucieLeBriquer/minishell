@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 11:10:12 by lle-briq          #+#    #+#             */
-/*   Updated: 2020/12/30 14:44:47 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 20:33:13 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	rec_putnbr_fd(unsigned int nb, int fd, int sg)
 	ft_putchar_fd(nb % 10 + '0', fd);
 }
 
-void	ft_putnbr_fd(int n, int fd)
+void		ft_putnbr_fd(int n, int fd)
 {
 	short int		sg;
 

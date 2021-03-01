@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 17:54:53 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/01/05 21:12:38 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 20:31:51 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	*ft_realloc(char *str, size_t len)
 	return (new);
 }
 
-char	*join_and_realloc(char *s, char *buf, size_t size)
+char		*join_and_realloc(char *s, char *buf, size_t size)
 {
 	size_t	i;
 	size_t	j;
@@ -56,7 +56,7 @@ char	*join_and_realloc(char *s, char *buf, size_t size)
 	return (s);
 }
 
-int	find_char_index(char *str, char c)
+int			find_char_index(char *str, char c)
 {
 	int		i;
 

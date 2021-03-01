@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 11:16:47 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/01/05 21:15:33 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 20:32:44 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	issep(char c, const char *charset)
 	return (0);
 }
 
-char	*ft_strtrim(const char *s1, const char *set)
+char		*ft_strtrim(const char *s1, const char *set)
 {
 	size_t	size;
 	size_t	i;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_ptr.c                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 11:46:14 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/01/03 17:00:13 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 20:36:05 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_ptoa(unsigned long ptr, int size)
 	int		i;
 
 	base = "0123456789abcdef";
-	res = malloc((size + 1)*sizeof(char));
+	res = malloc((size + 1) * sizeof(char));
 	if (!res)
 		return (NULL);
 	res[size] = '\0';
@@ -34,7 +34,7 @@ char	*ft_ptoa(unsigned long ptr, int size)
 	return (res);
 }
 
-int	size_ptr(unsigned long ptr, int prec)
+int		size_ptr(unsigned long ptr, int prec)
 {
 	int		i;
 
@@ -49,7 +49,7 @@ int	size_ptr(unsigned long ptr, int prec)
 	return (ft_max(i, prec) + 2);
 }
 
-int	min_not_neg(int a, int b)
+int		min_not_neg(int a, int b)
 {
 	if (a == -1)
 		return (b);

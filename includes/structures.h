@@ -6,51 +6,20 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 20:11:38 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 21:26:16 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 # include <stdarg.h>
+# include "libftstruct.h"
 # define NB_SEPS 6
 # define NB_TYPES 4
 # define NB_BUILTIN 7
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
 # endif
-
-/*
-** libft
-*/
-
-typedef struct		s_list
-{
-	void			*content;
-	struct s_list	*next;
-}					t_list;
-
-typedef struct		s_print
-{
-	int				align;
-	int				zero;
-	int				field;
-	int				precision;
-	int				type;
-	int				fd;
-}					t_print;
-
-typedef struct		s_buffer
-{
-	int				size;
-	char			content[BUFFER_SIZE + 1];
-}					t_buffer;
-
-typedef int	(*t_func)(t_print, va_list);
-
-/*
-** minishell
-*/
 
 typedef struct		s_parse
 {

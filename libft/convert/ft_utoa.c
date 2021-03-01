@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 11:14:48 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/01/05 21:11:04 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/01 20:30:37 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	utoa_size(unsigned int nb)
 	return (1 + utoa_size(nb / 10));
 }
 
-char	*ft_utoa(unsigned int n)
+char		*ft_utoa(unsigned int n)
 {
 	char			*res;
 	int				i;
