@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 23:50:06 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/02 19:55:27 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libftfull.h"
 # include <stdlib.h>
 # include <signal.h>
+# include <errno.h>
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <sys/types.h>

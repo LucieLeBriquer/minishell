@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 17:37:50 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 19:57:13 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/02 20:09:04 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,6 @@ t_split		*parse_command(char *command, int *err)
 	if (fill_words(split, words, command) < 0)
 		return (NULL);
 	split[words].str = NULL;
+	split[words].sep = '\0';
 	return (split);
 }

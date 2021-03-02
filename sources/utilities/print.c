@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:39:04 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 23:26:32 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/02 20:05:35 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	print_leave(t_info cmd, t_split *split)
 	ft_printf("\t\xE2\xAE\x9f%2d   ", cmd.input);
 	ft_printf("\xE2\xAE\x9D%2d\t", cmd.output);
 	i = -1;
-	while (++i < cmd.number - 1)
+	while (++i + 1 < cmd.number)
 		ft_printf("%s ", split[cmd.start + i].str);
 	ft_printf("%s\n", split[cmd.start + i].str);
 	ft_putstr(WHITE);
