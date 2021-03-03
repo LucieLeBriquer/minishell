@@ -41,9 +41,11 @@ SRCS		=  $(addprefix sources/, \
 			builtin/export_sorted.c \
 			builtin/pwd.c \
 			builtin/unset.c \
+			expand/declare.c \
 			expand/main.c \
-			expand/useful.c \
 			expand/replace.c \
+			expand/useful.c \
+			expand/variables.c \
 			main.c )
  
 OBJS		= $(SRCS:.c=.o)

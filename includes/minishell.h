@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/02 19:55:27 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/03 18:29:07 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,11 @@ void	header(void);
 void	print_leave(t_info cmd, t_split *split);
 
 /*
-** a ajouter dans la libft
+** Environment
 */
+
+int	multiple_var(t_info cmd, t_list **envl);
+int	export_all(char **vars, t_list **envl);
 
 /*
 ** Built-in

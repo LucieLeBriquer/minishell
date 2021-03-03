@@ -6,13 +6,13 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:06:38 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 19:44:55 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/03 17:11:52 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	declare(char *to_export, t_env *var)
+/*static void	declare(char *to_export, t_env *var)
 {
 	if (ft_strchr(to_export, '='))
 	{
@@ -54,32 +54,16 @@ static void	unvalid_identifier(char *str, int *ret)
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd(": not a valid identifier\n", 2);
 	*ret = 1;
-}
+}*/
 
 int			ft_export(t_info *cmd, t_split *split, t_list **envl)
 {
-	int		i;
-	char	**args;
-	int		ret;
-
-	args = create_tab_args(cmd, split);
-	if (number_of_args(args) <= 1)
-	{
-		free(args);
+	cmd->args = create_tab_args(cmd, split);
+	cmd->nb_args = number_of_args(cmd->args);
+	cmd->spaces = create_tab_spaces(cmd, split);
+	if (number_of_args(cmd->args) <= 1)
 		return (print_sorted(*envl, cmd));
-	}
-	i = 1;
-	ret = 0;
-	while (args[i])
-	{
-		if (authorized_char(args[i]))
-			export_one(args[i], *envl);
-		else
-			unvalid_identifier(args[i], &ret);
-		i++;
-	}
-	free(args);
-	return (ret);
+	return (multiple_var(*cmd, envl));
 }
 
 /*
