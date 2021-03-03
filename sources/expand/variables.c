@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   variables.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/03 18:52:00 by lle-briq          #+#    #+#             */
+/*   Updated: 2021/03/03 18:52:26 by lle-briq         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-int		count_var(t_info cmd)
+static int	count_var(t_info cmd)
 {
 	int	nb_var;
 	int	i;
@@ -14,18 +26,6 @@ int		count_var(t_info cmd)
 		nb_var++;
 	}
 	return (nb_var);
-}
-
-void	print_tab_var(char **var)
-{
-	int	i;
-
-	i = 0;
-	while (var[i])
-	{
-		ft_printf("[%s]\n", var[i]);
-		i++;
-	}
 }
 
 static void	fill_vars(t_info cmd, int nb_var, char **vars)
@@ -57,7 +57,7 @@ static void	fill_vars(t_info cmd, int nb_var, char **vars)
 	vars[nb_var] = NULL;
 }
 
-int		multiple_var(t_info cmd, t_list **envl)
+int			multiple_var(t_info cmd, t_list **envl)
 {
 	int		nb_var;
 	char	**vars;
@@ -69,7 +69,6 @@ int		multiple_var(t_info cmd, t_list **envl)
 	if (!vars)
 		return (-1);
 	fill_vars(cmd, nb_var, vars);
-	print_tab_var(vars);
 	err = export_all(vars, envl);
 	free_tab(vars);
 	return (err);

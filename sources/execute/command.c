@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:48:01 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/02 20:18:09 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/03 18:51:08 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,11 @@ void		execute_cmd(t_info *cmd, t_split *split, t_list **envl)
 	if (update_in_out(cmd, split) < 0)
 	{
 		if (cmd->err)
-			ft_printf("minishell: %s: %s\n", cmd->file_error, strerror(cmd->err));
+			ft_printf("minishell: %s: %s\n", cmd->file_error,\
+				strerror(cmd->err));
 		else
-			ft_putstr("minishell: syntax error near unexpected token `newline'\n");
+			ft_putstr("minishell: syntax error near unexpected token \
+			`newline'\n");
 		return ;
 	}
 	print_leave(*cmd, split);

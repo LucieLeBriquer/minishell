@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   declare.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/03 18:49:52 by lle-briq          #+#    #+#             */
+/*   Updated: 2021/03/03 18:51:54 by lle-briq         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	add_new_var(char *var, char *value, t_list **envl, int exported)
@@ -41,7 +53,6 @@ int	add_env(char *var, char *value, t_list **envl, int exported)
 		env = env->next;
 	}
 	return (add_new_var(var, value, envl, exported));
-	
 }
 
 int	export_one(char *var, t_list **envl)
@@ -64,6 +75,10 @@ int	export_one(char *var, t_list **envl)
 	}
 	if (authorized_char(varname))
 		return (add_env(varname, value, envl, 2));
+	invalid_identifier(varname);
+	free(varname);
+	if (value)
+		free(value);
 	return (-2);
 }
 

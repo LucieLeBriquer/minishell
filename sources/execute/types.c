@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:49:15 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/02 20:39:47 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/03 18:50:33 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ int			exec_declaration(t_info *cmd, t_split *split, t_list **envl)
 {
 	t_list	*new;
 
-	//if (cmd->output != 1)
-	//	return (0);
 	new = *envl;
 	while (new)
 	{
