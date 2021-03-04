@@ -28,7 +28,9 @@ SRCS		=  $(addprefix sources/, \
 			parse/state.c \
 			parse/tree.c \
 			parse/node.c \
+			parse/trim.c \
 			parse/useful.c \
+			execute/args.c \
 			reader/reader.c \
 			utilities/errors.c \
 			utilities/print.c \

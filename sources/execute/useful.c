@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:51:33 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 19:52:16 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/04 13:15:41 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ char	**create_tab_args(t_info *cmd, t_split *split)
 	int		j;
 
 	args = malloc((cmd->number + 1) * sizeof(char *));
+	if (!args)
+		return (NULL);
 	i = 0;
 	j = 0;
 	while (j < cmd->number)
@@ -55,7 +57,7 @@ char	**create_tab_args(t_info *cmd, t_split *split)
 			j++;
 		else
 		{
-			args[i] = split[cmd->start + j].str;
+			args[i] = ft_strdup(split[cmd->start + j].str);
 			i++;
 		}
 		j++;

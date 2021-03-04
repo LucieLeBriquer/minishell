@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 17:37:50 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/02 20:09:04 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/04 14:28:11 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,24 @@ static int	fill_words(t_split *split, int words, char *command)
 	return (0);
 }
 
+static void	add_virtual_spaces(t_split *split, int words)
+{
+	int		i;
+	char	c;
+
+	i = -1;
+	while (++i < words)
+	{
+		c = split[i].sep;
+		if ((c == '>' || c == '<' || c == 'd'))
+		{
+			if (i > 0)
+				split[i - 1].space = 1;
+			split[i].space = 1;
+		}
+	}
+}
+
 t_split		*parse_command(char *command, int *err)
 {
 	int		l;
@@ -67,6 +85,7 @@ t_split		*parse_command(char *command, int *err)
 	t_split	*split;
 
 	*err = 0;
+	trim_spaces(command);
 	l = ft_strlen(command);
 	if (l == 0)
 		return (NULL);
@@ -82,5 +101,6 @@ t_split		*parse_command(char *command, int *err)
 		return (NULL);
 	split[words].str = NULL;
 	split[words].sep = '\0';
+	add_virtual_spaces(split, words);
 	return (split);
 }

@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:38:48 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 19:48:15 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/04 13:17:42 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,6 @@ char		**create_env_tab(t_list *envl, int exported)
 		}
 		envl = envl->next;
 	}
-	env[size] = NULL;
+	env[i] = NULL;
 	return (env);
 }

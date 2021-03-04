@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/03 18:50:14 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/04 14:28:54 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ int		state_reset(char *command, int i, t_parse *p);
 int		nb_words(char *s);
 int		len_of_word(char *s, int i, char *sep);
 void	trim_seps(t_split split);
+void	trim_spaces(char *s);
 int		new_state(char *command, int i);
 int		is_state_ok(t_parse *p);
 int		is_spaceend(char c);
@@ -126,6 +127,7 @@ t_tree	*create_leave(int start, int number, char *line);
 */
 
 void	pipe_recursive(t_tree *tree, t_split *split, t_list **envl);
+int		join_words(t_info *cmd, t_split *split);
 
 /*
 ** Expand

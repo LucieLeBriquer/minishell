@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:58:52 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 19:59:48 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/04 13:20:24 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,13 @@ void	free_tree(t_tree *tree)
 	free_tree(tree->right);
 	cmd = tree->info;
 	if (cmd->args)
-		free(cmd->args);
+		free_tab(cmd->args);
 	if (cmd->env)
 		free_tab(cmd->env);
 	if (cmd->spaces)
 		free(cmd->spaces);
+	if (cmd->first_word)
+		free(cmd->first_word);
 	free(cmd);
 	free(tree);
 }

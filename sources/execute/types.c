@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:49:15 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/03 18:50:33 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/03 19:09:22 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,11 @@ int			exec_executable(t_info *cmd, t_split *split, t_list **envl)
 {
 	int		fd;
 
+	errno = 0;
 	fd = open(split[cmd->start].str, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_printf("minishell: %s: %s\n", split[cmd->start].str, strerror(2));
+		ft_printf("minishell: %s: %s\n", split[cmd->start].str, strerror(errno));
 		return (-1);
 	}
 	close(fd);
