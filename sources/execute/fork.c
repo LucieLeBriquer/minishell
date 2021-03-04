@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:48:35 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/04 17:06:18 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/04 23:35:31 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	fork_and_exec(t_info *cmd, t_list *envl, char *file)
 	else if (pid == 0)
 	{
 		change_stdin_stdout(cmd);
+		errno = 0;
 		if (file)
 			return (execve(file, cmd->argv, cmd->env));
 		else

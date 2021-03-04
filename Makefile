@@ -9,7 +9,7 @@ LIB_DIR		= ./libft/
 LIB_INC		= -I$(LIB_DIR)includes/
 LIB_NAME	= $(LIB_DIR)libft.a
 
-INCS		= $(addprefix $(INCS_DIR), minishell.h)
+INCS		= $(addprefix $(INCS_DIR), minishell.h structures.h)
 
 SRCS		=  $(addprefix sources/, \
 			execute/types.c \
@@ -75,4 +75,4 @@ norme		:
 			@$(NORME) $(SRCS) includes/structures.h includes/minishell.h includes/libftfull.h
 			@$(MAKE) norme --silent -C $(LIB_DIR)
 
-.PHONY		: all clean fclean re docu
+.PHONY		: all clean fclean re
