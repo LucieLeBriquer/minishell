@@ -6,30 +6,11 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:38:58 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 19:58:13 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/04 18:02:40 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	trim_seps(t_split split)
-{
-	int	i;
-	int	l;
-
-	if (split.sep == '\'' || split.sep == '\"')
-	{
-		i = 0;
-		l = ft_strlen(split.str);
-		while (i + 2 < l)
-		{
-			split.str[i] = split.str[i + 1];
-			i++;
-		}
-		split.str[i] = '\0';
-		split.str[i + 1] = '\0';
-	}
-}
 
 char	sep_converter(char c, char *command, int k)
 {

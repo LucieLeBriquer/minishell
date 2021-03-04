@@ -6,20 +6,20 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 18:49:52 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/04 18:00:09 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/04 18:07:09 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	invalid_identifier(char *str)
+void		invalid_identifier(char *str)
 {
 	ft_putstr_fd("minishell: export: ", 2);
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd(": not a valid identifier\n", 2);
-};
+}
 
-int	add_new_var(char *var, char *value, t_list **envl, int exported)
+int			add_new_var(char *var, char *value, t_list **envl, int exported)
 {
 	t_list	*new;
 	t_env	*cont;
@@ -46,7 +46,7 @@ int	add_new_var(char *var, char *value, t_list **envl, int exported)
 	return (0);
 }
 
-int	add_env(char *var, char *value, t_list **envl, int exported)
+int			add_env(char *var, char *value, t_list **envl, int exported)
 {
 	t_list	*env;
 
@@ -97,7 +97,7 @@ static int	export_one(char *var, t_list **envl, int exported)
 	return (-2);
 }
 
-int	export_all(char **vars, t_list **envl, int exported)
+int			export_all(char **vars, t_list **envl, int exported)
 {
 	int	i;
 	int	err;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   args.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/04 18:02:50 by lle-briq          #+#    #+#             */
+/*   Updated: 2021/03/04 18:04:38 by lle-briq         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static int	count_arg(t_info cmd, t_split *split)
@@ -23,7 +35,6 @@ static void	fill_args(t_info cmd, t_split *split)
 	int		j;
 	int		end;
 	char	*current;
-	char	*tmp;
 
 	i = -1;
 	j = 0;
@@ -33,9 +44,9 @@ static void	fill_args(t_info cmd, t_split *split)
 		current = ft_strdup("");
 		while (j < cmd.number && !end)
 		{
-			tmp = current;
-			current = ft_strjoin(tmp, split[cmd.start + j].str);
-			free(tmp);
+			cmd.args[i] = current;
+			current = ft_strjoin(cmd.args[i], split[cmd.start + j].str);
+			free(cmd.args[i]);
 			if (split[cmd.start + j].space)
 				end = 1;
 			j++;
