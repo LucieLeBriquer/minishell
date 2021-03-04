@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:58:45 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/04 17:51:33 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/04 18:22:37 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_info	*init_node(int i, int type, int number, char *line)
 	info->line = line;
 	info->root = NULL;
 	info->args = NULL;
+	info->argv = NULL;
 	info->nb_args = 1;
 	info->env = NULL;
 	info->spaces = NULL;
