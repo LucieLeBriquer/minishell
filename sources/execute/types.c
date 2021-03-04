@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:49:15 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/04 17:50:37 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/04 23:32:34 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ int	exec_executable(t_info *cmd, t_list **envl)
 		return (-1);
 	}
 	close(fd);
-	fork_and_exec(cmd, *envl, NULL);
-	return (0);
+	return (fork_and_exec(cmd, *envl, NULL));
 }
 
 int	exec_declaration(t_info *cmd, t_list **envl)
@@ -69,13 +68,14 @@ int	exec_declaration(t_info *cmd, t_list **envl)
 int	exec_execbin(t_info *cmd, t_list **envl)
 {
 	char	*file;
+	int		err;
 
 	if (open_executable(cmd, *envl, &file) < 0)
 	{
 		ft_printf("minishell: %s: command not found\n", cmd->args[0]);
 		return (-1);
 	}
-	fork_and_exec(cmd, *envl, file);
+	err = fork_and_exec(cmd, *envl, file);
 	free(file);
-	return (0);
+	return (err);
 }

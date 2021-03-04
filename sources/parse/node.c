@@ -6,13 +6,26 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:58:45 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/04 22:41:52 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/04 23:39:47 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_info	*init_node(int i, int type, int number, char *line)
+static void	init_aux(t_info *info)
+{
+	info->nb_args = 1;
+	info->env = NULL;
+	info->spaces = NULL;
+	info->file_error = NULL;
+	info->err = 0;
+	info->first_word = NULL;
+	info->start_args = 0;
+	info->offset = 0;
+	info->split = NULL;
+}
+
+t_info		*init_node(int i, int type, int number, char *line)
 {
 	t_info	*info;
 
@@ -30,19 +43,11 @@ t_info	*init_node(int i, int type, int number, char *line)
 	info->args = NULL;
 	info->argv = NULL;
 	info->seps = NULL;
-	info->nb_args = 1;
-	info->env = NULL;
-	info->spaces = NULL;
-	info->file_error = NULL;
-	info->err = 0;
-	info->first_word = NULL;
-	info->start_args = 0;
-	info->offset = 0;
-	info->split = NULL;
+	init_aux(info);
 	return (info);
 }
 
-t_tree	*create_leave(int start, int number, char *line)
+t_tree		*create_leave(int start, int number, char *line)
 {
 	t_tree	*new;
 	t_info	*new_info;
@@ -57,7 +62,7 @@ t_tree	*create_leave(int start, int number, char *line)
 	return (new);
 }
 
-t_tree	*create_node(int i, int type, int start, char *line)
+t_tree		*create_node(int i, int type, int start, char *line)
 {
 	t_tree		*new;
 	t_info		*new_info;

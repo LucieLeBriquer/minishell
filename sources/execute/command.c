@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:48:01 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/04 22:56:19 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/04 23:38:10 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,17 @@ int			cmd_type(t_info *cmd, int i)
 		return (EXECBIN);
 }
 
+static int	error_in_out(t_info *cmd)
+{
+	if (cmd->err)
+		ft_printf("minishell: %s: %s\n", cmd->file_error,\
+				strerror(cmd->err));
+	else
+		ft_putstr("minishell: syntax error near unexpected token \
+				`newline'\n");
+	return (-1);
+}
+
 int			execute_cmd(t_info *cmd, t_split *split, t_list **envl)
 {
 	t_exec	exec_func[NB_TYPES];
@@ -60,14 +71,10 @@ int			execute_cmd(t_info *cmd, t_split *split, t_list **envl)
 	if (err)
 		return (-1);
 	if (update_in_out(cmd) < 0)
-	{
-		if (cmd->err)
-			ft_printf("minishell: %s: %s\n", cmd->file_error,\
-				strerror(cmd->err));
-		else
-			ft_putstr("minishell: syntax error near unexpected token \
-			`newline'\n");
-		return (-1);
-	}
-	return ((exec_func[cmd_type(cmd, 0)])(cmd, envl));
+		return (error_in_out(cmd));
+	errno = 0;
+	err = (exec_func[cmd_type(cmd, 0)])(cmd, envl);
+	if (!err)
+		return (errno);
+	return (0);
 }

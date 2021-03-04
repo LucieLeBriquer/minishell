@@ -6,11 +6,23 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:19:12 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/04 23:11:44 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/04 23:41:51 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	skip_var(char *str, int i, int l)
+{
+	if (str[i] == '?')
+		i++;
+	else
+	{
+		while (i < l && (ft_isalpha(str[i]) || str[i] == '_'))
+			i++;
+	}
+	return (i);
+}
 
 static int	expanded_size(char *str, t_list *envl)
 {
@@ -31,13 +43,7 @@ static int	expanded_size(char *str, t_list *envl)
 			else
 			{
 				res += size_var(str + ++i, envl, &value);
-				if (str[i] == '?')
-					i++;
-				else
-				{
-					while (i < l && (ft_isalpha(str[i]) || str[i] == '_'))
-						i++;
-				}
+				i = skip_var(str, i, l);
 			}
 		}
 		res++;
