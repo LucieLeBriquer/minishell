@@ -39,6 +39,7 @@ static void	fill_args(t_info cmd, t_split *split)
 			j++;
 		}
 		cmd.args[i] = ft_strdup(current);
+		cmd.seps[i] = split[cmd.start + j - 1].sep;
 		free(current);
 	}
 	cmd.args[i] = NULL;
@@ -48,7 +49,8 @@ int			join_words(t_info *cmd, t_split *split)
 {
 	cmd->nb_args = count_arg(*cmd, split);
 	cmd->args = malloc((cmd->nb_args + 1) * sizeof(char *));
-	if (!(cmd->args))
+	cmd->seps = malloc((cmd->nb_args + 1) * sizeof(char));
+	if (!(cmd->args) || !(cmd->seps))
 		return (-1);
 	fill_args(*cmd, split);
 	return (0);

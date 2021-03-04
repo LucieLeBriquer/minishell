@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:41:45 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 19:42:00 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/04 16:21:35 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,29 +32,28 @@ void	unset_one(char *to_unset, t_list *envl)
 	}
 }
 
-int		ft_unset(t_info *cmd, t_split *split, t_list **envl)
+int		ft_unset(t_info *cmd, t_list **envl)
 {
 	int		i;
-	char	**args;
 	int		ret;
 
 	if (cmd->number <= 1)
 		return (0);
-	args = create_tab_args(cmd, split);
+	if (create_tab_args(cmd))
+		return (ALLOCATION_FAIL);
 	i = 1;
 	ret = 0;
-	while (args[i])
+	while (cmd->argv[i])
 	{
-		if (authorized_char(args[i]) && !ft_strchr(args[i], '='))
-			unset_one(args[i], *envl);
+		if (authorized_char(cmd->argv[i]) && !ft_strchr(cmd->argv[i], '='))
+			unset_one(cmd->argv[i], *envl);
 		else
 		{
 			ft_printf_fd(2, "minishell: unset: '%s': \
-				not a valid identifier\n", args[i]);
+				not a valid identifier\n", cmd->argv[i]);
 			ret = 1;
 		}
 		i++;
 	}
-	free(args);
 	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:51:33 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/04 13:15:41 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/04 16:39:05 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,58 +38,31 @@ int		authorized_char(char *s)
 	return (1);
 }
 
-char	**create_tab_args(t_info *cmd, t_split *split)
+int		create_tab_args(t_info *cmd)
 {
-	char	**args;
 	char	c;
 	int		i;
 	int		j;
 
-	args = malloc((cmd->number + 1) * sizeof(char *));
-	if (!args)
-		return (NULL);
+	cmd->argv = malloc((cmd->nb_args + 1) * sizeof(char *));
+	if (!(cmd->argv))
+		return (-1);
 	i = 0;
 	j = 0;
-	while (j < cmd->number)
+	while (j < cmd->nb_args)
 	{
-		c = split[cmd->start + j].sep;
+		c = cmd->seps[j];
 		if (c == 'd' || c == '>' || c == '<')
 			j++;
 		else
 		{
-			args[i] = ft_strdup(split[cmd->start + j].str);
+			cmd->argv[i] = cmd->args[j];
 			i++;
 		}
 		j++;
 	}
-	args[i] = NULL;
-	return (args);
-}
-
-int		*create_tab_spaces(t_info *cmd, t_split *split)
-{
-	int		*spaces;
-	char	c;
-	int		i;
-	int		j;
-
-	spaces = malloc((cmd->number + 1) * sizeof(int));
-	i = 0;
-	j = 0;
-	while (j < cmd->number)
-	{
-		c = split[cmd->start + j].sep;
-		if (c == 'd' || c == '>' || c == '<')
-			j++;
-		else
-		{
-			spaces[i] = split[cmd->start + j].space;
-			i++;
-		}
-		j++;
-	}
-	spaces[i] = -1;
-	return (spaces);
+	cmd->argv[i] = NULL;
+	return (0);
 }
 
 int		is_path(char *word)

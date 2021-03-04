@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:39:32 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 22:02:03 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/04 16:23:29 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,13 @@ void	print_envl(t_list *envl, int declare)
 	}
 }
 
-int		ft_env(t_info *cmd, t_split *split, t_list **envl)
+int		ft_env(t_info *cmd, t_list **envl)
 {
 	int		pid;
 
-	cmd->args = create_tab_args(cmd, split);
-	if (number_of_args(cmd->args) > 1)
+	if (create_tab_args(cmd))
+		return (ALLOCATION_FAIL);
+	if (number_of_args(cmd->argv) > 1)
 	{
 		ft_printf("env: should be used without option and argument\n");
 		return (-1);

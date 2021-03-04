@@ -6,25 +6,24 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:48:38 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 19:51:14 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/04 16:08:22 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	join_path(char *to_join, char **file, t_info *cmd, t_split *split)
+static void	join_path(char *to_join, char **file, t_info *cmd)
 {
 	char	*tmp;
 
 	tmp = ft_strjoin(to_join, "/");
 	if (*file)
 		free(*file);
-	*file = ft_strjoin(tmp, split[cmd->start].str);
+	*file = ft_strjoin(tmp, cmd->args[0]);
 	free(tmp);
 }
 
-int			open_executable(t_info *cmd, t_split *split, t_list *envl,
-			char **file)
+int			open_executable(t_info *cmd, t_list *envl, char **file)
 {
 	char	**path_list;
 	char	*path;
@@ -40,7 +39,7 @@ int			open_executable(t_info *cmd, t_split *split, t_list *envl,
 	i = 0;
 	while (path_list[i] && fd < 0)
 	{
-		join_path(path_list[i], file, cmd, split);
+		join_path(path_list[i], file, cmd);
 		fd = open(*file, O_RDONLY);
 		i++;
 	}
