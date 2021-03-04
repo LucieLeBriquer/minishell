@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:49:15 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/04 16:44:13 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/04 17:40:39 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,17 @@ int	exec_executable(t_info *cmd, t_list **envl)
 
 int	exec_declaration(t_info *cmd, t_list **envl)
 {
-	(void)cmd;
-	(void)envl;
-	ft_printf("declaration not yet implemented\n");
+	int		i;
+
+	if (create_tab_args(cmd) < 0)
+		return (ALLOCATION_FAIL);
+	i = 0;
+	while (cmd->argv[i] && ft_strchr(cmd->argv[i], '='))
+		i++;
+	if (cmd->argv[i])
+		ft_printf("still some work here...\n");
+	else
+		export_all(cmd->argv, envl, 0);
 	return (0);
 }
 

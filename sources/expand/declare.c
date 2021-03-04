@@ -6,11 +6,18 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 18:49:52 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/03 18:51:54 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/04 17:38:45 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	invalid_identifier(char *str)
+{
+	ft_putstr_fd("minishell: export: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(": not a valid identifier\n", 2);
+};
 
 int	add_new_var(char *var, char *value, t_list **envl, int exported)
 {
@@ -28,8 +35,10 @@ int	add_new_var(char *var, char *value, t_list **envl, int exported)
 	}
 	cont->var = var;
 	cont->value = value;
-	cont->exported = 1;
-	if (value && exported == 2)
+	cont->exported = 0;
+	if (!value && exported == 2)
+		cont->exported = 1;
+	else if (value && exported == 2)
 		cont->exported = 2;
 	new->content = cont;
 	new->next = NULL;
@@ -55,7 +64,7 @@ int	add_env(char *var, char *value, t_list **envl, int exported)
 	return (add_new_var(var, value, envl, exported));
 }
 
-int	export_one(char *var, t_list **envl)
+static int	export_one(char *var, t_list **envl, int exported)
 {
 	char	*varname;
 	char	*value;
@@ -74,7 +83,7 @@ int	export_one(char *var, t_list **envl)
 		varname = ft_strdup(var);
 	}
 	if (authorized_char(varname))
-		return (add_env(varname, value, envl, 2));
+		return (add_env(varname, value, envl, exported));
 	invalid_identifier(varname);
 	free(varname);
 	if (value)
@@ -82,7 +91,7 @@ int	export_one(char *var, t_list **envl)
 	return (-2);
 }
 
-int	export_all(char **vars, t_list **envl)
+int	export_all(char **vars, t_list **envl, int exported)
 {
 	int	i;
 	int	err;
@@ -91,7 +100,7 @@ int	export_all(char **vars, t_list **envl)
 	err = 0;
 	while (vars[i])
 	{
-		err += export_one(vars[i], envl);
+		err += export_one(vars[i], envl, exported);
 		i++;
 	}
 	if (err != 0)

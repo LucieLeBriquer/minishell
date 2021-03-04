@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:48:01 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/04 17:15:47 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/04 17:25:36 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,4 @@ void		execute_cmd(t_info *cmd, t_split *split, t_list **envl)
 
 /*
 ** changer le type de cette fonction pour faire un retour d'erreur
-
 */
