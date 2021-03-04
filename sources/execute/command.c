@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:48:01 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/04 16:25:41 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/04 17:15:47 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,6 @@ static int	cmd_type(t_info *cmd)
 		return (EXECBIN);
 }
 
-void		print_words(char **args)
-{
-	int	i;
-
-	i = 0;
-	ft_printf("WORD LIST\n");
-	while (args[i])
-	{
-		ft_printf("%s\n", args[i]);
-		i++;
-	}
-}
-
 void		execute_cmd(t_info *cmd, t_split *split, t_list **envl)
 {
 	t_exec	exec_func[NB_TYPES];
@@ -85,3 +72,8 @@ void		execute_cmd(t_info *cmd, t_split *split, t_list **envl)
 		return ;
 	ft_printf("%serr = %d%s\n", GREY, err, WHITE);
 }
+
+/*
+** changer le type de cette fonction pour faire un retour d'erreur
+
+*/
