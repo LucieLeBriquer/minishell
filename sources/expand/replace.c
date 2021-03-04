@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:19:12 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 20:01:10 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/04 23:13:01 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,19 @@ int			size_var(char *str, t_list *envl, char **value)
 	int		size;
 	int		i;
 
-	size = ft_strlen(str);
-	var = malloc((size + 1) * sizeof(char));
-	if (!var)
-		return (0);
-	i = -1;
-	while (++i < size && (ft_isalpha(str[i]) || str[i] == '_'))
-		var[i] = str[i];
-	var[i] = '\0';
+	if (str[0] == '?')
+		var = ft_strdup("?begin");
+	else
+	{
+		size = ft_strlen(str);
+		var = malloc((size + 1) * sizeof(char));
+		if (!var)
+			return (0);
+		i = -1;
+		while (++i < size && (ft_isalpha(str[i]) || str[i] == '_'))
+			var[i] = str[i];
+		var[i] = '\0';
+	}
 	*value = search_in_env(envl, var);
 	free(var);
 	if (!(*value))
@@ -43,8 +48,13 @@ static int	replace_var(int *i, char *old, t_list *envl, char *dest)
 	size = size_var(old + ++(*i), envl, &current_var);
 	if (current_var)
 		ft_strlcpy(dest, current_var, size + 1);
-	while (*i < l && (ft_isalpha(old[*i]) || old[*i] == '_'))
+	if (old[*i] == '?')
 		(*i)++;
+	else
+	{
+		while (*i < l && (ft_isalpha(old[*i]) || old[*i] == '_'))
+			(*i)++;
+	}
 	return (size);
 }
 
@@ -60,7 +70,7 @@ void		fill_expanded(char *fill, char *old, t_list *envl)
 	while (i < l)
 	{
 		if ((old[i] == '\"' || old[i] == '\\' || old[i] == '$')
-			&& i > 0 && old[i - 1] == '\\')
+				&& i > 0 && old[i - 1] == '\\')
 		{
 			fill[res - 1] = old[i];
 			i++;

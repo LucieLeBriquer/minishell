@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:19:12 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/04 22:35:26 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/04 23:11:44 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,13 @@ static int	expanded_size(char *str, t_list *envl)
 			else
 			{
 				res += size_var(str + ++i, envl, &value);
-				while (i < l && (ft_isalpha(str[i]) || str[i] == '_'))
+				if (str[i] == '?')
 					i++;
+				else
+				{
+					while (i < l && (ft_isalpha(str[i]) || str[i] == '_'))
+						i++;
+				}
 			}
 		}
 		res++;

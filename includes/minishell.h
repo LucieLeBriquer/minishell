@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/04 17:52:38 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/04 23:01:52 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ void	free_entry(void *ventry);
 void	free_tree(t_tree *tree);
 t_list	*init_entry(char *line, int exported);
 char	*search_env(t_list *env, char *to_find);
-void	execute(t_split *split, t_list **envl, char *line);
+int		execute(t_split *split, t_list **envl, char *line);
 void	print_error_parsing(int err);
 void	print_parsed_command(t_split *split);
 t_tree	*create_tree(t_split *split, char *line);
 void	print_tree(t_tree *tree, t_split *split);
-void	execute_cmd(t_info *cmd, t_split *split, t_list **envl);
+int		execute_cmd(t_info *cmd, t_split *split, t_list **envl);
 int		exec_builtin(t_info *cmd, t_list **envl);
 int		exec_executable(t_info *cmd, t_list **envl);
 int		exec_declaration(t_info *cmd, t_list **envl);
@@ -82,6 +82,7 @@ void	print_leave(t_info cmd, t_split *split);
 int		multiple_var(t_info cmd, t_list **envl);
 int		export_all(char **vars, t_list **envl, int exported);
 void	invalid_identifier(char *str);
+int		add_env(char *var, char *value, t_list **envl, int exported);
 
 /*
 ** Built-in

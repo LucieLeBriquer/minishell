@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:38:48 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 18:33:41 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/04 22:59:25 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	parse_env(t_list **envl, char **env)
 
 	i = 0;
 	*envl = NULL;
-	new = init_entry("?begin", 0);
+	new = init_entry("?begin", -1);
 	ft_lstadd_back(envl, new);
 	while (env[i])
 	{

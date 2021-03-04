@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:36:55 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/04 18:17:50 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/04 23:14:34 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	waiting_command(t_list **envl)
 	prompt();
 	signal(SIGINT, &handler);
 	line = NULL;
+	add_env("?begin", ft_strdup("0"), envl, -1);
 	while (reader(&line) > 0)
 	{
 		g_sigint = 0;
@@ -48,8 +49,9 @@ void	waiting_command(t_list **envl)
 		else
 		{
 			print_parsed_command(split);
-			execute(split, envl, line);
+			err = execute(split, envl, line);
 		}
+		add_env("?begin", ft_itoa(err), envl, -1);
 		free_all(line, split);
 		if (!g_sigint)
 			prompt();
