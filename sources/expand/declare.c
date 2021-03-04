@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 18:49:52 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/04 17:38:45 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/04 18:00:09 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,14 @@ int	add_env(char *var, char *value, t_list **envl, int exported)
 	{
 		if (ft_strcmp(((t_env *)env->content)->var, var) == 0)
 		{
-			((t_env *)env->content)->value = value;
-			((t_env *)env->content)->exported = exported;
+			if (value)
+			{
+				if (((t_env *)env->content)->value)
+					free(((t_env *)env->content)->value);
+				((t_env *)env->content)->value = value;
+			}
+			if (exported > ((t_env *)env->content)->exported)
+				((t_env *)env->content)->exported = exported;
 			return (0);
 		}
 		env = env->next;

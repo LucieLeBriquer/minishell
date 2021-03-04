@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:48:01 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/04 17:25:36 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/04 17:48:38 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ static int	is_builtin(char *str)
 	return (-1);
 }
 
-static int	cmd_type(t_info *cmd)
+int			cmd_type(t_info *cmd, int i)
 {
-	cmd->builtin = is_builtin(cmd->args[0]);
+	cmd->builtin = is_builtin(cmd->args[i]);
 	if (cmd->builtin > -1)
 		return (BUILTIN);
-	if (ft_strchr(cmd->args[0], '='))
+	if (ft_strchr(cmd->args[i], '='))
 		return (DECLARATION);
-	if (is_path(cmd->args[0]))
+	if (is_path(cmd->args[i]))
 		return (EXECUTABLE);
 	else
 		return (EXECBIN);
@@ -67,7 +67,7 @@ void		execute_cmd(t_info *cmd, t_split *split, t_list **envl)
 			`newline'\n");
 		return ;
 	}
-	err = (exec_func[cmd_type(cmd)])(cmd, envl);
+	err = (exec_func[cmd_type(cmd, 0)])(cmd, envl);
 	if (g_print_all == 0)
 		return ;
 	ft_printf("%serr = %d%s\n", GREY, err, WHITE);

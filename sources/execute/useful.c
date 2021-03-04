@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:51:33 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/04 17:02:10 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/04 17:51:16 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		create_tab_args(t_info *cmd)
 	if (!(cmd->argv))
 		return (-1);
 	i = 0;
-	j = 0;
+	j = cmd->offset;
 	while (j < cmd->nb_args)
 	{
 		c = cmd->seps[j];
