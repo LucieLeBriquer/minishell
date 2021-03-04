@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:39:28 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/04 16:23:08 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/04 16:59:46 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@ static void	print_args(char **args, int option, int i)
 {
 	while (args[i] && args[i + 1])
 	{
-		ft_printf("%s", args[i]);
+		ft_putstr(args[i]);
+		ft_putstr(" ");
 		i++;
 	}
 	if (args[i])
-		ft_printf("%s", args[i]);
+		ft_putstr(args[i]);
 	if (!option)
 		ft_printf("\n");
 }
@@ -33,6 +34,18 @@ static int	option_echo(t_info *cmd)
 	while ((cmd->args)[i] && (ft_strcmp((cmd->args)[i], "-n") == 0))
 		i++;
 	return (i);
+}
+
+void		print_tab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		ft_printf("\t[%s]\n", tab[i]);
+		i++;
+	}
 }
 
 int			ft_echo(t_info *cmd, t_list **envl)

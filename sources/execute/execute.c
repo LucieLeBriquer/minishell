@@ -6,23 +6,11 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:37:45 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/04 14:49:07 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/04 16:47:49 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void		draw_line(int n)
-{
-	int	i;
-
-	i = -1;
-	ft_putstr("\033[30m");
-	while (++i < n)
-		ft_putstr("\xE2\x94\x80");
-	ft_putstr(WHITE);
-	ft_putstr("\n");
-}
 
 static void	execute_recursive(t_tree *tree, t_split *split, t_list **envl)
 {
@@ -36,8 +24,6 @@ static void	execute_recursive(t_tree *tree, t_split *split, t_list **envl)
 		return ;
 	}
 	execute_recursive(tree->right, split, envl);
-	if (g_print_all)
-		draw_line(84);
 }
 
 void		execute(t_split *split, t_list **envl, char *line)
@@ -45,15 +31,12 @@ void		execute(t_split *split, t_list **envl, char *line)
 	t_tree	*tree;
 	int		status;
 
+	ft_putstr(WHITE);
 	tree = create_tree(split, line);
 	pipe_recursive(tree, split, envl);
 	execute_recursive(tree, split, envl);
-	if (g_print_all && tree->info->type == CMD)
-		draw_line(84);
 	while (wait(&status) > 0)
 		;
-	if (g_print_all)
-		draw_line(84);
 	free_tree(tree);
 	print_child_end(status);
 }

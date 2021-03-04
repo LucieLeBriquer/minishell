@@ -5,13 +5,15 @@ static int	count_arg(t_info cmd, t_split *split)
 	int	nb_arg;
 	int	i;
 
-	nb_arg = 1;
+	nb_arg = 0;
 	i = -1;
 	while (++i < cmd.number)
 	{
 		if (split[cmd.start + i].space)
 			nb_arg++;
 	}
+	if (!split[cmd.start + i].str)
+		nb_arg++;
 	return (nb_arg);
 }
 

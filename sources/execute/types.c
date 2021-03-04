@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:49:15 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/04 16:25:00 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/04 16:44:13 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ int	exec_executable(t_info *cmd, t_list **envl)
 		return (-1);
 	}
 	close(fd);
-	ft_printf("execute not yet implemented\n");
-	return (0);
 	fork_and_exec(cmd, *envl, NULL);
 	return (0);
 }
