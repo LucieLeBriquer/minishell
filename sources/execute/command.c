@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:48:01 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/04 18:17:29 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/04 22:42:35 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void		execute_cmd(t_info *cmd, t_split *split, t_list **envl)
 	exec_func[DECLARATION] = &exec_declaration;
 	exec_func[EXECBIN] = &exec_execbin;
 	print_leave(*cmd, split);
+	cmd->split = split;
 	expand(cmd, split, *envl);
 	err = join_words(cmd, split);
 	if (err)
