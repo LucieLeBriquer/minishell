@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:49:15 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/04 23:32:34 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/05 15:51:44 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ int	exec_declaration(t_info *cmd, t_list **envl)
 	exec_func[EXECUTABLE] = &exec_executable;
 	exec_func[DECLARATION] = &exec_declaration;
 	exec_func[EXECBIN] = &exec_execbin;
-	if (create_tab_args(cmd) < 0)
-		return (ALLOCATION_FAIL);
 	i = 0;
 	while (cmd->argv[i] && ft_strchr(cmd->argv[i], '='))
 		i++;

@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:41:45 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/04 16:21:35 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/05 15:51:00 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ int		ft_unset(t_info *cmd, t_list **envl)
 
 	if (cmd->number <= 1)
 		return (0);
-	if (create_tab_args(cmd))
-		return (ALLOCATION_FAIL);
 	i = 1;
 	ret = 0;
 	while (cmd->argv[i])

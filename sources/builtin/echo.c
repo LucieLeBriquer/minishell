@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:39:28 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/04 16:59:46 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/05 15:49:36 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ int			ft_echo(t_info *cmd, t_list **envl)
 	else if (pid == 0)
 	{
 		change_stdin_stdout(cmd);
-		if (create_tab_args(cmd))
-			return (ALLOCATION_FAIL);
 		print_args(cmd->argv, (i > 1), i);
 		exit(0);
 	}
