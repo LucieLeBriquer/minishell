@@ -5,7 +5,7 @@
 - [done] un split qui prend en compte les `'` et `"`
   - pour les simples quotes : easy
   - pour les doubles c'est plus galère, il faut check tous les cas de `\` et `$`
-- [done] la création de noeuds à chaque opérateur `|,;`
+- [done] la création de noeuds à chaque opérateur `|` et `;`
 - [done] affichage du prompt et attente d'une commande
 - [done] création d'une liste chaînée à partir de l'environnement et une fonction de recherche dans cette liste
 - [done] fonction d'expansion d'une commande simple
