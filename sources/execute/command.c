@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:48:01 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/05 15:51:20 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/05 16:25:15 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,5 @@ int			execute_cmd(t_info *cmd, t_split *split, t_list **envl)
 	if (create_tab_args(cmd))
 		return (ALLOCATION_FAIL);
 	errno = 0;
-	err = (exec_func[cmd_type(cmd, 0)])(cmd, envl);
-	if (!err)
-		return (errno);
-	return (0);
+	return ((exec_func[cmd_type(cmd, 0)])(cmd, envl));
 }

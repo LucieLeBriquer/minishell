@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:49:15 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/05 15:51:44 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/05 16:13:51 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	exec_execbin(t_info *cmd, t_list **envl)
 
 	if (open_executable(cmd, *envl, &file) < 0)
 	{
-		ft_printf("minishell: %s: command not found\n", cmd->args[0]);
+		ft_printf("minishell: %s: command not found\n", cmd->args[cmd->offset]);
 		return (-1);
 	}
 	err = fork_and_exec(cmd, *envl, file);
