@@ -1,6 +1,6 @@
 # minishell - documentation
-- [Travail attendu](#travail-attendu)
 - [TODO](#todo)
+- [Travail attendu](#travail-attendu)
 - [Notes](#notes)
   - [Fonctions autorisées](#fonctions-autorisées)
   - [Processus](#processus)
@@ -14,6 +14,27 @@
   - [Exécution](#exécution)
   - [Description des commandes builtin](#description-des-commandes-builtin)
 - [Ressources](#ressources)
+
+## TODO
+### General
+- [done] un split qui prend en compte les `'` et `"`
+  - pour les simples quotes : easy
+  - pour les doubles c'est plus galère, il faut check tous les cas de `\` et `$`
+- [done] la création de noeuds à chaque opérateur `|,>,>>,<,;`
+- [done] affichage du prompt et attente d'une commande
+- [done] création d'une liste chaînée à partir de l'environnement et une fonction de recherche dans cette liste
+- [done] fonction d'expansion d'une commande simple
+- [done] parcours de l'arbre pour remplir les fd d'`intput` et d'`output` a chaque noeud principal avec un appel a `pipe`
+- [done] faire des tests fork, pipe pour etre sure de tout bien comprendre
+- [done] se renseigner sur les signaux qui peuvent etre envoyes pendant l'execution d'un processus pour gerer les leaks (par exemple deja ctrl+c ctrl+d dans la fonction principale)
+- [done] rajouter un entier d'état pour savoir si la commande est exportée ou non ; est-ce que l'on doit modifier l'environnement extérieur ?
+- [done] faire les commandes built-in pour commencer
+- termcaps et historique
+### En detail (a suppr au fur et a mesure)
+- pour le Ctrl+c, on doit return 130
+- test et modifier les valeur de retour d'erreur des builtins
+- faire termcaps pour l'historique
+- recheck plein de commandes et les leaks
 
 ## Travail attendu
 Écrivez un shell qui doit :
@@ -34,27 +55,6 @@
 - Les variables d’environnement (`$variable`) doivent marcher comme dans bash
 - `$?` doit marcher comme dans bash
 - `ctrl-C`, `ctrl-D` et `ctrl-\` doivent afficher le même résultat que dans bash
-
-## TODO
-### General
-- [done] un split qui prend en compte les `'` et `"`
-  - pour les simples quotes : easy
-  - pour les doubles c'est plus galère, il faut check tous les cas de `\` et `$`
-- [done] la création de noeuds à chaque opérateur `|,>,>>,<,;`
-- [done] affichage du prompt et attente d'une commande
-- [done] création d'une liste chaînée à partir de l'environnement et une fonction de recherche dans cette liste
-- [done] fonction d'expansion d'une commande simple
-- [done] parcours de l'arbre pour remplir les fd d'`intput` et d'`output` a chaque noeud principal avec un appel a `pipe`
-- [done] faire des tests fork, pipe pour etre sure de tout bien comprendre
-- [done] se renseigner sur les signaux qui peuvent etre envoyes pendant l'execution d'un processus pour gerer les leaks (par exemple deja ctrl+c ctrl+d dans la fonction principale)
-- [done] rajouter un entier d'état pour savoir si la commande est exportée ou non ; est-ce que l'on doit modifier l'environnement extérieur ?
-- [done] faire les commandes built-in pour commencer
-### En detail (a suppr au fur et a mesure)
-- pour le Ctrl+c, on doit return 130
-- plutôt que de faire des retours arbitraires faire un enum de types d'erreur à propager
-- gestion du dernier retour à faire : le mettre dans la variable begin ?
-- rebosser le export en faisant une liste chainee des variables à exporter
-- same pour les définitions de variables temporaires (suivies d'une commande ?)
 
 ## Notes
 
