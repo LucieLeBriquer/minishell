@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/04 23:01:52 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/06 12:12:57 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ int		size_var(char *str, t_list *envl, char **value);
 */
 
 void	print_title(char *s);
+void	print_error(char *file, int err, char *error);
 
 /*
 ** To delete
