@@ -1,4 +1,5 @@
-a=b c=d unknown1 | echo $? | unknown2 ; echo $?
+a=b c=d notfound1 | echo $? | notfound2 ; echo $? ; echo $?
+a=b c=d notfound1 | echo $? ; echo $?
 
 sleep 5 | sleep 5 | sleep 5 | sleep 5 | sleep 5
 
