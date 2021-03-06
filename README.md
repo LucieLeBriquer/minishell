@@ -20,6 +20,7 @@
 - test et modifier les valeur de retour d'erreur des builtins
 - termcaps pour l'historique
 - recheck plein de commandes et les leaks
+- enlever la possibilite de faire `\` ou alors fix le pb
 
 ## Travail attendu
 Écrivez un shell qui doit :
