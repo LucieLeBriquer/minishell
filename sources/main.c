@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:36:55 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/06 11:47:09 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/06 17:14:00 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ void	prompt(void)
 	char	cwd[SIZE_PATH];
 
 	getcwd(cwd, SIZE_PATH);
-	ft_printf("\033[1;35m%s@%s \033[0;35m%s\033[0m$ ", "mini", "shell", cwd);
+	ft_putstr("\033[1;35mmini@shell \033[0;35m");
+	ft_putstr(cwd);
+	ft_putstr("\033[0m$ ");
 }
 
 void	handler(int signo)
@@ -43,6 +45,7 @@ void	waiting_command(t_list **envl)
 	while (reader(&line) > 0)
 	{
 		g_sigint = 0;
+		err = 0;
 		split = parse_command(line, &err);
 		if (!split)
 			print_error_parsing(err);
@@ -56,7 +59,8 @@ void	waiting_command(t_list **envl)
 		if (!g_sigint)
 			prompt();
 	}
-	free(line);
+	if (line)
+		free(line);
 }
 
 void	header_simple(void)
