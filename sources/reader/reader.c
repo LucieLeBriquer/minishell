@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:58:29 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/06 17:40:05 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/06 17:44:53 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static int	error_and_first_read(char **line, char *c)
 	*line = malloc_empty_string();
 	if (!(*line))
 		return (-1);
-	size = read(0, &c, 1);
+	size = read(0, c, 1);
 	return (size);
 }
 

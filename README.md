@@ -17,10 +17,8 @@
 - termcaps et historique
 ### En detail (a suppr au fur et a mesure)
 - pour le Ctrl+c, on doit return 130
-- test et modifier les valeur de retour d'erreur des builtins
 - termcaps pour l'historique
 - recheck plein de commandes et les leaks
-- enlever la possibilite de faire `\` ou alors fix le pb
 
 ## Travail attendu
 Écrivez un shell qui doit :
