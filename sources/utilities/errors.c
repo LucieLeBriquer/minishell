@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:39:04 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/06 18:18:55 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/08 16:17:05 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 void	print_error_parsing(int err)
 {
-	if (err == 0)
+	if (err == SUCCESS)
 		return ;
-	if (err == 1)
-	{
-		ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd("minishell: ", 2);
+	if (err == SYNTAX_QUOTES)
 		ft_putstr_fd("syntax error near unexpected token `newline'\n", 2);
-	}
-	else if (err == 2)
-		ft_putstr_fd("minishell: allocation failed\n", 2);
+	else if (err == SYNTAX_REDIR)
+		ft_putstr_fd("syntax error near unexpected token `redirection'\n", 2);
+	else if (err == ALLOCATION_FAIL)
+		ft_putstr_fd("allocation failed\n", 2);
 }
 
 void	print_error(char *file, int err, char *error)
