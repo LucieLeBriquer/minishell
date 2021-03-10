@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/06 12:12:57 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/08 16:25:19 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ t_tree	*create_leave(int start, int number, char *line);
 ** Execute
 */
 
-void	pipe_recursive(t_tree *tree, t_split *split, t_list **envl);
+int		pipe_recursive(t_tree *tree, t_split *split, t_list **envl);
 int		join_words(t_info *cmd, t_split *split);
 int		cmd_type(t_info *cmd, int i);
 

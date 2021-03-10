@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:37:45 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 23:48:33 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/08 17:42:39 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@ static void	fill_subtree_fd(t_tree *tree, int out, int fd)
 	fill_subtree_fd(tree->left, out, fd);
 }
 
-void		pipe_recursive(t_tree *tree, t_split *split, t_list **envl)
+int			pipe_recursive(t_tree *tree, t_split *split, t_list **envl)
 {
 	int	pfd[2];
 	int	type;
 
 	if (!tree)
-		return ;
+		return (SUCCESS);
 	type = tree->info->type;
 	if (type == CMD)
-		return ;
+		return (SUCCESS);
 	if (type == SEMIC)
 	{
 		fill_subtree_fd(tree->right, 0, 0);
@@ -41,12 +41,19 @@ void		pipe_recursive(t_tree *tree, t_split *split, t_list **envl)
 	}
 	else
 	{
-		pipe(pfd);
+		errno = 0;
+		if (pipe(pfd))
+		{
+			ft_printf("%s\n", strerror(errno));
+			return (PIPE_FAIL);
+		}
 		if (g_print_all == 1)
 			ft_printf("%screate pipe [%d,%d]%s\n", GREY, pfd[0], pfd[1], WHITE);
 		tree->left->info->output = pfd[1];
 		fill_subtree_fd(tree->right, 0, pfd[0]);
 	}
-	pipe_recursive(tree->left, split, envl);
-	pipe_recursive(tree->right, split, envl);
+	if (pipe_recursive(tree->left, split, envl)
+		|| pipe_recursive(tree->right, split, envl))
+		return (PIPE_FAIL);
+	return (SUCCESS);
 }

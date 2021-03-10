@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:36:55 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/06 17:46:59 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/08 16:31:01 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	waiting_command(t_list **envl)
 		{
 			print_parsed_command(split);
 			err = execute(split, envl, line);
+			ft_printf("err = %d\n", err);
 		}
 		add_env("?begin", ft_itoa(err), envl, -1);
 		free_all(line, split);

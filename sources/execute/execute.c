@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:37:45 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/06 18:12:33 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/08 17:40:15 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,12 @@ int			execute(t_split *split, t_list **envl, char *line)
 	int		err;
 
 	tree = create_tree(split, line);
-	pipe_recursive(tree, split, envl);
+	if (pipe_recursive(tree, split, envl) < 0)
+	{
+		free_tree(tree);
+		ft_printf("%s\n", strerror(errno));
+		return (errno);
+	}
 	err = execute_recursive(tree, split, envl);
 	while (wait(&status) > 0)
 		;

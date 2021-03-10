@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:58:52 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/06 17:48:48 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/08 16:41:09 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	free_tree(t_tree *tree)
 		free(cmd->seps);
 	if (cmd->spaces)
 		free(cmd->spaces);
+	close_unused_fd(cmd);
 	free(cmd);
 	free(tree);
 }
