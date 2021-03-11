@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:49:15 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/06 12:10:46 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/11 22:33:52 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	exec_executable(t_info *cmd, t_list **envl)
 	int		fd;
 
 	errno = 0;
-	fd = open(cmd->args[0], O_RDONLY);
+	fd = open(cmd->args[cmd->offset], O_RDONLY);
 	if (fd < 0)
 	{
 		print_error(cmd->args[cmd->offset], errno, NULL);

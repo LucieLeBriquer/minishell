@@ -19,6 +19,7 @@
 - termcaps pour l'historique
 - recheck plein de commandes et les leaks
 ### To fix
+- petit probleme dans le comptage des arguments
 `echo $?;echo $?;echo $?;echo $?;echo $?;`
 marche easy
 `echo $?;echo $?;echo $?;echo $?;echo $?;;`

@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 18:02:50 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/11 21:37:35 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/11 22:19:25 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ static int	count_arg(t_info cmd, t_split *split)
 		if (split[cmd.start + i].space)
 			nb_arg++;
 	}
-	if (!split[cmd.start + i].str || split[cmd.start + i].sep == ';'
-		|| split[cmd.start + i].sep == '|')
+	if (!split[cmd.start + i].str)
 		nb_arg++;
+//|| split[cmd.start + i].sep == ';' || split[cmd.start + i].sep == '|')
 	return (nb_arg);
 }
 
