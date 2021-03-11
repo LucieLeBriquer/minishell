@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:39:04 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/08 16:38:42 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/11 21:31:18 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,21 @@ void	print_child_end(int status)
 	ft_printf("\t\t%d\n\n", status);
 }
 
-void	print_leave(t_info cmd, t_split *split)
+void	print_leave(t_info cmd, t_split *split, int j)
 {
 	int	i;
 
 	if (g_print_all == 0)
 		return ;
-	ft_putstr("\n");
-	print_title("EXECUTE");
-	ft_printf("\t\xE2\xAE\x9f%4d   ", cmd.input);
-	ft_printf("\xE2\xAE\x9D%4d\t", cmd.output);
+	if (j == 0)
+	{
+		ft_putstr("\n");
+		print_title("EXECUTE");
+		ft_printf("\t\xE2\xAE\x9f%4d   ", cmd.input);
+		ft_printf("\xE2\xAE\x9D%4d\t", cmd.output);
+	}
+	else
+		ft_printf("\t%safter expansion  \t", GREY);
 	i = -1;
 	while (++i + 1 < cmd.number)
 		ft_printf("%s ", split[cmd.start + i].str);

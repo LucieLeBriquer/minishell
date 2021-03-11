@@ -18,6 +18,7 @@
 ### En detail (a suppr au fur et a mesure)
 - termcaps pour l'historique
 - recheck plein de commandes et les leaks
+- `echo $?;echo $?;echo $?;echo $?;echo $?` not working alors que `echo $? ; echo $? ; echo $? ; echo $? ; echo $?` c'est ok
 
 ## Travail attendu
 Écrivez un shell qui doit :

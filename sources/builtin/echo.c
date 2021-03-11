@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:39:28 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/05 16:04:52 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/11 21:38:34 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,6 @@ static int	option_echo(t_info *cmd)
 	while ((cmd->args)[i] && (ft_strcmp((cmd->args)[i], "-n") == 0))
 		i++;
 	return (i);
-}
-
-void		print_tab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		ft_printf("\t[%s]\n", tab[i]);
-		i++;
-	}
 }
 
 int			ft_echo(t_info *cmd, t_list **envl)

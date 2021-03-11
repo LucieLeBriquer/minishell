@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/08 16:25:19 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/11 21:29:31 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char	*join_all_arguments(t_split *split, int start, int number);
 void	ft_lstsort(t_list **begin_list, int (*cmp)());
 int		fork_and_exec(t_info *cmd, t_list *envl, char *file);
 void	header(void);
-void	print_leave(t_info cmd, t_split *split);
+void	print_leave(t_info cmd, t_split *split, int j);
 
 /*
 ** Environment
