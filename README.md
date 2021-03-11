@@ -16,10 +16,8 @@
 - [done] faire les commandes built-in pour commencer
 - termcaps et historique
 ### En detail (a suppr au fur et a mesure)
-- pour le Ctrl+c, on doit return 130
 - termcaps pour l'historique
 - recheck plein de commandes et les leaks
-- `cmd A ; echo $?` maj `$?` dans env des la fin de la cmd A
 
 ## Travail attendu
 Écrivez un shell qui doit :
