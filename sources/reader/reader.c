@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:58:29 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/06 17:52:04 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/11 20:45:38 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static char	*join_realloc(char *line, char c, int reset)
 
 	if (c == '\n')
 		return (line);
-	if (reset || g_sigint)
+	if (reset || g_sigint == 1)
 	{
-		g_sigint = 0;
+		g_sigint = 2;
 		l = 0;
 	}
 	else

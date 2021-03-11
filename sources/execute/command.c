@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:48:01 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/06 12:12:32 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/11 20:47:28 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,11 @@ int			execute_cmd(t_info *cmd, t_split *split, t_list **envl)
 	exec_func[EXECBIN] = &exec_execbin;
 	print_leave(*cmd, split);
 	cmd->split = split;
+	if (g_sigint)
+	{
+		add_env("?begin", ft_strdup("130"), envl, -1);
+		g_sigint = 0;
+	}
 	expand(cmd, split, *envl);
 	err = join_words(cmd, split);
 	if (err)
