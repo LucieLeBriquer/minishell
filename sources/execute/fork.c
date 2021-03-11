@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:48:35 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/05 16:31:36 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/11 19:51:15 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,5 @@ int	fork_and_exec(t_info *cmd, t_list *envl, char *file)
 		else
 			return (execve(cmd->args[cmd->offset], argv, cmd->env));
 	}
-	else
-		return (0);
+	return (0);
 }
