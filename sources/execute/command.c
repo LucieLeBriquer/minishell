@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:48:01 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/11 22:39:44 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/12 14:30:24 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ int			execute_cmd(t_info *cmd, t_split *split, t_list **envl)
 	}
 	expand(cmd, split, *envl);
 	print_leave(*cmd, split, 1);
+	if (cmd->number == 0)
+		return (0);
 	err = join_words(cmd, split);
 	if (err)
 		return (-1);

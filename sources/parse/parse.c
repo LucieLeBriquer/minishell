@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 17:37:50 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/11 21:47:28 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/12 14:16:33 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ static int	add_virtual_spaces(t_split *split, int words)
 	while (++i < words)
 	{
 		c = split[i].sep;
-		if ((c == '>' || c == '<' || c == 'd'))
+		if ((c == '>' || c == '<' || c == 'd' || c == ';' || c == '|'))
 		{
-			if (redir)
+			if (redir && c != '|')
 				return (1);
 			redir = 1;
 			if (i > 0)

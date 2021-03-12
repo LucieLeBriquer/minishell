@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:39:04 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/11 21:31:18 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/12 14:31:42 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,9 @@ void	print_leave(t_info cmd, t_split *split, int j)
 	i = -1;
 	while (++i + 1 < cmd.number)
 		ft_printf("%s ", split[cmd.start + i].str);
-	ft_printf("%s\n", split[cmd.start + i].str);
+	if (cmd.number)
+		ft_printf("%s", split[cmd.start + i].str);
+	ft_putstr("\n");
 	ft_putstr(WHITE);
 }
 
