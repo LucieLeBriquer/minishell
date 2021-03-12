@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:39:32 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/05 16:06:33 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/12 16:43:54 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ int		ft_env(t_info *cmd, t_list **envl)
 {
 	int		pid;
 
-	if (number_of_args(cmd->argv + cmd->offset) > 1)
-	{
-		ft_printf("env: should be used without option and argument\n");
-		return (-1);
-	}
 	pid = fork();
 	if (pid == 0)
 	{
+		if (number_of_args(cmd->argv + cmd->offset) > 1)
+		{
+			ft_putstr_fd("env: should be used without option and argument\n", 2);
+			exit(2);
+		}
 		change_stdin_stdout(cmd);
 		print_envl(*envl, 0);
 		exit(0);

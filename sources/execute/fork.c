@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:48:35 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/11 22:40:00 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/12 16:36:01 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	fork_and_exec(t_info *cmd, t_list *envl, char *file)
 {
 	int		pid;
 	char	**argv;
+	char	*to_exec;
+	int		err;
 
 	cmd->env = create_env_tab(envl, 0);
 	pid = fork();
@@ -26,10 +28,12 @@ int	fork_and_exec(t_info *cmd, t_list *envl, char *file)
 		change_stdin_stdout(cmd);
 		errno = 0;
 		argv = cmd->argv + cmd->offset;
+		to_exec = cmd->args[cmd->offset];
 		if (file)
-			exit(execve(file, argv, cmd->env));
-		else
-			exit(execve(cmd->args[cmd->offset], argv, cmd->env));
+			to_exec = file;
+		err = execve(to_exec, argv, cmd->env);
+		print_error(to_exec, errno, NULL);
+		exit(126 + (errno == 2));
 	}
 	return (0);
 }

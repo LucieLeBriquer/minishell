@@ -18,12 +18,7 @@
 ### En detail (a suppr au fur et a mesure)
 - termcaps pour l'historique
 - recheck plein de commandes et les leaks
-### To fix
-- petit probleme dans le comptage des arguments
-`echo $?;echo $?;echo $?;echo $?;echo $?;`
-marche easy
-`echo $?;echo $?;echo $?;echo $?;echo $?;;`
-doit generer une erreur
+- go gérer les arguments d'exit
 
 ## Travail attendu
 Écrivez un shell qui doit :
@@ -73,23 +68,15 @@ doit generer une erreur
 
 ### Astuces
 - `lsof | grep "minishell"` : pour voir tous les fd associés, voir que tout est bien close à la fin de chaque commande
-- utilisation de `lstat` pour check si exécutable
-```
-#include <sys/stat.h>
 
-int	main(int argc, char **argv)
-{
-	char		*file;
-	struct stat	buf;
-	int			err;
-
-	file = argv[argc - 1];
-	err = lstat(file, &buf);
-	if (err == 0 && buf.st_mode & S_IXUSR)
-		printf("executable\n");
-	return (0);
-}
-```
+### Valeur de retour $?
+1	Catchall for general errors	impermissible operations
+2	Misuse of shell builtins
+126	Command invoked cannot execute (permission problem or not an executable)
+127	"command not found"
+128	Invalid argument to exit
+130	Script terminated by Control-C
+255 Exit status out of range
 
 ## Plan d'attaque
 1) **Analyse lexicale** : transforme les instructions en token
@@ -216,6 +203,10 @@ hey%
 lucie@lucie-XPS ~/Code/minishell$ echo -n "hey " -n -n -n "hey" 
 hey  -n -n -n hey%
 ```
+#### exit
+- `a` ou `a 1` ou `3.14` : exit(2) + erreur numeric argument required
+- `1 a` ou `1 2` : pas d'exit + $? = 1 + erreur too many arguments
+- si juste un argument numérique -> go le convertir % 256 et exit avec cette valeur
 
 ## Ressources
 - https://shell.multun.net/structure.html

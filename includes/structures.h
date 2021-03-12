@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/12 14:44:03 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/12 15:41:41 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct		s_info
 	int				*spaces;
 	char			*file_error;
 	int				err;
+	int				errno_save;
 	char			*first_word;
 	int				start_args;
 	int				offset;

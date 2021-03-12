@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:37:45 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/11 22:14:24 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/12 17:15:28 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,28 @@ static int	execute_recursive(t_tree *tree, t_split *split, t_list **envl)
 	return (execute_recursive(tree->right, split, envl));
 }
 
+static void	remove_last_semic(t_split *split)
+{
+	int	i;
+
+	i = 0;
+	while (split[i].str)
+		i++;
+	if (i > 0 && split[i - 1].sep == ';')
+	{
+		split[i - 1].str = NULL;
+		split[i - 1].sep = '\0';
+	}
+}
+
 int			execute(t_split *split, t_list **envl, char *line)
 {
 	t_tree	*tree;
 	int		status;
 	int		err;
 
+	status = 0;
+	remove_last_semic(split);
 	tree = create_tree(split, line);
 	if (pipe_recursive(tree, split, envl))
 	{

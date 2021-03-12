@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 17:37:50 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/12 14:43:19 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/12 15:34:29 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static char	add_virtual_spaces(t_split *split, int words, char *token)
 		c = split[i].sep;
 		if ((c == '>' || c == '<' || c == 'd' || c == ';' || c == '|'))
 		{
-			if (redir)
+			if (redir || (i == 0 && (c == ';' || c == '|')))
 			{
 				*token = c;
 				return (1);
@@ -91,14 +91,12 @@ static char	add_virtual_spaces(t_split *split, int words, char *token)
 
 t_split		*parse_command(char *command, t_error *error)
 {
-	int		l;
 	int		words;
 	t_split	*split;
 
 	error->num = SUCCESS;
 	trim_spaces(command);
-	l = ft_strlen(command);
-	if (l == 0)
+	if (ft_strlen(command) == 0)
 		return (NULL);
 	words = nb_words(command);
 	error->num = SYNTAX_QUOTES;
