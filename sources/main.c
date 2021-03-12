@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:36:55 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/12 15:34:53 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/12 17:31:31 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	handler(int signo)
 	}
 }
 
-void	waiting_command(t_list **envl)
+int		waiting_command(t_list **envl)
 {
 	char	*line;
 	t_split	*split;
@@ -62,6 +62,7 @@ void	waiting_command(t_list **envl)
 	}
 	if (line)
 		free(line);
+	return (130 * g_sigint);
 }
 
 void	header_simple(void)
@@ -76,6 +77,7 @@ void	header_simple(void)
 int		main(int argc, char **argv, char **env)
 {
 	t_list	*envl;
+	int		exit_value;
 
 	(void)argv;
 	if (argc > 1)
@@ -84,8 +86,10 @@ int		main(int argc, char **argv, char **env)
 		g_print_all = 1;
 	header_simple();
 	parse_env(&envl, env);
-	waiting_command(&envl);
+	exit_value = waiting_command(&envl);
+	if (!exit_value)
+		exit_value = ft_atoi(search_in_env(envl, "?begin"));
 	ft_lstclear(&envl, &free_entry);
 	ft_printf("exit\n");
-	return (0);
+	return (exit_value);
 }

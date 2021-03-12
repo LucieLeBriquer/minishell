@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:39:36 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/12 17:04:17 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/12 17:32:44 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,9 @@ int	ft_exit(t_info *cmd, t_list **envl)
 
 	if (cmd->nb_args < 2)
 	{
+		exit_value = ft_atoi(search_in_env(*envl, "?begin"));
 		free_exit(cmd, envl);
-		exit(0);
+		exit(exit_value);
 	}
 	else if (!ft_isnum(cmd->argv[cmd->offset + 1]))
 	{

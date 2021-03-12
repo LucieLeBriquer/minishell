@@ -18,7 +18,6 @@
 ### En detail (a suppr au fur et a mesure)
 - termcaps pour l'historique
 - recheck plein de commandes et les leaks
-- go gérer les arguments d'exit
 
 ## Travail attendu
 Écrivez un shell qui doit :
