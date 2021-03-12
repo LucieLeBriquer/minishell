@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/11 21:29:31 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/12 14:46:56 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 int		g_print_all;
 int		g_sigint;
 void	simple_parse(char *command);
-t_split	*parse_command(char *command, int *err);
+t_split	*parse_command(char *command, t_error *error);
 void	print_parse_quotes(char *command);
 void	parse_env(t_list **env_list, char **env);
 void	print_entry(void *ventry);
@@ -40,7 +40,7 @@ void	free_tree(t_tree *tree);
 t_list	*init_entry(char *line, int exported);
 char	*search_env(t_list *env, char *to_find);
 int		execute(t_split *split, t_list **envl, char *line);
-void	print_error_parsing(int err);
+void	print_error_parsing(t_error error);
 void	print_parsed_command(t_split *split);
 t_tree	*create_tree(t_split *split, char *line);
 void	print_tree(t_tree *tree, t_split *split);

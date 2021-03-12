@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/11 21:07:04 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/12 14:44:03 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,12 @@ typedef struct		s_tree
 	struct s_tree	*left;
 	struct s_tree	*right;
 }					t_tree;
+
+typedef struct		s_error
+{
+	int				num;
+	char			token;
+}					t_error;
 
 typedef int	(*t_exec)(t_info *cmd, t_list **envl);
 

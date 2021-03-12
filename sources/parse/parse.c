@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 17:37:50 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/12 14:16:33 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/12 14:43:19 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	fill_words(t_split *split, int words, char *command)
 	return (0);
 }
 
-static int	add_virtual_spaces(t_split *split, int words)
+static char	add_virtual_spaces(t_split *split, int words, char *token)
 {
 	int		i;
 	char	c;
@@ -73,8 +73,11 @@ static int	add_virtual_spaces(t_split *split, int words)
 		c = split[i].sep;
 		if ((c == '>' || c == '<' || c == 'd' || c == ';' || c == '|'))
 		{
-			if (redir && c != '|')
+			if (redir)
+			{
+				*token = c;
 				return (1);
+			}
 			redir = 1;
 			if (i > 0)
 				split[i - 1].space = 1;
@@ -86,31 +89,30 @@ static int	add_virtual_spaces(t_split *split, int words)
 	return (0);
 }
 
-t_split		*parse_command(char *command, int *err)
+t_split		*parse_command(char *command, t_error *error)
 {
 	int		l;
 	int		words;
 	t_split	*split;
 
-	*err = SUCCESS;
+	error->num = SUCCESS;
 	trim_spaces(command);
 	l = ft_strlen(command);
 	if (l == 0)
 		return (NULL);
 	words = nb_words(command);
-	*err = SYNTAX_QUOTES;
+	error->num = SYNTAX_QUOTES;
 	if (words < 0)
 		return (NULL);
 	split = malloc((words + 1) * sizeof(t_split));
-	*err = ALLOCATION_FAIL;
-	if (!split)
-		return (NULL);
-	if (fill_words(split, words, command) < 0)
+	error->num = ALLOCATION_FAIL;
+	if (!split || fill_words(split, words, command) < 0)
 		return (NULL);
 	split[words].str = NULL;
 	split[words].sep = '\0';
-	*err = SYNTAX_REDIR;
-	if (add_virtual_spaces(split, words) && free_split(split, words))
+	error->num = SYNTAX_REDIR;
+	if (add_virtual_spaces(split, words, &(error->token))
+		&& free_split(split, words))
 		return (NULL);
 	return (split);
 }
