@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:36:55 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/13 18:42:17 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/13 19:12:50 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,21 @@
 
 static void	handler(int signo)
 {
+	ft_putstr("\b\b  \b\b");
 	if (signo == SIGINT)
 	{
 		g_sigint = 1;
-		ft_printf("\n");
+		ft_putstr("\n");
 		prompt();
+	}
+	if (signo == SIGQUIT)
+	{
+		if (g_sigquit)
+		{
+			g_sigquit = 0;
+			ft_putstr("Quit (core dumped)\n");
+			// + exit 131
+		}
 	}
 }
 
@@ -48,12 +58,16 @@ static int	waiting_command(t_list **envl)
 	char	*line;
 
 	signal(SIGINT, &handler);
+	signal(SIGQUIT, &handler);
 	line = NULL;
 	g_sigint = 0;
 	add_env("?begin", ft_strdup("0"), envl, -1);
 	prompt();
 	while (reader(&line) > 0)
+	{
+		g_sigquit = 0;
 		parse_and_exec(envl, line);
+	}
 	if (line)
 		free(line);
 	return (CSIGINT * g_sigint);
