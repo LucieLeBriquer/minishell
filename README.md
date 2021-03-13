@@ -16,6 +16,7 @@
 - [done] faire les commandes built-in pour commencer
 ### En detail (a suppr au fur et a mesure)
 - faire une liste de commandes de tous les trucs à tester puis push
+- recheck un coup `ctrl-C`, `ctrl-D` et `ctrl-\`
 
 ## Travail attendu
 Écrivez un shell qui doit :
