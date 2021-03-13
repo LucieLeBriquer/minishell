@@ -14,10 +14,8 @@
 - [done] se renseigner sur les signaux qui peuvent être envoyés pendant l'exécution d'un processus
 - [done] rajouter un entier d'état pour savoir si la commande est exportée ou non
 - [done] faire les commandes built-in pour commencer
-- termcaps et historique
 ### En detail (a suppr au fur et a mesure)
-- termcaps pour l'historique
-- recheck plein de commandes et les leaks
+- faire une liste de commandes de tous les trucs à tester puis push
 
 ## Travail attendu
 Écrivez un shell qui doit :
