@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/13 18:30:54 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/13 19:00:21 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 
 int		g_print_all;
 int		g_sigint;
+int		g_sigquit;
 
 void	simple_parse(char *command);
 t_split	*parse_command(char *command, t_error *error);
