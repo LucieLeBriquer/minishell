@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:58:45 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/04 23:39:47 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/13 17:40:48 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ t_info		*init_node(int i, int type, int number, char *line)
 	info->args = NULL;
 	info->argv = NULL;
 	info->seps = NULL;
+	info->is_subprocess = 0;
 	init_aux(info);
 	return (info);
 }

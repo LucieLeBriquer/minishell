@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:39:28 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/11 21:38:34 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/13 17:34:34 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int			ft_echo(t_info *cmd, t_list **envl)
 	{
 		change_stdin_stdout(cmd);
 		print_args(cmd->argv + cmd->offset, (i > 1), i);
-		exit(0);
+		exit(SUCCESS);
 	}
-	return (0);
+	return (SUCCESS);
 }

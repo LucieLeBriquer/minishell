@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/12 14:46:56 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/13 17:30:34 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	print_leave(t_info cmd, t_split *split, int j);
 
 int		multiple_var(t_info cmd, t_list **envl);
 int		export_all(char **vars, t_list **envl, int exported);
-void	invalid_identifier(char *str);
+void	invalid_identifier(char *str, int exported);
 int		add_env(char *var, char *value, t_list **envl, int exported);
 
 /*
@@ -145,7 +145,7 @@ int		size_var(char *str, t_list *envl, char **value);
 */
 
 void	print_title(char *s);
-void	print_error(char *file, int err, char *error);
+void	print_error(char *exe, char *file, int err, char *error);
 
 /*
 ** To delete

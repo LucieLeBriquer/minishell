@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:39:04 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/12 15:41:22 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/13 17:46:59 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	print_leave(t_info cmd, t_split *split, int j)
 		print_title("EXECUTE");
 		ft_printf("\t\xE2\xAE\x9f%4d   ", cmd.input);
 		ft_printf("\xE2\xAE\x9D%4d\t", cmd.output);
+		ft_printf("sub=%d\t", cmd.is_subprocess);
 	}
 	else
 		ft_printf("\t%safter expansion  \t", GREY);

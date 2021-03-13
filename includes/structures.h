@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/12 15:41:41 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/13 17:40:22 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # define NB_SEPS 6
 # define NB_TYPES 4
 # define NB_BUILTIN 7
+# define STDIN 0
+# define STDOUT 1
+# define STDERR 2
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
 # endif
@@ -65,6 +68,7 @@ typedef struct		s_info
 	char			*first_word;
 	int				start_args;
 	int				offset;
+	int				is_subprocess;
 	t_split			*split;
 }					t_info;
 
@@ -86,8 +90,9 @@ typedef int	(*t_exec)(t_info *cmd, t_list **envl);
 enum	{CMD, PIPE, LEFT, RIGHT, RRIGHT, SEMIC};
 enum	{BUILTIN, EXECUTABLE, DECLARATION, EXECBIN};
 enum	{ECHO, CD, PWD, EXPORT, UNSET, ENV, EXIT};
+enum	{RESET, SPACE, QUOTE, DB_QUOTE, REDIR, OPERATOR};
 enum	{SUCCESS = 0, PIPE_FAIL = -1, FORK_FAIL = -2, ALLOCATION_FAIL = -3,\
 		SYNTAX_QUOTES = -4,	SYNTAX_REDIR = -5};
-enum	{RESET, SPACE, QUOTE, DB_QUOTE, REDIR, OPERATOR};
+enum	{ERROR = 1, MISUSE = 2, CANTEXEC = 126, NOTFOUND = 127};
 
 #endif

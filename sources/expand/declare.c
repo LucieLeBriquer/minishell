@@ -6,18 +6,11 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 18:49:52 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/12 15:35:09 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/13 17:20:35 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void		invalid_identifier(char *str)
-{
-	ft_putstr_fd("minishell: export: ", 2);
-	ft_putstr_fd(str, 2);
-	ft_putstr_fd(": not a valid identifier\n", 2);
-}
 
 int			add_new_var(char *var, char *value, t_list **envl, int exported)
 {
@@ -26,12 +19,12 @@ int			add_new_var(char *var, char *value, t_list **envl, int exported)
 
 	new = malloc(sizeof(t_list));
 	if (!new)
-		return (-1);
+		return (ERROR);
 	cont = malloc(sizeof(t_env));
 	if (!cont)
 	{
 		free(new);
-		return (-1);
+		return (ERROR);
 	}
 	cont->var = var;
 	cont->value = value;
@@ -43,7 +36,7 @@ int			add_new_var(char *var, char *value, t_list **envl, int exported)
 	new->content = cont;
 	new->next = NULL;
 	ft_lstadd_back(envl, new);
-	return (0);
+	return (SUCCESS);
 }
 
 int			add_env(char *var, char *value, t_list **envl, int exported)
@@ -63,7 +56,7 @@ int			add_env(char *var, char *value, t_list **envl, int exported)
 			}
 			if (exported > ((t_env *)env->content)->exported)
 				((t_env *)env->content)->exported = exported;
-			return (0);
+			return (SUCCESS);
 		}
 		env = env->next;
 	}
@@ -90,11 +83,11 @@ static int	export_one(char *var, t_list **envl, int exported)
 	}
 	if (authorized_char(varname))
 		return (add_env(varname, value, envl, exported));
-	invalid_identifier(varname);
+	invalid_identifier(varname, exported);
 	free(varname);
 	if (value)
 		free(value);
-	return (-2);
+	return (ERROR);
 }
 
 int			export_all(char **vars, t_list **envl, int exported)
@@ -109,7 +102,7 @@ int			export_all(char **vars, t_list **envl, int exported)
 		err += export_one(vars[i], envl, exported);
 		i++;
 	}
-	if (err != 0)
-		return (-1);
-	return (0);
+	if (err)
+		return (ERROR);
+	return (SUCCESS);
 }

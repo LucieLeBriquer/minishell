@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:48:01 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/12 16:07:44 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/13 17:32:50 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,10 @@ int			cmd_type(t_info *cmd, int i)
 static int	error_in_out(t_info *cmd)
 {
 	if (cmd->err)
-		print_error(cmd->file_error, cmd->err, NULL);
+		print_error(NULL, cmd->file_error, cmd->err, NULL);
 	else
-		print_error(NULL, 0, "syntax error near unexpected token `newline'\n");
+		print_error(NULL, NULL, 0,\
+		"syntax error near unexpected token `newline'\n");
 	return (-1);
 }
 
