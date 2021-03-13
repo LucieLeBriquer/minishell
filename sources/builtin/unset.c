@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:41:45 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/05 16:07:56 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/13 18:08:38 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ int		ft_unset(t_info *cmd, t_list **envl)
 			unset_one(cmd->argv[i], *envl);
 		else
 		{
-			ft_printf_fd(2, "minishell: unset: '%s': \
-				not a valid identifier\n", cmd->argv[i]);
+			invalid_identifier(cmd->argv[i], "unset", 1);
 			ret = 1;
 		}
 		i++;

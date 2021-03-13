@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:48:38 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/05 16:14:22 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/13 18:08:59 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int			open_executable(t_info *cmd, t_list *envl, char **file)
 
 	path = search_in_env(envl, "PATH");
 	if (!path)
-		return (-1);
+		return (ERROR);
 	path_list = ft_split(path, ":=");
 	fd = -1;
 	*file = NULL;
@@ -47,7 +47,7 @@ int			open_executable(t_info *cmd, t_list *envl, char **file)
 	if (fd > 0)
 	{
 		close(fd);
-		return (1);
+		return (SUCCESS);
 	}
-	return (-1);
+	return (ERROR);
 }

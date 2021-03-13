@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:39:04 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/13 17:36:41 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/13 18:08:19 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,15 @@ void	print_error(char *exe, char *file, int err, char *error)
 	ft_putstr_fd("\n", STDERR);
 }
 
-void		invalid_identifier(char *str, int exported)
+void		invalid_identifier(char *str, char *func, int exported)
 {
 	ft_putstr_fd("minishell: ", STDERR);
-	if (exported)
-		ft_putstr_fd("export: `", STDERR);
-	else
-		write(STDERR, "`", 1);
+	if (func && exported)
+	{
+		ft_putstr_fd(func, STDERR);
+		ft_putstr_fd(": ", STDERR);
+	}
+	write(STDERR, "`", 1);
 	ft_putstr_fd(str, STDERR);
 	ft_putstr_fd("': not a valid identifier\n", STDERR);
 }

@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 18:49:52 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/13 17:20:35 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/13 18:08:10 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static int	export_one(char *var, t_list **envl, int exported)
 	}
 	if (authorized_char(varname))
 		return (add_env(varname, value, envl, exported));
-	invalid_identifier(varname, exported);
+	invalid_identifier(varname, "export", exported);
 	free(varname);
 	if (value)
 		free(value);

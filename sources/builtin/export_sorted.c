@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:41:31 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 22:02:16 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/13 18:00:45 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int			print_sorted(t_list *envl, t_info *cmd)
 		ft_lstsort(&sorted, &cmp_entry);
 		print_envl(sorted, 1);
 		ft_lstclear(&sorted, &free_entry);
-		exit(0);
+		exit(SUCCESS);
 	}
-	return (0);
+	return (SUCCESS);
 }

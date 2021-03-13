@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:49:15 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/13 17:57:42 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/13 18:02:18 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	exec_execbin(t_info *cmd, t_list **envl)
 	char	*file;
 	int		err;
 
-	if (open_executable(cmd, *envl, &file) < 0)
+	if (open_executable(cmd, *envl, &file))
 	{
 		print_error(cmd->args[cmd->offset], NULL, 0, "command not found");
 		return (NOTFOUND);
