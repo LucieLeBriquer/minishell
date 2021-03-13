@@ -6,13 +6,13 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:19:16 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/01 20:00:25 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/13 18:39:39 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*search_in_env(t_list *envl, char *var)
+char		*search_in_env(t_list *envl, char *var)
 {
 	while (envl)
 	{
@@ -23,7 +23,7 @@ char	*search_in_env(t_list *envl, char *var)
 	return (NULL);
 }
 
-int		list_size(t_list *begin_list)
+static int	list_size(t_list *begin_list)
 {
 	int		i;
 
@@ -36,7 +36,7 @@ int		list_size(t_list *begin_list)
 	return (i);
 }
 
-void	ft_lstsort(t_list **begin_list, int (*cmp)())
+void		ft_lstsort(t_list **begin_list, int (*cmp)())
 {
 	t_list	*current;
 	void	*save;
@@ -65,7 +65,7 @@ void	ft_lstsort(t_list **begin_list, int (*cmp)())
 	}
 }
 
-char	*ft_strcut(char *line, char c)
+static char	*ft_strcut(char *line, char c)
 {
 	int		i;
 	char	*res;
@@ -84,7 +84,7 @@ char	*ft_strcut(char *line, char c)
 	return (res);
 }
 
-int		variable_match(t_list *envl, char *var, int cut)
+int			variable_match(t_list *envl, char *var, int cut)
 {
 	char	*env_var;
 	char	*to_find;

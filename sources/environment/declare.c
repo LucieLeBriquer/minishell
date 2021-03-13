@@ -6,13 +6,13 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 18:49:52 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/13 18:08:10 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/13 18:36:36 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			add_new_var(char *var, char *value, t_list **envl, int exported)
+static int	add_new_var(char *var, char *value, t_list **envl, int exported)
 {
 	t_list	*new;
 	t_env	*cont;

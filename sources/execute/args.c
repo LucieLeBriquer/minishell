@@ -6,11 +6,48 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 18:02:50 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/12 14:11:21 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/13 18:26:52 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int			number_of_args(char **args)
+{
+	int	i;
+
+	i = 0;
+	while (args[i])
+		i++;
+	return (i);
+}
+
+int			create_tab_args(t_info *cmd)
+{
+	char	c;
+	int		i;
+	int		j;
+
+	cmd->argv = malloc((cmd->nb_args + 1) * sizeof(char *));
+	if (!(cmd->argv))
+		return (-1);
+	i = 0;
+	j = cmd->offset;
+	while (j < cmd->nb_args)
+	{
+		c = cmd->seps[j];
+		if (c == 'd' || c == '>' || c == '<')
+			j++;
+		else
+		{
+			cmd->argv[i] = cmd->args[j];
+			i++;
+		}
+		j++;
+	}
+	cmd->argv[i] = NULL;
+	return (0);
+}
 
 static int	count_arg(t_info cmd, t_split *split)
 {

@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:48:01 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/13 17:32:50 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/13 18:32:25 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int			execute_cmd(t_info *cmd, t_split *split, t_list **envl)
 	exec_func[EXECUTABLE] = &exec_executable;
 	exec_func[DECLARATION] = &exec_declaration;
 	exec_func[EXECBIN] = &exec_execbin;
-	print_leave(*cmd, split, 0);
 	cmd->split = split;
 	if (g_sigint)
 	{
@@ -71,12 +70,11 @@ int			execute_cmd(t_info *cmd, t_split *split, t_list **envl)
 		g_sigint = 0;
 	}
 	expand(cmd, split, *envl);
-	print_leave(*cmd, split, 1);
 	if (cmd->number == 0)
-		return (0);
+		return (SUCCESS);
 	err = join_words(cmd, split);
 	if (err)
-		return (-1);
+		return (ERROR);
 	if (update_in_out(cmd) < 0)
 		return (error_in_out(cmd));
 	if (create_tab_args(cmd))

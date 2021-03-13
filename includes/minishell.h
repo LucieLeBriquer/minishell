@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/13 18:09:15 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/13 18:30:54 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 
 int		g_print_all;
 int		g_sigint;
+
 void	simple_parse(char *command);
 t_split	*parse_command(char *command, t_error *error);
 void	print_parse_quotes(char *command);
@@ -66,13 +67,10 @@ int		authorized_char(char *s);
 void	print_envl(t_list *envl, int declare);
 int		print_sorted(t_list *envl, t_info *cmd);
 void	free_all(char *line, t_split *split);
-char	*ft_strcut(char *line, char c);
 char	*search(char *var, t_list *envl);
 int		reader(char **line);
-char	*join_all_arguments(t_split *split, int start, int number);
 void	ft_lstsort(t_list **begin_list, int (*cmp)());
 int		fork_and_exec(t_info *cmd, t_list *envl, char *file);
-void	header(void);
 void	print_leave(t_info cmd, t_split *split, int j);
 
 /*
@@ -146,6 +144,8 @@ int		size_var(char *str, t_list *envl, char **value);
 
 void	print_title(char *s);
 void	print_error(char *exe, char *file, int err, char *error);
+void	prompt(void);
+void	header(void);
 
 /*
 ** To delete

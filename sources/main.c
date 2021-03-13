@@ -6,13 +6,13 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:36:55 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/13 18:15:28 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/13 18:42:17 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	handler(int signo)
+static void	handler(int signo)
 {
 	if (signo == SIGINT)
 	{
@@ -22,12 +22,30 @@ void	handler(int signo)
 	}
 }
 
-int		waiting_command(t_list **envl)
+static void	parse_and_exec(t_list **envl, char *line)
+{
+	int		err;
+	t_error	error;
+	t_split	*split;
+
+	err = 0;
+	split = parse_command(line, &error);
+	if (!split)
+		print_error_parsing(error);
+	else
+	{
+		print_parsed_command(split);
+		err = execute(split, envl, line);
+	}
+	add_env("?begin", ft_itoa(err), envl, -1);
+	free_all(line, split);
+	if (!g_sigint)
+		prompt();
+}
+
+static int	waiting_command(t_list **envl)
 {
 	char	*line;
-	t_split	*split;
-	t_error	error;
-	int		err;
 
 	signal(SIGINT, &handler);
 	line = NULL;
@@ -35,27 +53,13 @@ int		waiting_command(t_list **envl)
 	add_env("?begin", ft_strdup("0"), envl, -1);
 	prompt();
 	while (reader(&line) > 0)
-	{
-		err = 0;
-		split = parse_command(line, &error);
-		if (!split)
-			print_error_parsing(error);
-		else
-		{
-			print_parsed_command(split);
-			err = execute(split, envl, line);
-		}
-		add_env("?begin", ft_itoa(err), envl, -1);
-		free_all(line, split);
-		if (!g_sigint)
-			prompt();
-	}
+		parse_and_exec(envl, line);
 	if (line)
 		free(line);
 	return (CSIGINT * g_sigint);
 }
 
-int		main(int argc, char **argv, char **env)
+int			main(int argc, char **argv, char **env)
 {
 	t_list	*envl;
 	int		exit_value;
@@ -65,7 +69,7 @@ int		main(int argc, char **argv, char **env)
 		g_print_all = 0;
 	else
 		g_print_all = 1;
-	header_simple();
+	header();
 	parse_env(&envl, env);
 	exit_value = waiting_command(&envl);
 	if (!exit_value)

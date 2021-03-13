@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/13 18:12:39 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/13 18:44:01 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ enum	{BUILTIN, EXECUTABLE, DECLARATION, EXECBIN};
 enum	{ECHO, CD, PWD, EXPORT, UNSET, ENV, EXIT};
 enum	{RESET, SPACE, QUOTE, DB_QUOTE, REDIR, OPERATOR};
 enum	{SUCCESS = 0, PIPE_FAIL = 3, FORK_FAIL = 4, ALLOCATION_FAIL = 5,\
-		SYNTAX_QUOTES = 6, SYNTAX_REDIR = 7};
-enum	{ERROR = 1, MISUSE = 2, CANTEXEC = 126, NOTFOUND = 127, CSIGINT = 130};
+	SYNTAX_QUOTES = 6, SYNTAX_REDIR = 7, TOOMANY = 24, ERROR = 1, MISUSE = 2,\
+	CANTEXEC = 126, NOTFOUND = 127, CSIGINT = 130};
 
 #endif

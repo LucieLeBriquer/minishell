@@ -5,21 +5,33 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/01 19:51:33 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/04 17:51:16 by lle-briq         ###   ########.fr       */
+/*   Created: 2021/03/01 19:51:26 by lle-briq          #+#    #+#             */
+/*   Updated: 2021/03/13 18:44:58 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		number_of_args(char **args)
+void	change_stdin_stdout(t_info *cmd)
 {
-	int	i;
+	if (cmd->output != STDOUT)
+	{
+		close(STDOUT);
+		dup(cmd->output);
+	}
+	if (cmd->input != STDIN)
+	{
+		close(STDIN);
+		dup(cmd->input);
+	}
+}
 
-	i = 0;
-	while (args[i])
-		i++;
-	return (i);
+void	close_unused_fd(t_info *cmd)
+{
+	if (cmd->input != STDIN)
+		close(cmd->input);
+	if (cmd->output != STDOUT)
+		close(cmd->output);
 }
 
 int		authorized_char(char *s)
@@ -36,33 +48,6 @@ int		authorized_char(char *s)
 		i++;
 	}
 	return (1);
-}
-
-int		create_tab_args(t_info *cmd)
-{
-	char	c;
-	int		i;
-	int		j;
-
-	cmd->argv = malloc((cmd->nb_args + 1) * sizeof(char *));
-	if (!(cmd->argv))
-		return (-1);
-	i = 0;
-	j = cmd->offset;
-	while (j < cmd->nb_args)
-	{
-		c = cmd->seps[j];
-		if (c == 'd' || c == '>' || c == '<')
-			j++;
-		else
-		{
-			cmd->argv[i] = cmd->args[j];
-			i++;
-		}
-		j++;
-	}
-	cmd->argv[i] = NULL;
-	return (0);
 }
 
 int		is_path(char *word)

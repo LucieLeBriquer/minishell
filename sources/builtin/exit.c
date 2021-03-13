@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:39:36 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/13 17:44:05 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/13 18:34:00 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ static void	free_exit(t_info *cmd, t_list **envl)
 	ft_lstclear(envl, &free_entry);
 }
 
-int	ft_exit(t_info *cmd, t_list **envl)
+int			ft_exit(t_info *cmd, t_list **envl)
 {
 	int	exit_value;
 
-	if (cmd->nb_args < 2)
+	if (number_of_args(cmd->argv) < 2)
 	{
 		exit_value = ft_atoi(search_in_env(*envl, "?begin"));
 		free_exit(cmd, envl);
@@ -50,7 +50,7 @@ int	ft_exit(t_info *cmd, t_list **envl)
 		free_exit(cmd, envl);
 		exit(MISUSE);
 	}
-	else if (cmd->nb_args > 2)
+	else if (number_of_args(cmd->argv) > 2)
 	{
 		print_error("minishell: exit", NULL, 0, "too many arguments");
 		return (ERROR);

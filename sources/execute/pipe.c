@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:37:45 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/13 17:55:48 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/13 18:25:03 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,8 @@ int			pipe_recursive(t_tree *tree, t_split *split, t_list **envl)
 	}
 	else
 	{
-		errno = 0;
 		if (pipe(pfd))
 			return (PIPE_FAIL);
-		if (g_print_all == 1)
-			ft_printf("%screate pipe [%d,%d]%s\n", GREY, pfd[0], pfd[1], WHITE);
 		tree->left->info->output = pfd[1];
 		tree->left->info->is_subprocess = 1;
 		fill_subtree_fd(tree->right, 0, pfd[0], 1);

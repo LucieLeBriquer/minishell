@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 18:14:46 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/13 18:14:47 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/13 18:16:19 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	prompt(void)
 	ft_putstr("\033[0m$ ");
 }
 
-void	header_simple(void)
+void	header(void)
 {
 	ft_putstr("\033[1;35m  __  __ _       _     _          _ _\n");
 	ft_putstr(" |  \\/  (_)_ __ (_)___| |__   ___| | |\n");

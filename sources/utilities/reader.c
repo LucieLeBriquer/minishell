@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:58:29 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/11 20:45:38 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/13 18:42:08 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int			reader(char **line)
 	while (size >= 0)
 	{
 		if (size == 0 && (!(*line) || ft_strlen(*line) == 0))
-			break;
+			break ;
 		else if (size == 0)
 			size = read(0, &c, 1);
 		else

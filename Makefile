@@ -15,12 +15,10 @@ SRCS		=  $(addprefix sources/, \
 			execute/types.c \
 			execute/fork.c \
 			execute/command.c \
-			execute/env.c \
 			execute/execute.c \
 			execute/file.c \
 			execute/useful.c \
 			execute/pipe.c \
-			execute/useful2.c \
 			parse/count.c \
 			parse/env.c \
 			parse/parse.c \
@@ -31,11 +29,11 @@ SRCS		=  $(addprefix sources/, \
 			parse/trim.c \
 			parse/useful.c \
 			execute/args.c \
-			reader/reader.c \
 			utilities/errors.c \
+			utilities/free.c \
 			utilities/print.c \
 			utilities/prompt.c \
-			utilities/free.c \
+			utilities/reader.c \
 			builtin/cd.c \
 			builtin/echo.c \
 			builtin/env.c \
@@ -44,10 +42,11 @@ SRCS		=  $(addprefix sources/, \
 			builtin/export_sorted.c \
 			builtin/pwd.c \
 			builtin/unset.c \
-			expand/declare.c \
-			expand/main.c \
-			expand/replace.c \
-			expand/useful.c \
+			environment/declare.c \
+			environment/main.c \
+			environment/replace.c \
+			environment/useful.c \
+			environment/env.c \
 			main.c )
  
 OBJS		= $(SRCS:.c=.o)
