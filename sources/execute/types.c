@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:49:15 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/13 17:22:16 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/13 17:57:42 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	exec_declaration(t_info *cmd, t_list **envl)
 		cmd->offset = i;
 		return (exec_func[cmd_type(cmd, i)](cmd, envl));
 	}
-	else if (cmd->output == STDOUT)
+	else if (!cmd->is_subprocess)
 		return (export_all(cmd->argv, envl, 0));
 	return (SUCCESS);
 }
@@ -60,7 +60,7 @@ int	exec_execbin(t_info *cmd, t_list **envl)
 
 	if (open_executable(cmd, *envl, &file) < 0)
 	{
-		print_error(cmd->args[cmd->offset], 0, "command not found");
+		print_error(cmd->args[cmd->offset], NULL, 0, "command not found");
 		return (NOTFOUND);
 	}
 	err = fork_and_exec(cmd, *envl, file);
