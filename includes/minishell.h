@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/15 18:45:14 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/15 23:06:58 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,10 @@ char	**create_env_tab(t_list *envl, int exported);
 void	fill_expanded(char *fill, char *old, t_list *envl);
 void	expand(t_info *cmd, t_split *split, t_list *envl);
 int		size_var(char *str, t_list *envl, char **value);
+
+void	expand_simple(t_list **words, char *str, t_list *envl);
+void	expand_hard(t_list **words, char *str, t_list *envl);
+int		new_expand(t_info *cmd, t_list *envl);
 
 /*
 ** Utilities

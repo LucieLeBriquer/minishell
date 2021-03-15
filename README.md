@@ -17,6 +17,9 @@
 ### En detail (a suppr au fur et a mesure)
 - faire une liste de commandes de tous les trucs à tester puis push
 - recheck un coup `ctrl-C`, `ctrl-D` et `ctrl-\`
+- finir l'expansion et le nouveau split
+- + faire gaffe si redirection a l'intérieur d'une variable donc go faire
+l'expansion après s'être occupée des redirectiosn (expansion quand meme pour le nom des files)
 
 ## Travail attendu
 Écrivez un shell qui doit :
