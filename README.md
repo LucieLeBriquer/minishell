@@ -22,6 +22,7 @@
 l'expansion après s'être occupée des redirectiosn (expansion quand meme pour le nom des files)
 - pour le nom des files :
 ```
+lucie@lucie-XPS:~/Code/minishell$ var="file 2"
 lucie@lucie-XPS:~/Code/minishell$ echo bl > $var
 bash: $var: ambiguous redirect
 ```
