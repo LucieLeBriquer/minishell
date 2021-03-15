@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:39:32 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/13 17:37:04 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/15 18:07:19 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int		ft_env(t_info *cmd, t_list **envl)
 	{
 		if (number_of_args(cmd->argv + cmd->offset) > 1)
 		{
-			print_error("env:", NULL, 0,\
-			"should be used without option and argument\n");
+			print_error("env", NULL, 0,\
+			"should be used without option and argument");
 			exit(MISUSE);
 		}
 		change_stdin_stdout(cmd);

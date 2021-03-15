@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/13 18:44:01 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/15 18:47:08 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct		s_info
 	int				start_args;
 	int				offset;
 	int				is_subprocess;
+	char			*all;
 	t_split			*split;
 }					t_info;
 

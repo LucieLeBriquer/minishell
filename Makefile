@@ -12,6 +12,7 @@ LIB_NAME	= $(LIB_DIR)libft.a
 INCS		= $(addprefix $(INCS_DIR), minishell.h structures.h)
 
 SRCS		=  $(addprefix sources/, \
+			execute/args.c \
 			execute/types.c \
 			execute/fork.c \
 			execute/command.c \
@@ -28,7 +29,6 @@ SRCS		=  $(addprefix sources/, \
 			parse/node.c \
 			parse/trim.c \
 			parse/useful.c \
-			execute/args.c \
 			utilities/errors.c \
 			utilities/free.c \
 			utilities/print.c \
@@ -43,7 +43,7 @@ SRCS		=  $(addprefix sources/, \
 			builtin/pwd.c \
 			builtin/unset.c \
 			environment/declare.c \
-			environment/main.c \
+			environment/expand.c \
 			environment/replace.c \
 			environment/useful.c \
 			environment/env.c \
