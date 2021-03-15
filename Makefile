@@ -13,6 +13,7 @@ INCS		= $(addprefix $(INCS_DIR), minishell.h structures.h)
 
 SRCS		=  $(addprefix sources/, \
 			execute/args.c \
+			execute/words.c \
 			execute/types.c \
 			execute/fork.c \
 			execute/command.c \
