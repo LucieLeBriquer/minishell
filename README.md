@@ -20,6 +20,11 @@
 - finir l'expansion et le nouveau split
 - + faire gaffe si redirection a l'intérieur d'une variable donc go faire
 l'expansion après s'être occupée des redirectiosn (expansion quand meme pour le nom des files)
+- pour le nom des files :
+```
+lucie@lucie-XPS:~/Code/minishell$ echo bl > $var
+bash: $var: ambiguous redirect
+```
 
 ## Travail attendu
 Écrivez un shell qui doit :
