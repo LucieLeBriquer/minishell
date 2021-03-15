@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:19:12 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/15 18:23:56 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/15 22:12:17 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	expanded_size(char *str, t_list *envl)
 	return (res + 1);
 }
 
-static void	expand_one(t_split *split, int i, t_list *envl)
+static void	expand_simple(t_split *split, int i, t_list *envl)
 {
 	char	*old;
 	int		size_tot;
@@ -73,8 +73,7 @@ void		expand(t_info *cmd, t_split *split, t_list *envl)
 	i = -1;
 	while (++i < cmd->number)
 	{
-		if (split[cmd->start + i].sep == '\"'
-			|| split[cmd->start + i].sep == ' ')
-			expand_one(split, cmd->start + i, envl);
+		if (split[cmd->start + i].sep == '\"' || split[cmd->start + i].sep == ' ')
+			expand_simple(split, cmd->start + i, envl);
 	}
 }
