@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:19:12 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/16 16:18:42 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/16 17:31:43 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	expand_hard(t_list **words, char *str, t_list *envl, t_list **seps, t_list 
 		ft_lstadd_back(words, to_add);
 		ft_lstadd_back(seps, ft_lstnew(" "));
 		if (split[i + 1])
-			ft_lstadd_back(spaces, ft_lstnew("1"));
+			ft_lstadd_back(spaces, ft_lstnew("0"));
 		i++;
 	}
 }

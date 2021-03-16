@@ -6,13 +6,13 @@ int		expand_then_add(t_list **words, char *str, char sep, int space, t_list *env
 	{
 		expand_simple(words, str, envl);
 		ft_lstadd_back(seps, ft_lstnew("\""));
-		ft_lstadd_back(spaces, ft_lstnew(ft_itoa(space)));
 	}
 	else
-	{
 		expand_hard(words, str, envl, seps, spaces);
-		ft_lstadd_back(spaces, ft_lstnew(ft_itoa(space)));
-	}
+	if (space)
+		ft_lstadd_back(spaces, ft_lstnew("1"));
+	else
+		ft_lstadd_back(spaces, ft_lstnew("0"));
 	return (SUCCESS);
 }
 
@@ -31,7 +31,7 @@ static int	list_to_tab(t_list *words, t_list *seps, t_list *spaces, t_info *cmd)
 	{
 		cmd->args_tmp[i] = ft_strdup((char *)words->content);
 		cmd->seps_tmp[i] = ((char *)seps->content)[0];
-		cmd->spaces_tmp[i] = ((int *)spaces->content)[0] - '0';
+		cmd->spaces_tmp[i] = ((char *)spaces->content)[0] - '0';
 		words = words->next; 
 		seps = seps->next;
 		spaces = spaces->next;

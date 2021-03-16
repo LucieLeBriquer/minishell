@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 18:02:50 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/16 17:05:08 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/16 17:29:01 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static int	count_arg(t_info cmd)
 	i = -1;
 	while (++i < cmd.nb_args_tmp)
 	{
+		ft_printf("%d, %d, %s\n", i, cmd.spaces_tmp[i], cmd.args_tmp[i]);
 		if (cmd.spaces_tmp[i])
 			nb_arg++;
 	}
