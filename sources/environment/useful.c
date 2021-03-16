@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:19:16 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/13 18:39:39 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/16 15:53:34 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char		*search_in_env(t_list *envl, char *var)
 	return (NULL);
 }
 
-static int	list_size(t_list *begin_list)
+int			list_size(t_list *begin_list)
 {
 	int		i;
 

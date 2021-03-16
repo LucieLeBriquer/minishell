@@ -47,6 +47,7 @@ SRCS		=  $(addprefix sources/, \
 			environment/replace.c \
 			environment/useful.c \
 			environment/env.c \
+			environment/join.c \
 			environment/simple.c \
 			environment/new.c \
 			main.c )

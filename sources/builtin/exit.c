@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:39:36 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/13 18:34:00 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/16 16:59:17 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	ft_isnum(char *str)
 static void	free_exit(t_info *cmd, t_list **envl)
 {
 	ft_putstr("exit\n");
-	free_all(cmd->line, cmd->split);
+	//free_all(cmd->line, cmd->split);
 	free_tree(cmd->root);
 	ft_lstclear(envl, &free_entry);
 }

@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/15 23:06:58 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/16 17:15:34 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int		multiple_var(t_info cmd, t_list **envl);
 int		export_all(char **vars, t_list **envl, int exported);
 void	invalid_identifier(char *str, char *func, int exported);
 int		add_env(char *var, char *value, t_list **envl, int exported);
+int		list_size(t_list *lst);
 
 /*
 ** Built-in
@@ -140,8 +141,11 @@ void	expand(t_info *cmd, t_split *split, t_list *envl);
 int		size_var(char *str, t_list *envl, char **value);
 
 void	expand_simple(t_list **words, char *str, t_list *envl);
-void	expand_hard(t_list **words, char *str, t_list *envl);
-int		new_expand(t_info *cmd, t_list *envl);
+void	expand_hard(t_list **words, char *str, t_list *envl, t_list **seps, t_list **spaces);
+int		new_expand(t_info *cmd, t_list *envl, t_split *split);
+
+int		words(t_info *cmd, t_split *split);
+int		join_args(t_info *cmd);
 
 /*
 ** Utilities
@@ -157,7 +161,8 @@ void	header(void);
 */
 
 void	print_tab(char **tab);
+void	print_tabs(t_info cmd, int join);
+void	print_expand(t_info cmd);
 
-int			words(t_info *cmd, t_split *split);
 
 #endif

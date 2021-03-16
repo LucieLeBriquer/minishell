@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/15 22:11:19 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/16 16:53:05 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,15 @@ typedef struct		s_info
 	char			*line;
 	void			*root;
 	char			**args;
-	char			**argv;
 	char			*seps;
+	int				*spaces;//maybe useless
 	int				nb_args;
+	char			**args_tmp;
+	char			*seps_tmp;
+	int				*spaces_tmp;
+	int				nb_args_tmp;
+	char			**argv;
 	char			**env;
-	int				*spaces;
 	char			*file_error;
 	int				err;
 	int				errno_save;
@@ -70,7 +74,6 @@ typedef struct		s_info
 	int				offset;
 	int				is_subprocess;
 	char			*all;
-	t_split			*split;
 	t_list			*words;
 }					t_info;
 
