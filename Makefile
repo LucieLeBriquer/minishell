@@ -43,7 +43,6 @@ SRCS		=  $(addprefix sources/, \
 			builtin/pwd.c \
 			builtin/unset.c \
 			environment/declare.c \
-			environment/expand.c \
 			environment/replace.c \
 			environment/useful.c \
 			environment/env.c \
