@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/16 17:15:34 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/17 16:40:52 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ int		new_expand(t_info *cmd, t_list *envl, t_split *split);
 
 int		words(t_info *cmd, t_split *split);
 int		join_args(t_info *cmd);
+char	*char_to_string(char c);
 
 /*
 ** Utilities
@@ -155,6 +156,7 @@ void	print_title(char *s);
 void	print_error(char *exe, char *file, int err, char *error);
 void	prompt(void);
 void	header(void);
+void	free_lists(t_list **w, t_list **s, t_list **sp);
 
 /*
 ** To delete

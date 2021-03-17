@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 17:37:50 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/12 15:34:29 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/17 15:53:31 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ static char	add_virtual_spaces(t_split *split, int words, char *token)
 		else
 			redir = 0;
 	}
+	split[i - 1].space = 1;
 	return (0);
 }
 

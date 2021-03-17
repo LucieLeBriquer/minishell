@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:48:01 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/16 17:41:09 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/16 17:42:09 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int			cmd_type(t_info *cmd, int i)
 		return (EXECBIN);
 }
 
-/*
 static int	error_in_out(t_info *cmd)
 {
 	if (cmd->err)
@@ -54,7 +53,6 @@ static int	error_in_out(t_info *cmd)
 		"syntax error near unexpected token `newline'\n");
 	return (-1);
 }
-*/
 
 int			execute_cmd(t_info *cmd, t_split *split, t_list **envl)
 {
@@ -75,8 +73,8 @@ int			execute_cmd(t_info *cmd, t_split *split, t_list **envl)
 	new_expand(cmd, *envl, split);
 	if (cmd->nb_args_tmp == 0)
 		return (SUCCESS);
-//	if (update_in_out(cmd) < 0)
-//		return (error_in_out(cmd));
+	if (update_in_out(cmd) < 0)
+		return (error_in_out(cmd));
 	if (create_tab_args(cmd))
 		return (ALLOCATION_FAIL);
 	return (exec_func[cmd_type(cmd, 0)])(cmd, envl);

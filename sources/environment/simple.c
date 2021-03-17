@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:19:12 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/16 17:31:43 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/17 16:47:40 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,16 @@ void	expand_hard(t_list **words, char *str, t_list *envl, t_list **seps, t_list 
 		return ;
 	fill_expanded(new, str, envl);
 	split = ft_splitchar(new, ' ');
+	free(new);
 	i = 0;
 	while (split[i])
 	{
-		to_add = ft_lstnew(split[i]);
+		to_add = ft_lstnew(ft_strdup(split[i]));
 		ft_lstadd_back(words, to_add);
-		ft_lstadd_back(seps, ft_lstnew(" "));
+		ft_lstadd_back(seps, ft_lstnew(char_to_string(' ')));
 		if (split[i + 1])
-			ft_lstadd_back(spaces, ft_lstnew("0"));
+			ft_lstadd_back(spaces, ft_lstnew(ft_itoa(1)));
 		i++;
 	}
+	free_tab(split);
 }

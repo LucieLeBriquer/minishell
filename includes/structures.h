@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/16 16:53:05 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/17 16:03:32 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ typedef struct		s_info
 	int				offset;
 	int				is_subprocess;
 	char			*all;
-	t_list			*words;
 }					t_info;
 
 typedef struct		s_tree

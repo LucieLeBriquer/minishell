@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 18:02:50 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/13 18:26:52 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/16 17:44:54 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ static void	fill_args(t_info cmd, t_split *split)
 	int		j;
 	int		end;
 	char	*current;
+	char	*save;
 
 	i = -1;
 	j = 0;
@@ -81,9 +82,9 @@ static void	fill_args(t_info cmd, t_split *split)
 		current = ft_strdup("");
 		while (j < cmd.number && !end)
 		{
-			cmd.args[i] = current;
+			save = current;
 			current = ft_strjoin(cmd.args[i], split[cmd.start + j].str);
-			free(cmd.args[i]);
+			free(save);
 			if (split[cmd.start + j].space)
 				end = 1;
 			j++;

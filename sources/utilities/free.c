@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:58:52 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/15 19:54:23 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/17 16:48:23 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,13 @@ void	free_tab(char **args)
 	free(args);
 }
 
+void	free_lists(t_list **words, t_list **seps, t_list **spaces)
+{
+	ft_lstclear(words, &free);
+	ft_lstclear(seps, &free);
+	ft_lstclear(spaces, &free);
+}
+
 void	free_tree(t_tree *tree)
 {
 	t_info	*cmd;
@@ -66,6 +73,12 @@ void	free_tree(t_tree *tree)
 			free(cmd->seps);
 		if (cmd->spaces)
 			free(cmd->spaces);
+		if (cmd->args_tmp)
+			free_tab(cmd->args_tmp);
+		if (cmd->seps_tmp)
+			free(cmd->seps_tmp);
+		if (cmd->spaces_tmp)
+			free(cmd->spaces_tmp);
 		close_unused_fd(cmd);
 		free(cmd);
 	}

@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:58:45 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/16 17:22:14 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/17 16:04:29 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static void	init_aux(t_info *info)
 	info->args_tmp = NULL;
 	info->seps_tmp = NULL;
 	info->spaces_tmp = NULL;
-	info->words = NULL;
 	info->all = NULL;
 }
 
