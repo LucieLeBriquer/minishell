@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:19:12 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/17 16:47:40 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/17 17:08:24 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	expand_simple(t_list **words, char *str, t_list *envl)
 	ft_lstadd_back(words, to_add);
 }
 
-void	expand_hard(t_list **words, char *str, t_list *envl, t_list **seps, t_list **spaces)
+int		expand_hard(t_list **words, char *str, t_list *envl, t_list **seps, t_list **spaces, int r)
 {
 	int		size_tot;
 	int		i;
@@ -78,7 +78,7 @@ void	expand_hard(t_list **words, char *str, t_list *envl, t_list **seps, t_list 
 	size_tot = expanded_size(str, envl);
 	new = malloc(size_tot * sizeof(char));
 	if (!new)
-		return ;
+		return (ALLOCATION_FAIL);
 	fill_expanded(new, str, envl);
 	split = ft_splitchar(new, ' ');
 	free(new);
@@ -93,4 +93,7 @@ void	expand_hard(t_list **words, char *str, t_list *envl, t_list **seps, t_list 
 		i++;
 	}
 	free_tab(split);
+	if (i > 1 && r)
+		return (AMBIGUOUS_REDIR);
+	return (SUCCESS);
 }

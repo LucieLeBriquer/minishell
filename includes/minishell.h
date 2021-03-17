@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/17 16:40:52 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/17 17:08:47 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ void	expand(t_info *cmd, t_split *split, t_list *envl);
 int		size_var(char *str, t_list *envl, char **value);
 
 void	expand_simple(t_list **words, char *str, t_list *envl);
-void	expand_hard(t_list **words, char *str, t_list *envl, t_list **seps, t_list **spaces);
+int		expand_hard(t_list **words, char *str, t_list *envl, t_list **seps, t_list **spaces, int r);
 int		new_expand(t_info *cmd, t_list *envl, t_split *split);
 
 int		words(t_info *cmd, t_split *split);

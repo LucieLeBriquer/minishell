@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:58:45 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/17 16:04:29 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/17 16:51:54 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void	init_aux(t_info *info)
 	info->seps_tmp = NULL;
 	info->spaces_tmp = NULL;
 	info->all = NULL;
+	info->split = NULL;
 }
 
 t_info		*init_node(int i, int type, int number, char *line)
