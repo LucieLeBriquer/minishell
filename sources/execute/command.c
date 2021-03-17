@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:48:01 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/17 16:51:16 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/17 18:03:55 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static int	error_in_out(t_info *cmd)
 int			execute_cmd(t_info *cmd, t_split *split, t_list **envl)
 {
 	t_exec	exec_func[NB_TYPES];
+	int		err;
 
 	exec_func[BUILTIN] = &exec_builtin;
 	exec_func[EXECUTABLE] = &exec_executable;
@@ -71,7 +72,9 @@ int			execute_cmd(t_info *cmd, t_split *split, t_list **envl)
 	print_leave(*cmd, split, 0);
 	if (cmd->number == 0)
 		return (SUCCESS);
-	new_expand(cmd, *envl, split);
+	err = expand(cmd, *envl, split);
+	if (err)
+		return (err);
 	if (cmd->nb_args_tmp == 0)
 		return (SUCCESS);
 	if (update_in_out(cmd) < 0)

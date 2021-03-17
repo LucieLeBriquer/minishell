@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   simple.c                                           :+:      :+:    :+:   */
+/*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:19:12 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/17 17:08:24 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/17 17:50:10 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,44 +52,40 @@ static int	expanded_size(char *str, t_list *envl)
 	return (res + 1);
 }
 
-void	expand_simple(t_list **words, char *str, t_list *envl)
+void	expand_simple(t_list **expansion, t_split curr, t_list *envl)
 {
 	int		size_tot;
 	char	*new;
-	t_list	*to_add;
 
-	size_tot = expanded_size(str, envl);
+	size_tot = expanded_size(curr.str, envl);
 	new = malloc(size_tot * sizeof(char));
 	if (!new)
 		return ;
-	fill_expanded(new, str, envl);
-	to_add = ft_lstnew(new);
-	ft_lstadd_back(words, to_add);
+	fill_expanded(new, curr.str, envl);
+	ft_lstadd_back(expansion, new_entry(new, curr.sep, curr.space));
 }
 
-int		expand_hard(t_list **words, char *str, t_list *envl, t_list **seps, t_list **spaces, int r)
+int		expand_hard(t_list **expansion, t_split curr, t_list *envl, int r)
 {
 	int		size_tot;
 	int		i;
 	char	**split;
 	char	*new;
-	t_list	*to_add;
 
-	size_tot = expanded_size(str, envl);
+	size_tot = expanded_size(curr.str, envl);
 	new = malloc(size_tot * sizeof(char));
 	if (!new)
 		return (ALLOCATION_FAIL);
-	fill_expanded(new, str, envl);
+	fill_expanded(new, curr.str, envl);
 	split = ft_splitchar(new, ' ');
 	free(new);
 	i = 0;
 	while (split[i])
 	{
-		to_add = ft_lstnew(ft_strdup(split[i]));
-		ft_lstadd_back(words, to_add);
-		ft_lstadd_back(seps, ft_lstnew(char_to_string(' ')));
 		if (split[i + 1])
-			ft_lstadd_back(spaces, ft_lstnew(ft_itoa(1)));
+			ft_lstadd_back(expansion, new_entry(ft_strdup(split[i]), ' ', 1));
+		else
+			ft_lstadd_back(expansion, new_entry(ft_strdup(split[i]), ' ', curr.space));
 		i++;
 	}
 	free_tab(split);

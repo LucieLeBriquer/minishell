@@ -1,26 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/17 18:07:28 by lle-briq          #+#    #+#             */
+/*   Updated: 2021/03/17 18:07:31 by lle-briq         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-int		expand_then_add(t_list **words, char *str, char sep, int space, t_list *envl, t_list **seps, t_list **spaces, int r)
+int		expand_then_add(t_list **expansion, t_split curr, t_list *envl, int r)
 {
-	int	err;
-
-	err = SUCCESS;
-	if (sep == '\"')
+	if (curr.sep == '\"')
 	{
-		expand_simple(words, str, envl);
-		ft_lstadd_back(seps, ft_lstnew(char_to_string(sep)));
+		expand_simple(expansion, curr, envl);
+		return (SUCCESS);
 	}
-	else
-		err = expand_hard(words, str, envl, seps, spaces, r);
-	ft_lstadd_back(spaces, ft_lstnew(ft_itoa(space)));
-	return (err);
+	return (expand_hard(expansion, curr, envl, r));
 }
 
-static int	list_to_tab(t_list *words, t_list *seps, t_list *spaces, t_info *cmd)
+static int	list_to_tab(t_list *expansion, t_info *cmd)
 {
-	int	i;
+	t_split	*curr;
+	int		i;
 
-	cmd->nb_args_tmp = list_size(words);
+	cmd->nb_args_tmp = list_size(expansion);
 	cmd->args_tmp = malloc((cmd->nb_args_tmp + 1) * sizeof(char *));
 	cmd->seps_tmp = malloc((cmd->nb_args_tmp + 1) * sizeof(char));
 	cmd->spaces_tmp = malloc((cmd->nb_args_tmp + 1) * sizeof(int));
@@ -29,12 +36,11 @@ static int	list_to_tab(t_list *words, t_list *seps, t_list *spaces, t_info *cmd)
 	i = -1;
 	while (++i < cmd->nb_args_tmp)
 	{
-		cmd->args_tmp[i] = ft_strdup((char *)(words->content));
-		cmd->seps_tmp[i] = ((char *)seps->content)[0];
-		cmd->spaces_tmp[i] = ((char *)spaces->content)[0] - '0';
-		words = words->next; 
-		seps = seps->next;
-		spaces = spaces->next;
+		curr = expansion->content;
+		cmd->args_tmp[i] = ft_strdup(curr->str);
+		cmd->seps_tmp[i] = curr->sep;
+		cmd->spaces_tmp[i] = curr->space;
+		expansion = expansion->next; 
 	}
 	cmd->args_tmp[i] = NULL;
 	cmd->seps_tmp[i] = '\0';
@@ -42,72 +48,43 @@ static int	list_to_tab(t_list *words, t_list *seps, t_list *spaces, t_info *cmd)
 	return (SUCCESS);
 }
 
-char	*char_to_string(char c)
+int		expand_one(t_list **expansion, t_list *envl, t_split curr, int *redir)
 {
-	char *str;
+	int	err;
 
-	str = malloc(2 * sizeof(char));
-	str[0] = c;
-	str[1] = '\0';
-	return (str);
+	err = SUCCESS;
+	if (curr.sep == '\"' || curr.sep == ' ')
+		err = expand_then_add(expansion, curr, envl, *redir);
+	else
+		ft_lstadd_back(expansion, new_entry(curr.str, curr.sep, curr.space));
+	if (err)
+		return (AMBIGUOUS_REDIR);
+	*redir = 0;
+	if (is_redir(curr.sep))
+		*redir = 1;
+	return (SUCCESS);
 }
 
-int		is_redir(char c)
+int		expand(t_info *cmd, t_list *envl, t_split *split)
 {
-	if (c == '>' || c == 'd' || c == '<')
-		return (1);
-	return (0);
-}
-
-int		new_expand(t_info *cmd, t_list *envl, t_split *split)
-{
+	t_list	*expansion;
 	int		i;
-	t_list	*words;
-	t_list	*seps;
-	t_list	*spaces;
-	t_list	*new;
-	char	*str;
-	char	sep;
-	int		r;
-	int		space;
+	int		redir;
 	int		err;
 
 	i = -1;
-	words = NULL;
-	seps = NULL;
-	spaces = NULL;
-	r = 0;
-	err = 0;
-	while (++i < cmd->number)
+	expansion = NULL;
+	err = SUCCESS;
+	redir = 0;
+	while (++i < cmd->number && !err)
+		err = expand_one(&expansion, envl, split[cmd->start + i], &redir);
+	if (err || list_to_tab(expansion, cmd))
 	{
-		space = split[cmd->start + i].space;
-		str = split[cmd->start + i].str;
-		sep = split[cmd->start + i].sep;
-		if (sep == '\"' || sep == ' ')
-			err = expand_then_add(&words, str, sep, space, envl, &seps, &spaces, r);
-		else
-		{
-			new = ft_lstnew(ft_strdup(str));
-			ft_lstadd_back(&words, new);
-			ft_lstadd_back(&seps, ft_lstnew(char_to_string(sep)));
-			ft_lstadd_back(&spaces, ft_lstnew(ft_itoa(space)));
-		}
+		ft_lstclear(&expansion, &free_expd);
 		if (err)
-			break ;
-		r = 0;
-		if (is_redir(sep))
-			r = 1;
-	}
-	if (err || list_to_tab(words, seps, spaces, cmd))
-	{
-		free_lists(&words, &seps, &spaces);
-		if (err)
-		{
-			ft_printf("ambiguous\n");
 			return (AMBIGUOUS_REDIR);
-		}
 		return (ALLOCATION_FAIL);
 	}
-	free_lists(&words, &seps, &spaces);
+	ft_lstclear(&expansion, &free_expd);
 	return (join_args(cmd));
 }
