@@ -46,9 +46,9 @@ SRCS		=  $(addprefix sources/, \
 			environment/replace.c \
 			environment/useful.c \
 			environment/env.c \
-			environment/join.c \
-			environment/simple.c \
-			environment/new.c \
+			expand/join.c \
+			expand/main.c \
+			expand/expansion.c \
 			main.c )
  
 OBJS		= $(SRCS:.c=.o)
