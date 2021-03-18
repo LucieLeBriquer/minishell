@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:36:55 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/18 16:59:28 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/18 17:49:41 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static void	parse_and_exec(t_list **envl, char *line)
 		err = execute(split, envl, line);
 	}
 	update_return(envl, err);
+	update_last_arg(envl, NULL, split);
 	update_env(envl);
 	free_all(line, split);
 	if (!g_sigint)

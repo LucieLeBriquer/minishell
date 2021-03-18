@@ -25,3 +25,20 @@ void	update_env(t_list **envl)
 		add_env("PWD", ft_strdup(cwd), envl, 1);
 	}
 }
+
+void	update_last_arg(t_list **envl, t_info *cmd, t_split *split)
+{
+	int	i;
+
+	if (cmd)
+		i = cmd->start - 1;
+	else
+	{
+		i = 0;
+		while (split[i].str)
+			i++;
+		i--;
+	}
+	if (i >= 0)
+		add_env("_", ft_strdup(split[i].str), envl, 1);
+}

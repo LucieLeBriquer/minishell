@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/18 16:57:43 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/18 17:47:23 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int		list_size(t_list *lst);
 void	update_return(t_list **envl, int err);
 int		get_return(t_list *envl);
 void	update_env(t_list **envl);
+void	update_last_arg(t_list **envl, t_info *cmd, t_split *split);
 
 /*
 ** Built-in
