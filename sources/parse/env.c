@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:38:48 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/04 22:59:25 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/18 17:56:18 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,5 @@ void	parse_env(t_list **envl, char **env)
 		ft_lstadd_back(envl, new);
 		i++;
 	}
+	add_env("_", ft_strdup("./minishell"), envl, 1);
 }
