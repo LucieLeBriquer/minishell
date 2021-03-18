@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:48:35 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/13 19:05:25 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/18 15:33:00 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	fork_and_exec(t_info *cmd, t_list *envl, char *file)
 	g_sigquit = 1;
 	pid = fork();
 	if (pid == -1)
-		return (FORK_FAIL);
+		return (error_msg(FORK_FAIL));
 	else if (pid == 0)
 	{
 		change_stdin_stdout(cmd);

@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:37:45 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/18 15:18:57 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/18 16:56:49 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	execute_recursive(t_tree *tree, t_split *split, t_list **envl)
 	}
 	if (tree->info->type == SEMIC)
 	{
-		add_env("?begin", ft_itoa(err), envl, -1);
+		update_return(envl, err);
 		while (wait(&status) > 0)
 			;
 	}

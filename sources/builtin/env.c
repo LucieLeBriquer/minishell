@@ -6,11 +6,32 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:39:32 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/15 18:07:19 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/18 16:00:15 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	print_quoted(t_env entry)
+{
+	ft_putstr("declare -x ");
+	ft_putstr(entry.var);
+	if (entry.value)
+	{
+		ft_putstr("=\"");
+		ft_putstr(entry.value);
+		ft_putstr("\"");
+	}
+	ft_putstr("\n");
+}
+
+static void	print_unquoted(t_env entry)
+{
+	ft_putstr(entry.var);
+	ft_putstr("=");
+	ft_putstr(entry.value);
+	ft_putstr("\n");
+}
 
 void	print_envl(t_list *envl, int declare)
 {
@@ -23,14 +44,9 @@ void	print_envl(t_list *envl, int declare)
 		{
 			if (declare && entry->exported >= 1
 				&& ft_strcmp(entry->var, "_") != 0)
-			{
-				ft_printf("declare -x %s", entry->var);
-				if (entry->value)
-					ft_printf("=\"%s\"", entry->value);
-				ft_printf("\n");
-			}
+				print_quoted(*entry);
 			else if (!declare && entry->exported >= 2)
-				ft_printf("%s=%s\n", entry->var, entry->value);
+				print_unquoted(*entry);
 		}
 		envl = envl->next;
 	}

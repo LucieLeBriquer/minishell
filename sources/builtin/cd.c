@@ -6,13 +6,32 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:39:19 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/13 17:30:12 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/18 15:54:43 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_cd(t_info *cmd, t_list **envl)
+static int	cd_home(t_list *envl)
+{
+	char	*path_home;
+
+	path_home = search_in_env(envl, "HOME");
+	if (!path_home)
+	{
+		print_error("minishell: cd", NULL, 0, "HOME not set");
+		return (ERROR);
+	}
+	errno = 0;
+	if (chdir(path_home))
+	{
+		print_error("cd", path_home, errno, NULL);
+		return (ERROR);
+	}
+	return (SUCCESS);
+}
+
+int			ft_cd(t_info *cmd, t_list **envl)
 {
 	int		err;
 	char	*path;
@@ -34,5 +53,5 @@ int	ft_cd(t_info *cmd, t_list **envl)
 		}
 		return (SUCCESS);
 	}
-	return (chdir(search_in_env(*envl, "HOME")));
+	return (cd_home(*envl));
 }

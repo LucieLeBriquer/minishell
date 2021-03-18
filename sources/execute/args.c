@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 18:02:50 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/18 15:23:02 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/18 15:38:18 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int			create_tab_args(t_info *cmd)
 
 	cmd->argv = malloc((cmd->nb_args + 1) * sizeof(char *));
 	if (!(cmd->argv))
-		return (error_msg(ALLOCATION_FAIL, NULL));
+		return (error_msg(ALLOCATION_FAIL));
 	i = 0;
 	j = cmd->offset;
 	while (j < cmd->nb_args)

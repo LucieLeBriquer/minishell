@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:41:41 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/13 18:09:24 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/18 16:02:17 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_pwd(t_info *cmd, t_list **envl)
 	getcwd(cwd, SIZE_PATH);
 	pid = fork();
 	if (pid == -1)
-		return (FORK_FAIL);
+		return (error_msg(FORK_FAIL));
 	else if (pid == 0)
 	{
 		change_stdin_stdout(cmd);

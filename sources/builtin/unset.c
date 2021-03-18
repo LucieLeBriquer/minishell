@@ -6,13 +6,13 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:41:45 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/13 18:08:38 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/18 16:03:01 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	unset_one(char *to_unset, t_list *envl)
+static void	unset_one(char *to_unset, t_list *envl)
 {
 	t_list	*previous;
 
@@ -32,7 +32,7 @@ void	unset_one(char *to_unset, t_list *envl)
 	}
 }
 
-int		ft_unset(t_info *cmd, t_list **envl)
+int			ft_unset(t_info *cmd, t_list **envl)
 {
 	int		i;
 	int		ret;
@@ -40,7 +40,7 @@ int		ft_unset(t_info *cmd, t_list **envl)
 	if (cmd->number <= 1)
 		return (0);
 	i = cmd->offset + 1;
-	ret = 0;
+	ret = SUCCESS;
 	while (cmd->argv[i])
 	{
 		if (authorized_char(cmd->argv[i]) && !ft_strchr(cmd->argv[i], '='))
@@ -48,7 +48,7 @@ int		ft_unset(t_info *cmd, t_list **envl)
 		else
 		{
 			invalid_identifier(cmd->argv[i], "unset", 1);
-			ret = 1;
+			ret = ERROR;
 		}
 		i++;
 	}

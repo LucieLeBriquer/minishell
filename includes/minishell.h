@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/18 15:22:40 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/18 16:57:43 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,9 @@ int		export_all(char **vars, t_list **envl, int exported);
 void	invalid_identifier(char *str, char *func, int exported);
 int		add_env(char *var, char *value, t_list **envl, int exported);
 int		list_size(t_list *lst);
+void	update_return(t_list **envl, int err);
+int		get_return(t_list *envl);
+void	update_env(t_list **envl);
 
 /*
 ** Built-in
@@ -159,7 +162,8 @@ void	print_error(char *exe, char *file, int err, char *error);
 void	prompt(void);
 void	header(void);
 void	free_lists(t_list **w, t_list **s, t_list **sp);
-int		error_msg(int error, char *info);
+int		error_msg(int error);
+int		error_msg_info(int error, char *info);
 
 /*
 ** To delete

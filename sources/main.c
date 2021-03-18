@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:36:55 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/15 18:52:43 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/18 16:59:28 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,7 @@ static void	handler(int signo)
 	if (signo == SIGQUIT)
 	{
 		if (g_sigquit)
-		{
-			g_sigquit = 0;
 			ft_putstr("Quit (core dumped)\n");
-			// + exit 131
-		}
 	}
 }
 
@@ -47,7 +43,8 @@ static void	parse_and_exec(t_list **envl, char *line)
 		print_parsed_command(split);
 		err = execute(split, envl, line);
 	}
-	add_env("?begin", ft_itoa(err), envl, -1);
+	update_return(envl, err);
+	update_env(envl);
 	free_all(line, split);
 	if (!g_sigint)
 		prompt();
@@ -61,7 +58,7 @@ static int	waiting_command(t_list **envl)
 	signal(SIGQUIT, &handler);
 	line = NULL;
 	g_sigint = 0;
-	add_env("?begin", ft_strdup("0"), envl, -1);
+	update_return(envl, 0);
 	prompt();
 	while (reader(&line) > 0)
 	{
@@ -87,7 +84,7 @@ int			main(int argc, char **argv, char **env)
 	parse_env(&envl, env);
 	exit_value = waiting_command(&envl);
 	if (!exit_value)
-		exit_value = ft_atoi(search_in_env(envl, "?begin"));
+		exit_value = get_return(envl);
 	ft_lstclear(&envl, &free_entry);
 	ft_putstr("exit\n");
 	return (exit_value);
