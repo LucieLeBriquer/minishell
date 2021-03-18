@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/17 18:02:08 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/18 15:22:40 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,7 @@ void	print_error(char *exe, char *file, int err, char *error);
 void	prompt(void);
 void	header(void);
 void	free_lists(t_list **w, t_list **s, t_list **sp);
+int		error_msg(int error, char *info);
 
 /*
 ** To delete

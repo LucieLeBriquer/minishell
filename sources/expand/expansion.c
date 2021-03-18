@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:19:12 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/17 17:50:10 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/18 15:21:17 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,6 @@ int		expand_hard(t_list **expansion, t_split curr, t_list *envl, int r)
 	}
 	free_tab(split);
 	if (i > 1 && r)
-		return (AMBIGUOUS_REDIR);
+		return (error_msg(AMBIGUOUS_REDIR, curr.str));
 	return (SUCCESS);
 }

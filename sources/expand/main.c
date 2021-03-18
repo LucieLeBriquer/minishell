@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 18:07:28 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/17 18:07:31 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/18 15:24:01 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	list_to_tab(t_list *expansion, t_info *cmd)
 	cmd->seps_tmp = malloc((cmd->nb_args_tmp + 1) * sizeof(char));
 	cmd->spaces_tmp = malloc((cmd->nb_args_tmp + 1) * sizeof(int));
 	if (!cmd->args_tmp || !cmd->seps_tmp || !cmd->spaces_tmp)
-		return (ALLOCATION_FAIL);
+		return (error_msg(ALLOCATION_FAIL, NULL));
 	i = -1;
 	while (++i < cmd->nb_args_tmp)
 	{
@@ -58,7 +58,7 @@ int		expand_one(t_list **expansion, t_list *envl, t_split curr, int *redir)
 	else
 		ft_lstadd_back(expansion, new_entry(curr.str, curr.sep, curr.space));
 	if (err)
-		return (AMBIGUOUS_REDIR);
+		return (ERROR);
 	*redir = 0;
 	if (is_redir(curr.sep))
 		*redir = 1;
@@ -81,9 +81,7 @@ int		expand(t_info *cmd, t_list *envl, t_split *split)
 	if (err || list_to_tab(expansion, cmd))
 	{
 		ft_lstclear(&expansion, &free_expd);
-		if (err)
-			return (AMBIGUOUS_REDIR);
-		return (ALLOCATION_FAIL);
+		return (ERROR);
 	}
 	ft_lstclear(&expansion, &free_expd);
 	return (join_args(cmd));

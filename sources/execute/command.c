@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:48:01 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/17 18:03:55 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/17 18:33:22 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,12 @@ static int	error_in_out(t_info *cmd)
 	else
 		print_error(NULL, NULL, 0,\
 		"syntax error near unexpected token `newline'\n");
-	return (-1);
+	return (ERROR);
 }
 
 int			execute_cmd(t_info *cmd, t_split *split, t_list **envl)
 {
 	t_exec	exec_func[NB_TYPES];
-	int		err;
 
 	exec_func[BUILTIN] = &exec_builtin;
 	exec_func[EXECUTABLE] = &exec_executable;
@@ -72,14 +71,13 @@ int			execute_cmd(t_info *cmd, t_split *split, t_list **envl)
 	print_leave(*cmd, split, 0);
 	if (cmd->number == 0)
 		return (SUCCESS);
-	err = expand(cmd, *envl, split);
-	if (err)
-		return (err);
+	if (expand(cmd, *envl, split))
+		return (ERROR);
 	if (cmd->nb_args_tmp == 0)
 		return (SUCCESS);
 	if (update_in_out(cmd) < 0)
 		return (error_in_out(cmd));
 	if (create_tab_args(cmd))
-		return (ALLOCATION_FAIL);
+		return (ERROR);
 	return (exec_func[cmd_type(cmd, 0)])(cmd, envl);
 }

@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:39:04 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/13 18:41:57 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/18 15:24:37 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,17 @@ void	invalid_identifier(char *str, char *func, int exported)
 	write(STDERR, "`", 1);
 	ft_putstr_fd(str, STDERR);
 	ft_putstr_fd("': not a valid identifier\n", STDERR);
+}
+
+int		error_msg(int error, char *info)
+{
+	ft_putstr_fd("minishell: ", STDERR);
+	if (error == ALLOCATION_FAIL)
+		ft_putstr_fd("allocation failed\n", STDERR);
+	if (error == AMBIGUOUS_REDIR)
+	{
+		ft_putstr_fd(info, STDERR);
+		ft_putstr_fd(": ambiguous redirect\n", STDERR);
+	}
+	return (ERROR);
 }
