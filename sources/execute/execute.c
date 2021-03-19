@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:37:45 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/18 17:46:32 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/19 16:20:06 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,5 @@ int			execute(t_split *split, t_list **envl, char *line)
 	free_tree(tree);
 	if (status)
 		err = status / 256;
-	print_child_end(err);
 	return (err);
 }

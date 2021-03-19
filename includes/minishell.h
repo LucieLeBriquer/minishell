@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/18 17:47:23 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/19 16:21:17 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@
 # define COLOR "\033[0;35m"
 # define BOLD "\033[1;35m"
 
-int		g_print_all;
 int		g_sigint;
 int		g_sigquit;
 
@@ -142,14 +141,12 @@ int		cmd_type(t_info *cmd, int i);
 char	**create_env_tab(t_list *envl, int exported);
 void	fill_expanded(char *fill, char *old, t_list *envl);
 int		size_var(char *str, t_list *envl, char **value);
-
 int		expand(t_info *cmd, t_list *envl, t_split *split);
 int		expand_hard(t_list **expansion, t_split curr, t_list *envl, int r);
 void	expand_simple(t_list **expansion, t_split curr, t_list *envl);
 t_list	*new_entry(char *str, char sep, int space);
 int		is_redir(char c);
 void	free_expd(void *expd);
-
 int		words(t_info *cmd, t_split *split);
 int		join_args(t_info *cmd);
 char	*char_to_string(char c);
@@ -158,21 +155,11 @@ char	*char_to_string(char c);
 ** Utilities
 */
 
-void	print_title(char *s);
 void	print_error(char *exe, char *file, int err, char *error);
 void	prompt(void);
 void	header(void);
 void	free_lists(t_list **w, t_list **s, t_list **sp);
 int		error_msg(int error);
 int		error_msg_info(int error, char *info);
-
-/*
-** To delete
-*/
-
-void	print_tab(char **tab);
-void	print_tabs(t_info cmd, int join);
-void	print_expand(t_info cmd);
-
 
 #endif

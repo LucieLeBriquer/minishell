@@ -31,7 +31,6 @@ SRCS		=  $(addprefix sources/, \
 			parse/useful.c \
 			utilities/errors.c \
 			utilities/free.c \
-			utilities/print.c \
 			utilities/prompt.c \
 			utilities/reader.c \
 			builtin/cd.c \

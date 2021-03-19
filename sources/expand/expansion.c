@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:19:12 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/18 15:38:35 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/19 16:14:35 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	expand_simple(t_list **expansion, t_split curr, t_list *envl)
 		return ;
 	fill_expanded(new, curr.str, envl);
 	ft_lstadd_back(expansion, new_entry(new, curr.sep, curr.space));
+	free(new);
 }
 
 int		expand_hard(t_list **expansion, t_split curr, t_list *envl, int r)
@@ -83,9 +84,9 @@ int		expand_hard(t_list **expansion, t_split curr, t_list *envl, int r)
 	while (split[i])
 	{
 		if (split[i + 1])
-			ft_lstadd_back(expansion, new_entry(ft_strdup(split[i]), ' ', 1));
+			ft_lstadd_back(expansion, new_entry(split[i], ' ', 1));
 		else
-			ft_lstadd_back(expansion, new_entry(ft_strdup(split[i]), ' ', curr.space));
+			ft_lstadd_back(expansion, new_entry(split[i], ' ', curr.space));
 		i++;
 	}
 	free_tab(split);

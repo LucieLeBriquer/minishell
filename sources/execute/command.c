@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:48:01 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/18 16:55:51 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/19 16:19:53 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int			execute_cmd(t_info *cmd, t_split *split, t_list **envl)
 	if (g_sigint)
 		update_return(envl, 130);
 	cmd->split = split;
-	print_leave(*cmd, split, 0);
 	if (cmd->number == 0)
 		return (SUCCESS);
 	if (expand(cmd, *envl, split))

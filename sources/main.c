@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:36:55 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/18 17:49:41 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/19 16:21:37 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,7 @@ static void	parse_and_exec(t_list **envl, char *line)
 	if (!split)
 		print_error_parsing(error);
 	else
-	{
-		print_parsed_command(split);
 		err = execute(split, envl, line);
-	}
 	update_return(envl, err);
 	update_last_arg(envl, NULL, split);
 	update_env(envl);
@@ -77,10 +74,7 @@ int			main(int argc, char **argv, char **env)
 	int		exit_value;
 
 	(void)argv;
-	if (argc > 1)
-		g_print_all = 0;
-	else
-		g_print_all = 1;
+	(void)argc;
 	header();
 	parse_env(&envl, env);
 	exit_value = waiting_command(&envl);
