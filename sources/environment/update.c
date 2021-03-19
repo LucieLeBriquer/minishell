@@ -2,9 +2,10 @@
 
 void	update_return(t_list **envl, int err)
 {
-	add_env("?begin", ft_itoa(err), envl, -1);
-	if (err == 130)
-		g_sigint = 0;
+	if (g_signal == 2)
+		add_env("?begin", ft_itoa(130), envl, -1);
+	else
+		add_env("?begin", ft_itoa(err), envl, -1);
 }
 
 int		get_return(t_list *envl)

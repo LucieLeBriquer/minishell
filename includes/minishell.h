@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/19 16:21:17 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/19 16:24:01 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,7 @@
 # define COLOR "\033[0;35m"
 # define BOLD "\033[1;35m"
 
-int		g_sigint;
-int		g_sigquit;
-
+int		g_signal;
 void	simple_parse(char *command);
 t_split	*parse_command(char *command, t_error *error);
 void	print_parse_quotes(char *command);

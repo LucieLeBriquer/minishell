@@ -6,25 +6,28 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:36:55 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/19 16:21:37 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/19 18:03:53 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	handler(int signo)
+void		handler(int signo)
 {
 	ft_putstr("\b\b  \b\b");
 	if (signo == SIGINT)
 	{
-		g_sigint = 1;
+		g_signal = 2;
 		ft_putstr("\n");
 		prompt();
 	}
-	if (signo == SIGQUIT)
+	else if (signo == SIGQUIT)
 	{
-		if (g_sigquit)
+		if (g_signal == 5)
+		{
 			ft_putstr("Quit (core dumped)\n");
+			g_signal = 3;
+		}
 	}
 }
 
@@ -37,15 +40,20 @@ static void	parse_and_exec(t_list **envl, char *line)
 	err = 0;
 	split = parse_command(line, &error);
 	if (!split)
+	{
 		print_error_parsing(error);
+		if (error.num != SUCCESS)
+			update_return(envl, ERROR);
+	}
 	else
+	{
 		err = execute(split, envl, line);
-	update_return(envl, err);
-	update_last_arg(envl, NULL, split);
+		update_return(envl, err);
+		update_last_arg(envl, NULL, split);
+	}
 	update_env(envl);
 	free_all(line, split);
-	if (!g_sigint)
-		prompt();
+	prompt();
 }
 
 static int	waiting_command(t_list **envl)
@@ -55,17 +63,21 @@ static int	waiting_command(t_list **envl)
 	signal(SIGINT, &handler);
 	signal(SIGQUIT, &handler);
 	line = NULL;
-	g_sigint = 0;
+	g_signal = 0;
 	update_return(envl, 0);
 	prompt();
 	while (reader(&line) > 0)
 	{
-		g_sigquit = 0;
+		if (g_signal == 4)
+			g_signal = 2;
 		parse_and_exec(envl, line);
+		g_signal = 0;
 	}
 	if (line)
 		free(line);
-	return (CSIGINT * g_sigint);
+	if (g_signal)
+		return (128 + g_signal);
+	return (SUCCESS);
 }
 
 int			main(int argc, char **argv, char **env)

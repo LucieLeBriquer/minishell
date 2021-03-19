@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:48:01 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/19 16:19:53 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/19 16:28:03 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ int			execute_cmd(t_info *cmd, t_split *split, t_list **envl)
 	exec_func[EXECUTABLE] = &exec_executable;
 	exec_func[DECLARATION] = &exec_declaration;
 	exec_func[EXECBIN] = &exec_execbin;
-	if (g_sigint)
-		update_return(envl, 130);
+	if (g_signal)
+		update_return(envl, 128 + g_signal);
 	cmd->split = split;
 	if (cmd->number == 0)
 		return (SUCCESS);

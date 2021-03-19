@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:48:35 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/18 15:33:00 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/19 18:03:12 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	fork_and_exec(t_info *cmd, t_list *envl, char *file)
 	int		err;
 
 	cmd->env = create_env_tab(envl, 0);
-	g_sigquit = 1;
 	pid = fork();
 	if (pid == -1)
 		return (error_msg(FORK_FAIL));
