@@ -15,6 +15,7 @@ echo "hey    you"
 echo -n hey"you"
 echo -n -n -n -n hey -n 42
 
+
 ### Exit
 exit
 exit 12
@@ -92,6 +93,20 @@ echo hey >> file ; cat file
 cat < file > copy ; cat copy
 echo test > file1 > file2 > file3 ; cat file1 file2 file3
 > bl echo hey; cat bl
+echo hey >file10
+echo Bonjour >file1 jeune homme
+echo Bonjour >file1 jeune homme > file2 ca va >file3
+ls | echo OK
+ls | echo bonjour > file11 | ls
+ls | hexdump > f0 | echo Bonjour >f1 jeune homme > f2 ca va >f3 | ls
+echo bonjour >f1 mec >f2 | echo ok > f3 | echo >f4 >>f5 oui | echo final >f7
+echo hey > file ; cat file
+filename="file_test" ; echo "hi Bro" > $filename
+echo hey >> file ; hexdump file | cat
+echo hey >> file ; hexdump file | cat -e
+echo test > file01 > file02 > file03 ; tail file1 file2 file3
+echo test > file01 > file02 > file03 ; tail file01 file02 file03
+> b1 echo hey lucie ; cat b1
 
 ### Pipes
 cat file | grep hey | more
