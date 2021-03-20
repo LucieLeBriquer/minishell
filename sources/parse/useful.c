@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:38:58 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/04 18:02:40 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/20 11:40:25 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,11 @@ int		is_state_ok(t_parse *p)
 	if (p->state != OPERATOR || p->sep == '=' || p->sep == ';')
 		return (p->nb);
 	return (-1);
+}
+
+void	add_space(t_split *split, int i)
+{
+	if (i > 0)
+		split[i - 1].space = 1;
+	split[i].space = 1;
 }

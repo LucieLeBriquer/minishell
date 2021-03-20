@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:41:10 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/19 16:24:01 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/20 11:40:23 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ int		is_spaceend(char c);
 int		is_operator(char c);
 char	sep_converter(char c, char *command, int k);
 void	trim_seps(t_split split);
+void	add_space(t_split *split, int i);
 
 /*
 ** Tree

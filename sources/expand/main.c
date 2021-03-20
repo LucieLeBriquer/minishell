@@ -6,13 +6,14 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 18:07:28 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/18 15:39:03 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/20 11:45:25 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		expand_then_add(t_list **expansion, t_split curr, t_list *envl, int r)
+int			expand_then_add(t_list **expansion, t_split curr, t_list *envl,
+				int r)
 {
 	if (curr.sep == '\"')
 	{
@@ -40,7 +41,7 @@ static int	list_to_tab(t_list *expansion, t_info *cmd)
 		cmd->args_tmp[i] = ft_strdup(curr->str);
 		cmd->seps_tmp[i] = curr->sep;
 		cmd->spaces_tmp[i] = curr->space;
-		expansion = expansion->next; 
+		expansion = expansion->next;
 	}
 	cmd->args_tmp[i] = NULL;
 	cmd->seps_tmp[i] = '\0';
@@ -48,7 +49,8 @@ static int	list_to_tab(t_list *expansion, t_info *cmd)
 	return (SUCCESS);
 }
 
-int		expand_one(t_list **expansion, t_list *envl, t_split curr, int *redir)
+int			expand_one(t_list **expansion, t_list *envl, t_split curr,
+				int *redir)
 {
 	int	err;
 
@@ -65,7 +67,7 @@ int		expand_one(t_list **expansion, t_list *envl, t_split curr, int *redir)
 	return (SUCCESS);
 }
 
-int		expand(t_info *cmd, t_list *envl, t_split *split)
+int			expand(t_info *cmd, t_list *envl, t_split *split)
 {
 	t_list	*expansion;
 	int		i;

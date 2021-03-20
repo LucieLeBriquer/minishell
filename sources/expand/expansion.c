@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:19:12 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/19 16:14:35 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/20 11:45:17 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	expanded_size(char *str, t_list *envl)
 	return (res + 1);
 }
 
-void	expand_simple(t_list **expansion, t_split curr, t_list *envl)
+void		expand_simple(t_list **expansion, t_split curr, t_list *envl)
 {
 	int		size_tot;
 	char	*new;
@@ -66,7 +66,7 @@ void	expand_simple(t_list **expansion, t_split curr, t_list *envl)
 	free(new);
 }
 
-int		expand_hard(t_list **expansion, t_split curr, t_list *envl, int r)
+int			expand_hard(t_list **expansion, t_split curr, t_list *envl, int r)
 {
 	int		size_tot;
 	int		i;
