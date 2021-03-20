@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:48:38 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/20 10:43:25 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/20 11:23:47 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	join_path(char *to_join, char **file, t_info *cmd)
 	tmp = ft_strjoin(to_join, "/");
 	if (*file)
 		free(*file);
-	*file = ft_strjoin(tmp, cmd->args[cmd->offset]);
+	*file = ft_strjoin(tmp, cmd->argv[cmd->offset]);
 	free(tmp);
 }
 
