@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:39:36 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/17 16:51:01 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/20 10:47:53 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,13 @@ int			ft_exit(t_info *cmd, t_list **envl)
 	}
 	else if (!ft_isnum(cmd->argv[cmd->offset + 1]))
 	{
-		print_error("minishell: exit", NULL, 0, "numeric argument required");
 		free_exit(cmd, envl);
+		print_error("minishell: exit", NULL, 0, "numeric argument required");
 		exit(MISUSE);
 	}
 	else if (number_of_args(cmd->argv) > 2)
 	{
+		ft_putstr("exit\n");
 		print_error("minishell: exit", NULL, 0, "too many arguments");
 		return (ERROR);
 	}

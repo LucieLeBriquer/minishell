@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:36:55 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/19 18:03:53 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/20 11:18:03 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@ void		handler(int signo)
 	ft_putstr("\b\b  \b\b");
 	if (signo == SIGINT)
 	{
-		g_signal = 2;
 		ft_putstr("\n");
-		prompt();
+		if (g_signal != 5)
+			prompt();
+		g_signal = 2;
 	}
 	else if (signo == SIGQUIT)
 	{

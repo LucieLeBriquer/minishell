@@ -1,6 +1,3 @@
 - val de retour not good '/bin/ls fichiernul ; echo $?'
-- ctrl+c dans une commande bloquante -> double prompt
-- exit 1 a -> afficher "exit" avant le message d'erreur, et si possible afficher l'autre message d'erreur apres exit
-- lorsque l'on appel env mettre a jour le dernier argument comme étant env avant d'afficher
-- segfault lorsque PATH est unset
+- lorsque l'on appelle env mettre a jour le dernier argument comme étant env avant d'afficher
 - < file cat > copy ; cat copy
