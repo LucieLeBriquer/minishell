@@ -25,6 +25,7 @@ exit ab 1
 ### Valeur de retour d'un processus
 echo hey ; echo $?
 /bin/ls fichiernul ; echo $?
+a=b c=d notfound1 | echo $? $a | notfound2 ; echo $? ; echo $?
 
 ### Point virgule
 ls ; echo hey
@@ -75,11 +76,11 @@ pwd a b cd e
 
 ### Path d'environnement
 ls | wc -c
-unset $PATH
+unset PATH
 ls
-$PATH="directory1"
+PATH="directory1"
 ls
-$PATH="directory1:directory2:/bin"
+PATH="directory1:directory2:/bin"
 ls
 
 ### Simple quotes
@@ -91,20 +92,18 @@ filename="two parts"
 echo hey > $filename
 echo hey >> file ; cat file
 cat < file > copy ; cat copy
-echo test > file1 > file2 > file3 ; cat file1 file2 file3
+echo test > file1 > file2 > file3; tail file1 file2 file3 ; rm file1 file2 file3
 > bl echo hey; cat bl
 echo hey >file10
-echo Bonjour >file1 jeune homme
-echo Bonjour >file1 jeune homme > file2 ca va >file3
+echo Bonjour >file1 jeune homme; cat file1
+echo Bonjour >file1 jeune homme > file2 ca va >file3; tail file1 file2 file3 ; rm file1 file2 file3
 ls | echo OK
 ls | echo bonjour > file11 | ls
 ls | hexdump > f0 | echo Bonjour >f1 jeune homme > f2 ca va >f3 | ls
 echo bonjour >f1 mec >f2 | echo ok > f3 | echo >f4 >>f5 oui | echo final >f7
-echo hey > file ; cat file
 filename="file_test" ; echo "hi Bro" > $filename
 echo hey >> file ; hexdump file | cat
 echo hey >> file ; hexdump file | cat -e
-echo test > file01 > file02 > file03 ; tail file1 file2 file3
 echo test > file01 > file02 > file03 ; tail file01 file02 file03
 > b1 echo hey lucie ; cat b1
 
@@ -113,6 +112,5 @@ cat file | grep hey | more
 ls fichiernul | grep bla | more
 
 ### Autres
-time sleep 1 | sleep 1 | sleep 1 | sleep 1 | sleep 1
-time sleep 1 | sleep 1 | sleep 1 ; sleep 1
-a=b c=d notfound1 | echo $? $a | notfound2 ; echo $? ; echo $?
+sleep 5 | sleep 5 | sleep 5 | sleep 5 | sleep 5
+sleep 5 | sleep 5 | sleep 5 ; sleep 5
