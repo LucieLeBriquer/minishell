@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 18:14:46 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/13 18:16:19 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/20 21:21:02 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ void	prompt(void)
 	char	cwd[SIZE_PATH];
 
 	getcwd(cwd, SIZE_PATH);
-	ft_putstr("\033[1;35mmini@shell \033[0;35m");
+	ft_putstr("\033[1;34mmini@shell \033[0;34m");
 	ft_putstr(cwd);
 	ft_putstr("\033[0m$ ");
 }
 
 void	header(void)
 {
-	ft_putstr("\033[1;35m  __  __ _       _     _          _ _\n");
+	ft_putstr("\033[1;34m  __  __ _       _     _          _ _\n");
 	ft_putstr(" |  \\/  (_)_ __ (_)___| |__   ___| | |\n");
 	ft_putstr(" | |\\/| | | '_ \\| / __| '_ \\ / _ \\ | |\n");
 	ft_putstr(" | |  | | | | | | \\__ \\ | | |  __/ | |\n");

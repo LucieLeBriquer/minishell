@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:36:55 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/20 21:19:47 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/20 21:21:09 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ static int	waiting_command(t_list **envl)
 	g_signal = 0;
 	update_return(envl, 0);
 	prompt();
-	run_test();
 	while (reader(&line) > 0)
 	{
 		if (g_signal == 4)
