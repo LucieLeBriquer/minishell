@@ -1,9 +1,8 @@
-CC			= gcc
+CC			= clang
 CFLAGS		= -Wall -Wextra -Werror
 RM			= rm -rf
 NAME		= libft.a
 LIB			= ar rcs
-NORME		= ~/.norminette_v2/norminette.rb
 
 INCS_DIR	= includes/
 INCS		= $(addprefix $(INCS_DIR), libftfull.h libftstruct.h)
@@ -98,9 +97,6 @@ all			: $(NAME)
 $(NAME)		: $(OBJS) $(INCS)
 			@$(LIB) $(NAME) $(OBJS)
 
-norme		:
-			@$(NORME) $(SRCS) $(PRINT_SRCS) $(INCS)
-
 clean:
 			@$(RM) $(OBJS)
 
@@ -109,4 +105,4 @@ fclean		: clean
 
 re			: fclean all
 
-.PHONY		: all clean fclean re norme
+.PHONY		: all clean fclean re
