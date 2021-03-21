@@ -47,7 +47,7 @@
 - faire un `fork` pour chaque commande qui écrit sur la sortie standard, on close la sortie standard et on duplique l'output, donc lorsque qu'on écrira sur le fd 0 ça redirigera sur l'output désiré (same pour l'input)
 
 ### Astuces
-- `lsof | grep "minishell"` : pour voir tous les fd associés, voir que tout est bien close à la fin de chaque commande
+- `lsof | grep "minishell"` : pour voir tous les fd ouverts par `minishell`, voir que tout est bien close à la fin de chaque commande
 
 ### Valeur de retour $?
 1	Catchall for general errors	impermissible operations
@@ -61,8 +61,8 @@
 ## Plan d'attaque
 1) **Analyse lexicale** : transforme les instructions en token
 2) **Analyse syntaxique** : le parseur demande les tokens correspondant au fur et a mesure et construit un AST (cf partie suivante)
-3) **Expansion** : comme son nom l'indique, remplace les alias, les variables d'environnement, ...
-4) **Execution** : lecture de l'arbre par un parcours postfixe
+3) **Expansion** : remplace les alias, les variables d'environnement, ...
+4) **Execution** : lecture de l'arbre suivant un parcours postfixe
 
 ## Plus en détail
 
@@ -90,12 +90,12 @@ mini@shell /home/lucie/Code/minishell$  that 's' a | "  \"wonderfuuul" >$tree  ;
 
 ### Construction de l'AST
 #### Format des noeuds
-- entry point
-- exit point
-- position dans le split
-- opérateur (0 si simple commande)
-- fils gauche
-- fils droit
+Informations principales contenues dans les noeuds :
+- input : fd depuis lequel on va lire
+- output : fd sur lequel on va écrire
+- start : position dans le split
+- number : nombre d'arguments
+- sep : token représentant le séparateur ou l'opérateur (`|`, `>`, `'`...)
 
 #### Remplissage de l'arbre
 Prenons comme exemple `A | B > C ; D`. On va construire l'arbre suivant :
@@ -104,7 +104,7 @@ Prenons comme exemple `A | B > C ; D`. On va construire l'arbre suivant :
     A       ;
        B > C   D
 ```
-Remplissage gauche puis droite. On aura donc toujours qu'un fils sans enfant à gauche. On va creer l'arbre selon notre premier parsing contenu dans `split`. Lors de la création on va remplir les informations suivante : l'indice correspondant au noeud dans `split`, le nombre d'arguments composant la commande quand on se trouve sur une feuille (noeud sans enfant donc ici `A,B,C,D`), le type d'opérateur (`|` ou `;`) si l'on se trouve sur un noeud principal. Exemple :
+Remplissage gauche puis droite. On aura donc toujours qu'un fils sans enfant à gauche. On va créer l'arbre selon le contenu de `split`. Lors de la création on va remplir les informations suivante : l'indice correspondant au noeud dans `split`, le nombre d'arguments composant la commande quand on se trouve sur une feuille (noeud sans enfant donc ici `A,B,C,D`), le type d'opérateur (`|` ou `;`) si l'on se trouve sur un noeud principal. Exemple :
 ```
 mini@shell /home/lucie/Code/minishell$  that 's' a | "  \"wonderfuuul" >$tree  ;with '"an' |AMAZING     parsing
 [ ] [that]
@@ -137,38 +137,30 @@ input 0		output 5		with "an
 input 6		output 1		AMAZING parsing 
 ```
 
-Avant d'exécuter les commandes on a besoin de connaître les entry point et exit point de chaque noeud. On va parcourir à nouveau l'arbre pour remplir ces attributs à chaque noeud.
-- si on a un `|` appelle la fonction `pipe` qui va nous donner un entry point `fd_e` et un exit point `fd_s`. que l'on donnera comme exit point au fils gauche et comme entry point au fils droit.
-- lorsque l'on rencontre un `;` on remet l'entry point et l'exit point aux entrées et sorties standard (0 et 1)
-- par défaut l'entry point = 0 et l'exit point = 1
+Avant d'exécuter les commandes on a besoin de connaître input et output pour chaque noeud. On va parcourir à nouveau l'arbre pour remplir ces attributs.
+- si on a un `|` appelle la fonction `pipe` qui va nous donner deux fd pour effectuer la liaison entre les commandes, on les donnera comme output au fils gauche et comme input au fils droit.
+- lorsque l'on rencontre un `;` on remet l'input et l'output aux entrées et sorties standard (0 et 1)
 
-### Extension
-Pour l'extension, on étend les variables d'environnement lorsque `"` ou `' '` et on remplace `sep` dans la structure par `' '`.
-#### Redirection
+### Expansion
+Pour l'expansion, on étend les variables d'environnement lorsque `"` ou `' '` et on remplace `sep` dans la structure par `' '`. Attention à certains cas un peu tricky lorsque la variable correspond à un fichier de redirection :
 ```
 lucie@lucie-XPS:~/Code/minishell$ var="file 2"
 lucie@lucie-XPS:~/Code/minishell$ echo bl > $var
 bash: $var: ambiguous redirect
 ```
+Attention aussi à :
+```
+lucie@lucie-XPS:~/Code/minishell$ var="echo hey"
+lucie@lucie-XPS:~/Code/minishell$ $var
+hey
+```
 
 ### Exécution
-Lorsque l'on est sur une commande ('A', 'B', 'C' ou 'D') donc que le séparateur est `' '`, on regarde le premier mot
-  - si c'est une commande built-in (*go to la fonction dédiée*)
+Lorsque l'on est sur une commande/feuille, on regarde le premier mot après expansion :
+  - si c'est une commande built-in *go to la fonction dédiée*
   - si on commence par `./` on essaye de lancer l'exécutable `./name` *fork needed*
-  - sinon s'il y a un `=` on créé une variable d'environnement
-  - sinon on essaye de lancer l'exécutable $(PATH)/name (check si on a besoin de tester dans l'ordre ou si execve s'en charge directement) *fork needed*
-
-Informations nécessaires à l'exécution des commandes implémentées dans `minishell` :
-- pour `echo` :
-  - les indices de début et de fin dans split des arguments de `echo`
-  - option `-n` ou non
-- pour `cd` : l'indice du path à regarder
-- pour `pwd` : nada
-- pour `export` : indice de la variable à exporter (si la recherche retourne NULL on ne fait rien, pas d'erreur)
-- pour `unset` :  : indice de la variable à désexporter (si la recherche retourne NULL on ne fait rien, pas d'erreur ; attetion ne la supprime pas elle est toujours définie)
-- pour `env`: nada
-- `exit` : nada
-Pour resumer, pour executer une commande il nous faut l'indice du debut du/des arguments, le nombre d'arguments a prendre en compte, un autre entier pour l'option d'`echo` ainsi que les `fd` d'input et d'output.
+  - s'il y a un `=` on créé une variable d'environnement
+  - sinon on essaye de lancer l'exécutable $(PATH)/name *fork needed*
 
 ### Description des commandes builtin
 #### echo
@@ -190,8 +182,8 @@ lucie@lucie-XPS ~/Code/minishell$ echo -n "hey " -n -n -n "hey"
 hey  -n -n -n hey%
 ```
 #### exit
-- `a` ou `a 1` ou `3.14` : exit(2) + erreur numeric argument required
-- `1 a` ou `1 2` : pas d'exit + $? = 1 + erreur too many arguments
+- `a` ou `a 1` ou `3.14` : `exit(2)` + erreur `numeric argument required`
+- `1 a` ou `1 2` : pas d'exit + $? = 1 + erreur `too many arguments`
 - si juste un argument numérique -> go le convertir % 256 et exit avec cette valeur
 
 ## Ressources
