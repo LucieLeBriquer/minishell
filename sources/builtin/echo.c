@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:39:28 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/20 21:33:15 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/21 10:51:56 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	print_args(char **args, int option, int i)
 	if (args[i])
 		ft_putstr(args[i]);
 	if (!option)
-		ft_printf("\n");
+		ft_putstr("\n");
 }
 
 static int	option_echo(t_info *cmd)

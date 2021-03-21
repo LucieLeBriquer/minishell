@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:39:19 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/18 15:54:43 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/21 10:52:45 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int			ft_cd(t_info *cmd, t_list **envl)
 
 	if (number_of_args(cmd->argv + cmd->offset) > 2)
 	{
-		ft_printf("minishell: '%s': %s\n", "cd", "too many arguments");
+		print_error("minishell: cd", NULL, 0, "too many arguments");
 		return (MISUSE);
 	}
 	if (cmd->args[cmd->offset + 1])
