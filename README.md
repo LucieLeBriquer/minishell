@@ -1,32 +1,5 @@
 # minishell - documentation
 
-## TODO
-### General
-- [done] un split qui prend en compte les `'` et `"`
-  - pour les simples quotes : easy
-  - pour les doubles c'est plus galère, il faut check tous les cas de `\` et `$`
-- [done] la création de noeuds à chaque opérateur `|` et `;`
-- [done] affichage du prompt et attente d'une commande
-- [done] création d'une liste chaînée à partir de l'environnement et une fonction de recherche dans cette liste
-- [done] fonction d'expansion d'une commande simple
-- [done] parcours de l'arbre pour remplir les fd d'`intput` et d'`output` a chaque noeud principal avec un appel a `pipe`
-- [done] faire des tests `fork`, `pipe` pour être sûre de bien tout comprendre
-- [done] se renseigner sur les signaux qui peuvent être envoyés pendant l'exécution d'un processus
-- [done] rajouter un entier d'état pour savoir si la commande est exportée ou non
-- [done] faire les commandes built-in pour commencer
-### En detail (a suppr au fur et a mesure)
-- faire une liste de commandes de tous les trucs à tester puis push
-- recheck un coup `ctrl-C`, `ctrl-D` et `ctrl-\`
-- finir l'expansion et le nouveau split
-- + faire gaffe si redirection a l'intérieur d'une variable donc go faire
-l'expansion après s'être occupée des redirectiosn (expansion quand meme pour le nom des files)
-- pour le nom des files :
-```
-lucie@lucie-XPS:~/Code/minishell$ var="file 2"
-lucie@lucie-XPS:~/Code/minishell$ echo bl > $var
-bash: $var: ambiguous redirect
-```
-
 ## Travail attendu
 Écrivez un shell qui doit :
 - Afficher un prompt en l’attente d’une nouvelle commande
@@ -170,7 +143,13 @@ Avant d'exécuter les commandes on a besoin de connaître les entry point et exi
 - par défaut l'entry point = 0 et l'exit point = 1
 
 ### Extension
-Pour l'extension, on étend les variables d'environnement lorsque `"` ou `' '` et on remplace `sep` dans la structure par `' '`. Maybe faire du réalloc.
+Pour l'extension, on étend les variables d'environnement lorsque `"` ou `' '` et on remplace `sep` dans la structure par `' '`.
+#### Redirection
+```
+lucie@lucie-XPS:~/Code/minishell$ var="file 2"
+lucie@lucie-XPS:~/Code/minishell$ echo bl > $var
+bash: $var: ambiguous redirect
+```
 
 ### Exécution
 Lorsque l'on est sur une commande ('A', 'B', 'C' ou 'D') donc que le séparateur est `' '`, on regarde le premier mot
