@@ -146,28 +146,28 @@ echo Bonjour >file1 jeune homme; cat file1
 
 echo Bonjour >file1 jeune homme > file2 ca va >file3; tail file1 file2 file3; rm file1 file2 file3
 
-echo bonjour >f1 mec >f2 | echo ok > f3 | echo >f4 >>f5 oui | echo final >f7
+echo bonjour >f1 mec >f2 | echo ok > f3 | echo >f4 >>f5 oui | echo final >f6 ; tail f1 f2 f3 f4 f5 f6 ; rm f1 f2 f3 f4 f5 f6
 
-filename="file_test" ; echo "hi Bro" > $filename
+filename="file_test" ; echo "hi Bro" > $filename ; cat $filename ; rm $filename
 
-echo test > file01 > file02 > file03 ; tail file01 file02 file03
+echo test > file01 > file02 > file03 ; tail file01 file02 file03 ; rm file01 file02 file03
 
 
 # Pipes
 
-cat file | grep hey | more
+cat tests.txt | grep hey | more
 
 ls fichiernul | grep bla | more
 
 ls | echo OK
 
-ls | echo bonjour > file11 | ls
+ls | echo bonjour > file11 | ls ; rm file11
 
-ls | hexdump > f0 | echo Bonjour >f1 jeune homme > f2 ca va >f3 | ls
+ls | hexdump > f0 | echo Bonjour >f1 jeune homme > f2 ca va >f3 | ls ; tail f0 f1 f2 f3 ; rm f0 f1 f2 f3
 
 echo hey >> file ; hexdump file | cat
 
-echo hey >> file ; hexdump file | cat -e
+echo hey >> file ; hexdump file | cat -e; rm file
 
 sleep 5 | sleep 5 | sleep 5 | sleep 5 | sleep 5
 
