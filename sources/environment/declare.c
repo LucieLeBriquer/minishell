@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 18:49:52 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/13 18:36:36 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/21 14:07:04 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,11 @@ int			add_env(char *var, char *value, t_list **envl, int exported)
 		}
 		env = env->next;
 	}
-	return (add_new_var(var, value, envl, exported));
+	return (add_new_var(ft_strdup(var), value, envl, exported));
 }
 
 static int	export_one(char *var, t_list **envl, int exported)
 {
-	char	*varname;
 	char	*value;
 	char	*tmp;
 
@@ -74,17 +73,12 @@ static int	export_one(char *var, t_list **envl, int exported)
 	{
 		value = ft_strdup(tmp + 1);
 		tmp[0] = '\0';
-		varname = ft_strdup(var);
 	}
 	else
-	{
 		value = NULL;
-		varname = ft_strdup(var);
-	}
-	if (authorized_char(varname))
-		return (add_env(varname, value, envl, exported));
-	invalid_identifier(varname, "export", exported);
-	free(varname);
+	if (authorized_char(var))
+		return (add_env(var, value, envl, exported));
+	invalid_identifier(var, "export", exported);
 	if (value)
 		free(value);
 	return (ERROR);
