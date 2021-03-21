@@ -1,6 +1,10 @@
 # minishell - documentation
 
-## Travail attendu
+1. [Sujet](#sujet)
+2. [Notes](#notes)
+3. [Description du programme](#description-du-programme)
+
+## Sujet
 Écrivez un shell qui doit :
 - Afficher un prompt en l’attente d’une nouvelle commande
 - Chercher et lancer le bon executable (basé sur une variable d’environnement `PATH` ou en utilisant un path absolu), comme dans `bash`
@@ -49,8 +53,7 @@
 ### Astuces
 - `lsof | grep "minishell"` : pour voir tous les fd ouverts par `minishell`, voir que tout est bien close à la fin de chaque commande
 
-### Valeur de retour $?
-
+### Valeurs de retour
 
 | Value | Signification |
 |----:|:-------------|
@@ -64,13 +67,12 @@
 | 255 | Exit status out of range |
 
 
-## Plan d'attaque
+## Description du programme
+### Structure globale
 1) **Analyse lexicale** : transforme les instructions en token
 2) **Analyse syntaxique** : le parseur demande les tokens correspondant au fur et a mesure et construit un AST (cf partie suivante)
 3) **Expansion** : remplace les alias, les variables d'environnement, ...
 4) **Execution** : lecture de l'arbre suivant un parcours postfixe
-
-## Plus en détail
 
 ### Gestion de l'environnement
 On va créer une liste chaînée à partir de l'environnement contenant à chaque maillon le nom de la variable et sa valeur.
