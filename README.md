@@ -3,6 +3,7 @@
 1. [Sujet](#sujet)
 2. [Notes](#notes)
 3. [Description du programme](#description-du-programme)
+4. [Ressources](#ressources)
 
 ## Sujet
 Écrivez un shell qui doit :
