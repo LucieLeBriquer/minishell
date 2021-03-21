@@ -44,7 +44,7 @@
 ### Processus
 - il y a des commandes suffisamment simples pour être exécutées directement par minishell ce sont les *commandes builtin*
 - a contrario les *commandes externes* doivent etre exécutées dans un nouveau processus et nécessitent donc un `fork`
-- faire un `fork` pour chaque commande qui écrit sur la sortie standard, on close la sortie standard et on duplique l'output, donc lorsque qu'on écrira sur le fd 0 ça redirigera sur l'output désiré (same pour l'input)
+- faire un `fork` pour chaque commande qui écrit sur la sortie standard, on close la sortie standard et on duplique l'output, donc lorsque qu'on écrira sur le fd 1 ça redirigera sur l'output désiré (same pour l'input)
 
 ### Astuces
 - `lsof | grep "minishell"` : pour voir tous les fd ouverts par `minishell`, voir que tout est bien close à la fin de chaque commande
