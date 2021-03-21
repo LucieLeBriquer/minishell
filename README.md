@@ -50,13 +50,19 @@
 - `lsof | grep "minishell"` : pour voir tous les fd ouverts par `minishell`, voir que tout est bien close à la fin de chaque commande
 
 ### Valeur de retour $?
-1	Catchall for general errors	impermissible operations
-2	Misuse of shell builtins
-126	Command invoked cannot execute (permission problem or not an executable)
-127	"command not found"
-128	Invalid argument to exit
-130	Script terminated by Control-C
-255 Exit status out of range
+
+
+| Value | Signification |
+|----:|:-------------|
+| 1 | Catchall for general errors	impermissible operations |
+| 2 | Misuse of shell builtins |
+| 126	| Command invoked cannot execute (permission problem or not an executable) |
+| 127	| Command not found |
+| 128	| Invalid argument to exit |
+| 128+n | Error signal n |
+| 130	| Script terminated by Control-C |
+| 255 | Exit status out of range |
+
 
 ## Plan d'attaque
 1) **Analyse lexicale** : transforme les instructions en token
