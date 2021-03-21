@@ -28,6 +28,8 @@ int	exec_builtin(t_info *cmd, t_list **envl)
 
 int	exec_executable(t_info *cmd, t_list **envl)
 {
+	if (ft_strcmp(cmd->argv[cmd->offset], "./minishell") == 0)
+		g_signal = 6;
 	return (fork_and_exec(cmd, *envl, NULL));
 }
 

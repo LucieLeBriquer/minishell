@@ -36,6 +36,8 @@ static int	cmp_entry(void *data1, void *data2)
 
 	str1 = ((t_env *)data1)->var;
 	str2 = ((t_env *)data2)->var;
+	if (str1 && str2)
+		return (ft_strcmp(str1, str2));
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/03 11:37:45 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/21 11:43:11 by lle-briq         ###   ########.fr       */
+/*   Created: 2021/03/21 16:20:37 by lle-briq          #+#    #+#             */
+/*   Updated: 2021/03/21 16:20:39 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,10 @@ int			execute(t_split *split, t_list **envl, char *line)
 		return (TOOMANY);
 	}
 	err = execute_recursive(tree, split, envl);
-	g_signal = 5;
+	if (g_signal != 6)
+		g_signal = 5;
 	while (wait(&status) > 0)
 		;
-	g_signal = 0;
 	free_tree(tree);
 	return (return_value(status, err));
 }

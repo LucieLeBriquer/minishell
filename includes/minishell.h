@@ -22,11 +22,6 @@
 # include <sys/types.h>
 # define NB_CMD 3
 # define SIZE_PATH 4096
-# define SQUARE "\xE2\x96\xA1 "
-# define WHITE "\033[0;0m"
-# define GREY "\033[0;30m"
-# define COLOR "\033[0;35m"
-# define BOLD "\033[1;35m"
 
 int		g_signal;
 void	simple_parse(char *command);
@@ -160,5 +155,6 @@ void	header(void);
 void	free_lists(t_list **w, t_list **s, t_list **sp);
 int		error_msg(int error);
 int		error_msg_info(int error, char *info);
+int		should_quit(int size, char *line);
 
 #endif

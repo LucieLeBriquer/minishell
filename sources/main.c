@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/03 11:36:55 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/20 21:21:09 by lle-briq         ###   ########.fr       */
+/*   Created: 2021/03/21 16:19:31 by lle-briq          #+#    #+#             */
+/*   Updated: 2021/03/21 16:19:32 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,20 @@
 
 void		handler(int signo)
 {
-	ft_putstr("\b\b  \b\b");
-	if (signo == SIGINT)
+	if (g_signal != 6)
+		ft_putstr("\b\b  \b\b");
+	if (signo == SIGINT && (g_signal != 6))
 	{
 		ft_putstr("\n");
 		if (g_signal != 5)
 			prompt();
 		g_signal = 2;
 	}
-	else if (signo == SIGQUIT)
+	else if (signo == SIGQUIT && (g_signal != 6))
 	{
 		if (g_signal == 5)
-		{
-			ft_putstr("Quit (core dumped)\n");
-			g_signal = 3;
-		}
+			ft_putstr("\b\b  \b\bQuit (core dumped)\n");
+		g_signal = 3;
 	}
 }
 

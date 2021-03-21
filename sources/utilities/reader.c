@@ -89,7 +89,7 @@ int			reader(char **line)
 		return (-1);
 	while (size >= 0)
 	{
-		if (size == 0 && (!(*line) || ft_strlen(*line) == 0))
+		if (should_quit(size, *line))
 			break ;
 		else if (size == 0)
 			size = read(0, &c, 1);
