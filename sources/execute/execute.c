@@ -6,7 +6,7 @@
 /*   By: lle-briq <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:37:45 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/20 11:31:33 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/21 11:43:11 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static int	execute_recursive(t_tree *tree, t_split *split, t_list **envl)
 
 	if (!tree)
 		return (0);
+	status = SUCCESS;
 	err = execute_recursive(tree->left, split, envl);
 	if (tree->info->type == CMD)
 	{
