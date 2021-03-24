@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:51:26 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/13 18:44:58 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/24 14:51:44 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	change_stdin_stdout(t_info *cmd)
 
 void	close_unused_fd(t_info *cmd)
 {
-	if (cmd->input != STDIN)
+	if (cmd->input != STDIN && cmd->input != -1)
 		close(cmd->input);
-	if (cmd->output != STDOUT)
+	if (cmd->output != STDOUT && cmd->output != -1)
 		close(cmd->output);
 }
 

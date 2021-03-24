@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:48:01 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/19 16:28:03 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/24 14:55:25 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static int	is_builtin(char *str)
 
 int			cmd_type(t_info *cmd, int i)
 {
+	if (!cmd->argv[i])
+		return (-1);
 	cmd->builtin = is_builtin(cmd->argv[i]);
 	if (cmd->builtin > -1)
 		return (BUILTIN);
@@ -75,5 +77,7 @@ int			execute_cmd(t_info *cmd, t_split *split, t_list **envl)
 		return (error_in_out(cmd));
 	if (create_tab_args(cmd))
 		return (ERROR);
-	return (exec_func[cmd_type(cmd, 0)])(cmd, envl);
+	if (cmd_type(cmd, 0) >= 0)
+		return (exec_func[cmd_type(cmd, 0)])(cmd, envl);
+	return (SUCCESS);
 }
