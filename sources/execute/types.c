@@ -6,7 +6,7 @@
 /*   By: lle-briq <lle-briq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 19:49:15 by lle-briq          #+#    #+#             */
-/*   Updated: 2021/03/24 14:56:10 by lle-briq         ###   ########.fr       */
+/*   Updated: 2021/03/24 14:58:55 by lle-briq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ int	exec_execbin(t_info *cmd, t_list **envl)
 		print_error(cmd->argv[cmd->offset], NULL, 0, "command not found");
 		return (NOTFOUND);
 	}
-	if (ft_strcmp(cmd->argv[cmd->offset], "man") == 0)
+	if (ft_strcmp(cmd->argv[cmd->offset], "man") == 0 
+		|| ft_strcmp(cmd->argv[cmd->offset], "vi") == 0
+		|| ft_strcmp(cmd->argv[cmd->offset], "vim") == 0)
 		g_signal = 6;
 	err = fork_and_exec(cmd, *envl, file);
 	free(file);
